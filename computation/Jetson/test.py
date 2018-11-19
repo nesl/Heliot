@@ -15,5 +15,5 @@ data = base64.b64encode(data)
 client = msgpackrpc.Client(msgpackrpc.Address("localhost", 18800))
 
 while True:
-    result = client.call('push', data, time.time())
+    result = client.call('runInference', data, time.time())
     print(result)

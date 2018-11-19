@@ -135,7 +135,7 @@ class InferenceServer(object):
         print('Requst:',x,y)
         return x + y
 
-    def push(self,data,time2):
+    def runInference(self,data,time2):
 
         confidence_limit=0.5
 

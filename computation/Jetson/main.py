@@ -23,19 +23,23 @@ from PIL import Image
 import base64
 from base64 import decodestring
 import json
-
+import time
 
 # Used to run RPC server
 import msgpackrpc
 
 
-# Utilities used 
+# Utilities used
 from utils import visualization_utils as vis_util
 
 
 if StrictVersion(tf.__version__) < StrictVersion('1.9.0'):
   raise ImportError('Please upgrade your TensorFlow installation to v1.9.* or later!')
 
+
+# An inferencing image is saved with detection_boxes
+save_image=False
+download_model=False
 
 
 """
@@ -52,15 +56,15 @@ DOWNLOAD_BASE = 'http://download.tensorflow.org/models/object_detection/'
 # Path to frozen detection graph. This is the actual model that is used for the object detection.
 PATH_TO_FROZEN_GRAPH = MODEL_NAME + '/frozen_inference_graph.pb'
 
-
 # Downloading the model, in case it is not present
-opener = urllib.request.URLopener()
-opener.retrieve(DOWNLOAD_BASE + MODEL_FILE, MODEL_FILE)
-tar_file = tarfile.open(MODEL_FILE)
-for file in tar_file.getmembers():
-  file_name = os.path.basename(file.name)
-  if 'frozen_inference_graph.pb' in file_name:
-    tar_file.extract(file, os.getcwd())
+if download_model:
+    opener = urllib.request.URLopener()
+    opener.retrieve(DOWNLOAD_BASE + MODEL_FILE, MODEL_FILE)
+    tar_file = tarfile.open(MODEL_FILE)
+    for file in tar_file.getmembers():
+      file_name = os.path.basename(file.name)
+      if 'frozen_inference_graph.pb' in file_name:
+        tar_file.extract(file, os.getcwd())
 
 
 # Load a (frozen) Tensorflow model into memory.
@@ -117,12 +121,25 @@ def run_inference_for_single_image(image, graph):
   return output_dict
 
 
+def get_scores_labels(output_dict,confidence_limit):
+    result=[]
+    detection_classes=output_dict['detection_classes']
+    detection_scores=output_dict['detection_scores']
+    for i in range(detection_classes.shape[0]):
+        if detection_scores[i]>confidence_limit:
+            result.append([category_index[str(detection_classes[i])],detection_scores[i]*100])
+    return result
+
 class InferenceServer(object):
     def Test(self, x, y):
         print('Requst:',x,y)
         return x + y
 
     def push(self,data,time2):
+
+        confidence_limit=0.5
+
+        start_time=time.time()
         image_data = base64.b64decode(data)
         image = Image.open(io.BytesIO(image_data))
 
@@ -135,20 +152,30 @@ class InferenceServer(object):
         # Actual detection.
         output_dict = run_inference_for_single_image(image_np, detection_graph)
 
-        # The results of a detection is visualized
-        vis_util.visualize_boxes_and_labels_on_image_array(
-            image_np,
-            output_dict['detection_boxes'],
-            output_dict['detection_classes'],
-            output_dict['detection_scores'],
-            category_index,
-            instance_masks=output_dict.get('detection_masks'),
-            use_normalized_coordinates=True,
-            line_thickness=8)
-        im = Image.fromarray(image_np)
-        im.save('abc.jpg')
-        print("Done")
-        return "Done"
+        if save_image:
+            # The results of a detection is visualized
+            vis_util.visualize_boxes_and_labels_on_image_array(
+                image_np,
+                output_dict['detection_boxes'],
+                output_dict['detection_classes'],
+                output_dict['detection_scores'],
+                category_index,
+                instance_masks=output_dict.get('detection_masks'),
+                use_normalized_coordinates=True,
+                line_thickness=8)
+            im = Image.fromarray(image_np)
+            im.save('Inference.jpg')
+
+        end_time=time.time()
+
+        result=get_scores_labels(output_dict,confidence_limit)
+
+        time_taken=end_time-start_time
+
+
+        print("Time Taken is:",time_taken)
+        print("Result is:",result)
+        return result
         #except Exception as inst:
 
 server = msgpackrpc.Server(InferenceServer())

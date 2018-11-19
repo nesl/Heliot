@@ -14,5 +14,6 @@ data = binary_file.read()
 data = base64.b64encode(data)
 client = msgpackrpc.Client(msgpackrpc.Address("localhost", 18800))
 
-result = client.call('push', data, time.time())
-
+while True:
+    result = client.call('push', data, time.time())
+    print(result)

@@ -28,7 +28,6 @@ In order to emulate the demo surveillance scenario, we will setup the below syst
   - Installation steps: 
 
 - **Windows machine running Airsim**: Our goal is to setup a drone in AirSim having camera sensor. 
-  - Skip this step, if virtual drone having camera as sensor is not needed.
   - Installation steps: Add Installation Steps.
 
 - **Ubuntu machine running Mininet**:

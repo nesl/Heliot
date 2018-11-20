@@ -1,6 +1,7 @@
 # Nvidia Jetson-TX2 as Edge Server
+[Jetson-Tx2 developer](https://developer.nvidia.com/embedded/buy/jetson-tx2-devkit) kit supports a Linux development environment. 
 
-Setting up Nvidia Jetson-TX2, consists of installing the operating system on the device and then setting up development environment to run pretrained machine learning models in Tensorflow.
+Next we explain the steps to install the operating system and to setup the Machine learning environment for Tensorflow. After completing the following steps, TX2 can be used to run ML inference using pretrained models in Tensorflow and can be added as an edge device in Heliot framework 
 
 ## 1. Installing the operating system
 

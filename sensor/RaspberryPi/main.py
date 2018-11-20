@@ -18,11 +18,11 @@ camera.resolution = (300, 300)
 
 
 while True:
- #time.sleep(1)
+ time.sleep(1)
  camera.capture(filepath)
  binary_file=open(filepath, 'rb')
  data = binary_file.read()
  data = base64.b64encode(data)
- client = msgpackrpc.Client(msgpackrpc.Address("172.17.49.168", 18800))
- result = client.call('runInference', data, time.time())
+ client = msgpackrpc.Client(msgpackrpc.Address("172.17.49.60", 18800))
+ result = client.call('push', data, time.time())
  print(result)

@@ -1,9 +1,10 @@
 """
-Google Vision Kit: https://aiyprojects.withgoogle.com/vision/
+Raspberry Pi Camera
+Capturing images
 """
 
 
-mport msgpackrpc
+import msgpackrpc
 import base64
 import time
 import picamera
@@ -13,11 +14,11 @@ filepath = 'local.jpg'
 
 camera= picamera.PiCamera()
 camera.resolution = (300, 300)
-camera.start_preview()
+#camera.start_preview()
 
 
 while True:
- time.sleep(1)
+ #time.sleep(1)
  camera.capture(filepath)
  binary_file=open(filepath, 'rb')
  data = binary_file.read()

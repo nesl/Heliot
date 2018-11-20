@@ -1,4 +1,4 @@
-# Nvidia Jetson-TX2 as Edge Server
+# Setting up Nvidia Jetson-TX2 as Edge Server
 [Jetson-Tx2 Developer Kit](https://developer.nvidia.com/embedded/buy/jetson-tx2-devkit) supports a Linux development environment. 
 
 ![Developer Kit](https://github.com/nesl/Heliot/blob/master/docs/images/Tx_2_dev_kit.png)

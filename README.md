@@ -19,11 +19,21 @@ This scenario consists of the following components:
 <br />
 
 # Installation
-In order to emulate the demo surveillance scenario, we will setup the below system.
+In order to emulate the demo surveillance scenario, we will setup the below system. The installation steps are listed separately for each section.
 
 - **Nvidia Jetson-TX2**: [Nvidia Jetson-TX2](https://www.nvidia.com/en-us/autonomous-machines/embedded-systems-dev-kits-modules/) will act as an edge server having GPU (local accelerator). 
-  - Installation Steps: [Available here](https://github.com/nesl/Heliot/tree/master/computation/Jetson).
+  - Installation steps: [Available here](https://github.com/nesl/Heliot/tree/master/computation/Jetson).
+
+- **Google Vision Kit**:
+  - Installation steps: 
 
 - **Windows machine running Airsim**: Our goal is to setup a drone in AirSim having camera sensor. 
   - Skip this step, if virtual drone having camera as sensor is not needed.
-  - Installation Steps: Add Installation Steps.
+  - Installation steps: Add Installation Steps.
+
+- **Ubuntu machine running Mininet**:
+  - Installation steps: 
+
+# Running Demo Scenario
+Add steps to run the demo scenario
+

@@ -23,3 +23,18 @@ bash Setup.sh
 ```
 
 ## 3. Testing the Installation
+In the folder *Heliot/computation/Jetson/* 
+</br>
+``` bash
+python3 test_local.py
+```
+This may take some time to run. The steps include, downloading pretrained tensorflow object detection model and then using it to make inference on the image1.jpg saved in data folder.
+</br>
+The result displayed should be as below:
+``` bash
+Result is: [['dog', 98.33402037620544], ['dog', 85.49986481666565], ['person', 80.31414747238159], ['person', 59.35972332954407]]
+```
+</br>
+An image, inference.jpg will be created in the same folder, which is shown as below:
+
+![inference image](https://github.com/nesl/Heliot/blob/master/docs/images/Inference.jpg)

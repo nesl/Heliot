@@ -38,71 +38,29 @@ if StrictVersion(tf.__version__) < StrictVersion('1.9.0'):
 
 
 # An inferencing image is saved with detection_boxes
-save_image=False
-download_model=False
+save_image=True
+download_model=True
 
 
-"""
-The list of available modes:
-https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/detection_model_zoo.md
-"""
-# The model used for the inference
-MODEL_NAME = 'ssdlite_mobilenet_v2_coco_2018_05_09'#'ssd_mobilenet_v2_coco_2018_03_29'
 
-
-MODEL_FILE = MODEL_NAME + '.tar.gz'
-DOWNLOAD_BASE = 'http://download.tensorflow.org/models/object_detection/'
-
-# Path to frozen detection graph. This is the actual model that is used for the object detection.
-PATH_TO_FROZEN_GRAPH = MODEL_NAME + '/frozen_inference_graph.pb'
-
-# Downloading the model, in case it is not present
-if download_model:
-    opener = urllib.request.URLopener()
-    opener.retrieve(DOWNLOAD_BASE + MODEL_FILE, MODEL_FILE)
-    tar_file = tarfile.open(MODEL_FILE)
-    for file in tar_file.getmembers():
-      file_name = os.path.basename(file.name)
-      if 'frozen_inference_graph.pb' in file_name:
-        tar_file.extract(file, os.getcwd())
-
-
-# Load a (frozen) Tensorflow model into memory.
-detection_graph = tf.Graph()
-with detection_graph.as_default():
-  od_graph_def = tf.GraphDef()
-  with tf.gfile.GFile(PATH_TO_FROZEN_GRAPH, 'rb') as fid:
-    serialized_graph = fid.read()
-    od_graph_def.ParseFromString(serialized_graph)
-    tf.import_graph_def(od_graph_def, name='')
-
-
-# Loading label map
-with open('data/labels.json') as f:
-    category_index = json.load(f)
 
 # load image into numpy array
 def load_image_into_numpy_array(image):
   (im_width, im_height) = image.size
-  image_np = np.array(image.getdata()).reshape(
+  
+  try:
+   image_np = np.array(image.getdata()).reshape(
       (im_height, im_width, 4)).astype(np.uint8)
+
+  except:
+   image_np = np.array(image.getdata()).reshape(
+      (im_height, im_width, 3)).astype(np.uint8)
+
+
   image_np=image_np[:,:,:3]
   #print(image_np.shape)
   return image_np
 
-
-# TensorFlow Session
-sess=tf.Session(graph=detection_graph)
-
-ops = detection_graph.get_operations()
-all_tensor_names = {output.name for op in ops for output in op.outputs}
-  #print(all_tensor_names)
-tensor_dict = {}
-for key in ['num_detections', 'detection_boxes', 'detection_scores',
-            'detection_classes', 'detection_masks']:
-    tensor_name = key + ':0'
-    if tensor_name in all_tensor_names:
-        tensor_dict[key] = detection_graph.get_tensor_by_name(tensor_name)
 
 
 # Running inference on single image
@@ -125,14 +83,6 @@ def run_inference_for_single_image(image, graph):
   return output_dict
 
 
-# Running one inference
-filepath = 'data/Im_rec.png'
-image = Image.open(filepath)
-image_np = load_image_into_numpy_array(image)
-run_inference_for_single_image(image_np, detection_graph)
-
-print('*'*100)
-print('Available for Inference now')
 
 
 def get_scores_labels(output_dict,confidence_limit):
@@ -154,7 +104,7 @@ class InferenceServer(object):
     def push(self,data,time2):
         
         print('Image received')
-        confidence_limit=0.5
+        confidence_limit=0.3
 
         
         image_data = base64.b64decode(data)
@@ -194,14 +144,90 @@ class InferenceServer(object):
         result,labels=get_scores_labels(output_dict,confidence_limit)
 
         
-
-
-        
         print("Result is:",result)
 
         return labels
         #except Exception as inst:
 
-server = msgpackrpc.Server(InferenceServer())
-server.listen(msgpackrpc.Address("localhost", 18800))
-server.start()
+if __name__ == "__main__":
+	
+	
+	#There is input port argument
+	if len(sys.argv)!=2:
+		print('usage: python3 main.py PORT_NUM')
+		print('Example: python3 main.py 18800')
+		exit(0)
+	#Parsing the input argument
+	port=int(sys.argv[1])
+	
+	
+	"""
+	The list of available modes:
+	https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/detection_model_zoo.md
+	"""
+	# The model used for the inference
+	MODEL_NAME = 'ssdlite_mobilenet_v2_coco_2018_05_09'#'ssd_mobilenet_v2_coco_2018_03_29'
+
+
+	MODEL_FILE = MODEL_NAME + '.tar.gz'
+	DOWNLOAD_BASE = 'http://download.tensorflow.org/models/object_detection/'
+
+	# Path to frozen detection graph. This is the actual model that is used for the object detection.
+	PATH_TO_FROZEN_GRAPH = MODEL_NAME + '/frozen_inference_graph.pb'
+
+	# Downloading the model, in case it is not present
+	if download_model:
+		opener = urllib.request.URLopener()
+		opener.retrieve(DOWNLOAD_BASE + MODEL_FILE, MODEL_FILE)
+		tar_file = tarfile.open(MODEL_FILE)
+		for file in tar_file.getmembers():
+			file_name = os.path.basename(file.name)
+			if 'frozen_inference_graph.pb' in file_name:
+				tar_file.extract(file, os.getcwd())
+
+
+	# Load a (frozen) Tensorflow model into memory.
+	detection_graph = tf.Graph()
+	with detection_graph.as_default():
+	  od_graph_def = tf.GraphDef()
+	  with tf.gfile.GFile(PATH_TO_FROZEN_GRAPH, 'rb') as fid:
+	    serialized_graph = fid.read()
+	    od_graph_def.ParseFromString(serialized_graph)
+	    tf.import_graph_def(od_graph_def, name='')
+
+
+	# Loading label map
+	with open('data/labels.json') as f:
+	    category_index = json.load(f)
+	
+		# TensorFlow Session
+	sess=tf.Session(graph=detection_graph)
+
+	ops = detection_graph.get_operations()
+	all_tensor_names = {output.name for op in ops for output in op.outputs}
+	  #print(all_tensor_names)
+	tensor_dict = {}
+	for key in ['num_detections', 'detection_boxes', 'detection_scores',
+		    'detection_classes', 'detection_masks']:
+	    tensor_name = key + ':0'
+	    if tensor_name in all_tensor_names:
+		    tensor_dict[key] = detection_graph.get_tensor_by_name(tensor_name)
+		
+		
+	
+
+		# Running one inference
+	filepath = 'data/Im_rec.png'
+	image = Image.open(filepath)
+	image_np = load_image_into_numpy_array(image)
+	run_inference_for_single_image(image_np, detection_graph)
+
+	print('*'*100)
+	print('Available for Inference now')
+
+	
+	
+	
+	server = msgpackrpc.Server(InferenceServer())
+	server.listen(msgpackrpc.Address("localhost", port))
+	server.start()

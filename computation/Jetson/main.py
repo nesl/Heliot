@@ -38,8 +38,8 @@ if StrictVersion(tf.__version__) < StrictVersion('1.9.0'):
 
 
 # An inferencing image is saved with detection_boxes
-save_image=False
-download_model=False
+save_image=True
+download_model=True
 
 
 """
@@ -84,12 +84,19 @@ with open('data/labels.json') as f:
 # load image into numpy array
 def load_image_into_numpy_array(image):
   (im_width, im_height) = image.size
-  image_np = np.array(image.getdata()).reshape(
+  
+  try:
+   image_np = np.array(image.getdata()).reshape(
       (im_height, im_width, 4)).astype(np.uint8)
+
+  except:
+   image_np = np.array(image.getdata()).reshape(
+      (im_height, im_width, 3)).astype(np.uint8)
+
+
   image_np=image_np[:,:,:3]
   #print(image_np.shape)
   return image_np
-
 
 # TensorFlow Session
 sess=tf.Session(graph=detection_graph)

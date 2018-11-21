@@ -47,7 +47,7 @@ The list of available modes:
 https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/detection_model_zoo.md
 """
 # The model used for the inference
-MODEL_NAME = 'ssd_mobilenet_v2_coco_2018_03_29'
+MODEL_NAME = 'ssdlite_mobilenet_v2_coco_2018_05_09'#'ssd_mobilenet_v2_coco_2018_03_29'
 
 
 MODEL_FILE = MODEL_NAME + '.tar.gz'
@@ -84,8 +84,11 @@ with open('data/labels.json') as f:
 # load image into numpy array
 def load_image_into_numpy_array(image):
   (im_width, im_height) = image.size
-  return np.array(image.getdata()).reshape(
-      (im_height, im_width, 3)).astype(np.uint8)
+  image_np = np.array(image.getdata()).reshape(
+      (im_height, im_width, 4)).astype(np.uint8)
+  image_np=image_np[:,:,:3]
+  #print(image_np.shape)
+  return image_np
 
 
 # TensorFlow Session
@@ -100,6 +103,7 @@ for key in ['num_detections', 'detection_boxes', 'detection_scores',
     tensor_name = key + ':0'
     if tensor_name in all_tensor_names:
         tensor_dict[key] = detection_graph.get_tensor_by_name(tensor_name)
+
 
 # Running inference on single image
 def run_inference_for_single_image(image, graph):
@@ -121,36 +125,55 @@ def run_inference_for_single_image(image, graph):
   return output_dict
 
 
+# Running one inference
+filepath = 'data/Im_rec.png'
+image = Image.open(filepath)
+image_np = load_image_into_numpy_array(image)
+run_inference_for_single_image(image_np, detection_graph)
+
+print('*'*100)
+print('Available for Inference now')
+
+
 def get_scores_labels(output_dict,confidence_limit):
     result=[]
+    labels=[]
     detection_classes=output_dict['detection_classes']
     detection_scores=output_dict['detection_scores']
     for i in range(detection_classes.shape[0]):
         if detection_scores[i]>confidence_limit:
             result.append([category_index[str(detection_classes[i])],detection_scores[i]*100])
-    return result
+            labels.append(category_index[str(detection_classes[i])])
+    return result,labels
 
 class InferenceServer(object):
     def Test(self, x, y):
         print('Requst:',x,y)
         return x + y
 
-    def runInference(self,data,time2):
-
+    def push(self,data,time2):
+        
+        print('Image received')
         confidence_limit=0.5
 
-        start_time=time.time()
+        
         image_data = base64.b64decode(data)
         image = Image.open(io.BytesIO(image_data))
+        image.save('Im_rec_3.png')
 
         #Converting to numpy array
         image_np = load_image_into_numpy_array(image)
 
         # Expand dimensions since the model expects images to have shape: [1, None, None, 3]
-        image_np_expanded = np.expand_dims(image_np, axis=0)
+        #image_np_expanded = np.expand_dims(image_np, axis=0)
 
+        start_time=time.time()
         # Actual detection.
         output_dict = run_inference_for_single_image(image_np, detection_graph)
+        end_time=time.time()
+        time_taken=end_time-start_time
+        print("Time Taken for Inference is:",time_taken)
+
 
         if save_image:
             # The results of a detection is visualized
@@ -166,16 +189,17 @@ class InferenceServer(object):
             im = Image.fromarray(image_np)
             im.save('Inference.jpg')
 
-        end_time=time.time()
+       
 
-        result=get_scores_labels(output_dict,confidence_limit)
+        result,labels=get_scores_labels(output_dict,confidence_limit)
 
-        time_taken=end_time-start_time
+        
 
 
-        print("Time Taken is:",time_taken)
+        
         print("Result is:",result)
-        return result
+
+        return labels
         #except Exception as inst:
 
 server = msgpackrpc.Server(InferenceServer())

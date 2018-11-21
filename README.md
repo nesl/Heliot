@@ -27,7 +27,6 @@ The scenario consists of the following components:
    - Recommended configuration: Intel core i9 or i7 processor with 8 cores, 32 GB RAM, NVIDIA TitanX GPU and peripherals (monitor, mouse, and keyboard).
    - For development purpose, we use i7 processor with 8 cores, 32 GB RAM and NVIDIA TitanX GPU. 
 - **Operating system** : [Windows 10 Home](https://www.microsoft.com/en-us/software-download/windows10ISO).
-- **Recommended vendor** : 
 
 
 ## 2. Host-2 (Mininet machine)
@@ -35,7 +34,6 @@ The scenario consists of the following components:
    - Recommended configuration: Intel core i9 or i7 processor with 8 cores, 32 GB RAM
    - For development purpose, we use i7 processor with 12 cores and 32 GB RAM.
 - **Operating system** : [Ubuntu 16.04.5](http://releases.ubuntu.com/16.04/)
-- **Recommended vendor**  
 
 
 ## 3. Nvidia Jetson-TX2

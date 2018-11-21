@@ -60,7 +60,7 @@ The scenario consists of the following components:
 - **Recommended vendor**: [We use Samsung Galaxy S7](https://www.amazon.com/Samsung-Galaxy-S7-Unlocked-Smartphone/dp/B01CJSF8IO).
 <br/>
 <br/>
-We are working on adding new edge devices.
+We are actively working on adding new edge devices, support and documentation.
 
 ---
 ---
@@ -95,68 +95,72 @@ Please follow the installation and system set up steps listed above.
 ## 1. Inference on Jetson-Tx2
 In the folder Heliot/computation/Jetson/ run.
 ```
-python3 main.py
+python3 main.py JETSON_PORT_NUM
+```
+PORT_NUM can be: 18800
+<br/>
+Wait until you see, the below output in the terminal before running any sensor code or the test code.
+```
+Available for Inference now
 ```
 
 <br/>
 To verify, that Jetson-Tx2 is running as inference server run.
 
 ```
-python3 test.py
+python3 test.py JETSON_PORT_NUM
 ```
-
-Note: add instructions for Tx2 to update the ip.
  
-## 2. Running Mininet
-<!-- Please get the source code from our development branch and follow the steps for installation:  -->
-<!-- 
-0. Hardware
-- General purpose server with Ubuntu Linux 16.04 LTS
-- Recommended system requirements:
-```
-2 GHz dual core processor or better
-2 GB system memory
-5 GB of free hard drive space
-Internet access
-```
--->
+## 2. Running Network Emulator
 
-1. Install containernet
+0. get source code and install required packages by following the steps in https://github.com/nesl/Heliot/blob/master/network/README.md
+
+1. modify the config file
 ```
-$ sudo apt-get install ansible git aptitude
-$ git clone https://github.com/containernet/containernet.git
-$ cd containernet/ansible
-$ sudo ansible-playbook -i "localhost," -c local install.yml
-$ cd ..
-$ sudo python setup.py install
-$ sudo py.test -v mininet/test/test_containernet.py
+cd placethings
+vim config_ddflow_demo/task_data.json
+
+# change the ip addresses and to the correct ip addresses
+172.17.51.1:18900 => the corresponding IP and port of the actuator (the display server in section 5)
+172.17.49.60:18800 => the corresponding IP and port of Jetson-Tx2
 ```
 
-2. Install ilp solvers and python packages
+2. run the demo case with sudo (because mininet requires root access to simulate the network)
 ```
-$ pip install --upgrade pip==9.0.1
-$ sudo pip install msgpack-rpc-python numpy Pillow future networkx matplotlib six aenum pulp
-$ sudo apt-get install glpk-utils
-```
+# clean up mininet objects (if any)
+sudo mn -c
 
-3. get source code from our development branch
-```
-git clone https://github.com/kumokay/placethings
-```
+# run the demo case
+sudo python main.py -tc test_ddflow_demo.Test -c config_ddflow_demo
 
-4. modify the config file
+sample output:
+...
+2018-11-27 17:00:38,509 |[INFO] start: start mininet.
+2018-11-27 17:00:38,510 |[INFO] start: *** Starting network
+...
+2018-11-27 17:02:51,480 |[INFO] test: === running scenario: initial deployment ===
+2018-11-27 17:02:51,481 |[INFO] start_workers: run all workers
+2018-11-27 17:02:51,481 |[INFO] run_worker: run worker on CAMERA.0
+2018-11-27 17:02:51,482 |[INFO] run_cmd: send command to CAMERA.0(h0): cd /opt/github/placethings && python main_entity.py run_task -n task_camera -en task_forward -a 172.18.0.2:18800 -ra 10.0.0.102:18800 &> /dev/null &
+2018-11-27 17:02:51,495 |[INFO] run_cmd: output: 
+2018-11-27 17:02:51,495 |[INFO] run_worker: run worker on CONTROLLER.0
+2018-11-27 17:02:51,495 |[INFO] run_cmd: send command to CONTROLLER.0(h1): cd /opt/github/placethings && python main_entity.py run_task -n task_alert -en task_forward -a 10.0.0.101:18800 -ra 172.17.51.1:18900 &> /dev/null &
+2018-11-27 17:02:51,509 |[INFO] run_cmd: output: 
+2018-11-27 17:02:51,509 |[INFO] run_worker: run worker on P3_2XLARGE.0
+2018-11-27 17:02:51,509 |[INFO] run_cmd: send command to P3_2XLARGE.0(h2): cd /opt/github/placethings && python main_entity.py run_task -n task_findObj -en task_findObj -a 10.0.0.102:18800 -ra 10.0.0.101:18800 -al offload 172.17.49.60:18800 &> /dev/null &
+2018-11-27 17:02:51,517 |[INFO] run_cmd: output: 
+press any key to end test
 ```
-in placethings/config_ddflow_demo/task_data.json
+3. run the data forwarder so that we can send data into mininet
+    - MININET_SERVER_IP:MININET_SERVER_PORT is the server ip and port you selected to run the script.
+    - CAMERA_IP:CAMERA_PORT can be found in the output log, for example in the log above, CAMERA is running at 172.18.0.2:18800.
+```
+partial output log:
+...
+2018-11-27 17:02:51,482 |[INFO] run_cmd: send command to CAMERA.0(h0): cd /opt/github/placethings && python main_entity.py run_task -n task_camera -en task_forward -a 172.18.0.2:18800 -ra 10.0.0.102:18800 &> /dev/null &
+...
 
-change the ip addresses and to the correct ip addresses
-172.17.51.1:18900 => your actuator that handles the alert message
-172.17.49.60:18800 => your edge device with GPU
-172.17.51.1:18800 => your general purpose server
-```
-
-5. run demo case
-```
-python main.py -tc test_ddflow_demo.TestDynamic -c config_ddflow_demo
+python main_entity.py run_task -n forward -en task_forward -a MININET_SERVER_IP:MININET_SERVER_PORT -ra CAMERA_IP:CAMERA_PORT
 ```
 
 ## 3. Google Vision Kit as Camera Sensor
@@ -165,7 +169,7 @@ In the folder *Heliot/sensor/RaspberryPi/*   run.
 <br/> 
 Note: add details to update the ip of consumer of images.
 ``` bash
-python3 main.py 
+python main.py MININET_SERVER_IP MININET_SERVER_PORT
 ```
 
 ## 4. Virtual drone in AirSim as Camera Sensor

@@ -24,9 +24,9 @@ git clone https://github.com/nesl/Heliot.git
 ```
 2. Running drone on predefined trajectory
 <br/>
-Move the settings.json file to the folder location.
+- Move the settings.json file to the folder location.
 <br/>
-In the folder *Heliot/sensor/AirSim*   run. 
+- In the folder *Heliot/sensor/AirSim*   run. 
 
 ``` bash
 python3 hello_drone.py

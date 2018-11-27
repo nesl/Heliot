@@ -35,9 +35,25 @@ In order to emulate the demo surveillance scenario, we will setup the below syst
 
 # Running Demo Scenario
 
-Currently Heliot is still under development. 
+<!--Currently Heliot is still under development. -->
+ Heliot is in active development.
+Please follow the installation and system set up steps listed above. 
 
-Please get the source code from our development branch and follow the steps for installation: 
+## 1. Inference on Jetson-Tx2
+In the folder Heliot/computation/Jetson/ run.
+```
+python3 main.py
+```
+
+<br/>
+To verify, that Jetson-Tx2 is running as inference server run.
+```
+python3 test.py
+```
+
+ 
+## 1. Running Mininet
+<!-- Please get the source code from our development branch and follow the steps for installation:  -->
 
 1. Install containernet
 ```

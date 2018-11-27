@@ -18,7 +18,12 @@ The scenario consists of the following components:
 - Network emulation using **Mininet**.
 - User **Smartphone** to deliver the notification.
 
-<br />
+<br/>
+
+# Hardware Requirements
+## 1. Host-1 (AirSim Machine)
+-  **Machine configuration** Intel core i9 or i7 processor with 8 cores, 32 GB RAM and NVIDIA TitanX GPU. Typical AirSim workload require GPUs with at least 4GB of RAM.
+
 
 # Installation and System Setup
 In order to emulate the demo surveillance scenario, we will setup the below system. The installation steps are listed separately for each section.

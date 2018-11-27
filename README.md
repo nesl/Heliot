@@ -52,8 +52,9 @@ To verify, that Jetson-Tx2 is running as inference server run.
 python3 test.py
 ```
 
+Note: add instructions for Tx2 to update the ip.
  
-## 1. Running Mininet
+## 2. Running Mininet
 <!-- Please get the source code from our development branch and follow the steps for installation:  -->
 
 1. Install containernet
@@ -92,4 +93,20 @@ change the ip addresses and to the correct ip addresses
 5. run demo case
 ```
 python main.py -tc test_ddflow_demo.TestDynamic -c config_ddflow_demo
+```
+
+## 3. Google Vision Kit as Camera Sensor
+
+In the folder *Heliot/sensor/RaspberryPi/*   run.
+<br/> 
+Note: add details to update the ip of consumer of images.
+``` bash
+python3 main.py 
+```
+
+## 4. Virtual drone in AirSim as Camera Sensor
+In the folder *Heliot/sensor/AirSim* run.
+Note: add the updated AirSim code.
+``` bash
+python3 main.py 
 ```

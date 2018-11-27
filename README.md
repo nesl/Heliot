@@ -26,7 +26,7 @@ The scenario consists of the following components:
    - Recommended configuration: Intel core i9 or i7 processor with 8 cores, 32 GB RAM, NVIDIA TitanX GPU and peripherals (monitor, mouse, and keyboard).
    - For development purpose, we use i7 processor with 8 cores, 32 GB RAM and NVIDIA TitanX GPU. 
 - **Operating system** : [Windows 10 Home](https://www.microsoft.com/en-us/software-download/windows10ISO).
-- **Recommended Vendor** : 
+- **Recommended vendor** : 
 
 
 ## 2. Host-2 (Mininet machine)
@@ -34,14 +34,14 @@ The scenario consists of the following components:
    - Recommended configuration: Intel core i9 or i7 processor with 8 cores, 32 GB RAM
    - For development purpose, we use i7 processor with 12 cores and 32 GB RAM.
 - **Operating system** : [Ubuntu 16.04.5](http://releases.ubuntu.com/16.04/)
-- **Recommended Vendor**  
+- **Recommended vendor**  
 
 
 ## 3. Nvidia Jetson-TX2
 -  **Hardware requirements** 
    - Jetson-Tx2 Developer Kit and peripherals (monitor, USB hub, mouse, and keyboard). 
 - **Operating system** : A customized version of Ubuntu 16.04. More details in the *Installation and System Setup section*.
-- **Recommended Vendor**   
+- **Recommended vendor**   
   - Jetson-Tx2 Developer Kit: [Available on Amazon from Nvidia](https://www.amazon.com/NVIDIA-Jetson-TX2-Development-Kit/dp/B06XPFH939).
   - Peripherals (monitor): The development kit supports HDMI. Monitor or TV (any size will work) with a HDMI input. We use ASUS monitor available [here](https://www.amazon.com/MX279H-27-Inch-1920x1080-ICEpower-Frameless/dp/B00B17C5KO/ref=sr_1_4?s=electronics&ie=UTF8&qid=1543351305&sr=1-4&keywords=asus+hdmi+monitor).
   - Peripherals (mouse, and keyboard): Connecting mouse and keyboard require a USB hub. We use USB hub available [here](https://www.amazon.com/Recbot-Indivadual-Extension-Plug-Play-Compatible/dp/B07F8L8V94/ref=sr_1_1_sspa?s=electronics&ie=UTF8&qid=1542308924&sr=1-1-spons&keywords=Recbot+USB+3.0+Hub&psc=1).
@@ -51,7 +51,7 @@ The scenario consists of the following components:
 -  **Hardware requirements** 
    - Google Vision Kit and peripherals (Android Smartphone and a separate computer). 
 - **Operating system** : A customized version of Raspbian. More details in the *Installation and System Setup section*.
-- **Recommended Vendor** 
+- **Recommended vendor** 
   - Google Vision Kit: [Available from Target](https://www.target.com/p/-/A-53417081)
   - Peripherals : Android Smartphone and a separate computer (Windows, Mac, or Linux computer) is needed to configure Google Vision Kit.
 

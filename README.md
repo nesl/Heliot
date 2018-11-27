@@ -58,6 +58,15 @@ Note: add instructions for Tx2 to update the ip.
  
 ## 2. Running Mininet
 <!-- Please get the source code from our development branch and follow the steps for installation:  -->
+0. Requires
+- General purpose server with Ubuntu Linux 16.04 LTS
+- Recommended system requirements:
+```
+2 GHz dual core processor or better
+2 GB system memory
+5 GB of free hard drive space
+Internet access
+```
 
 1. Install containernet
 ```

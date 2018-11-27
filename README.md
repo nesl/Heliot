@@ -20,9 +20,27 @@ The scenario consists of the following components:
 
 <br/>
 
-# Hardware Requirements
-## 1. Host-1 (AirSim Machine)
--  **Machine configuration** Intel core i9 or i7 processor with 8 cores, 32 GB RAM and NVIDIA TitanX GPU. Typical AirSim workload require GPUs with at least 4GB of RAM.
+# System Requirements
+## 1. Host-1 (AirSim machine)
+-  **Machine configuration** 
+   - Recommended configuration: Intel core i9 or i7 processor with 8 cores, 32 GB RAM and NVIDIA TitanX GPU. 
+   - For development purpose, we use i7 processor with 8 cores, 32 GB RAM and NVIDIA TitanX GPU. 
+- **Operating system** : [Windows 10 Home](https://www.microsoft.com/en-us/software-download/windows10ISO).
+- **Usage**: AirSim machine is used to provide images from virtual drone in a predefined trajectory.
+
+## 2. Host-2 (Mininet machine)
+-  **Machine configuration** 
+   - Recommended configuration:  
+   - For development purpose, we use . 
+- **Operating system** : [Ubuntu 16.04.5](http://releases.ubuntu.com/16.04/)
+- **Usage**: Mininet machine is used to ..
+
+## 3. Nvidia Jetson-TX2
+-  **Machine configuration** 
+   - [Jetson-Tx2 Developer Kit](https://www.nvidia.com/en-us/autonomous-machines/embedded-systems-dev-kits-modules/)
+- **Operating system** : A modified version of Ubuntu 16.04 installed via JetPack. More details in the *Installation and System Setup section*.
+- **Usage**: TX2 is used as edge server to do the object detection inference.
+
 
 
 # Installation and System Setup

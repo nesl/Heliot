@@ -9,10 +9,12 @@ To better understand the Heliot, let us consider a demo IoT scenario of surveill
 
 ![Demo Surveillance Scenario](https://github.com/nesl/Heliot/blob/master/docs/images/Demo_Arch_1.png)
 
-This scenario consists of the following components:
+In this scenario, we have two image sensors capturing images on which object detection is done in realtime. 
+
+The scenario consists of the following components:
 - Object detection inference of detecting Cars and Person from images using Neural Network.
-- Sensors (**Google Vision Kit** and **Drone** in Airsim having Camera).
-- Compute resources (Google Vision Kit, Virtual Container, Nvidia Jetson TX-2).
+- Two image sensors (i) **Google Vision Kit**  (ii) **Drone** in Airsim having Camera.
+- Compute resources (Google Vision Kit, Virtual Container, Nvidia Jetson TX-2). At present, the inference is done on Nvidia Jetson TX-2. 
 - Network emulation using **Mininet**.
 - User **Smartphone** to deliver the notification.
 
@@ -110,3 +112,6 @@ Note: add the updated AirSim code.
 ``` bash
 python3 main.py 
 ```
+
+## 5. User Smartphone for notification
+ToDo.

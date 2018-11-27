@@ -3,7 +3,7 @@
 ## Goal: Setup up [AirSim simulator](https://github.com/Microsoft/AirSim) in a Windows machine where virtual drone acts as image sensor.
 
 ### System: Machine with Windows 10.
-Recommended System: Machine with 32 GB RAM and [NVIDIA TitanX](https://www.nvidia.com/en-us/geforce/products/10series/titan-x-pascal/) GPU. Typical virtual worlds require GPUs with at least 4GB of RAM. 
+Recommended System: Machine with 32 GB RAM and [NVIDIA TitanX](https://www.nvidia.com/en-us/geforce/products/10series/titan-x-pascal/) GPU. Typical AirSim workload require GPUs with at least 4GB of RAM. 
 
 ## 1. Setting up the Machine
 1. **Installing windows 10** on the machine. Many online resources are available. A complete step-by-step guide is [here](https://www.howtogeek.com/197559/how-to-install-windows-10-on-your-pc/)

@@ -203,10 +203,16 @@ wget https://raw.githubusercontent.com/kumokay/placethings/master/config_ddflow_
 wget https://raw.githubusercontent.com/kumokay/placethings/master/config_ddflow_demo/sample_flask_server.py
 ```
 
-3. run the actuator and web server
+3. run the actuator (display server)
 ```
-python sample_display_server.py
-python sample_flask_server.py
+python sample_display_server.py DISPLAY_SERVER_IP:DISPLAY_SERVER_PORT
+# e.g. python sample_display_server.py 172.17.51.1:18900
 ```
 
-4. use cellphone to open a webpage at YOUR_IP_ADDR:7788 with auto-refresh enabled
+4. run the web server which gets result from the display server and shows the alert on a web page
+```
+python sample_flask_server.py WEB_SERVER_IP:WEB_SERVER_PORT DISPLAY_SERVER_IP:DISPLAY_SERVER_PORT
+# e.g. python sample_display_server.py 172.17.51.1:7788 172.17.51.1:18900
+```
+
+5. use any web browser to open a webpage at WEB_SERVER_IP:WEB_SERVER_PORT with auto-refresh enabled. you should be able to see the result once the whole system starts running.

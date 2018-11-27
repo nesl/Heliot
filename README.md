@@ -55,6 +55,11 @@ The scenario consists of the following components:
   - Google Vision Kit: [Available from Target](https://www.target.com/p/-/A-53417081)
   - Peripherals : Android Smartphone and a separate computer (Windows, Mac, or Linux computer) is needed to configure Google Vision Kit.
 
+
+## 5. Smartphone
+- Any Android smartphone can be used.
+- [We use Samsung Galaxy S7](https://www.amazon.com/Samsung-Galaxy-S7-Unlocked-Smartphone/dp/B01CJSF8IO).
+
 # Installation and System Setup
 In order to emulate the demo surveillance scenario, we will setup the below system. The installation steps are listed separately for each section.
 

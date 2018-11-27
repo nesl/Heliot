@@ -175,6 +175,7 @@ python3 main.py
 ```
 
 ## 5. User Smartphone for notification
+<!-- 
 0. Hardware
 - Smartphone with Android system
 - General purpose server with any Linux-like operating systems (e.g. Ubuntu or Mac), and a public IP that accessible by your Smartphone
@@ -185,7 +186,7 @@ Recommended system requirements for the general purpose server:
 5 GB of free hard drive space
 Internet access
 ```
-- 
+-->
 
 1. Install python packages
 ```

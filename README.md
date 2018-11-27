@@ -23,9 +23,10 @@ The scenario consists of the following components:
 # System Requirements
 ## 1. Host-1 (AirSim machine)
 -  **Machine configuration** 
-   - Recommended configuration: Intel core i9 or i7 processor with 8 cores, 32 GB RAM and NVIDIA TitanX GPU. 
+   - Recommended configuration: Intel core i9 or i7 processor with 8 cores, 32 GB RAM, NVIDIA TitanX GPU and a connected display.
    - For development purpose, we use i7 processor with 8 cores, 32 GB RAM and NVIDIA TitanX GPU. 
 - **Operating system** : [Windows 10 Home](https://www.microsoft.com/en-us/software-download/windows10ISO).
+- **Recommended Vendor** : 
 - **Usage**: AirSim machine is used to provide images from virtual drone in a predefined trajectory.
 
 ## 2. Host-2 (Mininet machine)
@@ -33,13 +34,23 @@ The scenario consists of the following components:
    - Recommended configuration:  
    - For development purpose, we use . 
 - **Operating system** : [Ubuntu 16.04.5](http://releases.ubuntu.com/16.04/)
+- **Recommended Vendor** : 
 - **Usage**: Mininet machine is used to ..
 
 ## 3. Nvidia Jetson-TX2
 -  **Machine configuration** 
-   - [Jetson-Tx2 Developer Kit](https://www.nvidia.com/en-us/autonomous-machines/embedded-systems-dev-kits-modules/)
-- **Operating system** : A modified version of Ubuntu 16.04 installed via JetPack. More details in the *Installation and System Setup section*.
-- **Usage**: TX2 is used as edge server to do the object detection inference.
+   - [Jetson-Tx2 Developer Kit](https://www.nvidia.com/en-us/autonomous-machines/embedded-systems-dev-kits-modules/) and a connected display. 
+- **Operating system** : A customized version of Ubuntu 16.04. More details in the *Installation and System Setup section*.
+- **Recommended Vendor** :  
+  - Jetson-Tx2 Developer Kit: [Available on Amazon from Nvidia](https://www.amazon.com/NVIDIA-Jetson-TX2-Development-Kit/dp/B06XPFH939).
+  - Display: The development kit supports HDMI. Feel free to use any display/monitor. We use ASUS monitor available [here](https://www.amazon.com/MX279H-27-Inch-1920x1080-ICEpower-Frameless/dp/B00B17C5KO/ref=sr_1_4?s=electronics&ie=UTF8&qid=1543351305&sr=1-4&keywords=asus+hdmi+monitor).
+- **Usage**: TX2 is used to do the object detection inference near the edge.
+
+## 4. Google Vision Kit
+-  **Machine configuration** 
+   - [Google Vision Kit](https://aiyprojects.withgoogle.com/vision/) 
+- **Operating system** : A customized version of Raspbian. More details in the *Installation and System Setup section*.
+- **Usage**: It is used as a camera sensors. We are extending it usage in future for inference and training at the edge.
 
 
 

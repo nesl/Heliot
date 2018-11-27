@@ -58,7 +58,7 @@ Note: add instructions for Tx2 to update the ip.
  
 ## 2. Running Mininet
 <!-- Please get the source code from our development branch and follow the steps for installation:  -->
-0. Requires
+0. Hardware
 - General purpose server with Ubuntu Linux 16.04 LTS
 - Recommended system requirements:
 ```
@@ -123,4 +123,34 @@ python3 main.py
 ```
 
 ## 5. User Smartphone for notification
-ToDo.
+0. Hardware
+- Smartphone with Android system
+- General purpose server with any Linux-like operating systems (e.g. Ubuntu or Mac), and a public IP that accessible by your Smartphone
+```
+Recommended system requirements for the general purpose server:
+2 GHz dual core processor or better
+2 GB system memory
+5 GB of free hard drive space
+Internet access
+```
+- 
+
+1. Intall python packages
+```
+$ pip install --upgrade pip==9.0.1
+$ sudo pip install msgpack-rpc-python future
+```
+
+2. get script from our development branch
+```
+wget https://raw.githubusercontent.com/kumokay/placethings/master/config_ddflow_demo/sample_display_server.py
+wget https://raw.githubusercontent.com/kumokay/placethings/master/config_ddflow_demo/sample_flask_server.py
+```
+
+3. run the actuator and web server
+```
+python sample_display_server.py
+python sample_flask_server.py
+```
+
+4. use cellphone to open a webpage at YOUR_IP_ADDR:7788 with auto-refresh enabled

@@ -64,10 +64,10 @@ In order to emulate the demo surveillance scenario, we will setup the below syst
 - **Google Vision Kit**:
   - System and Installation steps: [Available here](https://github.com/nesl/Heliot/blob/master/sensor/RaspberryPi/Readme.md)
 
-- **Windows machine running Airsim**: Our goal is to setup a drone in AirSim having camera sensor. 
+## 1. **Host-1 (AirSim machine)**
   - System and Installation steps: [Available here](https://github.com/nesl/Heliot/blob/master/sensor/AirSim/Readme.md)
 
-- **Ubuntu machine running Mininet**:
+## 2. **Host-2 (Mininet machine)**:
   - System and Installation steps: [Available here](https://github.com/nesl/Heliot/blob/master/network/Mininet/Readme.md)
 
 # Running Demo Scenario

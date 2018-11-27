@@ -58,7 +58,7 @@ The scenario consists of the following components:
 
 ## 5. Smartphone
 - Any Android smartphone can be used.
-- [We use Samsung Galaxy S7](https://www.amazon.com/Samsung-Galaxy-S7-Unlocked-Smartphone/dp/B01CJSF8IO).
+- **Recommended vendor**: [We use Samsung Galaxy S7](https://www.amazon.com/Samsung-Galaxy-S7-Unlocked-Smartphone/dp/B01CJSF8IO).
 
 # Installation and System Setup
 In order to emulate the demo surveillance scenario, we will setup the below system. The installation steps are listed separately for each section.

@@ -47,6 +47,7 @@ python3 main.py
 
 <br/>
 To verify, that Jetson-Tx2 is running as inference server run.
+
 ```
 python3 test.py
 ```

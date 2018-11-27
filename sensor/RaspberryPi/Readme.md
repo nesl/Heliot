@@ -17,6 +17,7 @@ git clone https://github.com/nesl/Heliot.git
 bash Setup.sh
 ```
 
+<!--
 ## 3. Using as Camera Sensor
 In the folder *Heliot/sensor/RaspberryPi/*   run.
 <br/> 
@@ -24,3 +25,4 @@ Note: add details to update the ip of consumer of images.
 ``` bash
 python3 main.py 
 ```
+-->

@@ -37,7 +37,42 @@ In order to emulate the demo surveillance scenario, we will setup the below syst
 
 Currently Heliot is still under development. 
 
-Please get the source code from our development branch and follow the steps for mininet setup: 
+Please get the source code from our development branch and follow the steps for installation: 
 
-https://github.com/kumokay/placethings
+1. Install containernet
+```
+$ sudo apt-get install ansible git aptitude
+$ git clone https://github.com/containernet/containernet.git
+$ cd containernet/ansible
+$ sudo ansible-playbook -i "localhost," -c local install.yml
+$ cd ..
+$ sudo python setup.py install
+$ sudo py.test -v mininet/test/test_containernet.py
+```
 
+2. Intall ilp solvers and python packages
+```
+$ pip install --upgrade pip==9.0.1
+$ sudo pip install msgpack-rpc-python numpy Pillow future networkx matplotlib six aenum pulp
+$ sudo apt-get install glpk-utils
+```
+
+3. get source code from our development branch
+```
+git clone https://github.com/kumokay/placethings
+```
+
+4. modify the config file
+```
+in placethings/config_ddflow_demo/task_data.json
+
+change the ip addresses and to the correct ip addresses
+172.17.51.1:18900 => your actuator that handles the alert message
+172.17.49.60:18800 => your edge device with GPU
+172.17.51.1:18800 => your general purpose server
+```
+
+5. run demo case
+```
+python main.py -tc test_ddflow_demo.TestDynamic -c config_ddflow_demo
+```

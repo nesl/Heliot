@@ -18,7 +18,8 @@ The scenario consists of the following components:
 - Network emulation using **Mininet**.
 - User **Smartphone** to deliver the notification.
 
-<br/>
+---
+---
 
 # System Requirements
 ## 1. Host-1 (AirSim machine)
@@ -60,6 +61,9 @@ The scenario consists of the following components:
 - Any Android smartphone can be used.
 - **Recommended vendor**: [We use Samsung Galaxy S7](https://www.amazon.com/Samsung-Galaxy-S7-Unlocked-Smartphone/dp/B01CJSF8IO).
 
+---
+---
+
 # Installation and System Setup
 In order to emulate the demo surveillance scenario, we will setup the below system. The installation steps are listed separately for each section.
 
@@ -77,6 +81,9 @@ In order to emulate the demo surveillance scenario, we will setup the below syst
 
 ## 5. **Smartphone**:
 - Installation and system setup steps: To Add here.
+
+---
+---
 
 # Running Demo Scenario
 
@@ -124,7 +131,7 @@ $ sudo python setup.py install
 $ sudo py.test -v mininet/test/test_containernet.py
 ```
 
-2. Intall ilp solvers and python packages
+2. Install ilp solvers and python packages
 ```
 $ pip install --upgrade pip==9.0.1
 $ sudo pip install msgpack-rpc-python numpy Pillow future networkx matplotlib six aenum pulp
@@ -180,7 +187,7 @@ Internet access
 ```
 - 
 
-1. Intall python packages
+1. Install python packages
 ```
 $ pip install --upgrade pip==9.0.1
 $ sudo pip install msgpack-rpc-python future

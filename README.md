@@ -75,6 +75,8 @@ In order to emulate the demo surveillance scenario, we will setup the below syst
 ## 4. **Google Vision Kit**:
   - Installation and system setup steps: [Available here](https://github.com/nesl/Heliot/blob/master/sensor/RaspberryPi/Readme.md)
 
+## 5. **Smartphone**:
+- Installation and system setup steps: To Add here.
 
 # Running Demo Scenario
 

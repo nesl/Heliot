@@ -60,6 +60,9 @@ The scenario consists of the following components:
 ## 5. Smartphone
 - Any Android smartphone can be used.
 - **Recommended vendor**: [We use Samsung Galaxy S7](https://www.amazon.com/Samsung-Galaxy-S7-Unlocked-Smartphone/dp/B01CJSF8IO).
+<br/>
+<br/>
+We are working on adding new edge devices.
 
 ---
 ---

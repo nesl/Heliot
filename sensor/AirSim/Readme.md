@@ -18,14 +18,13 @@ Recommended System: Machine with 32 GB RAM and [NVIDIA TitanX](https://www.nvidi
 2. Install the packages. Note: Add instructions.
 
 ## 4. Testing drone locally
-1. Clone the github repo is not done already on the machine.
+1. Clone the github repo if not done already on the machine.
 ```bash
 git clone https://github.com/nesl/Heliot.git
 ```
 2. Running drone on predefined trajectory
-<br/>
 - Move the settings.json file to the folder location.
-<br/>
+- Start the AirSim, by running the run.bat file.
 - In the folder *Heliot/sensor/AirSim*   run. 
 
 ``` bash

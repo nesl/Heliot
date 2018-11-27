@@ -22,5 +22,5 @@ In the folder *Heliot/sensor/RaspberryPi/*   run.
 <br/> 
 Note: add details to update the ip of consumer of images.
 ``` bash
-python main.py 
+python3 main.py 
 ```

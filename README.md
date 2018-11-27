@@ -43,7 +43,7 @@ The scenario consists of the following components:
 - **Operating system** : A customized version of Ubuntu 16.04. More details in the *Installation and System Setup section*.
 - **Recommended Vendor** :  
   - Jetson-Tx2 Developer Kit: [Available on Amazon from Nvidia](https://www.amazon.com/NVIDIA-Jetson-TX2-Development-Kit/dp/B06XPFH939).
-  - Display: The development kit supports HDMI. Feel free to use any display/monitor. We use ASUS monitor available [here](https://www.amazon.com/MX279H-27-Inch-1920x1080-ICEpower-Frameless/dp/B00B17C5KO/ref=sr_1_4?s=electronics&ie=UTF8&qid=1543351305&sr=1-4&keywords=asus+hdmi+monitor).
+  - Display: The development kit supports HDMI. We use ASUS monitor available [here](https://www.amazon.com/MX279H-27-Inch-1920x1080-ICEpower-Frameless/dp/B00B17C5KO/ref=sr_1_4?s=electronics&ie=UTF8&qid=1543351305&sr=1-4&keywords=asus+hdmi+monitor).
 - **Usage**: TX2 is used to do the object detection inference near the edge.
 
 ## 4. Google Vision Kit

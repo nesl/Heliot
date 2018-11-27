@@ -1,8 +1,15 @@
 # Setting up Intel Neural Compute Stick
 
 ## 1. Installing Intel® Movidius™ Neural Compute SDK
+  ### Install the SDK
+Steps are listed [here](https://movidius.github.io/ncsdk/install.html)
+
 
 ## 2. Downloading Model and Setting up Environment
+``` bash
+cd Heliot/computation/movidius/setup
+bash setup.sh
+```
 
 ## 3. Testing the Inferences
 - ### 1. Sample Output after running Object_recognition.py on Movidius Neural Compute Stick

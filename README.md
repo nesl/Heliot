@@ -34,5 +34,10 @@ In order to emulate the demo surveillance scenario, we will setup the below syst
   - Installation steps: [Available here](https://github.com/nesl/Heliot/blob/master/network/Mininet/Readme.md)
 
 # Running Demo Scenario
-Add steps to run the demo scenario
+
+Currently Heliot is still under development. 
+
+Please get the source code from our development branch and follow the steps for mininet setup: 
+
+https://github.com/kumokay/placethings
 

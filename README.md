@@ -31,8 +31,8 @@ The scenario consists of the following components:
 
 ## 2. Host-2 (Mininet machine)
 -  **Hardware requirements** 
-   - Recommended configuration:  
-   - For development purpose, we use . 
+   - Recommended configuration: Intel core i9 or i7 processor with 8 cores, 32 GB RAM
+   - For development purpose, we use i7 processor with 12 cores and 32 GB RAM.
 - **Operating system** : [Ubuntu 16.04.5](http://releases.ubuntu.com/16.04/)
 - **Recommended Vendor**  
 
@@ -93,6 +93,7 @@ Note: add instructions for Tx2 to update the ip.
  
 ## 2. Running Mininet
 <!-- Please get the source code from our development branch and follow the steps for installation:  -->
+<!-- 
 0. Hardware
 - General purpose server with Ubuntu Linux 16.04 LTS
 - Recommended system requirements:
@@ -102,6 +103,7 @@ Note: add instructions for Tx2 to update the ip.
 5 GB of free hard drive space
 Internet access
 ```
+-->
 
 1. Install containernet
 ```

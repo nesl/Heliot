@@ -113,17 +113,16 @@ python3 test.py JETSON_PORT_NUM
  
 ## 2. Running Network Emulator
 
-0. get source code and install required packages by following the steps in https://github.com/nesl/Heliot/blob/master/network/README.md
+0. get source code and install required packages by following the steps described [here] (https://github.com/nesl/Heliot/blob/master/network/README.md)
 
 1. modify the config file
 ```
 cd placethings
 vim config_ddflow_demo/task_data.json
-
-# change the ip addresses and to the correct ip addresses
-172.17.51.1:18900 => the corresponding IP and port of the actuator (the display server in section 5)
-172.17.49.60:18800 => the corresponding IP and port of Jetson-Tx2
 ```
+change the ip addresses and to the correct ip addresses
+    - 172.17.51.1:18900 => the corresponding IP and port of the actuator, which would be the display server described in [section 5] (https://github.com/nesl/Heliot#5-user-smartphone-for-notification) in this demo
+    - 172.17.49.60:18800 => the corresponding IP and port of Jetson-Tx2
 
 2. run the demo case with sudo (because mininet requires root access to simulate the network)
 ```
@@ -173,10 +172,14 @@ python main.py MININET_SERVER_IP MININET_SERVER_PORT
 ```
 
 ## 4. Virtual drone in AirSim as Camera Sensor
-In the folder *Heliot/sensor/AirSim* run.
-Note: add the updated AirSim code.
-``` bash
-python3 main.py 
+
+0. get source code and install required packages by following the steps described [here] (https://github.com/nesl/Heliot/blob/master/sensor/AirSim/Readme.md)
+
+1. run the python client to control the drone
+    - MININET_MACHINE_IP:MININET_MACHINE_PORT is the IP and port you used for your data forwarder
+```
+cd airsim_python_client\PythonClient\multirotor
+python _multi_drone_threading.py MININET_MACHINE_IP:MININET_MACHINE_PORT
 ```
 
 ## 5. User Smartphone for notification

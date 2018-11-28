@@ -155,9 +155,13 @@ vim config_ddflow_demo/task_data.json
 ```
 
 5. run demo case
-  - run the demo case
+  - run the demo case with sudo (because mininet requires root access to simulate the network)
 ```
-python main.py -tc test_ddflow_demo.Test -c config_ddflow_demo
+# clean up mininet objects (if any)
+sudo mn -c
+
+# run the demo case
+sudo python main.py -tc test_ddflow_demo.Test -c config_ddflow_demo
 
 sample output:
 ...

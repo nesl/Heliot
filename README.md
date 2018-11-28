@@ -72,7 +72,7 @@ In order to emulate the demo surveillance scenario, we will setup the below syst
   - Installation and system setup steps: [Available here](https://github.com/nesl/Heliot/blob/master/sensor/AirSim/Readme.md)
 
 ## 2. **Host-2 (Mininet machine)**
-  - Installation and system setup steps: [Available here](https://github.com/nesl/Heliot/blob/master/network/Mininet/Readme.md)
+  - Installation and system setup steps: [Available here](https://github.com/nesl/Heliot/blob/master/network/README.md)
 
 ## 3. **Nvidia Jetson-TX2**
   - Installation and system setup steps: [Available here](https://github.com/nesl/Heliot/tree/master/computation/Jetson).

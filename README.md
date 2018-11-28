@@ -129,7 +129,7 @@ vim config_ddflow_demo/task_data.json
 sudo mn -c
 
 # run the demo case
-sudo python main.py -tc test_ddflow_demo.Test -c config_ddflow_demo
+sudo python main.py demo -tc test_ddflow_demo.Test -c config_ddflow_demo
 
 sample output:
 ...

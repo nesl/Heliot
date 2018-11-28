@@ -22,8 +22,8 @@ git clone https://github.com/kumokay/airsim_python_client
 2. Extract it to anywhere you like, and copy/replace the following files in to the extracted AirSimNH folder
 ```
 cd AirSimNH
-cp YOUR_GIT_HUB_PATH/airsim_python_client/airsim_exes/AirSimNH/settings.json .
-cp YOUR_GIT_HUB_PATH/airsim_python_client/airsim_exes/AirSimNH/run.bat .
+copy YOUR_GIT_HUB_PATH/airsim_python_client/airsim_exes/AirSimNH/settings.json settings.json
+copy YOUR_GIT_HUB_PATH/airsim_python_client/airsim_exes/AirSimNH/run.bat run.bat
 ```
 3. Double clicked run.bat to verify the AirSim simulator works.
 

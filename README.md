@@ -98,6 +98,11 @@ In the folder Heliot/computation/Jetson/ run.
 python3 main.py JETSON_PORT_NUM
 ```
 PORT_NUM can be: 18800
+<br/>
+Wait until you see, the below output in the terminal before running any sensor code or the test code.
+```
+Available for Inference now
+```
 
 <br/>
 To verify, that Jetson-Tx2 is running as inference server run.
@@ -105,8 +110,6 @@ To verify, that Jetson-Tx2 is running as inference server run.
 ```
 python3 test.py JETSON_PORT_NUM
 ```
-
-Note: add instructions for Tx2 to update the ip.
  
 ## 2. Running Network Emulator
 

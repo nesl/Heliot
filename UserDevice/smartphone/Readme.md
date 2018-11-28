@@ -35,4 +35,7 @@ In current case the WEB_SERVER_IP is the ip of the Mininet machine.
 We are actively working on developing an Android App. Currently, we refresh the web address hosted by the
 web server which is setup in the previous step on the user smartphone.
 
-5. Use any web browser to open a webpage at WEB_SERVER_IP:WEB_SERVER_PORT with auto-refresh enabled. you should be able to see the result once the whole system starts running.
+5. Use any web browser in the Smartphone to open a webpage at http://WEB_SERVER_IP:WEB_SERVER_PORT with auto-refresh enabled. you should be able to see the result once the whole system starts running.
+<br/>
+
+Another easy way is to use auto refresh Android application. We recommend using [Auto refresh web page utility](https://play.google.com/store/apps/details?id=com.murgoo.autowebpagerefresh). In the settings tab add http://WEB_SERVER_IP:WEB_SERVER_PORT 

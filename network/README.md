@@ -2,7 +2,7 @@
 
 0. Hardware
 - General purpose server with Ubuntu Linux 16.04 LTS
-- Recommended system requirements (at least):
+- Minimum system requirements:
     * 2 GHz dual core processor or better
     * 2 GB system memory
     * 5 GB of free hard drive space

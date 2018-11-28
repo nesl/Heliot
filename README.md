@@ -146,17 +146,45 @@ git clone https://github.com/kumokay/placethings
 
 4. modify the config file
 ```
-in placethings/config_ddflow_demo/task_data.json
+cd placethings
+vim config_ddflow_demo/task_data.json
 
-change the ip addresses and to the correct ip addresses
-172.17.51.1:18900 => your actuator that handles the alert message
-172.17.49.60:18800 => your edge device with GPU
-172.17.51.1:18800 => your general purpose server
+# change the ip addresses and to the correct ip addresses
+172.17.51.1:18900 => the corresponding IP and port of the actuator (the display server in section 5)
+172.17.49.60:18800 => the corresponding IP and port of Jetson-Tx2
 ```
 
 5. run demo case
+  - run the demo case
 ```
-python main.py -tc test_ddflow_demo.TestDynamic -c config_ddflow_demo
+python main.py -tc test_ddflow_demo.Test -c config_ddflow_demo
+
+sample output:
+...
+2018-11-27 17:00:38,509 |[INFO] start: start mininet.
+2018-11-27 17:00:38,510 |[INFO] start: *** Starting network
+...
+2018-11-27 17:02:51,480 |[INFO] test: === running scenario: initial deployment ===
+2018-11-27 17:02:51,481 |[INFO] start_workers: run all workers
+2018-11-27 17:02:51,481 |[INFO] run_worker: run worker on CAMERA.0
+2018-11-27 17:02:51,482 |[INFO] run_cmd: send command to CAMERA.0(h0): cd /opt/github/placethings && python main_entity.py run_task -n task_camera -en task_forward -a 172.18.0.2:18800 -ra 10.0.0.102:18800 &> /dev/null &
+2018-11-27 17:02:51,495 |[INFO] run_cmd: output: 
+2018-11-27 17:02:51,495 |[INFO] run_worker: run worker on CONTROLLER.0
+2018-11-27 17:02:51,495 |[INFO] run_cmd: send command to CONTROLLER.0(h1): cd /opt/github/placethings && python main_entity.py run_task -n task_alert -en task_forward -a 10.0.0.101:18800 -ra 172.17.51.1:18900 &> /dev/null &
+2018-11-27 17:02:51,509 |[INFO] run_cmd: output: 
+2018-11-27 17:02:51,509 |[INFO] run_worker: run worker on P3_2XLARGE.0
+2018-11-27 17:02:51,509 |[INFO] run_cmd: send command to P3_2XLARGE.0(h2): cd /opt/github/placethings && python main_entity.py run_task -n task_findObj -en task_findObj -a 10.0.0.102:18800 -ra 10.0.0.101:18800 -al offload 172.17.49.60:18800 &> /dev/null &
+2018-11-27 17:02:51,517 |[INFO] run_cmd: output: 
+press any key to end test
+```
+  - run the data forwarder so that we can send data into mininet
+```
+python main_entity.py run_task -n forward -en task_forward -a MININET_SERVER_IP:MININET_SERVER_PORT -ra CAMERA_IP:CAMERA_PORT
+```
+    * MININET_SERVER_IP:MININET_SERVER_PORT is the server ip and port you selected to run the script.
+    * CAMERA_IP:CAMERA_PORT can be found in the output log, for example in this log we have CAMERA running at 172.18.0.2:18800.
+```
+2018-11-27 17:02:51,482 |[INFO] run_cmd: send command to CAMERA.0(h0): cd /opt/github/placethings && python main_entity.py run_task -n task_camera -en task_forward -a 172.18.0.2:18800 -ra 10.0.0.102:18800 &> /dev/null &
 ```
 
 ## 3. Google Vision Kit as Camera Sensor

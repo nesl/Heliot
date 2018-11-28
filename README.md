@@ -115,12 +115,11 @@ python3 test.py JETSON_PORT_NUM
 
 0. get source code and install required packages by following the steps described [here] (https://github.com/nesl/Heliot/blob/master/network/README.md)
 
-1. modify the config file
+1. modify the config file and change the ip addresses and to the correct ip addresses
 ```
 cd placethings
 vim config_ddflow_demo/task_data.json
 ```
-change the ip addresses and to the correct ip addresses
     - 172.17.51.1:18900 => the corresponding IP and port of the actuator, which would be the display server described in [section 5] (https://github.com/nesl/Heliot#5-user-smartphone-for-notification) in this demo
     - 172.17.49.60:18800 => the corresponding IP and port of Jetson-Tx2
 

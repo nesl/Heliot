@@ -120,8 +120,8 @@ python3 test.py JETSON_PORT_NUM
 cd placethings
 vim config_ddflow_demo/task_data.json
 ```
-    - 172.17.51.1:18900 => the corresponding IP and port of the actuator, which would be the display server described in [section 5](https://github.com/nesl/Heliot#5-user-smartphone-for-notification) in this demo
-    - 172.17.49.60:18800 => the corresponding IP and port of Jetson-Tx2
+- 172.17.51.1:18900 => the corresponding IP and port of the actuator, which would be the DISPLAY_SERVER_IP:DISPLAY_SERVER_PORT described in [UserDevice/smartphone section](https://github.com/nesl/Heliot/blob/master/UserDevice/smartphone/Readme.md#3-run-the-actuator-display-server) in this demo
+- 172.17.49.60:18800 => the corresponding IP and port of Jetson-Tx2
 
 #### 2. run the demo case with sudo (because mininet requires root access to simulate the network)
 ```

@@ -113,17 +113,17 @@ python3 test.py JETSON_PORT_NUM
  
 ## 2. Running Network Emulator
 
-0. get source code and install required packages by following the steps described [here] (https://github.com/nesl/Heliot/blob/master/network/README.md)
+### 0. get source code and install required packages by following the steps described [here](https://github.com/nesl/Heliot/blob/master/network/README.md)
 
-1. modify the config file and change the ip addresses and to the correct ip addresses
+### 1. modify the config file and change the ip addresses and to the correct ip addresses
 ```
 cd placethings
 vim config_ddflow_demo/task_data.json
 ```
-    - 172.17.51.1:18900 => the corresponding IP and port of the actuator, which would be the display server described in [section 5] (https://github.com/nesl/Heliot#5-user-smartphone-for-notification) in this demo
+    - 172.17.51.1:18900 => the corresponding IP and port of the actuator, which would be the display server described in [section 5](https://github.com/nesl/Heliot#5-user-smartphone-for-notification) in this demo
     - 172.17.49.60:18800 => the corresponding IP and port of Jetson-Tx2
 
-2. run the demo case with sudo (because mininet requires root access to simulate the network)
+### 2. run the demo case with sudo (because mininet requires root access to simulate the network)
 ```
 # clean up mininet objects (if any)
 sudo mn -c
@@ -149,7 +149,7 @@ sample output:
 2018-11-27 17:02:51,517 |[INFO] run_cmd: output: 
 press any key to end test
 ```
-3. run the data forwarder so that we can send data into mininet
+### 3. run the data forwarder so that we can send data into mininet
     - MININET_SERVER_IP:MININET_SERVER_PORT is the server ip and port you selected to run the script.
     - CAMERA_IP:CAMERA_PORT can be found in the output log, for example in the log above, CAMERA is running at 172.18.0.2:18800.
 ```

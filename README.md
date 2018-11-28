@@ -108,44 +108,11 @@ python3 test.py JETSON_PORT_NUM
 
 Note: add instructions for Tx2 to update the ip.
  
-## 2. Running Mininet
-<!-- Please get the source code from our development branch and follow the steps for installation:  -->
-<!-- 
-0. Hardware
-- General purpose server with Ubuntu Linux 16.04 LTS
-- Recommended system requirements:
-```
-2 GHz dual core processor or better
-2 GB system memory
-5 GB of free hard drive space
-Internet access
-```
--->
+## 2. Running Network Emulator
 
-1. Install containernet
-```
-$ sudo apt-get install ansible git aptitude
-$ git clone https://github.com/containernet/containernet.git
-$ cd containernet/ansible
-$ sudo ansible-playbook -i "localhost," -c local install.yml
-$ cd ..
-$ sudo python setup.py install
-$ sudo py.test -v mininet/test/test_containernet.py
-```
+0. get source code and install required packages by following the steps in https://github.com/nesl/Heliot/blob/master/network/README.md
 
-2. Install ilp solvers and python packages
-```
-$ pip install --upgrade pip==9.0.1
-$ sudo pip install msgpack-rpc-python numpy Pillow future networkx matplotlib six aenum pulp
-$ sudo apt-get install glpk-utils
-```
-
-3. get source code from our development branch
-```
-git clone https://github.com/kumokay/placethings
-```
-
-4. modify the config file
+1. modify the config file
 ```
 cd placethings
 vim config_ddflow_demo/task_data.json
@@ -155,8 +122,7 @@ vim config_ddflow_demo/task_data.json
 172.17.49.60:18800 => the corresponding IP and port of Jetson-Tx2
 ```
 
-5. run demo case
-  - run the demo case with sudo (because mininet requires root access to simulate the network)
+2. run the demo case with sudo (because mininet requires root access to simulate the network)
 ```
 # clean up mininet objects (if any)
 sudo mn -c
@@ -182,17 +148,16 @@ sample output:
 2018-11-27 17:02:51,517 |[INFO] run_cmd: output: 
 press any key to end test
 ```
-  - run the data forwarder so that we can send data into mininet
-      * MININET_SERVER_IP:MININET_SERVER_PORT is the server ip and port you selected to run the script.
-      * CAMERA_IP:CAMERA_PORT can be found in the output log, for example in the log above, CAMERA is running at 172.18.0.2:18800.
-
+3. run the data forwarder so that we can send data into mininet
+    - MININET_SERVER_IP:MININET_SERVER_PORT is the server ip and port you selected to run the script.
+    - CAMERA_IP:CAMERA_PORT can be found in the output log, for example in the log above, CAMERA is running at 172.18.0.2:18800.
 ```
 partial output log:
 ...
 2018-11-27 17:02:51,482 |[INFO] run_cmd: send command to CAMERA.0(h0): cd /opt/github/placethings && python main_entity.py run_task -n task_camera -en task_forward -a 172.18.0.2:18800 -ra 10.0.0.102:18800 &> /dev/null &
 ...
 
-$ python main_entity.py run_task -n forward -en task_forward -a MININET_SERVER_IP:MININET_SERVER_PORT -ra CAMERA_IP:CAMERA_PORT
+python main_entity.py run_task -n forward -en task_forward -a MININET_SERVER_IP:MININET_SERVER_PORT -ra CAMERA_IP:CAMERA_PORT
 ```
 
 ## 3. Google Vision Kit as Camera Sensor

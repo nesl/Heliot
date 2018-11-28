@@ -10,7 +10,7 @@ Recommended System: Machine with 32 GB RAM and [NVIDIA TitanX](https://www.nvidi
 2. **Nvidia GPU Drivers** need to be installed. The steps are available [here](https://nvidia.custhelp.com/app/answers/detail/a_id/2900/~/installing-nvidia-display-drivers-under-windows-7%2C-windows-8%2C-or-windows-10).
 
 ## 2. Download Airsim python client for Airsim v1.2.1 and install python libraries
-1. Set up python2 or python3 by following the steps described in python official website [link] (https://docs.python.org/3/using/windows.html)
+1. Set up python2 or python3 by following the steps described in python official website [link](https://docs.python.org/3/using/windows.html)
 2. get the source code and install required libraries
 ```
 pip install msgpack-rpc-python

@@ -26,7 +26,9 @@ sudo pip install msgpack-rpc-python numpy Pillow future networkx matplotlib six 
 sudo apt-get install glpk-utils
 ```
 
-3. get source code from our development branch
+3. get source code from our development branch and download the sample docker container
 ```
 git clone https://github.com/kumokay/placethings
+sudo docker pull kumokay/ubuntu_wifi:v6
 ```
+

@@ -81,7 +81,7 @@ In order to emulate the demo surveillance scenario, we will setup the below syst
   - Installation and system setup steps: [Available here](https://github.com/nesl/Heliot/blob/master/sensor/RaspberryPi/Readme.md)
 
 ## 5. **Smartphone**:
-- Installation and system setup steps: To Add here.
+- Installation and system setup steps: [Available here](https://github.com/nesl/Heliot/blob/master/UserDevice/smartphone/Readme.md)
 
 ---
 ---
@@ -182,41 +182,16 @@ python _multi_drone_threading.py MININET_MACHINE_IP:MININET_MACHINE_PORT
 ```
 
 ## 5. User Smartphone for notification
-<!-- 
-0. Hardware
-- Smartphone with Android system
-- General purpose server with any Linux-like operating systems (e.g. Ubuntu or Mac), and a public IP that accessible by your Smartphone
-```
-Recommended system requirements for the general purpose server:
-2 GHz dual core processor or better
-2 GB system memory
-5 GB of free hard drive space
-Internet access
-```
--->
 
-1. Install python packages
-```
-$ pip install --upgrade pip==9.0.1
-$ sudo pip install msgpack-rpc-python future
-```
+1. Setup web server as mentioned in [installation steps](https://github.com/nesl/Heliot/blob/master/UserDevice/smartphone/Readme.md).
 
-2. get script from our development branch
-```
-wget https://raw.githubusercontent.com/kumokay/placethings/master/config_ddflow_demo/sample_display_server.py
-wget https://raw.githubusercontent.com/kumokay/placethings/master/config_ddflow_demo/sample_flask_server.py
-```
+2. We are actively working on developing an Android App. Currently, we refresh the web address hosted by the
+web server which is setup in the previous step on the user smartphone.
 
-3. run the actuator (display server)
-```
-python sample_display_server.py DISPLAY_SERVER_IP:DISPLAY_SERVER_PORT
-# e.g. python sample_display_server.py 172.17.51.1:18900
-```
+5. Use any web browser in the Smartphone to open a webpage at http://WEB_SERVER_IP:WEB_SERVER_PORT with auto-refresh enabled. 
+<br/>
 
-4. run the web server which gets result from the display server and shows the alert on a web page
-```
-python sample_flask_server.py WEB_SERVER_IP:WEB_SERVER_PORT DISPLAY_SERVER_IP:DISPLAY_SERVER_PORT
-# e.g. python sample_display_server.py 172.17.51.1:7788 172.17.51.1:18900
-```
+Another easy way is to use auto refresh Android application. We recommend using [Auto refresh web page utility](https://play.google.com/store/apps/details?id=com.murgoo.autowebpagerefresh). In the settings tab add http://WEB_SERVER_IP:WEB_SERVER_PORT 
 
-5. use any web browser to open a webpage at WEB_SERVER_IP:WEB_SERVER_PORT with auto-refresh enabled. you should be able to see the result once the whole system starts running.
+<br/>
+you should be able to see the result once the whole system starts running.

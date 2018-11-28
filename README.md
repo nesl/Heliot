@@ -172,10 +172,10 @@ python main.py MININET_SERVER_IP MININET_SERVER_PORT
 
 ## 4. Virtual drone in AirSim as Camera Sensor
 
-0. get source code and install required packages by following the steps described [here] (https://github.com/nesl/Heliot/blob/master/sensor/AirSim/Readme.md)
+0. get source code and install required packages by following the steps described [here](https://github.com/nesl/Heliot/blob/master/sensor/AirSim/Readme.md)
 
 1. run the python client to control the drone
-    - MININET_MACHINE_IP:MININET_MACHINE_PORT is the IP and port you used for your data forwarder
+    - MININET_MACHINE_IP:MININET_MACHINE_PORT is the IP and port you used for your data forwarder in [section 3](https://github.com/nesl/Heliot/blob/master/README.md#3-run-the-data-forwarder-so-that-we-can-send-data-into-mininet)
 ```
 cd airsim_python_client\PythonClient\multirotor
 python _multi_drone_threading.py MININET_MACHINE_IP:MININET_MACHINE_PORT

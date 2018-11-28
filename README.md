@@ -169,7 +169,7 @@ In the folder *Heliot/sensor/RaspberryPi/*   run.
 <br/> 
 Note: add details to update the ip of consumer of images.
 ``` bash
-python3 main.py 
+python main.py MININET_SERVER_IP MININET_SERVER_PORT
 ```
 
 ## 4. Virtual drone in AirSim as Camera Sensor

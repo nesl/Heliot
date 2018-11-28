@@ -178,13 +178,16 @@ sample output:
 press any key to end test
 ```
   - run the data forwarder so that we can send data into mininet
+      * MININET_SERVER_IP:MININET_SERVER_PORT is the server ip and port you selected to run the script.
+      * CAMERA_IP:CAMERA_PORT can be found in the output log, for example in the log above, CAMERA is running at 172.18.0.2:18800.
+
 ```
-python main_entity.py run_task -n forward -en task_forward -a MININET_SERVER_IP:MININET_SERVER_PORT -ra CAMERA_IP:CAMERA_PORT
-```
-    * MININET_SERVER_IP:MININET_SERVER_PORT is the server ip and port you selected to run the script.
-    * CAMERA_IP:CAMERA_PORT can be found in the output log, for example in this log we have CAMERA running at 172.18.0.2:18800.
-```
+partial output log:
+...
 2018-11-27 17:02:51,482 |[INFO] run_cmd: send command to CAMERA.0(h0): cd /opt/github/placethings && python main_entity.py run_task -n task_camera -en task_forward -a 172.18.0.2:18800 -ra 10.0.0.102:18800 &> /dev/null &
+...
+
+$ python main_entity.py run_task -n forward -en task_forward -a MININET_SERVER_IP:MININET_SERVER_PORT -ra CAMERA_IP:CAMERA_PORT
 ```
 
 ## 3. Google Vision Kit as Camera Sensor

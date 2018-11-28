@@ -95,14 +95,15 @@ Please follow the installation and system set up steps listed above.
 ## 1. Inference on Jetson-Tx2
 In the folder Heliot/computation/Jetson/ run.
 ```
-python3 main.py
+python3 main.py JETSON_PORT_NUM
 ```
+PORT_NUM can be: 18800
 
 <br/>
 To verify, that Jetson-Tx2 is running as inference server run.
 
 ```
-python3 test.py
+python3 test.py JETSON_PORT_NUM
 ```
 
 Note: add instructions for Tx2 to update the ip.

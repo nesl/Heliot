@@ -9,13 +9,23 @@ Recommended System: Machine with 32 GB RAM and [NVIDIA TitanX](https://www.nvidi
 1. **Installing windows 10** on the machine. Many online resources are available. A complete step-by-step guide is [here](https://www.howtogeek.com/197559/how-to-install-windows-10-on-your-pc/)
 2. **Nvidia GPU Drivers** need to be installed. The steps are available [here](https://nvidia.custhelp.com/app/answers/detail/a_id/2900/~/installing-nvidia-display-drivers-under-windows-7%2C-windows-8%2C-or-windows-10).
 
-## 2. AirSim
-1. Use precompiled binaries: Download the precompiled binary for [AirSimNH](https://github.com/Microsoft/AirSim/releases/download/v1.2.1/AirSimNH.zip). AirSimNH is small urban neighbourhood block. 
-2. Extract it somewhere and run the run.bat to verify the AirSim simulator works.
+## 2. Download Airsim python client for Airsim v1.2.1 and install python libraries
+1. Set up python2 or python3 by following the steps described in python official website [link] (https://docs.python.org/3/using/windows.html)
+2. get the source code and install required libraries
+```
+pip install msgpack-rpc-python
+git clone https://github.com/kumokay/airsim_python_client
+```
 
-## 3. Setting up development environment
-1. Set up python by following the steps [here](https://docs.python.org/3/using/windows.html).
-2. Install the packages. Note: Add instructions.
+## 3. Download AirSim precompiled binaries
+1. Download the precompiled binary for [AirSimNH v1.2.1](https://github.com/Microsoft/AirSim/releases/download/v1.2.1/AirSimNH.zip). AirSimNH is small urban neighbourhood block.
+2. Extract it to anywhere you like, and copy/replace the following files in to the extracted AirSimNH folder
+```
+cd AirSimNH
+cp YOUR_GIT_HUB_PATH/airsim_python_client/airsim_exes/AirSimNH/settings.json .
+cp YOUR_GIT_HUB_PATH/airsim_python_client/airsim_exes/AirSimNH/run.bat .
+```
+3. Double clicked run.bat to verify the AirSim simulator works.
 
 ## 4. Testing drone locally
 1. Clone the github repo if not done already on the machine.
@@ -28,5 +38,5 @@ git clone https://github.com/nesl/Heliot.git
 - In the folder *Heliot/sensor/AirSim*   run. 
 
 ``` bash
-python3 hello_drone.py
+python hello_drone.py
 ```

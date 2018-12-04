@@ -1,92 +1,134 @@
 {
     "Devices": {
-        "Device_1": {
-            "compute": {
-                "CPU": "8",
-                "GPU": "1"
-            },
+        "airsimServer": {
             "deviceType": "generalServer",
-            "ip": "172.17.49.168",
+            "compute": {
+                "GPU": "1",
+                "CPU": "8"
+            },
+            "sensor": {},
             "name": "AirSim Server",
-            "sensor": {}
+            "interfaces": {
+                "output": {
+                    "ip": "172.17.49.60",
+                    "n_port": 1,
+                    "protocol": "ethernet"
+                }
+            }
         },
-        "Device_2": {
-            "compute": {
-                "CPU": "12",
-                "GPU": "1"
-            },
+        "mininetServer": {
             "deviceType": "generalServer",
-            "ip": "172.17.49.168",
-            "name": "Mininet Server",
-            "sensor": {}
-        },
-        "Device_3": {
             "compute": {
-                "CPU": "4",
-                "GPU": "1"
+                "GPU": "1",
+                "CPU": "12"
             },
-            "deviceType": "tx2",
-            "ip": "172.17.49.168",
-            "name": "Nvidia Jetson TX2",
-            "sensor": {}
+            "sensor": {},
+            "name": "Mininet Server",
+            "interfaces": {
+                "output": {
+                    "ip": "172.17.49.60",
+                    "n_port": 1,
+                    "protocol": "ethernet"
+                }
+            }
         },
-        "Device_4": {
+        "tx2_0": {
+            "deviceType": "tx2",
+            "compute": {
+                "GPU": "1",
+                "CPU": "4"
+            },
+            "sensor": {},
+            "name": "Nvidia Jetson TX2",
+            "interfaces": {
+                "output": {
+                    "ip": "172.17.49.60",
+                    "n_port": 1,
+                    "protocol": "ethernet"
+                }
+            }
+        },
+        "googlevisionkit_0": {
+            "deviceType": "googlevisionkit",
             "compute": {
                 "CPU": "2"
             },
-            "deviceType": "googlevisionkit",
-            "ip": "172.17.49.168",
-            "name": "Google Vision Kit",
             "sensor": {
                 "sensor1": "Camera"
+            },
+            "name": "Google Vision Kit",
+            "interfaces": {
+                "output": {
+                    "ip": "172.17.49.60",
+                    "n_port": 1,
+                    "protocol": "wifi"
+                }
             }
         },
-        "Device_5": {
-            "compute": {
-                "CPU": "2",
-                "GPU": "0"
-            },
+        "pi3_cam": {
             "deviceType": "pi3",
-            "ip": "172.17.49.168",
+            "compute": {
+                "GPU": "0",
+                "CPU": "2"
+            },
             "name": "Raspberry pi 1",
             "sensor": {
                 "sensor1": "Camera"
-            }
+            },
+            "ip": "172.17.49.168"
         },
-        "Device_6": {
+        "pi3_cam_vpu": {
+            "deviceType": "pi3",
             "compute": {
-                "CPU": "2",
                 "GPU": "0",
+                "CPU": "2",
                 "VPU": "1"
             },
-            "deviceType": "pi3",
-            "ip": "172.17.49.168",
             "name": "Raspberry pi-1",
             "sensor": {
                 "sensor1": "Camera"
+            },
+            "interfaces": {
+                "output": {
+                    "ip": "172.17.49.60",
+                    "n_port": 1,
+                    "protocol": "ethernet"
+                }
             }
         },
-        "Device_7": {
+        "gap8_cam": {
+            "deviceType": "gap8",
             "compute": {
                 "CPU": "8"
             },
-            "deviceType": "gap8",
-            "ip": "172.17.49.168",
-            "name": "Gap 8 board",
             "sensor": {
                 "sensor1": "Camera"
+            },
+            "name": "Gap 8 board",
+            "interfaces": {
+                "output": {
+                    "ip": "172.17.49.60",
+                    "n_port": 1,
+                    "protocol": "ethernet"
+                }
             }
         },
-        "Device_8": {
+        "samsung_phone": {
+            "deviceType": "smartphone",
             "compute": {
                 "CPU": "8",
                 "GPU": "1"
             },
-            "deviceType": "smartphone",
-            "ip": "172.17.49.168",
-            "name": "Samsung Galaxy S7",
             "sensor": {
                 "sensor1": "Camera"
+            },
+            "name": "Samsung Galaxy S7",
+            "interfaces": {
+                "output": {
+                    "ip": "172.17.49.60",
+                    "n_port": 1,
+                    "protocol": "wifi"
+                }
             }
         }
     }

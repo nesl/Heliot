@@ -1,0 +1,93 @@
+{
+    "Devices": {
+        "Device_1": {
+            "compute": {
+                "CPU": "8",
+                "GPU": "1"
+            },
+            "deviceType": "generalServer",
+            "ip": "172.17.49.168",
+            "name": "AirSim Server",
+            "sensor": {}
+        },
+        "Device_2": {
+            "compute": {
+                "CPU": "12",
+                "GPU": "1"
+            },
+            "deviceType": "generalServer",
+            "ip": "172.17.49.168",
+            "name": "Mininet Server",
+            "sensor": {}
+        },
+        "Device_3": {
+            "compute": {
+                "CPU": "4",
+                "GPU": "1"
+            },
+            "deviceType": "tx2",
+            "ip": "172.17.49.168",
+            "name": "Nvidia Jetson TX2",
+            "sensor": {}
+        },
+        "Device_4": {
+            "compute": {
+                "CPU": "2"
+            },
+            "deviceType": "googlevisionkit",
+            "ip": "172.17.49.168",
+            "name": "Google Vision Kit",
+            "sensor": {
+                "sensor1": "Camera"
+            }
+        },
+        "Device_5": {
+            "compute": {
+                "CPU": "2",
+                "GPU": "0"
+            },
+            "deviceType": "pi3",
+            "ip": "172.17.49.168",
+            "name": "Raspberry pi 1",
+            "sensor": {
+                "sensor1": "Camera"
+            }
+        },
+        "Device_6": {
+            "compute": {
+                "CPU": "2",
+                "GPU": "0",
+                "VPU": "1"
+            },
+            "deviceType": "pi3",
+            "ip": "172.17.49.168",
+            "name": "Raspberry pi-1",
+            "sensor": {
+                "sensor1": "Camera"
+            }
+        },
+        "Device_7": {
+            "compute": {
+                "CPU": "8"
+            },
+            "deviceType": "gap8",
+            "ip": "172.17.49.168",
+            "name": "Gap 8 board",
+            "sensor": {
+                "sensor1": "Camera"
+            }
+        },
+        "Device_8": {
+            "compute": {
+                "CPU": "8",
+                "GPU": "1"
+            },
+            "deviceType": "smartphone",
+            "ip": "172.17.49.168",
+            "name": "Samsung Galaxy S7",
+            "sensor": {
+                "sensor1": "Camera"
+            }
+        }
+    }
+}

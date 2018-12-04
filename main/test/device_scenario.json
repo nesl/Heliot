@@ -1,0 +1,86 @@
+
+
+{
+    "RealDevices": [
+        "mininetServer",
+        "airsimServergooglevisionkit_0",
+        "tx2_0",
+        "pi3_cam_vpu",
+        "gap8_cam",
+        "samsung_phone"
+    ],
+    "virtualDevices": {
+        "container_GPU": {
+            "realDeviceMapping": "mininetServer",
+            "compute": {
+                "GPU": "1",
+                "CPU": "2"
+            },
+            "name": "Container with GPU",
+            "ip": "172.17.49.168"
+        },
+        "container_Camera": {
+            "realDeviceMapping": "mininetServer",
+            "compute": {
+                "CPU": "2"
+            },
+            "name": "Container with Camera",
+            "sensor": {
+                "sensor1": "Camera"
+            },
+            "ip": "172.17.49.168"
+        },
+        "vswitch_0": {
+            "deviceType": "switch",
+            "name": "ethernet swtich",
+            "Interfaces": {
+                "input": {
+                    "n_port": 8,
+                    "protocol": "ethernet"
+                },
+                "output": {
+                    "n_port": 1,
+                    "protocol": "ethernet"
+                }
+            }
+        }
+    },
+    "Links": {
+        "googlevisionkit_0": {
+            "vswitch_0": {
+                "latency": 2,
+                "src_interface": "output",
+                "dst_interface": "input"
+            }
+        },
+        "tx2_0": {
+            "vswitch_0": {
+                "latency": 2,
+                "src_interface": "output",
+                "dst_interface": "input"
+            }
+        },
+        "pi3_cam_vpu": {
+            "vswitch_0": {
+                "latency": 2,
+                "src_interface": "output",
+                "dst_interface": "input"
+            }
+        },
+        "gap8_cam": {
+            "vswitch_0": {
+                "latency": 2,
+                "src_interface": "output",
+                "dst_interface": "input"
+            }
+        },
+        "samsung_phone": {
+            "vswitch_0": {
+                "latency": 2,
+                "src_interface": "output",
+                "dst_interface": "input"
+            }
+        }
+    }
+}
+

@@ -1,0 +1,160 @@
+2018-09-16 03:15:52,142 task_checkAbnormalEvent|[INFO] start_server: start_server task_checkAbnormalEvent at 10.0.0.116:18800, args=['task_checkAbnormalEvent', 5, [(u'10.0.0.110', 18800)]]
+2018-09-16 03:15:52,142 task_checkAbnormalEvent|[INFO] __init__: start Task RPCServer: task_checkAbnormalEvent, exectime=0.005s, receivers=[(u'10.0.0.110', 18800)]
+2018-09-16 03:16:00,181 task_checkAbnormalEvent|[INFO] dispatch: (TIME) recv: t1=1537092960.17, t2=1537092960.18, t_transmit=0.014995098114
+2018-09-16 03:16:00,181 task_checkAbnormalEvent|[INFO] dispatch: (RECV) push: ['spent 0.005 to compute result']
+2018-09-16 03:16:00,186 task_checkAbnormalEvent|[INFO] push: push data to 10.0.0.110:18800
+2018-09-16 03:16:00,187 task_checkAbnormalEvent|[INFO] call: (TIME) send: t1=1537092960.19
+2018-09-16 03:16:00,187 task_checkAbnormalEvent|[INFO] call: (SEND) push: (u'spent 0.005 to compute result',)
+2018-09-16 03:16:00,367 task_checkAbnormalEvent|[INFO] push: got data: spent 0.005 to compute result
+2018-09-16 03:16:00,367 task_checkAbnormalEvent|[INFO] push: compute result: spent 0.005 to compute result
+2018-09-16 03:16:00,777 task_checkAbnormalEvent|[INFO] dispatch: (TIME) recv: t1=1537092960.76, t2=1537092960.78, t_transmit=0.0141899585724
+2018-09-16 03:16:00,777 task_checkAbnormalEvent|[INFO] dispatch: (RECV) push: ['spent 0.6 to compute result']
+2018-09-16 03:16:00,782 task_checkAbnormalEvent|[INFO] push: push data to 10.0.0.110:18800
+2018-09-16 03:16:00,783 task_checkAbnormalEvent|[INFO] call: (TIME) send: t1=1537092960.78
+2018-09-16 03:16:00,783 task_checkAbnormalEvent|[INFO] call: (SEND) push: (u'spent 0.005 to compute result',)
+2018-09-16 03:16:00,960 task_checkAbnormalEvent|[INFO] push: got data: spent 0.6 to compute result
+2018-09-16 03:16:00,960 task_checkAbnormalEvent|[INFO] push: compute result: spent 0.005 to compute result
+2018-09-16 03:16:05,164 task_checkAbnormalEvent|[INFO] dispatch: (TIME) recv: t1=1537092965.14, t2=1537092965.16, t_transmit=0.0197358131409
+2018-09-16 03:16:05,164 task_checkAbnormalEvent|[INFO] dispatch: (RECV) push: ['spent 0.005 to compute result']
+2018-09-16 03:16:05,170 task_checkAbnormalEvent|[INFO] push: push data to 10.0.0.110:18800
+2018-09-16 03:16:05,170 task_checkAbnormalEvent|[INFO] call: (TIME) send: t1=1537092965.17
+2018-09-16 03:16:05,170 task_checkAbnormalEvent|[INFO] call: (SEND) push: (u'spent 0.005 to compute result',)
+2018-09-16 03:16:05,346 task_checkAbnormalEvent|[INFO] push: got data: spent 0.005 to compute result
+2018-09-16 03:16:05,346 task_checkAbnormalEvent|[INFO] push: compute result: spent 0.005 to compute result
+2018-09-16 03:16:10,166 task_checkAbnormalEvent|[INFO] dispatch: (TIME) recv: t1=1537092970.15, t2=1537092970.17, t_transmit=0.0180521011353
+2018-09-16 03:16:10,167 task_checkAbnormalEvent|[INFO] dispatch: (RECV) push: ['spent 0.005 to compute result']
+2018-09-16 03:16:10,172 task_checkAbnormalEvent|[INFO] push: push data to 10.0.0.110:18800
+2018-09-16 03:16:10,172 task_checkAbnormalEvent|[INFO] call: (TIME) send: t1=1537092970.17
+2018-09-16 03:16:10,173 task_checkAbnormalEvent|[INFO] call: (SEND) push: (u'spent 0.005 to compute result',)
+2018-09-16 03:16:10,346 task_checkAbnormalEvent|[INFO] push: got data: spent 0.005 to compute result
+2018-09-16 03:16:10,347 task_checkAbnormalEvent|[INFO] push: compute result: spent 0.005 to compute result
+2018-09-16 03:16:15,219 task_checkAbnormalEvent|[INFO] dispatch: (TIME) recv: t1=1537092975.15, t2=1537092975.22, t_transmit=0.0666711330414
+2018-09-16 03:16:15,220 task_checkAbnormalEvent|[INFO] dispatch: (RECV) push: ['spent 0.005 to compute result']
+2018-09-16 03:16:15,225 task_checkAbnormalEvent|[INFO] push: push data to 10.0.0.110:18800
+2018-09-16 03:16:15,226 task_checkAbnormalEvent|[INFO] call: (TIME) send: t1=1537092975.23
+2018-09-16 03:16:15,226 task_checkAbnormalEvent|[INFO] call: (SEND) push: (u'spent 0.005 to compute result',)
+2018-09-16 03:16:15,403 task_checkAbnormalEvent|[INFO] push: got data: spent 0.005 to compute result
+2018-09-16 03:16:15,403 task_checkAbnormalEvent|[INFO] push: compute result: spent 0.005 to compute result
+2018-09-16 03:16:23,650 task_checkAbnormalEvent|[INFO] dispatch: (TIME) recv: t1=1537092983.53, t2=1537092983.65, t_transmit=0.117003917694
+2018-09-16 03:16:23,650 task_checkAbnormalEvent|[INFO] dispatch: (RECV) STOP: []
+2018-09-16 03:16:23,651 task_checkAbnormalEvent|[INFO] dispatch: stop server: task_checkAbnormalEvent
+2018-09-16 03:16:43,695 task_checkAbnormalEvent|[INFO] start_server: start_server task_checkAbnormalEvent at 10.0.0.133:18800, args=['task_checkAbnormalEvent', 5, [(u'10.0.0.127', 18800)]]
+2018-09-16 03:16:43,695 task_checkAbnormalEvent|[INFO] __init__: start Task RPCServer: task_checkAbnormalEvent, exectime=0.005s, receivers=[(u'10.0.0.127', 18800)]
+2018-09-16 03:16:50,189 task_checkAbnormalEvent|[INFO] dispatch: (TIME) recv: t1=1537093010.17, t2=1537093010.19, t_transmit=0.0191600322723
+2018-09-16 03:16:50,189 task_checkAbnormalEvent|[INFO] dispatch: (RECV) push: ['spent 0.01 to compute result']
+2018-09-16 03:16:50,195 task_checkAbnormalEvent|[INFO] push: push data to 10.0.0.127:18800
+2018-09-16 03:16:50,196 task_checkAbnormalEvent|[INFO] call: (TIME) send: t1=1537093010.2
+2018-09-16 03:16:50,196 task_checkAbnormalEvent|[INFO] call: (SEND) push: (u'spent 0.005 to compute result',)
+2018-09-16 03:16:50,400 task_checkAbnormalEvent|[INFO] push: got data: spent 0.01 to compute result
+2018-09-16 03:16:50,400 task_checkAbnormalEvent|[INFO] push: compute result: spent 0.005 to compute result
+2018-09-16 03:16:50,811 task_checkAbnormalEvent|[INFO] dispatch: (TIME) recv: t1=1537093010.77, t2=1537093010.81, t_transmit=0.0409240722656
+2018-09-16 03:16:50,811 task_checkAbnormalEvent|[INFO] dispatch: (RECV) push: ['spent 0.6 to compute result']
+2018-09-16 03:16:50,817 task_checkAbnormalEvent|[INFO] push: push data to 10.0.0.127:18800
+2018-09-16 03:16:50,818 task_checkAbnormalEvent|[INFO] call: (TIME) send: t1=1537093010.82
+2018-09-16 03:16:50,819 task_checkAbnormalEvent|[INFO] call: (SEND) push: (u'spent 0.005 to compute result',)
+2018-09-16 03:16:51,032 task_checkAbnormalEvent|[INFO] push: got data: spent 0.6 to compute result
+2018-09-16 03:16:51,032 task_checkAbnormalEvent|[INFO] push: compute result: spent 0.005 to compute result
+2018-09-16 03:16:55,192 task_checkAbnormalEvent|[INFO] dispatch: (TIME) recv: t1=1537093015.17, t2=1537093015.19, t_transmit=0.0258338451385
+2018-09-16 03:16:55,192 task_checkAbnormalEvent|[INFO] dispatch: (RECV) push: ['spent 0.01 to compute result']
+2018-09-16 03:16:55,197 task_checkAbnormalEvent|[INFO] push: push data to 10.0.0.127:18800
+2018-09-16 03:16:55,198 task_checkAbnormalEvent|[INFO] call: (TIME) send: t1=1537093015.2
+2018-09-16 03:16:55,198 task_checkAbnormalEvent|[INFO] call: (SEND) push: (u'spent 0.005 to compute result',)
+2018-09-16 03:16:55,391 task_checkAbnormalEvent|[INFO] push: got data: spent 0.01 to compute result
+2018-09-16 03:16:55,391 task_checkAbnormalEvent|[INFO] push: compute result: spent 0.005 to compute result
+2018-09-16 03:17:00,254 task_checkAbnormalEvent|[INFO] dispatch: (TIME) recv: t1=1537093020.22, t2=1537093020.25, t_transmit=0.0320210456848
+2018-09-16 03:17:00,255 task_checkAbnormalEvent|[INFO] dispatch: (RECV) push: ['spent 0.01 to compute result']
+2018-09-16 03:17:00,260 task_checkAbnormalEvent|[INFO] push: push data to 10.0.0.127:18800
+2018-09-16 03:17:00,260 task_checkAbnormalEvent|[INFO] call: (TIME) send: t1=1537093020.26
+2018-09-16 03:17:00,260 task_checkAbnormalEvent|[INFO] call: (SEND) push: (u'spent 0.005 to compute result',)
+2018-09-16 03:17:00,465 task_checkAbnormalEvent|[INFO] push: got data: spent 0.01 to compute result
+2018-09-16 03:17:00,465 task_checkAbnormalEvent|[INFO] push: compute result: spent 0.005 to compute result
+2018-09-16 03:17:05,194 task_checkAbnormalEvent|[INFO] dispatch: (TIME) recv: t1=1537093025.18, t2=1537093025.19, t_transmit=0.011932849884
+2018-09-16 03:17:05,195 task_checkAbnormalEvent|[INFO] dispatch: (RECV) push: ['spent 0.01 to compute result']
+2018-09-16 03:17:05,200 task_checkAbnormalEvent|[INFO] push: push data to 10.0.0.127:18800
+2018-09-16 03:17:05,200 task_checkAbnormalEvent|[INFO] call: (TIME) send: t1=1537093025.2
+2018-09-16 03:17:05,201 task_checkAbnormalEvent|[INFO] call: (SEND) push: (u'spent 0.005 to compute result',)
+2018-09-16 03:17:05,396 task_checkAbnormalEvent|[INFO] push: got data: spent 0.01 to compute result
+2018-09-16 03:17:05,397 task_checkAbnormalEvent|[INFO] push: compute result: spent 0.005 to compute result
+2018-09-16 03:17:14,925 task_checkAbnormalEvent|[INFO] dispatch: (TIME) recv: t1=1537093034.81, t2=1537093034.93, t_transmit=0.115362882614
+2018-09-16 03:17:14,925 task_checkAbnormalEvent|[INFO] dispatch: (RECV) STOP: []
+2018-09-16 03:17:14,926 task_checkAbnormalEvent|[INFO] dispatch: stop server: task_checkAbnormalEvent
+2018-09-16 03:17:29,096 task_checkAbnormalEvent|[INFO] start_server: start_server task_checkAbnormalEvent at 10.0.0.150:18800, args=['task_checkAbnormalEvent', 5, [(u'10.0.0.144', 18800)]]
+2018-09-16 03:17:29,097 task_checkAbnormalEvent|[INFO] __init__: start Task RPCServer: task_checkAbnormalEvent, exectime=0.005s, receivers=[(u'10.0.0.144', 18800)]
+2018-09-16 03:17:35,083 task_checkAbnormalEvent|[INFO] dispatch: (TIME) recv: t1=1537093055.07, t2=1537093055.08, t_transmit=0.0132300853729
+2018-09-16 03:17:35,083 task_checkAbnormalEvent|[INFO] dispatch: (RECV) push: ['spent 0.01 to compute result']
+2018-09-16 03:17:35,089 task_checkAbnormalEvent|[INFO] push: push data to 10.0.0.144:18800
+2018-09-16 03:17:35,089 task_checkAbnormalEvent|[INFO] call: (TIME) send: t1=1537093055.09
+2018-09-16 03:17:35,089 task_checkAbnormalEvent|[INFO] call: (SEND) push: (u'spent 0.005 to compute result',)
+2018-09-16 03:17:35,135 task_checkAbnormalEvent|[INFO] push: got data: spent 0.01 to compute result
+2018-09-16 03:17:35,135 task_checkAbnormalEvent|[INFO] push: compute result: spent 0.005 to compute result
+2018-09-16 03:17:37,077 task_checkAbnormalEvent|[INFO] dispatch: (TIME) recv: t1=1537093057.06, t2=1537093057.08, t_transmit=0.0158498287201
+2018-09-16 03:17:37,077 task_checkAbnormalEvent|[INFO] dispatch: (RECV) push: ['spent 2.0 to compute result']
+2018-09-16 03:17:37,082 task_checkAbnormalEvent|[INFO] push: push data to 10.0.0.144:18800
+2018-09-16 03:17:37,083 task_checkAbnormalEvent|[INFO] call: (TIME) send: t1=1537093057.08
+2018-09-16 03:17:37,083 task_checkAbnormalEvent|[INFO] call: (SEND) push: (u'spent 0.005 to compute result',)
+2018-09-16 03:17:37,135 task_checkAbnormalEvent|[INFO] push: got data: spent 2.0 to compute result
+2018-09-16 03:17:37,135 task_checkAbnormalEvent|[INFO] push: compute result: spent 0.005 to compute result
+2018-09-16 03:17:40,070 task_checkAbnormalEvent|[INFO] dispatch: (TIME) recv: t1=1537093060.06, t2=1537093060.07, t_transmit=0.011353969574
+2018-09-16 03:17:40,070 task_checkAbnormalEvent|[INFO] dispatch: (RECV) push: ['spent 0.01 to compute result']
+2018-09-16 03:17:40,075 task_checkAbnormalEvent|[INFO] push: push data to 10.0.0.144:18800
+2018-09-16 03:17:40,075 task_checkAbnormalEvent|[INFO] call: (TIME) send: t1=1537093060.08
+2018-09-16 03:17:40,075 task_checkAbnormalEvent|[INFO] call: (SEND) push: (u'spent 0.005 to compute result',)
+2018-09-16 03:17:40,122 task_checkAbnormalEvent|[INFO] push: got data: spent 0.01 to compute result
+2018-09-16 03:17:40,122 task_checkAbnormalEvent|[INFO] push: compute result: spent 0.005 to compute result
+2018-09-16 03:17:45,052 task_checkAbnormalEvent|[INFO] dispatch: (TIME) recv: t1=1537093065.04, t2=1537093065.05, t_transmit=0.0119960308075
+2018-09-16 03:17:45,053 task_checkAbnormalEvent|[INFO] dispatch: (RECV) push: ['spent 0.01 to compute result']
+2018-09-16 03:17:45,058 task_checkAbnormalEvent|[INFO] push: push data to 10.0.0.144:18800
+2018-09-16 03:17:45,058 task_checkAbnormalEvent|[INFO] call: (TIME) send: t1=1537093065.06
+2018-09-16 03:17:45,058 task_checkAbnormalEvent|[INFO] call: (SEND) push: (u'spent 0.005 to compute result',)
+2018-09-16 03:17:45,104 task_checkAbnormalEvent|[INFO] push: got data: spent 0.01 to compute result
+2018-09-16 03:17:45,104 task_checkAbnormalEvent|[INFO] push: compute result: spent 0.005 to compute result
+2018-09-16 03:17:50,057 task_checkAbnormalEvent|[INFO] dispatch: (TIME) recv: t1=1537093070.04, t2=1537093070.06, t_transmit=0.012167930603
+2018-09-16 03:17:50,057 task_checkAbnormalEvent|[INFO] dispatch: (RECV) push: ['spent 0.01 to compute result']
+2018-09-16 03:17:50,062 task_checkAbnormalEvent|[INFO] push: push data to 10.0.0.144:18800
+2018-09-16 03:17:50,063 task_checkAbnormalEvent|[INFO] call: (TIME) send: t1=1537093070.06
+2018-09-16 03:17:50,063 task_checkAbnormalEvent|[INFO] call: (SEND) push: (u'spent 0.005 to compute result',)
+2018-09-16 03:17:50,110 task_checkAbnormalEvent|[INFO] push: got data: spent 0.01 to compute result
+2018-09-16 03:17:50,110 task_checkAbnormalEvent|[INFO] push: compute result: spent 0.005 to compute result
+2018-09-16 03:17:59,480 task_checkAbnormalEvent|[INFO] dispatch: (TIME) recv: t1=1537093079.47, t2=1537093079.48, t_transmit=0.00841879844666
+2018-09-16 03:17:59,481 task_checkAbnormalEvent|[INFO] dispatch: (RECV) STOP: []
+2018-09-16 03:17:59,481 task_checkAbnormalEvent|[INFO] dispatch: stop server: task_checkAbnormalEvent
+2018-09-16 03:18:18,097 task_checkAbnormalEvent|[INFO] start_server: start_server task_checkAbnormalEvent at 10.0.0.167:18800, args=['task_checkAbnormalEvent', 5, [(u'10.0.0.161', 18800)]]
+2018-09-16 03:18:18,098 task_checkAbnormalEvent|[INFO] __init__: start Task RPCServer: task_checkAbnormalEvent, exectime=0.005s, receivers=[(u'10.0.0.161', 18800)]
+2018-09-16 03:18:25,120 task_checkAbnormalEvent|[INFO] dispatch: (TIME) recv: t1=1537093105.1, t2=1537093105.12, t_transmit=0.0254769325256
+2018-09-16 03:18:25,120 task_checkAbnormalEvent|[INFO] dispatch: (RECV) push: ['spent 0.01 to compute result']
+2018-09-16 03:18:25,126 task_checkAbnormalEvent|[INFO] push: push data to 10.0.0.161:18800
+2018-09-16 03:18:25,126 task_checkAbnormalEvent|[INFO] call: (TIME) send: t1=1537093105.13
+2018-09-16 03:18:25,127 task_checkAbnormalEvent|[INFO] call: (SEND) push: (u'spent 0.005 to compute result',)
+2018-09-16 03:18:25,319 task_checkAbnormalEvent|[INFO] push: got data: spent 0.01 to compute result
+2018-09-16 03:18:25,320 task_checkAbnormalEvent|[INFO] push: compute result: spent 0.005 to compute result
+2018-09-16 03:18:27,126 task_checkAbnormalEvent|[INFO] dispatch: (TIME) recv: t1=1537093107.09, t2=1537093107.13, t_transmit=0.0399608612061
+2018-09-16 03:18:27,127 task_checkAbnormalEvent|[INFO] dispatch: (RECV) push: ['spent 2.0 to compute result']
+2018-09-16 03:18:27,132 task_checkAbnormalEvent|[INFO] push: push data to 10.0.0.161:18800
+2018-09-16 03:18:27,133 task_checkAbnormalEvent|[INFO] call: (TIME) send: t1=1537093107.13
+2018-09-16 03:18:27,133 task_checkAbnormalEvent|[INFO] call: (SEND) push: (u'spent 0.005 to compute result',)
+2018-09-16 03:18:27,302 task_checkAbnormalEvent|[INFO] push: got data: spent 2.0 to compute result
+2018-09-16 03:18:27,302 task_checkAbnormalEvent|[INFO] push: compute result: spent 0.005 to compute result
+2018-09-16 03:18:30,073 task_checkAbnormalEvent|[INFO] dispatch: (TIME) recv: t1=1537093110.06, t2=1537093110.07, t_transmit=0.0126419067383
+2018-09-16 03:18:30,073 task_checkAbnormalEvent|[INFO] dispatch: (RECV) push: ['spent 0.01 to compute result']
+2018-09-16 03:18:30,078 task_checkAbnormalEvent|[INFO] push: push data to 10.0.0.161:18800
+2018-09-16 03:18:30,079 task_checkAbnormalEvent|[INFO] call: (TIME) send: t1=1537093110.08
+2018-09-16 03:18:30,079 task_checkAbnormalEvent|[INFO] call: (SEND) push: (u'spent 0.005 to compute result',)
+2018-09-16 03:18:30,248 task_checkAbnormalEvent|[INFO] push: got data: spent 0.01 to compute result
+2018-09-16 03:18:30,248 task_checkAbnormalEvent|[INFO] push: compute result: spent 0.005 to compute result
+2018-09-16 03:18:35,055 task_checkAbnormalEvent|[INFO] dispatch: (TIME) recv: t1=1537093115.04, t2=1537093115.06, t_transmit=0.0121221542358
+2018-09-16 03:18:35,055 task_checkAbnormalEvent|[INFO] dispatch: (RECV) push: ['spent 0.01 to compute result']
+2018-09-16 03:18:35,061 task_checkAbnormalEvent|[INFO] push: push data to 10.0.0.161:18800
+2018-09-16 03:18:35,061 task_checkAbnormalEvent|[INFO] call: (TIME) send: t1=1537093115.06
+2018-09-16 03:18:35,061 task_checkAbnormalEvent|[INFO] call: (SEND) push: (u'spent 0.005 to compute result',)
+2018-09-16 03:18:35,229 task_checkAbnormalEvent|[INFO] push: got data: spent 0.01 to compute result
+2018-09-16 03:18:35,229 task_checkAbnormalEvent|[INFO] push: compute result: spent 0.005 to compute result
+2018-09-16 03:18:40,060 task_checkAbnormalEvent|[INFO] dispatch: (TIME) recv: t1=1537093120.05, t2=1537093120.06, t_transmit=0.014429807663
+2018-09-16 03:18:40,060 task_checkAbnormalEvent|[INFO] dispatch: (RECV) push: ['spent 0.01 to compute result']
+2018-09-16 03:18:40,066 task_checkAbnormalEvent|[INFO] push: push data to 10.0.0.161:18800
+2018-09-16 03:18:40,066 task_checkAbnormalEvent|[INFO] call: (TIME) send: t1=1537093120.07
+2018-09-16 03:18:40,067 task_checkAbnormalEvent|[INFO] call: (SEND) push: (u'spent 0.005 to compute result',)
+2018-09-16 03:18:40,233 task_checkAbnormalEvent|[INFO] push: got data: spent 0.01 to compute result
+2018-09-16 03:18:40,234 task_checkAbnormalEvent|[INFO] push: compute result: spent 0.005 to compute result
+2018-09-16 03:18:48,707 task_checkAbnormalEvent|[INFO] dispatch: (TIME) recv: t1=1537093128.7, t2=1537093128.71, t_transmit=0.00857400894165
+2018-09-16 03:18:48,708 task_checkAbnormalEvent|[INFO] dispatch: (RECV) STOP: []
+2018-09-16 03:18:48,708 task_checkAbnormalEvent|[INFO] dispatch: stop server: task_checkAbnormalEvent

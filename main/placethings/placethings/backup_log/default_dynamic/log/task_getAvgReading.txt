@@ -1,0 +1,132 @@
+2018-09-16 03:15:52,115 task_getAvgReading|[INFO] start_server: start_server task_getAvgReading at 10.0.0.114:18800, args=['task_getAvgReading', 5, [(u'10.0.0.116', 18800)]]
+2018-09-16 03:15:52,115 task_getAvgReading|[INFO] __init__: start Task RPCServer: task_getAvgReading, exectime=0.005s, receivers=[(u'10.0.0.116', 18800)]
+2018-09-16 03:16:00,160 task_getAvgReading|[INFO] dispatch: (TIME) recv: t1=1537092960.01, t2=1537092960.16, t_transmit=0.152973175049
+2018-09-16 03:16:00,160 task_getAvgReading|[INFO] dispatch: (RECV) push: [[47, 104, 64, 85, 90, 85, 102, 99, 61, 91, 53, 101, 85, 108, 11
+2018-09-16 03:16:00,165 task_getAvgReading|[INFO] push: push data to 10.0.0.116:18800
+2018-09-16 03:16:00,166 task_getAvgReading|[INFO] call: (TIME) send: t1=1537092960.17
+2018-09-16 03:16:00,166 task_getAvgReading|[INFO] call: (SEND) push: (u'spent 0.005 to compute result',)
+2018-09-16 03:16:00,370 task_getAvgReading|[INFO] push: got data: [47, 104, 64, 85, 90, 85, 102, 99, 61, 91, 53, 101, 85, 108, 116, 73, 58, 93, 48, 80, 84, 105, 100, 49, 118, 57, 60, 110, 48, 114, 49, 48, 76, 105, 78, 49, 43, 97, 105, 87, 111, 108, 119, 46, 78, 99, 42, 61, 96, 120, 86, 80, 88, 46, 49, 112, 80, 68, 78, 111, 54, 87, 43, 111, 79, 97, 69, 72, 67, 101, 72, 118, 73, 71, 95, 71, 56, 65, 72, 81, 107, 85, 97, 67, 76, 108, 103, 59, 92, 91, 111, 116, 67, 78, 45, 70, 56, 65, 93, 112]
+2018-09-16 03:16:00,370 task_getAvgReading|[INFO] push: compute result: spent 0.005 to compute result
+2018-09-16 03:16:05,138 task_getAvgReading|[INFO] dispatch: (TIME) recv: t1=1537092965.01, t2=1537092965.14, t_transmit=0.132959127426
+2018-09-16 03:16:05,139 task_getAvgReading|[INFO] dispatch: (RECV) push: [[52, 60, 102, 120, 53, 82, 103, 49, 89, 51, 44, 48, 61, 81, 71,
+2018-09-16 03:16:05,144 task_getAvgReading|[INFO] push: push data to 10.0.0.116:18800
+2018-09-16 03:16:05,144 task_getAvgReading|[INFO] call: (TIME) send: t1=1537092965.14
+2018-09-16 03:16:05,145 task_getAvgReading|[INFO] call: (SEND) push: (u'spent 0.005 to compute result',)
+2018-09-16 03:16:05,348 task_getAvgReading|[INFO] push: got data: [52, 60, 102, 120, 53, 82, 103, 49, 89, 51, 44, 48, 61, 81, 71, 106, 93, 85, 80, 46, 93, 96, 113, 66, 113, 46, 63, 85, 101, 116, 88, 92, 109, 94, 103, 41, 93, 100, 92, 102, 53, 47, 101, 116, 120, 112, 71, 49, 82, 81, 92, 111, 118, 113, 120, 57, 116, 50, 80, 47, 88, 55, 69, 44, 70, 80, 60, 67, 98, 73, 116, 74, 59, 40, 48, 114, 68, 56, 96, 61, 100, 115, 116, 77, 70, 50, 86, 113, 61, 119, 64, 49, 51, 96, 40, 41, 107, 57, 93, 52]
+2018-09-16 03:16:05,348 task_getAvgReading|[INFO] push: compute result: spent 0.005 to compute result
+2018-09-16 03:16:10,143 task_getAvgReading|[INFO] dispatch: (TIME) recv: t1=1537092970.01, t2=1537092970.14, t_transmit=0.137367963791
+2018-09-16 03:16:10,143 task_getAvgReading|[INFO] dispatch: (RECV) push: [[58, 48, 115, 94, 49, 67, 44, 71, 86, 81, 50, 51, 108, 60, 43, 
+2018-09-16 03:16:10,148 task_getAvgReading|[INFO] push: push data to 10.0.0.116:18800
+2018-09-16 03:16:10,148 task_getAvgReading|[INFO] call: (TIME) send: t1=1537092970.15
+2018-09-16 03:16:10,149 task_getAvgReading|[INFO] call: (SEND) push: (u'spent 0.005 to compute result',)
+2018-09-16 03:16:10,349 task_getAvgReading|[INFO] push: got data: [58, 48, 115, 94, 49, 67, 44, 71, 86, 81, 50, 51, 108, 60, 43, 62, 88, 101, 61, 118, 95, 85, 77, 55, 106, 62, 87, 78, 43, 54, 64, 68, 49, 75, 69, 112, 99, 83, 110, 56, 68, 41, 115, 89, 61, 42, 74, 93, 74, 50, 103, 96, 95, 117, 42, 73, 57, 51, 103, 78, 119, 99, 73, 60, 52, 49, 100, 56, 98, 72, 58, 76, 77, 77, 84, 92, 76, 59, 64, 68, 76, 112, 63, 106, 73, 115, 69, 105, 93, 110, 83, 87, 97, 44, 77, 86, 97, 76, 75, 53]
+2018-09-16 03:16:10,349 task_getAvgReading|[INFO] push: compute result: spent 0.005 to compute result
+2018-09-16 03:16:15,146 task_getAvgReading|[INFO] dispatch: (TIME) recv: t1=1537092975.01, t2=1537092975.15, t_transmit=0.140839099884
+2018-09-16 03:16:15,147 task_getAvgReading|[INFO] dispatch: (RECV) push: [[80, 109, 102, 64, 74, 120, 80, 108, 52, 87, 42, 114, 90, 81, 4
+2018-09-16 03:16:15,152 task_getAvgReading|[INFO] push: push data to 10.0.0.116:18800
+2018-09-16 03:16:15,153 task_getAvgReading|[INFO] call: (TIME) send: t1=1537092975.15
+2018-09-16 03:16:15,153 task_getAvgReading|[INFO] call: (SEND) push: (u'spent 0.005 to compute result',)
+2018-09-16 03:16:15,406 task_getAvgReading|[INFO] push: got data: [80, 109, 102, 64, 74, 120, 80, 108, 52, 87, 42, 114, 90, 81, 41, 108, 77, 106, 43, 44, 90, 64, 116, 64, 46, 86, 108, 73, 78, 56, 68, 104, 97, 54, 49, 54, 109, 43, 67, 58, 76, 57, 115, 113, 90, 114, 86, 116, 82, 104, 85, 46, 55, 79, 41, 81, 41, 40, 73, 104, 43, 89, 108, 84, 97, 79, 86, 94, 96, 95, 104, 55, 101, 65, 84, 118, 44, 40, 67, 60, 75, 111, 87, 62, 93, 99, 74, 120, 61, 56, 108, 74, 40, 99, 54, 68, 103, 45, 77, 80]
+2018-09-16 03:16:15,407 task_getAvgReading|[INFO] push: compute result: spent 0.005 to compute result
+2018-09-16 03:16:22,522 task_getAvgReading|[INFO] dispatch: (TIME) recv: t1=1537092982.4, t2=1537092982.52, t_transmit=0.118178844452
+2018-09-16 03:16:22,523 task_getAvgReading|[INFO] dispatch: (RECV) STOP: []
+2018-09-16 03:16:22,523 task_getAvgReading|[INFO] dispatch: stop server: task_getAvgReading
+2018-09-16 03:16:43,674 task_getAvgReading|[INFO] start_server: start_server task_getAvgReading at 10.0.0.131:18800, args=['task_getAvgReading', 10, [(u'10.0.0.133', 18800)]]
+2018-09-16 03:16:43,674 task_getAvgReading|[INFO] __init__: start Task RPCServer: task_getAvgReading, exectime=0.01s, receivers=[(u'10.0.0.133', 18800)]
+2018-09-16 03:16:50,159 task_getAvgReading|[INFO] dispatch: (TIME) recv: t1=1537093010.01, t2=1537093010.16, t_transmit=0.150143146515
+2018-09-16 03:16:50,159 task_getAvgReading|[INFO] dispatch: (RECV) push: [[109, 60, 95, 104, 84, 75, 44, 69, 101, 63, 75, 100, 118, 75, 7
+2018-09-16 03:16:50,169 task_getAvgReading|[INFO] push: push data to 10.0.0.133:18800
+2018-09-16 03:16:50,170 task_getAvgReading|[INFO] call: (TIME) send: t1=1537093010.17
+2018-09-16 03:16:50,170 task_getAvgReading|[INFO] call: (SEND) push: (u'spent 0.01 to compute result',)
+2018-09-16 03:16:50,402 task_getAvgReading|[INFO] push: got data: [109, 60, 95, 104, 84, 75, 44, 69, 101, 63, 75, 100, 118, 75, 73, 92, 85, 77, 67, 64, 69, 78, 81, 71, 53, 50, 84, 85, 81, 93, 114, 47, 47, 43, 102, 100, 42, 101, 81, 109, 90, 83, 96, 114, 99, 101, 87, 90, 65, 103, 111, 48, 42, 73, 113, 53, 84, 81, 108, 116, 110, 81, 42, 51, 62, 93, 68, 47, 41, 80, 44, 82, 49, 116, 58, 62, 75, 63, 61, 73, 65, 48, 117, 58, 81, 104, 110, 53, 111, 41, 103, 109, 110, 53, 100, 82, 50, 41, 61, 93]
+2018-09-16 03:16:50,403 task_getAvgReading|[INFO] push: compute result: spent 0.01 to compute result
+2018-09-16 03:16:55,154 task_getAvgReading|[INFO] dispatch: (TIME) recv: t1=1537093015.01, t2=1537093015.15, t_transmit=0.148521900177
+2018-09-16 03:16:55,154 task_getAvgReading|[INFO] dispatch: (RECV) push: [[96, 70, 104, 83, 50, 72, 40, 117, 119, 44, 113, 112, 78, 116, 
+2018-09-16 03:16:55,165 task_getAvgReading|[INFO] push: push data to 10.0.0.133:18800
+2018-09-16 03:16:55,166 task_getAvgReading|[INFO] call: (TIME) send: t1=1537093015.17
+2018-09-16 03:16:55,166 task_getAvgReading|[INFO] call: (SEND) push: (u'spent 0.01 to compute result',)
+2018-09-16 03:16:55,394 task_getAvgReading|[INFO] push: got data: [96, 70, 104, 83, 50, 72, 40, 117, 119, 44, 113, 112, 78, 116, 67, 45, 61, 103, 106, 78, 76, 90, 74, 77, 115, 69, 65, 109, 92, 49, 95, 120, 99, 120, 118, 44, 87, 55, 96, 45, 82, 66, 73, 53, 93, 44, 82, 108, 72, 49, 85, 108, 94, 63, 75, 64, 111, 85, 80, 95, 92, 112, 83, 82, 113, 62, 76, 51, 96, 53, 77, 54, 59, 77, 79, 114, 69, 64, 40, 61, 65, 47, 40, 48, 103, 105, 56, 74, 70, 56, 87, 53, 94, 48, 91, 79, 50, 84, 65, 65]
+2018-09-16 03:16:55,394 task_getAvgReading|[INFO] push: compute result: spent 0.01 to compute result
+2018-09-16 03:17:00,211 task_getAvgReading|[INFO] dispatch: (TIME) recv: t1=1537093020.0, t2=1537093020.21, t_transmit=0.208563089371
+2018-09-16 03:17:00,211 task_getAvgReading|[INFO] dispatch: (RECV) push: [[104, 104, 42, 115, 93, 66, 80, 95, 91, 104, 52, 95, 98, 83, 47
+2018-09-16 03:17:00,222 task_getAvgReading|[INFO] push: push data to 10.0.0.133:18800
+2018-09-16 03:17:00,222 task_getAvgReading|[INFO] call: (TIME) send: t1=1537093020.22
+2018-09-16 03:17:00,222 task_getAvgReading|[INFO] call: (SEND) push: (u'spent 0.01 to compute result',)
+2018-09-16 03:17:00,468 task_getAvgReading|[INFO] push: got data: [104, 104, 42, 115, 93, 66, 80, 95, 91, 104, 52, 95, 98, 83, 47, 89, 112, 88, 41, 61, 88, 94, 101, 107, 87, 120, 105, 118, 111, 102, 62, 90, 103, 70, 62, 40, 95, 92, 118, 114, 52, 116, 109, 65, 50, 75, 100, 92, 68, 57, 107, 87, 68, 69, 84, 97, 69, 100, 119, 43, 49, 120, 56, 51, 108, 105, 40, 85, 44, 100, 69, 44, 100, 47, 73, 51, 71, 117, 53, 101, 64, 117, 82, 77, 88, 108, 89, 71, 83, 119, 93, 110, 48, 94, 66, 58, 86, 63, 77, 62]
+2018-09-16 03:17:00,468 task_getAvgReading|[INFO] push: compute result: spent 0.01 to compute result
+2018-09-16 03:17:05,172 task_getAvgReading|[INFO] dispatch: (TIME) recv: t1=1537093025.0, t2=1537093025.17, t_transmit=0.16891503334
+2018-09-16 03:17:05,172 task_getAvgReading|[INFO] dispatch: (RECV) push: [[96, 52, 68, 54, 110, 67, 45, 47, 111, 51, 70, 78, 95, 94, 68, 
+2018-09-16 03:17:05,182 task_getAvgReading|[INFO] push: push data to 10.0.0.133:18800
+2018-09-16 03:17:05,183 task_getAvgReading|[INFO] call: (TIME) send: t1=1537093025.18
+2018-09-16 03:17:05,183 task_getAvgReading|[INFO] call: (SEND) push: (u'spent 0.01 to compute result',)
+2018-09-16 03:17:05,401 task_getAvgReading|[INFO] push: got data: [96, 52, 68, 54, 110, 67, 45, 47, 111, 51, 70, 78, 95, 94, 68, 113, 118, 67, 59, 91, 43, 113, 82, 90, 88, 43, 44, 65, 86, 78, 61, 116, 47, 104, 92, 111, 101, 76, 60, 95, 65, 69, 116, 65, 89, 96, 71, 54, 109, 110, 66, 110, 40, 82, 49, 58, 78, 50, 60, 44, 102, 80, 95, 114, 63, 97, 92, 47, 61, 98, 51, 106, 79, 119, 118, 43, 107, 84, 59, 114, 59, 57, 79, 47, 70, 75, 86, 93, 110, 51, 74, 80, 81, 56, 56, 69, 42, 61, 111, 43]
+2018-09-16 03:17:05,401 task_getAvgReading|[INFO] push: compute result: spent 0.01 to compute result
+2018-09-16 03:17:14,010 task_getAvgReading|[INFO] dispatch: (TIME) recv: t1=1537093033.89, t2=1537093034.01, t_transmit=0.117486953735
+2018-09-16 03:17:14,011 task_getAvgReading|[INFO] dispatch: (RECV) STOP: []
+2018-09-16 03:17:14,011 task_getAvgReading|[INFO] dispatch: stop server: task_getAvgReading
+2018-09-16 03:17:29,011 task_getAvgReading|[INFO] start_server: start_server task_getAvgReading at 10.0.0.148:18800, args=['task_getAvgReading', 10, [(u'10.0.0.150', 18800)]]
+2018-09-16 03:17:29,011 task_getAvgReading|[INFO] __init__: start Task RPCServer: task_getAvgReading, exectime=0.01s, receivers=[(u'10.0.0.150', 18800)]
+2018-09-16 03:17:35,059 task_getAvgReading|[INFO] dispatch: (TIME) recv: t1=1537093055.01, t2=1537093055.06, t_transmit=0.0538990497589
+2018-09-16 03:17:35,059 task_getAvgReading|[INFO] dispatch: (RECV) push: [[93, 105, 66, 91, 69, 51, 65, 54, 107, 41, 94, 68, 79, 75, 89, 
+2018-09-16 03:17:35,070 task_getAvgReading|[INFO] push: push data to 10.0.0.150:18800
+2018-09-16 03:17:35,070 task_getAvgReading|[INFO] call: (TIME) send: t1=1537093055.07
+2018-09-16 03:17:35,070 task_getAvgReading|[INFO] call: (SEND) push: (u'spent 0.01 to compute result',)
+2018-09-16 03:17:35,138 task_getAvgReading|[INFO] push: got data: [93, 105, 66, 91, 69, 51, 65, 54, 107, 41, 94, 68, 79, 75, 89, 45, 80, 89, 48, 107, 73, 113, 72, 105, 111, 108, 48, 111, 108, 109, 60, 61, 91, 70, 64, 48, 118, 97, 112, 44, 49, 100, 114, 111, 91, 56, 87, 91, 54, 63, 93, 54, 99, 75, 79, 92, 78, 66, 79, 55, 103, 42, 100, 44, 67, 47, 78, 71, 75, 97, 43, 87, 54, 98, 50, 95, 51, 91, 89, 94, 70, 57, 114, 101, 100, 105, 42, 95, 96, 84, 40, 105, 80, 44, 117, 74, 115, 70, 65, 81]
+2018-09-16 03:17:35,138 task_getAvgReading|[INFO] push: compute result: spent 0.01 to compute result
+2018-09-16 03:17:40,047 task_getAvgReading|[INFO] dispatch: (TIME) recv: t1=1537093060.0, t2=1537093060.05, t_transmit=0.0455048084259
+2018-09-16 03:17:40,048 task_getAvgReading|[INFO] dispatch: (RECV) push: [[48, 74, 52, 114, 51, 118, 112, 61, 47, 105, 110, 108, 66, 81, 
+2018-09-16 03:17:40,058 task_getAvgReading|[INFO] push: push data to 10.0.0.150:18800
+2018-09-16 03:17:40,058 task_getAvgReading|[INFO] call: (TIME) send: t1=1537093060.06
+2018-09-16 03:17:40,058 task_getAvgReading|[INFO] call: (SEND) push: (u'spent 0.01 to compute result',)
+2018-09-16 03:17:40,125 task_getAvgReading|[INFO] push: got data: [48, 74, 52, 114, 51, 118, 112, 61, 47, 105, 110, 108, 66, 81, 51, 95, 50, 89, 51, 45, 70, 96, 81, 69, 67, 97, 108, 117, 92, 58, 53, 86, 108, 116, 46, 54, 43, 44, 106, 54, 118, 114, 109, 46, 75, 43, 102, 105, 71, 54, 81, 50, 69, 52, 110, 89, 94, 47, 55, 50, 42, 66, 48, 94, 90, 74, 72, 51, 91, 58, 90, 102, 66, 72, 105, 51, 100, 99, 40, 106, 115, 92, 50, 76, 81, 68, 70, 47, 49, 81, 92, 79, 120, 61, 113, 62, 45, 59, 102, 72]
+2018-09-16 03:17:40,125 task_getAvgReading|[INFO] push: compute result: spent 0.01 to compute result
+2018-09-16 03:17:45,030 task_getAvgReading|[INFO] dispatch: (TIME) recv: t1=1537093065.01, t2=1537093065.03, t_transmit=0.0240008831024
+2018-09-16 03:17:45,030 task_getAvgReading|[INFO] dispatch: (RECV) push: [[43, 114, 97, 56, 70, 88, 56, 80, 77, 87, 68, 63, 64, 101, 47, 
+2018-09-16 03:17:45,040 task_getAvgReading|[INFO] push: push data to 10.0.0.150:18800
+2018-09-16 03:17:45,040 task_getAvgReading|[INFO] call: (TIME) send: t1=1537093065.04
+2018-09-16 03:17:45,040 task_getAvgReading|[INFO] call: (SEND) push: (u'spent 0.01 to compute result',)
+2018-09-16 03:17:45,106 task_getAvgReading|[INFO] push: got data: [43, 114, 97, 56, 70, 88, 56, 80, 77, 87, 68, 63, 64, 101, 47, 50, 88, 46, 113, 118, 56, 54, 68, 96, 48, 50, 91, 87, 74, 119, 50, 73, 116, 117, 67, 90, 93, 57, 83, 63, 51, 104, 65, 100, 46, 67, 115, 40, 94, 56, 62, 91, 99, 86, 68, 114, 99, 109, 76, 102, 79, 90, 80, 45, 78, 89, 47, 115, 77, 81, 55, 110, 95, 106, 91, 99, 116, 100, 68, 93, 94, 46, 52, 76, 43, 98, 54, 113, 40, 40, 43, 54, 72, 111, 63, 109, 57, 50, 104, 91]
+2018-09-16 03:17:45,106 task_getAvgReading|[INFO] push: compute result: spent 0.01 to compute result
+2018-09-16 03:17:50,034 task_getAvgReading|[INFO] dispatch: (TIME) recv: t1=1537093070.01, t2=1537093070.03, t_transmit=0.0286250114441
+2018-09-16 03:17:50,034 task_getAvgReading|[INFO] dispatch: (RECV) push: [[89, 92, 113, 108, 67, 95, 75, 58, 45, 84, 62, 105, 86, 119, 12
+2018-09-16 03:17:50,044 task_getAvgReading|[INFO] push: push data to 10.0.0.150:18800
+2018-09-16 03:17:50,044 task_getAvgReading|[INFO] call: (TIME) send: t1=1537093070.04
+2018-09-16 03:17:50,044 task_getAvgReading|[INFO] call: (SEND) push: (u'spent 0.01 to compute result',)
+2018-09-16 03:17:50,113 task_getAvgReading|[INFO] push: got data: [89, 92, 113, 108, 67, 95, 75, 58, 45, 84, 62, 105, 86, 119, 120, 71, 118, 63, 107, 82, 57, 46, 99, 50, 90, 119, 72, 94, 89, 51, 54, 52, 119, 95, 63, 67, 50, 44, 118, 73, 83, 77, 66, 86, 58, 66, 64, 54, 43, 54, 74, 62, 98, 57, 107, 108, 119, 118, 113, 113, 94, 94, 98, 120, 42, 75, 81, 104, 69, 100, 86, 57, 100, 40, 106, 73, 59, 96, 79, 118, 76, 103, 93, 51, 54, 93, 73, 52, 118, 41, 90, 108, 94, 86, 97, 97, 91, 67, 68, 75]
+2018-09-16 03:17:50,113 task_getAvgReading|[INFO] push: compute result: spent 0.01 to compute result
+2018-09-16 03:17:59,067 task_getAvgReading|[INFO] dispatch: (TIME) recv: t1=1537093079.06, t2=1537093079.07, t_transmit=0.00873398780823
+2018-09-16 03:17:59,068 task_getAvgReading|[INFO] dispatch: (RECV) STOP: []
+2018-09-16 03:17:59,068 task_getAvgReading|[INFO] dispatch: stop server: task_getAvgReading
+2018-09-16 03:18:18,137 task_getAvgReading|[INFO] start_server: start_server task_getAvgReading at 10.0.0.165:18800, args=['task_getAvgReading', 10, [(u'10.0.0.167', 18800)]]
+2018-09-16 03:18:18,138 task_getAvgReading|[INFO] __init__: start Task RPCServer: task_getAvgReading, exectime=0.01s, receivers=[(u'10.0.0.167', 18800)]
+2018-09-16 03:18:25,084 task_getAvgReading|[INFO] dispatch: (TIME) recv: t1=1537093105.01, t2=1537093105.08, t_transmit=0.0760450363159
+2018-09-16 03:18:25,084 task_getAvgReading|[INFO] dispatch: (RECV) push: [[71, 116, 91, 67, 94, 89, 83, 63, 47, 63, 84, 45, 44, 113, 93, 
+2018-09-16 03:18:25,094 task_getAvgReading|[INFO] push: push data to 10.0.0.167:18800
+2018-09-16 03:18:25,095 task_getAvgReading|[INFO] call: (TIME) send: t1=1537093105.1
+2018-09-16 03:18:25,095 task_getAvgReading|[INFO] call: (SEND) push: (u'spent 0.01 to compute result',)
+2018-09-16 03:18:25,322 task_getAvgReading|[INFO] push: got data: [71, 116, 91, 67, 94, 89, 83, 63, 47, 63, 84, 45, 44, 113, 93, 57, 117, 77, 57, 57, 50, 68, 106, 40, 104, 120, 63, 52, 75, 88, 96, 87, 108, 47, 93, 88, 73, 100, 86, 97, 41, 71, 55, 117, 78, 103, 107, 84, 114, 94, 103, 51, 75, 105, 88, 82, 83, 47, 44, 95, 87, 117, 100, 67, 59, 84, 78, 118, 80, 68, 97, 52, 95, 91, 86, 107, 104, 84, 74, 84, 42, 58, 61, 101, 89, 75, 67, 52, 67, 58, 61, 71, 60, 106, 74, 41, 118, 88, 97, 55]
+2018-09-16 03:18:25,323 task_getAvgReading|[INFO] push: compute result: spent 0.01 to compute result
+2018-09-16 03:18:30,049 task_getAvgReading|[INFO] dispatch: (TIME) recv: t1=1537093110.01, t2=1537093110.05, t_transmit=0.0440988540649
+2018-09-16 03:18:30,049 task_getAvgReading|[INFO] dispatch: (RECV) push: [[91, 43, 69, 118, 88, 61, 91, 112, 58, 45, 85, 90, 116, 115, 86
+2018-09-16 03:18:30,060 task_getAvgReading|[INFO] push: push data to 10.0.0.167:18800
+2018-09-16 03:18:30,060 task_getAvgReading|[INFO] call: (TIME) send: t1=1537093110.06
+2018-09-16 03:18:30,060 task_getAvgReading|[INFO] call: (SEND) push: (u'spent 0.01 to compute result',)
+2018-09-16 03:18:30,250 task_getAvgReading|[INFO] push: got data: [91, 43, 69, 118, 88, 61, 91, 112, 58, 45, 85, 90, 116, 115, 86, 55, 109, 102, 115, 92, 41, 102, 58, 115, 95, 80, 96, 45, 76, 78, 42, 68, 83, 83, 45, 46, 93, 56, 63, 99, 74, 49, 120, 103, 101, 82, 85, 97, 66, 105, 66, 46, 91, 64, 95, 62, 84, 88, 107, 115, 61, 53, 49, 82, 112, 43, 49, 48, 99, 65, 112, 108, 82, 86, 75, 83, 96, 61, 80, 42, 101, 70, 58, 62, 110, 120, 106, 103, 119, 58, 58, 71, 46, 61, 42, 59, 94, 112, 83, 40]
+2018-09-16 03:18:30,251 task_getAvgReading|[INFO] push: compute result: spent 0.01 to compute result
+2018-09-16 03:18:35,032 task_getAvgReading|[INFO] dispatch: (TIME) recv: t1=1537093115.01, t2=1537093115.03, t_transmit=0.0266180038452
+2018-09-16 03:18:35,032 task_getAvgReading|[INFO] dispatch: (RECV) push: [[98, 120, 68, 67, 45, 76, 105, 47, 78, 77, 55, 49, 70, 55, 70, 
+2018-09-16 03:18:35,042 task_getAvgReading|[INFO] push: push data to 10.0.0.167:18800
+2018-09-16 03:18:35,043 task_getAvgReading|[INFO] call: (TIME) send: t1=1537093115.04
+2018-09-16 03:18:35,043 task_getAvgReading|[INFO] call: (SEND) push: (u'spent 0.01 to compute result',)
+2018-09-16 03:18:35,232 task_getAvgReading|[INFO] push: got data: [98, 120, 68, 67, 45, 76, 105, 47, 78, 77, 55, 49, 70, 55, 70, 82, 100, 64, 83, 89, 91, 64, 97, 45, 76, 102, 62, 111, 102, 109, 76, 50, 43, 83, 105, 119, 70, 95, 48, 79, 59, 102, 70, 69, 53, 101, 58, 103, 118, 80, 47, 95, 51, 79, 66, 115, 78, 74, 115, 63, 85, 72, 98, 43, 84, 45, 85, 84, 101, 119, 101, 67, 44, 73, 85, 120, 46, 60, 60, 106, 109, 105, 98, 96, 95, 46, 84, 50, 59, 56, 45, 61, 118, 111, 46, 42, 93, 43, 93, 86]
+2018-09-16 03:18:35,232 task_getAvgReading|[INFO] push: compute result: spent 0.01 to compute result
+2018-09-16 03:18:40,034 task_getAvgReading|[INFO] dispatch: (TIME) recv: t1=1537093120.0, t2=1537093120.03, t_transmit=0.0309090614319
+2018-09-16 03:18:40,035 task_getAvgReading|[INFO] dispatch: (RECV) push: [[51, 40, 108, 45, 47, 64, 108, 56, 41, 53, 70, 85, 93, 114, 68,
+2018-09-16 03:18:40,045 task_getAvgReading|[INFO] push: push data to 10.0.0.167:18800
+2018-09-16 03:18:40,046 task_getAvgReading|[INFO] call: (TIME) send: t1=1537093120.05
+2018-09-16 03:18:40,046 task_getAvgReading|[INFO] call: (SEND) push: (u'spent 0.01 to compute result',)
+2018-09-16 03:18:40,237 task_getAvgReading|[INFO] push: got data: [51, 40, 108, 45, 47, 64, 108, 56, 41, 53, 70, 85, 93, 114, 68, 82, 112, 64, 94, 87, 78, 120, 81, 56, 64, 79, 111, 49, 81, 43, 110, 75, 43, 55, 116, 115, 74, 117, 68, 97, 73, 104, 51, 97, 113, 104, 93, 46, 98, 83, 66, 91, 93, 85, 73, 59, 42, 74, 50, 110, 86, 109, 61, 100, 96, 94, 77, 57, 64, 106, 84, 118, 82, 84, 105, 57, 102, 85, 76, 113, 112, 119, 78, 120, 104, 80, 117, 108, 51, 113, 58, 51, 97, 96, 45, 67, 93, 99, 104, 77]
+2018-09-16 03:18:40,237 task_getAvgReading|[INFO] push: compute result: spent 0.01 to compute result
+2018-09-16 03:18:48,103 task_getAvgReading|[INFO] dispatch: (TIME) recv: t1=1537093128.09, t2=1537093128.1, t_transmit=0.0092191696167
+2018-09-16 03:18:48,103 task_getAvgReading|[INFO] dispatch: (RECV) STOP: []
+2018-09-16 03:18:48,103 task_getAvgReading|[INFO] dispatch: stop server: task_getAvgReading

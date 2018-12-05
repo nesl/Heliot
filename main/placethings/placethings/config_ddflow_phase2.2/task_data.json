@@ -1,0 +1,23 @@
+{
+    "task_info": {
+        "task_camera": {
+            "GtInfoEnum.EXEC_CMD": {},
+            "GtInfoEnum.LATENCY_INFO": {},
+            "GtInfoEnum.RESRC_RQMT": {}
+        },
+        "task_alert": {
+            "GtInfoEnum.EXEC_CMD": {},
+            "GtInfoEnum.LATENCY_INFO": {},
+            "GtInfoEnum.RESRC_RQMT": {}
+        }
+    },
+    "task_mapping": {
+        "task_alert": "CONTROLLER.0",
+        "task_camera": "CAMERA.0"
+    },
+    "task_links": {
+        "task_camera -> task_alert": {
+            "GtInfoEnum.TRAFFIC": 83886080
+        }
+    }
+}

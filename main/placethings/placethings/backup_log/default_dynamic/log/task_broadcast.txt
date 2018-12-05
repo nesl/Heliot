@@ -1,0 +1,80 @@
+2018-09-16 03:15:52,051 task_broadcast|[INFO] start_server: start_server task_broadcast at 10.0.0.113:18800, args=['task_broadcast', 0, None]
+2018-09-16 03:15:52,051 task_broadcast|[INFO] __init__: start Task RPCServer: task_broadcast, exectime=0.0s, receivers=None
+2018-09-16 03:16:00,327 task_broadcast|[INFO] dispatch: (TIME) recv: t1=1537092960.21, t2=1537092960.33, t_transmit=0.120334863663
+2018-09-16 03:16:00,327 task_broadcast|[INFO] dispatch: (RECV) push: ['spent 0.005 to compute result']
+2018-09-16 03:16:00,327 task_broadcast|[INFO] push: got data: spent 0.005 to compute result
+2018-09-16 03:16:00,919 task_broadcast|[INFO] dispatch: (TIME) recv: t1=1537092960.8, t2=1537092960.92, t_transmit=0.117388963699
+2018-09-16 03:16:00,919 task_broadcast|[INFO] dispatch: (RECV) push: ['spent 0.005 to compute result']
+2018-09-16 03:16:00,920 task_broadcast|[INFO] push: got data: spent 0.005 to compute result
+2018-09-16 03:16:05,305 task_broadcast|[INFO] dispatch: (TIME) recv: t1=1537092965.19, t2=1537092965.31, t_transmit=0.116408824921
+2018-09-16 03:16:05,306 task_broadcast|[INFO] dispatch: (RECV) push: ['spent 0.005 to compute result']
+2018-09-16 03:16:05,306 task_broadcast|[INFO] push: got data: spent 0.005 to compute result
+2018-09-16 03:16:10,306 task_broadcast|[INFO] dispatch: (TIME) recv: t1=1537092970.19, t2=1537092970.31, t_transmit=0.116701841354
+2018-09-16 03:16:10,307 task_broadcast|[INFO] dispatch: (RECV) push: ['spent 0.005 to compute result']
+2018-09-16 03:16:10,307 task_broadcast|[INFO] push: got data: spent 0.005 to compute result
+2018-09-16 03:16:15,363 task_broadcast|[INFO] dispatch: (TIME) recv: t1=1537092975.25, t2=1537092975.36, t_transmit=0.115216016769
+2018-09-16 03:16:15,363 task_broadcast|[INFO] dispatch: (RECV) push: ['spent 0.005 to compute result']
+2018-09-16 03:16:15,364 task_broadcast|[INFO] push: got data: spent 0.005 to compute result
+2018-09-16 03:16:22,911 task_broadcast|[INFO] dispatch: (TIME) recv: t1=1537092982.78, t2=1537092982.91, t_transmit=0.132885932922
+2018-09-16 03:16:22,911 task_broadcast|[INFO] dispatch: (RECV) STOP: []
+2018-09-16 03:16:22,912 task_broadcast|[INFO] dispatch: stop server: task_broadcast
+2018-09-16 03:16:43,650 task_broadcast|[INFO] start_server: start_server task_broadcast at 10.0.0.130:18800, args=['task_broadcast', 0, None]
+2018-09-16 03:16:43,650 task_broadcast|[INFO] __init__: start Task RPCServer: task_broadcast, exectime=0.0s, receivers=None
+2018-09-16 03:16:50,355 task_broadcast|[INFO] dispatch: (TIME) recv: t1=1537093010.22, t2=1537093010.36, t_transmit=0.134305000305
+2018-09-16 03:16:50,355 task_broadcast|[INFO] dispatch: (RECV) push: ['spent 0.005 to compute result']
+2018-09-16 03:16:50,356 task_broadcast|[INFO] push: got data: spent 0.005 to compute result
+2018-09-16 03:16:50,986 task_broadcast|[INFO] dispatch: (TIME) recv: t1=1537093010.85, t2=1537093010.99, t_transmit=0.137557983398
+2018-09-16 03:16:50,987 task_broadcast|[INFO] dispatch: (RECV) push: ['spent 0.005 to compute result']
+2018-09-16 03:16:50,987 task_broadcast|[INFO] push: got data: spent 0.005 to compute result
+2018-09-16 03:16:55,346 task_broadcast|[INFO] dispatch: (TIME) recv: t1=1537093015.22, t2=1537093015.35, t_transmit=0.129906892776
+2018-09-16 03:16:55,347 task_broadcast|[INFO] dispatch: (RECV) push: ['spent 0.005 to compute result']
+2018-09-16 03:16:55,347 task_broadcast|[INFO] push: got data: spent 0.005 to compute result
+2018-09-16 03:17:00,421 task_broadcast|[INFO] dispatch: (TIME) recv: t1=1537093020.29, t2=1537093020.42, t_transmit=0.130808115005
+2018-09-16 03:17:00,421 task_broadcast|[INFO] dispatch: (RECV) push: ['spent 0.005 to compute result']
+2018-09-16 03:17:00,422 task_broadcast|[INFO] push: got data: spent 0.005 to compute result
+2018-09-16 03:17:05,350 task_broadcast|[INFO] dispatch: (TIME) recv: t1=1537093025.22, t2=1537093025.35, t_transmit=0.13000702858
+2018-09-16 03:17:05,350 task_broadcast|[INFO] dispatch: (RECV) push: ['spent 0.005 to compute result']
+2018-09-16 03:17:05,351 task_broadcast|[INFO] push: got data: spent 0.005 to compute result
+2018-09-16 03:17:14,188 task_broadcast|[INFO] dispatch: (TIME) recv: t1=1537093034.17, t2=1537093034.19, t_transmit=0.0189390182495
+2018-09-16 03:17:14,189 task_broadcast|[INFO] dispatch: (RECV) STOP: []
+2018-09-16 03:17:14,189 task_broadcast|[INFO] dispatch: stop server: task_broadcast
+2018-09-16 03:17:29,083 task_broadcast|[INFO] start_server: start_server task_broadcast at 10.0.0.147:18800, args=['task_broadcast', 0, None]
+2018-09-16 03:17:29,084 task_broadcast|[INFO] __init__: start Task RPCServer: task_broadcast, exectime=0.0s, receivers=None
+2018-09-16 03:17:35,127 task_broadcast|[INFO] dispatch: (TIME) recv: t1=1537093055.11, t2=1537093055.13, t_transmit=0.0204880237579
+2018-09-16 03:17:35,127 task_broadcast|[INFO] dispatch: (RECV) push: ['spent 0.005 to compute result']
+2018-09-16 03:17:35,127 task_broadcast|[INFO] push: got data: spent 0.005 to compute result
+2018-09-16 03:17:37,127 task_broadcast|[INFO] dispatch: (TIME) recv: t1=1537093057.1, t2=1537093057.13, t_transmit=0.0255961418152
+2018-09-16 03:17:37,127 task_broadcast|[INFO] dispatch: (RECV) push: ['spent 0.005 to compute result']
+2018-09-16 03:17:37,127 task_broadcast|[INFO] push: got data: spent 0.005 to compute result
+2018-09-16 03:17:40,114 task_broadcast|[INFO] dispatch: (TIME) recv: t1=1537093060.09, t2=1537093060.11, t_transmit=0.0208520889282
+2018-09-16 03:17:40,114 task_broadcast|[INFO] dispatch: (RECV) push: ['spent 0.005 to compute result']
+2018-09-16 03:17:40,114 task_broadcast|[INFO] push: got data: spent 0.005 to compute result
+2018-09-16 03:17:45,095 task_broadcast|[INFO] dispatch: (TIME) recv: t1=1537093065.08, t2=1537093065.1, t_transmit=0.0199000835419
+2018-09-16 03:17:45,096 task_broadcast|[INFO] dispatch: (RECV) push: ['spent 0.005 to compute result']
+2018-09-16 03:17:45,096 task_broadcast|[INFO] push: got data: spent 0.005 to compute result
+2018-09-16 03:17:50,101 task_broadcast|[INFO] dispatch: (TIME) recv: t1=1537093070.08, t2=1537093070.1, t_transmit=0.0207419395447
+2018-09-16 03:17:50,102 task_broadcast|[INFO] dispatch: (RECV) push: ['spent 0.005 to compute result']
+2018-09-16 03:17:50,102 task_broadcast|[INFO] push: got data: spent 0.005 to compute result
+2018-09-16 03:17:59,213 task_broadcast|[INFO] dispatch: (TIME) recv: t1=1537093079.2, t2=1537093079.21, t_transmit=0.018100976944
+2018-09-16 03:17:59,213 task_broadcast|[INFO] dispatch: (RECV) STOP: []
+2018-09-16 03:17:59,213 task_broadcast|[INFO] dispatch: stop server: task_broadcast
+2018-09-16 03:18:18,082 task_broadcast|[INFO] start_server: start_server task_broadcast at 10.0.0.164:18800, args=['task_broadcast', 0, None]
+2018-09-16 03:18:18,094 task_broadcast|[INFO] __init__: start Task RPCServer: task_broadcast, exectime=0.0s, receivers=None
+2018-09-16 03:18:25,281 task_broadcast|[INFO] dispatch: (TIME) recv: t1=1537093105.16, t2=1537093105.28, t_transmit=0.123318195343
+2018-09-16 03:18:25,282 task_broadcast|[INFO] dispatch: (RECV) push: ['spent 0.005 to compute result']
+2018-09-16 03:18:25,282 task_broadcast|[INFO] push: got data: spent 0.005 to compute result
+2018-09-16 03:18:27,264 task_broadcast|[INFO] dispatch: (TIME) recv: t1=1537093107.15, t2=1537093107.26, t_transmit=0.110232114792
+2018-09-16 03:18:27,264 task_broadcast|[INFO] dispatch: (RECV) push: ['spent 0.005 to compute result']
+2018-09-16 03:18:27,264 task_broadcast|[INFO] push: got data: spent 0.005 to compute result
+2018-09-16 03:18:30,209 task_broadcast|[INFO] dispatch: (TIME) recv: t1=1537093110.1, t2=1537093110.21, t_transmit=0.112984895706
+2018-09-16 03:18:30,209 task_broadcast|[INFO] dispatch: (RECV) push: ['spent 0.005 to compute result']
+2018-09-16 03:18:30,210 task_broadcast|[INFO] push: got data: spent 0.005 to compute result
+2018-09-16 03:18:35,190 task_broadcast|[INFO] dispatch: (TIME) recv: t1=1537093115.08, t2=1537093115.19, t_transmit=0.111569881439
+2018-09-16 03:18:35,191 task_broadcast|[INFO] dispatch: (RECV) push: ['spent 0.005 to compute result']
+2018-09-16 03:18:35,191 task_broadcast|[INFO] push: got data: spent 0.005 to compute result
+2018-09-16 03:18:40,195 task_broadcast|[INFO] dispatch: (TIME) recv: t1=1537093120.09, t2=1537093120.2, t_transmit=0.10925579071
+2018-09-16 03:18:40,195 task_broadcast|[INFO] dispatch: (RECV) push: ['spent 0.005 to compute result']
+2018-09-16 03:18:40,195 task_broadcast|[INFO] push: got data: spent 0.005 to compute result
+2018-09-16 03:18:48,399 task_broadcast|[INFO] dispatch: (TIME) recv: t1=1537093128.29, t2=1537093128.4, t_transmit=0.10783290863
+2018-09-16 03:18:48,400 task_broadcast|[INFO] dispatch: (RECV) STOP: []
+2018-09-16 03:18:48,400 task_broadcast|[INFO] dispatch: stop server: task_broadcast

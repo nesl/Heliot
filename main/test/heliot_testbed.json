@@ -2,7 +2,9 @@
     "Devices": {
         "googlevisionkit_0": {
             "compute": {
-                "VPU": "VisionBonnet",
+                "VPU": [
+                    "VisionBonnet"
+                ],
                 "CPU": "2"
             },
             "sensor": {
@@ -29,9 +31,10 @@
         },
         "pi3_cam_vpu_1": {
             "compute": {
-                "VPU": "Movidius_1",
-                "CPU": "2",
-                "GPU": "0"
+                "VPU": [
+                    "Movidius_1"
+                ],
+                "CPU": "2"
             },
             "sensor": {
                 "sensor1": {
@@ -65,8 +68,7 @@
         },
         "pi3_audio": {
             "compute": {
-                "CPU": "2",
-                "GPU": "0"
+                "CPU": "2"
             },
             "sensor": {
                 "sensor1": {
@@ -109,9 +111,10 @@
         },
         "pi3_vpu_2": {
             "compute": {
-                "VPU": "Movidius_2",
-                "CPU": "2",
-                "GPU": "0"
+                "VPU": [
+                    "Movidius_2"
+                ],
+                "CPU": "2"
             },
             "sensor": {
                 "sensor1": {

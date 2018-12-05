@@ -6,7 +6,13 @@
                 "CPU": "2"
             },
             "sensor": {
-                "sensor1": "Camera"
+                "sensor1": {
+                    "type": "RGBcamera",
+                    "attributes": {
+                        "res": "1080p",
+                        "frame_rate": "30"
+                    }
+                }
             },
             "deviceType": "googlevisionkit",
             "ip": "172.17.49.60",
@@ -28,34 +34,51 @@
                 "GPU": "0"
             },
             "sensor": {
-                "sensor1": "Camera"
+                "sensor1": {
+                    "type": "RGBcamera",
+                    "attributes": {
+                        "res": "1080p",
+                        "frame_rate": "30"
+                    }
+                }
             },
             "deviceType": "pi3",
             "ip": "172.17.49.60",
             "description": "Raspberry pi with camera and Movidius 1"
-        },
-        "pi3_cam": {
-            "compute": {
-                "CPU": "2",
-                "GPU": "0"
-            },
-            "sensor": {
-                "sensor1": "Camera"
-            },
-            "deviceType": "pi3",
-            "ip": "172.17.49.168",
-            "description": "Raspberry pi with camera"
         },
         "gap8_cam": {
             "compute": {
                 "CPU": "8"
             },
             "sensor": {
-                "sensor1": "Camera"
+                "sensor1": {
+                    "type": "RGBcamera",
+                    "attributes": {
+                        "res": "1080p",
+                        "frame_rate": "30"
+                    }
+                }
             },
             "deviceType": "gap8",
             "ip": "172.17.49.60",
             "description": "Gap 8 board"
+        },
+        "pi3_audio": {
+            "compute": {
+                "CPU": "2",
+                "GPU": "0"
+            },
+            "sensor": {
+                "sensor1": {
+                    "type": "acoustic",
+                    "attributes": {
+                        "sample_rate": "44100"
+                    }
+                }
+            },
+            "deviceType": "pi3",
+            "ip": "172.17.49.168",
+            "description": "Raspberry pi with camera"
         },
         "airsimServer": {
             "compute": {
@@ -72,7 +95,13 @@
                 "GPU": "1"
             },
             "sensor": {
-                "sensor1": "Camera"
+                "sensor1": {
+                    "type": "RGBcamera",
+                    "attributes": {
+                        "res": "1080p",
+                        "frame_rate": "30"
+                    }
+                }
             },
             "deviceType": "smartphone",
             "ip": "172.17.49.60",
@@ -85,7 +114,13 @@
                 "GPU": "0"
             },
             "sensor": {
-                "sensor1": "Camera"
+                "sensor1": {
+                    "type": "RGBcamera",
+                    "attributes": {
+                        "res": "1080p",
+                        "frame_rate": "30"
+                    }
+                }
             },
             "deviceType": "pi3",
             "ip": "172.17.49.60",

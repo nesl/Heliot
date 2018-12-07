@@ -1,6 +1,6 @@
 # placethings
 
-# Add Credits
+code taken from https://github.com/kumokay/placethings
 
 ## Overview
 <b>placethings</b> allows developers to construct an experimental testbed to evaluate and verify their internet of things (IoT) applications during the development phase. <b>placethings</b>leverages the famous Mininet/Containernet emulation environment to span the emulation across virtual machines, containers, and bare metal devices. Developers can configure the emulated network and add virtual or real <b>THINGs</b>. Based on the network and devices configuration, <b>placethings</b> also suggests good solutions for deploying IoT applications.
@@ -36,4 +36,22 @@ $ sudo pip install msgpack-rpc-python numpy Pillow future networkx matplotlib si
 $ sudo apt-get install glpk-utils
 ```
 
+3. Run demo case
+```
+$ python main.py -tc test_ddflow_demo.Test -c config_ddflow_demo
+```
+
+## Example
+
+Al examples are in placethings/demo.
+
+```
+$ python main.py -tc TESTCASE_FILE.TESTCASE -c CONFIGFILE
+
+all TESTCASE_FILEs are in placethings/demo
+TESTCASE is the name of each lcass
+
+e.g.
+$ python main.py -tc test_ddflow_demo.Test -c config_ddflow_demo
+```
 

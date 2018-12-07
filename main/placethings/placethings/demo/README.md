@@ -7,6 +7,8 @@ This folder contains examples and test cases.
 - test_ddflow_demo_all.py: just like `test_ddflow_demo.py` but the virtual network changes dynamically
 - test_graph.py: given any configuration json files, read the configuration and compute a good placement
 
+Source code for predefined tasks are in the `entity` folder.
+
 Test cases for code under development:
 
 - test_config_base.py: test code for refactoring the configuration interfaces and logic.

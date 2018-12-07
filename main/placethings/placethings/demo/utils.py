@@ -16,20 +16,23 @@ log = logging.getLogger()
 
 class ConfigDataHelper(object):
 
+
     def __init__(self, cfg, is_export=False):
         assert type(cfg) is Config
         self.cfg = cfg
         self.is_export = is_export
         self.update_id = -1
         # graphs
-        self.Gt = None
-        self.Gn = None
-        self.Gnd = None
-        self.Gd = None
-        self.G_map = None
-        self.result_mapping = None
-        self.max_latency_log = []
-        self.max_latency_static_log = []
+        self.Gt = None  # Graph for the task
+        self.Gn = None  # Graph for the network devices (switch, AP)
+        self.Gnd = None # Graph for the network devices + devices ( how host is connected to the swtich)
+        self.Gd = None # Graph for the devices  (it is fake, virtual graph. To check connectivity between two devices )
+        self.G_map = None # Initial Task mapping provided by the user.
+        self.result_mapping = None # Task mapping for unassigned tasks from the ILP
+        self.max_latency_log = [] # Maximum latency is the longest path between hosts (sensors, actuators)
+        self.max_latency_static_log = [] # Used for debugging, if we change the placement, latency is supposed to tbe smaller
+
+
 
     def init_task_graph(self):
         log.info('init task graph')

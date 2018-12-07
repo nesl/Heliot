@@ -1,18 +1,14 @@
 {
     "node_info": {
-        "task_notify": {
+        "task_camera": {
             "GtInfoEnum.RESRC_RQMT": {},
-            "GtInfoEnum.EXEC_CMD": {},
-            "GtInfoEnum.LATENCY_INFO": {},
-            "GtInfoEnum.DEVICE": "CONTROLLER.0"
-        },
-        "task_takePic": {
-            "GtInfoEnum.RESRC_RQMT": {},
-            "GtInfoEnum.EXEC_CMD": {},
+            "GtInfoEnum.EXEC_CMD": {
+                "default": "cd {progdir} && python main_entity.py run_task -n task_camera -en task_forward -a {docker_addr} -ra {next_addr} &> /dev/null &"
+            },
             "GtInfoEnum.LATENCY_INFO": {},
             "GtInfoEnum.DEVICE": "CAMERA.0"
         },
-        "task_findObj": {
+        "task_findObject": {
             "GtInfoEnum.RESRC_RQMT": {
                 "Flavor.CPU": {
                     "Hardware.CPU": 60,
@@ -27,28 +23,39 @@
                     "Hardware.GPU": 60
                 }
             },
-            "GtInfoEnum.EXEC_CMD": {},
+            "GtInfoEnum.EXEC_CMD": {
+                "default": "cd {progdir} && python main_entity.py run_task -n task_findObj -en task_findObj -a {self_addr} -ra {next_addr} -al local &> /dev/null &",
+                "P3_2XLARGE.0": "cd {progdir} && python main_entity.py run_task -n task_findObj -en task_findObj -a {self_addr} -ra {next_addr} -al offload 172.17.49.60:18800 &> /dev/null &",
+                "T3_LARGE.0": "cd {progdir} && python main_entity.py run_task -n task_findObj -en task_findObj -a {self_addr} -ra {next_addr} -al local &> /dev/null &"
+            },
             "GtInfoEnum.LATENCY_INFO": {
                 "Device.P3_2XLARGE": {
-                    "Flavor.CPU": 600,
-                    "Flavor.GPU": 20
+                    "Flavor.GPU": 100
                 },
                 "Device.T3_LARGE": {
-                    "Flavor.CPU": 2000
+                    "Flavor.CPU": 884
                 },
                 "Device.T2_MICRO": {
-                    "Flavor.CPU": 6000
+                    "Flavor.CPU": 2400
                 }
             },
             "GtInfoEnum.DEVICE": null
+        },
+        "task_alert": {
+            "GtInfoEnum.RESRC_RQMT": {},
+            "GtInfoEnum.EXEC_CMD": {
+                "default": "cd {progdir} && python main_entity.py run_task -n task_alert -en task_forward -a {self_addr} -ra 172.17.51.1:18900 &> /dev/null &"
+            },
+            "GtInfoEnum.LATENCY_INFO": {},
+            "GtInfoEnum.DEVICE": "CONTROLLER.0"
         }
     },
     "edge_info": {
-        "task_takePic -> task_findObj": {
-            "GtInfoEnum.TRAFFIC": 100663296
+        "task_findObject -> task_alert": {
+            "GtInfoEnum.TRAFFIC": 20
         },
-        "task_findObj -> task_notify": {
-            "GtInfoEnum.TRAFFIC": 80
+        "task_camera -> task_findObject": {
+            "GtInfoEnum.TRAFFIC": 83886080
         }
     }
 }

@@ -1,0 +1,194 @@
+{
+    "device_spec": {
+        "NwDeviceCategory.FIELD": {
+            "NwDevice.FIELD_SWITCH": {
+                "LinkType.WAN": {
+                    "LinkInfo.ULINK_BW": 2147483647,
+                    "LinkInfo.PROTOCOL": "NwLink.ETHERNET",
+                    "LinkInfo.N_LINKS": 1,
+                    "LinkInfo.DLINK_BW": 2147483647
+                },
+                "LinkType.LAN": {
+                    "LinkInfo.ULINK_BW": 419430400,
+                    "LinkInfo.PROTOCOL": "NwLink.ETHERNET",
+                    "LinkInfo.N_LINKS": 2147483647,
+                    "LinkInfo.DLINK_BW": 419430400
+                }
+            }
+        },
+        "NwDeviceCategory.CLOUD": {
+            "NwDevice.CLOUD_SWITCH": {
+                "LinkType.WAN": {
+                    "LinkInfo.ULINK_BW": 2147483647,
+                    "LinkInfo.PROTOCOL": "NwLink.ETHERNET",
+                    "LinkInfo.N_LINKS": 1,
+                    "LinkInfo.DLINK_BW": 2147483647
+                },
+                "LinkType.LAN": {
+                    "LinkInfo.ULINK_BW": 419430400,
+                    "LinkInfo.PROTOCOL": "NwLink.ETHERNET",
+                    "LinkInfo.N_LINKS": 2147483647,
+                    "LinkInfo.DLINK_BW": 419430400
+                }
+            }
+        },
+        "NwDeviceCategory.BACKBONE": {
+            "NwDevice.BB_SWITCH": {
+                "LinkType.ANY": {
+                    "LinkInfo.ULINK_BW": 2147483647,
+                    "LinkInfo.PROTOCOL": "NwLink.ETHERNET",
+                    "LinkInfo.N_LINKS": 2147483647,
+                    "LinkInfo.DLINK_BW": 2147483647
+                }
+            },
+            "NwDevice.BB_AP": {
+                "LinkType.WAN": {
+                    "LinkInfo.ULINK_BW": 2147483647,
+                    "LinkInfo.PROTOCOL": "NwLink.ETHERNET",
+                    "LinkInfo.N_LINKS": 1,
+                    "LinkInfo.DLINK_BW": 2147483647
+                },
+                "LinkType.LAN": {
+                    "LinkInfo.ULINK_BW": 157286400,
+                    "LinkInfo.PROTOCOL": "NwLink.WIFI",
+                    "LinkInfo.N_LINKS": 2147483647,
+                    "LinkInfo.DLINK_BW": 52428800
+                }
+            }
+        },
+        "NwDeviceCategory.HOME": {
+            "NwDevice.HOME_ROUTER": {
+                "LinkType.WAN": {
+                    "LinkInfo.ULINK_BW": 524288000,
+                    "LinkInfo.PROTOCOL": "NwLink.ETHERNET",
+                    "LinkInfo.N_LINKS": 1,
+                    "LinkInfo.DLINK_BW": 524288000
+                },
+                "LinkType.LAN": {
+                    "LinkInfo.ULINK_BW": 104857600,
+                    "LinkInfo.PROTOCOL": "NwLink.ETHERNET",
+                    "LinkInfo.N_LINKS": 5,
+                    "LinkInfo.DLINK_BW": 104857600
+                }
+            },
+            "NwDevice.HOME_IOTGW": {
+                "LinkType.WAN": {
+                    "LinkInfo.ULINK_BW": 524288000,
+                    "LinkInfo.PROTOCOL": "NwLink.ETHERNET",
+                    "LinkInfo.N_LINKS": 1,
+                    "LinkInfo.DLINK_BW": 524288000
+                },
+                "LinkType.LAN": {
+                    "LinkInfo.ULINK_BW": 52428800,
+                    "LinkInfo.PROTOCOL": "NwLink.WIFI",
+                    "LinkInfo.N_LINKS": 10,
+                    "LinkInfo.DLINK_BW": 52428800
+                }
+            }
+        }
+    },
+    "device_inventory": {
+        "NwDeviceCategory.FIELD": {
+            "NwDevice.FIELD_SWITCH": 2
+        },
+        "NwDeviceCategory.CLOUD": {
+            "NwDevice.CLOUD_SWITCH": 2
+        },
+        "NwDeviceCategory.BACKBONE": {
+            "NwDevice.BB_SWITCH": 3,
+            "NwDevice.BB_AP": 3
+        }
+    },
+    "links": {
+        "BB_SWITCH.1 -> BB_AP.1": {
+            "GnInfoEnum.SRC_LINK_TYPE": "LinkType.ANY",
+            "GnInfoEnum.DST_LINK_TYPE": "LinkType.WAN",
+            "GnInfoEnum.LATENCY": 2
+        },
+        "BB_SWITCH.0 -> CLOUD_SWITCH.1": {
+            "GnInfoEnum.SRC_LINK_TYPE": "LinkType.ANY",
+            "GnInfoEnum.DST_LINK_TYPE": "LinkType.WAN",
+            "GnInfoEnum.LATENCY": 2
+        },
+        "BB_SWITCH.0 -> CLOUD_SWITCH.0": {
+            "GnInfoEnum.SRC_LINK_TYPE": "LinkType.ANY",
+            "GnInfoEnum.DST_LINK_TYPE": "LinkType.WAN",
+            "GnInfoEnum.LATENCY": 2
+        },
+        "BB_SWITCH.0 -> BB_SWITCH.1": {
+            "GnInfoEnum.SRC_LINK_TYPE": "LinkType.ANY",
+            "GnInfoEnum.DST_LINK_TYPE": "LinkType.ANY",
+            "GnInfoEnum.LATENCY": 2
+        },
+        "BB_SWITCH.2 -> BB_SWITCH.1": {
+            "GnInfoEnum.SRC_LINK_TYPE": "LinkType.ANY",
+            "GnInfoEnum.DST_LINK_TYPE": "LinkType.ANY",
+            "GnInfoEnum.LATENCY": 2
+        },
+        "FIELD_SWITCH.1 -> BB_SWITCH.1": {
+            "GnInfoEnum.SRC_LINK_TYPE": "LinkType.WAN",
+            "GnInfoEnum.DST_LINK_TYPE": "LinkType.ANY",
+            "GnInfoEnum.LATENCY": 2
+        },
+        "BB_SWITCH.2 -> BB_AP.2": {
+            "GnInfoEnum.SRC_LINK_TYPE": "LinkType.ANY",
+            "GnInfoEnum.DST_LINK_TYPE": "LinkType.WAN",
+            "GnInfoEnum.LATENCY": 2
+        },
+        "FIELD_SWITCH.1 -> BB_SWITCH.2": {
+            "GnInfoEnum.SRC_LINK_TYPE": "LinkType.WAN",
+            "GnInfoEnum.DST_LINK_TYPE": "LinkType.ANY",
+            "GnInfoEnum.LATENCY": 2
+        },
+        "BB_SWITCH.1 -> FIELD_SWITCH.1": {
+            "GnInfoEnum.SRC_LINK_TYPE": "LinkType.ANY",
+            "GnInfoEnum.DST_LINK_TYPE": "LinkType.WAN",
+            "GnInfoEnum.LATENCY": 2
+        },
+        "BB_AP.2 -> BB_SWITCH.2": {
+            "GnInfoEnum.SRC_LINK_TYPE": "LinkType.WAN",
+            "GnInfoEnum.DST_LINK_TYPE": "LinkType.ANY",
+            "GnInfoEnum.LATENCY": 2
+        },
+        "BB_SWITCH.0 -> BB_AP.0": {
+            "GnInfoEnum.SRC_LINK_TYPE": "LinkType.ANY",
+            "GnInfoEnum.DST_LINK_TYPE": "LinkType.WAN",
+            "GnInfoEnum.LATENCY": 2
+        },
+        "BB_AP.0 -> BB_SWITCH.0": {
+            "GnInfoEnum.SRC_LINK_TYPE": "LinkType.WAN",
+            "GnInfoEnum.DST_LINK_TYPE": "LinkType.ANY",
+            "GnInfoEnum.LATENCY": 2
+        },
+        "BB_AP.1 -> BB_SWITCH.1": {
+            "GnInfoEnum.SRC_LINK_TYPE": "LinkType.WAN",
+            "GnInfoEnum.DST_LINK_TYPE": "LinkType.ANY",
+            "GnInfoEnum.LATENCY": 2
+        },
+        "CLOUD_SWITCH.1 -> BB_SWITCH.0": {
+            "GnInfoEnum.SRC_LINK_TYPE": "LinkType.WAN",
+            "GnInfoEnum.DST_LINK_TYPE": "LinkType.ANY",
+            "GnInfoEnum.LATENCY": 2
+        },
+        "BB_SWITCH.2 -> FIELD_SWITCH.1": {
+            "GnInfoEnum.SRC_LINK_TYPE": "LinkType.ANY",
+            "GnInfoEnum.DST_LINK_TYPE": "LinkType.WAN",
+            "GnInfoEnum.LATENCY": 2
+        },
+        "BB_SWITCH.1 -> BB_SWITCH.2": {
+            "GnInfoEnum.SRC_LINK_TYPE": "LinkType.ANY",
+            "GnInfoEnum.DST_LINK_TYPE": "LinkType.ANY",
+            "GnInfoEnum.LATENCY": 2
+        },
+        "CLOUD_SWITCH.0 -> BB_SWITCH.0": {
+            "GnInfoEnum.SRC_LINK_TYPE": "LinkType.WAN",
+            "GnInfoEnum.DST_LINK_TYPE": "LinkType.ANY",
+            "GnInfoEnum.LATENCY": 2
+        },
+        "BB_SWITCH.1 -> BB_SWITCH.0": {
+            "GnInfoEnum.SRC_LINK_TYPE": "LinkType.ANY",
+            "GnInfoEnum.DST_LINK_TYPE": "LinkType.ANY",
+            "GnInfoEnum.LATENCY": 2
+        }
+    }
+}

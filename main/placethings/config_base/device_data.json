@@ -1,0 +1,240 @@
+{
+    "device_inventory": {
+        "device_spec": {
+            "items": {
+                "camera": {
+                    "device_type": "sensor", 
+                    "hardware": {
+                        "cpu_utilization": 0, 
+                        "disk_space": 0, 
+                        "gpu_utilization": 0, 
+                        "ram_size": 0
+                    }, 
+                    "interfaces": {
+                        "LAN": {
+                            "dl_bw": 629145600, 
+                            "n_ports": 1, 
+                            "protocol": "wifi", 
+                            "ul_bw": 629145600
+                        }
+                    }, 
+                    "name": "camera"
+                }, 
+                "p3.2xlarge": {
+                    "device_type": "processor", 
+                    "hardware": {
+                        "cpu_utilization": 100, 
+                        "disk_space": 107374182400, 
+                        "gpu_utilization": 100, 
+                        "ram_size": 68719476736
+                    }, 
+                    "interfaces": {
+                        "LAN": {
+                            "dl_bw": 10737418240, 
+                            "n_ports": 1, 
+                            "protocol": "ethernet", 
+                            "ul_bw": 10737418240
+                        }
+                    }, 
+                    "name": "p3.2xlarge"
+                }, 
+                "phone": {
+                    "device_type": "auctuator", 
+                    "hardware": {
+                        "cpu_utilization": 0, 
+                        "disk_space": 0, 
+                        "gpu_utilization": 0, 
+                        "ram_size": 0
+                    }, 
+                    "interfaces": {
+                        "LAN": {
+                            "dl_bw": 629145600, 
+                            "n_ports": 1, 
+                            "protocol": "wifi", 
+                            "ul_bw": 629145600
+                        }
+                    }, 
+                    "name": "phone"
+                }, 
+                "t3.large": {
+                    "device_type": "processor", 
+                    "hardware": {
+                        "cpu_utilization": 100, 
+                        "disk_space": 107374182400, 
+                        "gpu_utilization": 0, 
+                        "ram_size": 8589934592
+                    }, 
+                    "interfaces": {
+                        "LAN": {
+                            "dl_bw": 419430400, 
+                            "n_ports": 1, 
+                            "protocol": "ethernet", 
+                            "ul_bw": 419430400
+                        }
+                    }, 
+                    "name": "t3.large"
+                }, 
+                "t3.micro": {
+                    "device_type": "processor", 
+                    "hardware": {
+                        "cpu_utilization": 100, 
+                        "disk_space": 21474836480, 
+                        "gpu_utilization": 0, 
+                        "ram_size": 1073741824
+                    }, 
+                    "interfaces": {
+                        "LAN": {
+                            "dl_bw": 104857600, 
+                            "n_ports": 1, 
+                            "protocol": "ethernet", 
+                            "ul_bw": 104857600
+                        }
+                    }, 
+                    "name": "t3.micro"
+                }
+            }
+        }, 
+        "items": {
+            "cpu_server": "t3.large", 
+            "drone_camera": "camera", 
+            "gpu_server": "p3.2xlarge", 
+            "nuc": "t3.micro", 
+            "samsung_phone": "phone"
+        }
+    }, 
+    "device_links": {
+        "bb_ap1": {
+            "samsung_phone": {
+                "dst_intf_name": "LAN", 
+                "latency": 2, 
+                "src_intf_name": "LAN"
+            }
+        }, 
+        "bb_ap3": {
+            "drone_camera": {
+                "dst_intf_name": "LAN", 
+                "latency": 2, 
+                "src_intf_name": "LAN"
+            }
+        }, 
+        "cpu_server": {
+            "home_sw2": {
+                "dst_intf_name": "LAN", 
+                "latency": 2, 
+                "src_intf_name": "LAN"
+            }
+        }, 
+        "drone_camera": {
+            "bb_ap3": {
+                "dst_intf_name": "LAN", 
+                "latency": 2, 
+                "src_intf_name": "LAN"
+            }
+        }, 
+        "gpu_server": {
+            "home_sw1": {
+                "dst_intf_name": "LAN", 
+                "latency": 2, 
+                "src_intf_name": "LAN"
+            }
+        }, 
+        "home_sw1": {
+            "gpu_server": {
+                "dst_intf_name": "LAN", 
+                "latency": 2, 
+                "src_intf_name": "LAN"
+            }
+        }, 
+        "home_sw2": {
+            "cpu_server": {
+                "dst_intf_name": "LAN", 
+                "latency": 2, 
+                "src_intf_name": "LAN"
+            }
+        }, 
+        "home_sw3": {
+            "nuc": {
+                "dst_intf_name": "LAN", 
+                "latency": 2, 
+                "src_intf_name": "LAN"
+            }
+        }, 
+        "nuc": {
+            "home_sw3": {
+                "dst_intf_name": "LAN", 
+                "latency": 2, 
+                "src_intf_name": "LAN"
+            }
+        }, 
+        "samsung_phone": {
+            "bb_ap1": {
+                "dst_intf_name": "LAN", 
+                "latency": 2, 
+                "src_intf_name": "LAN"
+            }
+        }
+    }, 
+    "nw_device_inventory": {
+        "device_spec": {
+            "items": {
+                "dlink_ac3900": {
+                    "interfaces": {
+                        "LAN": {
+                            "dl_bw": 104857600, 
+                            "n_ports": 10, 
+                            "protocol": "wifi", 
+                            "ul_bw": 104857600
+                        }, 
+                        "WAN": {
+                            "dl_bw": 1048576000, 
+                            "n_ports": 1, 
+                            "protocol": "ethernet", 
+                            "ul_bw": 1048576000
+                        }
+                    }, 
+                    "name": "dlink_ac3900"
+                }, 
+                "dlink_dgs105": {
+                    "interfaces": {
+                        "LAN": {
+                            "dl_bw": 104857600, 
+                            "n_ports": 4, 
+                            "protocol": "ethernet", 
+                            "ul_bw": 104857600
+                        }, 
+                        "WAN": {
+                            "dl_bw": 1048576000, 
+                            "n_ports": 1, 
+                            "protocol": "ethernet", 
+                            "ul_bw": 1048576000
+                        }
+                    }, 
+                    "name": "dlink_dgs105"
+                }, 
+                "juniper_ex4300": {
+                    "interfaces": {
+                        "WAN": {
+                            "dl_bw": 1073741824, 
+                            "n_ports": 24, 
+                            "protocol": "ethernet", 
+                            "ul_bw": 1073741824
+                        }
+                    }, 
+                    "name": "juniper_ex4300"
+                }
+            }
+        }, 
+        "items": {
+            "bb_ap1": "dlink_ac3900", 
+            "bb_ap2": "dlink_ac3900", 
+            "bb_ap3": "dlink_ac3900", 
+            "bb_sw1": "juniper_ex4300", 
+            "bb_sw2": "juniper_ex4300", 
+            "bb_sw3": "juniper_ex4300", 
+            "home_sw1": "dlink_dgs105", 
+            "home_sw2": "dlink_dgs105", 
+            "home_sw3": "dlink_dgs105"
+        }
+    }, 
+    "nw_links": {}
+}

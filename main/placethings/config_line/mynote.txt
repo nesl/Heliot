@@ -1,0 +1,110 @@
+# test case 1
+
+python main_entity.py run_client -n client1 -a localhost:18900 -m push -al "this is a test"
+python main_entity.py run_actuator -n display1 -a localhost:18900
+
+
+# test case 2
+
+python main_entity.py client_send_file -n client1 -a localhost:18701 -m push -al config_line/3-0.png
+python main_entity.py run_task -n forwarder1 -en task_forward -a localhost:18701 -ra localhost:18800
+python main_entity.py run_task -n task1 -en task_findObj -a localhost:18800 -ra localhost:18702
+python main_entity.py run_task -n forwarder2 -en task_forward -a localhost:18702 -ra localhost:18900
+python main_entity.py run_actuator -n display1 -a localhost:18900
+
+
+# test case 3
+
+python main_entity.py client_send_file -n client1 -a localhost:18701 -m push -al config_line/3-0.png
+
+python main_entity.py run_agent -n agent1 -a localhost:18700
+python main_entity.py run_client -n client1 -a localhost:18700 -m get_prog_list
+python main_entity.py run_client -n client1 -a localhost:18700 -m start_prog -al forwarder1 "python main_entity.py run_task -n forwarder1 -en task_forward -a localhost:18701 -ra localhost:18800"
+python main_entity.py run_client -n client1 -a localhost:18700 -m stop_prog -al forwarder1
+python main_entity.py run_client -n client1 -a localhost:18700 -m start_prog -al task1 "python main_entity.py run_task -n task1 -en task_findObj -a localhost:18800 -ra localhost:18702"
+python main_entity.py run_client -n client1 -a localhost:18700 -m stop_prog -al task1
+python main_entity.py run_client -n client1 -a localhost:18700 -m start_prog -al forwarder2 "python main_entity.py run_task -n forwarder2 -en task_forward -a localhost:18702 -ra localhost:18900"
+python main_entity.py run_client -n client1 -a localhost:18700 -m stop_prog -al forwarder2
+
+python main_entity.py run_actuator -n display1 -a localhost:18900
+
+
+# test case 4
+
+## device ips
+nuc_mininet = 172.17.20.12  # DONT_CARE
+desktop = 172.17.51.1
+laptop_airsim = 172.17.51.2  # DONT_CARE
+
+## mininet hosts ips
+h_forwarder1 = 10.11.12.11
+h_forwarder2 = 10.11.12.12
+h_forwarder3 = 10.11.12.13
+h_forwarder1_dockerip = 172.17.0.2
+h_forwarder2_dockerip = 172.17.0.3
+h_forwarder3_dockerip = 172.17.0.4
+h_agent1 = 10.11.12.101
+h_agent2 = 10.11.12.102
+h_agent3 = 10.11.12.103
+
+## tasks running in mininet
+sensor_drone1_addr = {h_forwarder1_dockerip}:18700  # outside -> inside
+sensor_drone2_addr = {h_forwarder2_dockerip}:18700  # outside -> inside
+actuator_notify_addr = {h_forwarder3}:18700  # inside -> outside
+task_findObj_addr = {h_agent1}:18700
+
+## real sensors/actuators
+airsimControl_addr = DONT_CARE
+display1_addr = {desktop}:18900
+
+## sensors/actuators proxy to mininet
+forward1_addr = {h_forwarder1_dockerip}:18500  # => sensor_drone1
+forward2_addr = {h_forwarder2_dockerip}:18501  # => sensor_drone2
+forward3_addr = {h_forwarder3}:18502  # => actuator_notify
+
+## computers inside mininet
+agent1_addr = {h_agent1}:18600
+agent2_addr = {h_agent2}:18600
+agent3_addr = {h_agent3}:18600
+
+## init
+python main_entity.py client_send_file -n client1 -a {sensor_drone1_addr} -m push -al config_line/3-0.png
+python main_entity.py client_send_file -n client1 -a {sensor_drone2_addr} -m push -al config_line/3-0.png
+
+python main_entity.py run_actuator -n {display1} -a {actuator_notify_addr}
+
+python main_entity.py run_agent -n {forward1} -a {forward1_addr}
+python main_entity.py run_agent -n {forward2} -a {forward2_addr}
+python main_entity.py run_agent -n {forward3} -a {forward3_addr}
+
+python main_entity.py run_agent -n {agent1} -a {agent1_addr}
+python main_entity.py run_agent -n {agent2} -a {agent2_addr}
+python main_entity.py run_agent -n {agent3} -a {agent3_addr}
+
+## deploy tasks
+python main_entity.py run_client -n client1 -a {forward1_addr} -m start_prog -al {sensor_drone1} \
+    "python main_entity.py run_task -n {sensor_drone1} -en task_forward -a {sensor_drone1_addr} -ra {task_findObj_addr}"
+python main_entity.py run_client -n client1 -a {forward2_addr} -m start_prog -al {sensor_drone2} \
+    "python main_entity.py run_task -n {sensor_drone2} -en task_forward -a {sensor_drone2_addr} -ra {actuator_notify_addr}"
+python main_entity.py run_client -n client1 -a {agent1_addr} -m start_prog -al {task_findObj} \
+    "python main_entity.py run_task -n {task_findObj} -en task_findObj -a {task_findObj_addr} -ra {actuator_notify_addr}"
+python main_entity.py run_client -n client1 -a {forward3_addr} -m start_prog -al {actuator_notify} \
+    "python main_entity.py run_task -n {actuator_notify} -en task_forward -a {actuator_notify} -ra {display1_addr}"
+
+## stop tasks
+python main_entity.py run_client -n client1 -a {forward1_addr} -m stop_prog -al {sensor_drone1}
+python main_entity.py run_client -n client1 -a {forward2_addr} -m stop_prog -al {sensor_drone2}
+python main_entity.py run_client -n client1 -a {agent1_addr} -m stop_prog -al {task_findObj}
+python main_entity.py run_client -n client1 -a {forward3_addr} -m stop_prog -al {actuator_notify}
+
+## re-deploy tasks
+first stop tasks and then deploy tasks with new parameters
+
+## stop all rpc servers
+python main_entity.py run_client -n client1 -a {actuator_notify_addr} -m stop_server
+python main_entity.py run_client -n client1 -a {forward1_addr} -m stop_server
+python main_entity.py run_client -n client1 -a {forward2_addr} -m stop_server
+python main_entity.py run_client -n client1 -a {forward3_addr} -m stop_server
+python main_entity.py run_client -n client1 -a {agent1_addr} -m stop_server
+python main_entity.py run_client -n client1 -a {agent2_addr} -m stop_server
+python main_entity.py run_client -n client1 -a {agent3_addr} -m stop_server

@@ -1,0 +1,266 @@
+{
+    "node_info": {
+        "PHONE.0": {
+            "GdInfoEnum.HARDWARE": {},
+            "GdInfoEnum.NIC": {
+                "LinkInfo.ULINK_BW": 52428800,
+                "LinkInfo.PROTOCOL": "NwLink.WIFI",
+                "LinkInfo.N_LINKS": 1,
+                "LinkInfo.DLINK_BW": 157286400
+            },
+            "GdInfoEnum.DEVICE_TYPE": "Device.PHONE",
+            "GdInfoEnum.DEVICE_CAT": "DeviceCategory.ACTUATOR",
+            "GInfoEnum.NODE_TYPE": "NodeType.DEVICE",
+            "GdInfoEnum.RESRC": {},
+            "GdInfoEnum.COST": 0
+        },
+        "CAMERA.0": {
+            "GdInfoEnum.HARDWARE": {},
+            "GdInfoEnum.NIC": {
+                "LinkInfo.ULINK_BW": 62914560,
+                "LinkInfo.PROTOCOL": "NwLink.WIFI",
+                "LinkInfo.N_LINKS": 1,
+                "LinkInfo.DLINK_BW": 62914560
+            },
+            "GdInfoEnum.DEVICE_TYPE": "Device.CAMERA",
+            "GdInfoEnum.DEVICE_CAT": "DeviceCategory.SENSOR",
+            "GInfoEnum.NODE_TYPE": "NodeType.DEVICE",
+            "GdInfoEnum.RESRC": {},
+            "GdInfoEnum.COST": 0
+        },
+        "P3_2XLARGE.0": {
+            "GdInfoEnum.HARDWARE": {
+                "Hardware.CPU": 8,
+                "Hardware.HD": 140737488355328,
+                "Hardware.RAM": 137438953472,
+                "Hardware.GPU": 1
+            },
+            "GdInfoEnum.NIC": {
+                "LinkInfo.ULINK_BW": 10737418240,
+                "LinkInfo.PROTOCOL": "NwLink.ETHERNET",
+                "LinkInfo.N_LINKS": 1,
+                "LinkInfo.DLINK_BW": 10737418240
+            },
+            "GdInfoEnum.DEVICE_TYPE": "Device.P3_2XLARGE",
+            "GdInfoEnum.DEVICE_CAT": "DeviceCategory.PROCESSOR",
+            "GInfoEnum.NODE_TYPE": "NodeType.DEVICE",
+            "GdInfoEnum.RESRC": {
+                "Hardware.CPU": 100,
+                "Hardware.HD": 140737488355328,
+                "Hardware.RAM": 137438953472,
+                "Hardware.GPU": 100
+            },
+            "GdInfoEnum.COST": 3.06
+        },
+        "SMOKE.0": {
+            "GdInfoEnum.HARDWARE": {},
+            "GdInfoEnum.NIC": {
+                "LinkInfo.ULINK_BW": 10485760,
+                "LinkInfo.PROTOCOL": "NwLink.WIFI",
+                "LinkInfo.N_LINKS": 1,
+                "LinkInfo.DLINK_BW": 10485760
+            },
+            "GdInfoEnum.DEVICE_TYPE": "Device.SMOKE",
+            "GdInfoEnum.DEVICE_CAT": "DeviceCategory.SENSOR",
+            "GInfoEnum.NODE_TYPE": "NodeType.DEVICE",
+            "GdInfoEnum.RESRC": {},
+            "GdInfoEnum.COST": 0
+        },
+        "T3_LARGE.1": {
+            "GdInfoEnum.HARDWARE": {
+                "Hardware.CPU": 2,
+                "Hardware.HD": 140737488355328,
+                "Hardware.RAM": 68719476736,
+                "Hardware.GPU": 0
+            },
+            "GdInfoEnum.NIC": {
+                "LinkInfo.ULINK_BW": 107374182400,
+                "LinkInfo.PROTOCOL": "NwLink.ETHERNET",
+                "LinkInfo.N_LINKS": 1,
+                "LinkInfo.DLINK_BW": 107374182400
+            },
+            "GdInfoEnum.DEVICE_TYPE": "Device.T3_LARGE",
+            "GdInfoEnum.DEVICE_CAT": "DeviceCategory.PROCESSOR",
+            "GInfoEnum.NODE_TYPE": "NodeType.DEVICE",
+            "GdInfoEnum.RESRC": {
+                "Hardware.CPU": 100,
+                "Hardware.HD": 140737488355328,
+                "Hardware.RAM": 68719476736,
+                "Hardware.GPU": 100
+            },
+            "GdInfoEnum.COST": 0.0928
+        },
+        "T3_LARGE.0": {
+            "GdInfoEnum.HARDWARE": {
+                "Hardware.CPU": 2,
+                "Hardware.HD": 140737488355328,
+                "Hardware.RAM": 68719476736,
+                "Hardware.GPU": 0
+            },
+            "GdInfoEnum.NIC": {
+                "LinkInfo.ULINK_BW": 107374182400,
+                "LinkInfo.PROTOCOL": "NwLink.ETHERNET",
+                "LinkInfo.N_LINKS": 1,
+                "LinkInfo.DLINK_BW": 107374182400
+            },
+            "GdInfoEnum.DEVICE_TYPE": "Device.T3_LARGE",
+            "GdInfoEnum.DEVICE_CAT": "DeviceCategory.PROCESSOR",
+            "GInfoEnum.NODE_TYPE": "NodeType.DEVICE",
+            "GdInfoEnum.RESRC": {
+                "Hardware.CPU": 100,
+                "Hardware.HD": 140737488355328,
+                "Hardware.RAM": 68719476736,
+                "Hardware.GPU": 100
+            },
+            "GdInfoEnum.COST": 0.0928
+        },
+        "T2_MICRO.1": {
+            "GdInfoEnum.HARDWARE": {
+                "Hardware.CPU": 1,
+                "Hardware.HD": 257698037760,
+                "Hardware.RAM": 8589934592,
+                "Hardware.GPU": 0
+            },
+            "GdInfoEnum.NIC": {
+                "LinkInfo.ULINK_BW": 104857600,
+                "LinkInfo.PROTOCOL": "NwLink.ETHERNET",
+                "LinkInfo.N_LINKS": 1,
+                "LinkInfo.DLINK_BW": 104857600
+            },
+            "GdInfoEnum.DEVICE_TYPE": "Device.T2_MICRO",
+            "GdInfoEnum.DEVICE_CAT": "DeviceCategory.PROCESSOR",
+            "GInfoEnum.NODE_TYPE": "NodeType.DEVICE",
+            "GdInfoEnum.RESRC": {
+                "Hardware.CPU": 100,
+                "Hardware.HD": 257698037760,
+                "Hardware.RAM": 8589934592,
+                "Hardware.GPU": 100
+            },
+            "GdInfoEnum.COST": 0.0116
+        },
+        "T2_MICRO.0": {
+            "GdInfoEnum.HARDWARE": {
+                "Hardware.CPU": 1,
+                "Hardware.HD": 257698037760,
+                "Hardware.RAM": 8589934592,
+                "Hardware.GPU": 0
+            },
+            "GdInfoEnum.NIC": {
+                "LinkInfo.ULINK_BW": 104857600,
+                "LinkInfo.PROTOCOL": "NwLink.ETHERNET",
+                "LinkInfo.N_LINKS": 1,
+                "LinkInfo.DLINK_BW": 104857600
+            },
+            "GdInfoEnum.DEVICE_TYPE": "Device.T2_MICRO",
+            "GdInfoEnum.DEVICE_CAT": "DeviceCategory.PROCESSOR",
+            "GInfoEnum.NODE_TYPE": "NodeType.DEVICE",
+            "GdInfoEnum.RESRC": {
+                "Hardware.CPU": 100,
+                "Hardware.HD": 257698037760,
+                "Hardware.RAM": 8589934592,
+                "Hardware.GPU": 100
+            },
+            "GdInfoEnum.COST": 0.0116
+        }
+    },
+    "edge_info": {
+        "T2_MICRO.0 -> HOME_ROUTER.0": {
+            "GnInfoEnum.BANDWIDTH": 104857600,
+            "GnInfoEnum.SRC_LINK_TYPE": "LinkType.LAN",
+            "GnInfoEnum.DST_LINK_TYPE": "LinkType.LAN",
+            "GnInfoEnum.LATENCY": 1,
+            "GnInfoEnum.PROTOCOL": "NwLink.ETHERNET"
+        },
+        "T3_LARGE.1 -> CLOUD_SWITCH.0": {
+            "GnInfoEnum.BANDWIDTH": 419430400,
+            "GnInfoEnum.SRC_LINK_TYPE": "LinkType.LAN",
+            "GnInfoEnum.DST_LINK_TYPE": "LinkType.LAN",
+            "GnInfoEnum.LATENCY": 1,
+            "GnInfoEnum.PROTOCOL": "NwLink.ETHERNET"
+        },
+        "SMOKE.0 -> HOME_IOTGW.0": {
+            "GnInfoEnum.BANDWIDTH": 10485760,
+            "GnInfoEnum.SRC_LINK_TYPE": "LinkType.LAN",
+            "GnInfoEnum.DST_LINK_TYPE": "LinkType.LAN",
+            "GnInfoEnum.LATENCY": 3,
+            "GnInfoEnum.PROTOCOL": "NwLink.WIFI"
+        },
+        "CLOUD_SWITCH.0 -> P3_2XLARGE.0": {
+            "GnInfoEnum.BANDWIDTH": 419430400,
+            "GnInfoEnum.SRC_LINK_TYPE": "LinkType.LAN",
+            "GnInfoEnum.DST_LINK_TYPE": "LinkType.LAN",
+            "GnInfoEnum.LATENCY": 1,
+            "GnInfoEnum.PROTOCOL": "NwLink.ETHERNET"
+        },
+        "T2_MICRO.1 -> CLOUD_SWITCH.0": {
+            "GnInfoEnum.BANDWIDTH": 104857600,
+            "GnInfoEnum.SRC_LINK_TYPE": "LinkType.LAN",
+            "GnInfoEnum.DST_LINK_TYPE": "LinkType.LAN",
+            "GnInfoEnum.LATENCY": 1,
+            "GnInfoEnum.PROTOCOL": "NwLink.ETHERNET"
+        },
+        "T3_LARGE.0 -> HOME_ROUTER.0": {
+            "GnInfoEnum.BANDWIDTH": 104857600,
+            "GnInfoEnum.SRC_LINK_TYPE": "LinkType.LAN",
+            "GnInfoEnum.DST_LINK_TYPE": "LinkType.LAN",
+            "GnInfoEnum.LATENCY": 1,
+            "GnInfoEnum.PROTOCOL": "NwLink.ETHERNET"
+        },
+        "BB_AP.0 -> PHONE.0": {
+            "GnInfoEnum.BANDWIDTH": 157286400,
+            "GnInfoEnum.SRC_LINK_TYPE": "LinkType.LAN",
+            "GnInfoEnum.DST_LINK_TYPE": "LinkType.LAN",
+            "GnInfoEnum.LATENCY": 10,
+            "GnInfoEnum.PROTOCOL": "NwLink.WIFI"
+        },
+        "CAMERA.0 -> HOME_IOTGW.0": {
+            "GnInfoEnum.BANDWIDTH": 52428800,
+            "GnInfoEnum.SRC_LINK_TYPE": "LinkType.LAN",
+            "GnInfoEnum.DST_LINK_TYPE": "LinkType.LAN",
+            "GnInfoEnum.LATENCY": 3,
+            "GnInfoEnum.PROTOCOL": "NwLink.WIFI"
+        },
+        "P3_2XLARGE.0 -> CLOUD_SWITCH.0": {
+            "GnInfoEnum.BANDWIDTH": 419430400,
+            "GnInfoEnum.SRC_LINK_TYPE": "LinkType.LAN",
+            "GnInfoEnum.DST_LINK_TYPE": "LinkType.LAN",
+            "GnInfoEnum.LATENCY": 1,
+            "GnInfoEnum.PROTOCOL": "NwLink.ETHERNET"
+        },
+        "PHONE.0 -> BB_AP.0": {
+            "GnInfoEnum.BANDWIDTH": 52428800,
+            "GnInfoEnum.SRC_LINK_TYPE": "LinkType.LAN",
+            "GnInfoEnum.DST_LINK_TYPE": "LinkType.LAN",
+            "GnInfoEnum.LATENCY": 10,
+            "GnInfoEnum.PROTOCOL": "NwLink.WIFI"
+        },
+        "CLOUD_SWITCH.0 -> T3_LARGE.1": {
+            "GnInfoEnum.BANDWIDTH": 419430400,
+            "GnInfoEnum.SRC_LINK_TYPE": "LinkType.LAN",
+            "GnInfoEnum.DST_LINK_TYPE": "LinkType.LAN",
+            "GnInfoEnum.LATENCY": 1,
+            "GnInfoEnum.PROTOCOL": "NwLink.ETHERNET"
+        },
+        "HOME_ROUTER.0 -> T3_LARGE.0": {
+            "GnInfoEnum.BANDWIDTH": 104857600,
+            "GnInfoEnum.SRC_LINK_TYPE": "LinkType.LAN",
+            "GnInfoEnum.DST_LINK_TYPE": "LinkType.LAN",
+            "GnInfoEnum.LATENCY": 1,
+            "GnInfoEnum.PROTOCOL": "NwLink.ETHERNET"
+        },
+        "HOME_ROUTER.0 -> T2_MICRO.0": {
+            "GnInfoEnum.BANDWIDTH": 104857600,
+            "GnInfoEnum.SRC_LINK_TYPE": "LinkType.LAN",
+            "GnInfoEnum.DST_LINK_TYPE": "LinkType.LAN",
+            "GnInfoEnum.LATENCY": 1,
+            "GnInfoEnum.PROTOCOL": "NwLink.ETHERNET"
+        },
+        "CLOUD_SWITCH.0 -> T2_MICRO.1": {
+            "GnInfoEnum.BANDWIDTH": 104857600,
+            "GnInfoEnum.SRC_LINK_TYPE": "LinkType.LAN",
+            "GnInfoEnum.DST_LINK_TYPE": "LinkType.LAN",
+            "GnInfoEnum.LATENCY": 1,
+            "GnInfoEnum.PROTOCOL": "NwLink.ETHERNET"
+        }
+    }
+}

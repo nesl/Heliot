@@ -1,0 +1,135 @@
+{
+    "task_info": {
+        "task_sentNotificatoin": {
+            "GtInfoEnum.LATENCY_INFO": {
+                "Device.P3_2XLARGE": {
+                    "Flavor.CPU": 5
+                },
+                "Device.T3_LARGE": {
+                    "Flavor.CPU": 5
+                },
+                "Device.T2_MICRO": {
+                    "Flavor.CPU": 5
+                }
+            },
+            "GtInfoEnum.RESRC_RQMT": {
+                "Flavor.CPU": {
+                    "Hardware.CPU": 5,
+                    "Hardware.HD": 24576,
+                    "Hardware.RAM": 8388608,
+                    "Hardware.GPU": 0
+                }
+            }
+        },
+        "task_getAvgReading": {
+            "GtInfoEnum.LATENCY_INFO": {
+                "Device.P3_2XLARGE": {
+                    "Flavor.CPU": 5
+                },
+                "Device.T3_LARGE": {
+                    "Flavor.CPU": 10
+                },
+                "Device.T2_MICRO": {
+                    "Flavor.CPU": 15
+                }
+            },
+            "GtInfoEnum.RESRC_RQMT": {
+                "Flavor.CPU": {
+                    "Hardware.CPU": 5,
+                    "Hardware.HD": 24576,
+                    "Hardware.RAM": 8388608,
+                    "Hardware.GPU": 0
+                }
+            }
+        },
+        "task_smoke": {
+            "GtInfoEnum.LATENCY_INFO": {},
+            "GtInfoEnum.RESRC_RQMT": {}
+        },
+        "task_camera": {
+            "GtInfoEnum.LATENCY_INFO": {},
+            "GtInfoEnum.RESRC_RQMT": {}
+        },
+        "task_broadcast": {
+            "GtInfoEnum.LATENCY_INFO": {},
+            "GtInfoEnum.RESRC_RQMT": {}
+        },
+        "task_findObject": {
+            "GtInfoEnum.LATENCY_INFO": {
+                "Device.P3_2XLARGE": {
+                    "Flavor.GPU": 600
+                },
+                "Device.T3_LARGE": {
+                    "Flavor.CPU": 2000
+                },
+                "Device.T2_MICRO": {
+                    "Flavor.CPU": 6000
+                }
+            },
+            "GtInfoEnum.RESRC_RQMT": {
+                "Flavor.CPU": {
+                    "Hardware.CPU": 60,
+                    "Hardware.HD": 251658240,
+                    "Hardware.RAM": 8589934592,
+                    "Hardware.GPU": 0
+                },
+                "Flavor.GPU": {
+                    "Hardware.CPU": 5,
+                    "Hardware.HD": 251658240,
+                    "Hardware.RAM": 34359738368,
+                    "Hardware.GPU": 60
+                }
+            }
+        },
+        "task_checkAbnormalEvent": {
+            "GtInfoEnum.LATENCY_INFO": {
+                "Device.P3_2XLARGE": {
+                    "Flavor.CPU": 5
+                },
+                "Device.T3_LARGE": {
+                    "Flavor.CPU": 5
+                },
+                "Device.T2_MICRO": {
+                    "Flavor.CPU": 5
+                }
+            },
+            "GtInfoEnum.RESRC_RQMT": {
+                "Flavor.CPU": {
+                    "Hardware.CPU": 5,
+                    "Hardware.HD": 24576,
+                    "Hardware.RAM": 8388608,
+                    "Hardware.GPU": 0
+                }
+            }
+        }
+    },
+    "task_mapping": {
+        "task_sentNotificatoin": null,
+        "task_getAvgReading": null,
+        "task_smoke": "SMOKE.0",
+        "task_camera": "CAMERA.0",
+        "task_broadcast": "PHONE.0",
+        "task_findObject": null,
+        "task_checkAbnormalEvent": null
+    },
+    "task_links": {
+        "task_smoke -> task_getAvgReading": {
+            "GtInfoEnum.TRAFFIC": 8192
+        },
+        "task_sentNotificatoin -> task_broadcast": {
+            "GtInfoEnum.TRAFFIC": 8
+        },
+        "task_checkAbnormalEvent -> task_sentNotificatoin": {
+            "GtInfoEnum.TRAFFIC": 8
+        },
+        "task_getAvgReading -> task_checkAbnormalEvent": {
+            "GtInfoEnum.TRAFFIC": 8
+        },
+        "task_camera -> task_findObject": {
+            "GtInfoEnum.TRAFFIC": 83886080
+        },
+        "task_findObject -> task_checkAbnormalEvent": {
+            "GtInfoEnum.TRAFFIC": 80
+        }
+    }
+}

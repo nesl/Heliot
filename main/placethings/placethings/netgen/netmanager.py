@@ -176,11 +176,11 @@ class NetManager(object):
         # TODO: this is a hotfix. should stop hosts properly
         cleanup()
 
-    def run_cmd(self, device_name, command, async=False):
+    def run_cmd(self, device_name, command, is_async=False):
         host = self._host_dict[device_name]
         log.info('send command to {}({}): {}'.format(
             device_name, host, command))
-        if async:
+        if is_async:
             # no waiting
             host.sendCmd(command)
             output = 'command sent'

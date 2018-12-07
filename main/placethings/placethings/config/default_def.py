@@ -8,6 +8,11 @@ from placethings.definition import (
     GnInfo, GtInfo, LinkType, Unit)
 
 
+"""
+This file is obsolete; need to modify the data structure
+"""
+
+
 NW_DEVICE_INVENTORY = {
     NwDeviceCategory.HOME: {
         NwDevice.HOME_ROUTER: 1,

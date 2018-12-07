@@ -94,9 +94,9 @@
     },
     "device_inventory": {
         "DeviceCategory.PROCESSOR": {
-            "Device.T3_LARGE": 2,
+            "Device.T3_LARGE": 1,
             "Device.P3_2XLARGE": 1,
-            "Device.T2_MICRO": 4
+            "Device.T2_MICRO": 1
         },
         "DeviceCategory.ACTUATOR": {
             "Device.CONTROLLER": 1

@@ -105,6 +105,11 @@
             "GnInfoEnum.DST_LINK_TYPE": "LinkType.WAN",
             "GnInfoEnum.LATENCY": 2
         },
+        "FIELD_SWITCH.0 -> BB_SWITCH.2": {
+            "GnInfoEnum.SRC_LINK_TYPE": "LinkType.WAN",
+            "GnInfoEnum.DST_LINK_TYPE": "LinkType.ANY",
+            "GnInfoEnum.LATENCY": 2
+        },
         "BB_SWITCH.0 -> CLOUD_SWITCH.1": {
             "GnInfoEnum.SRC_LINK_TYPE": "LinkType.ANY",
             "GnInfoEnum.DST_LINK_TYPE": "LinkType.WAN",
@@ -133,11 +138,6 @@
         "BB_SWITCH.2 -> BB_AP.2": {
             "GnInfoEnum.SRC_LINK_TYPE": "LinkType.ANY",
             "GnInfoEnum.DST_LINK_TYPE": "LinkType.WAN",
-            "GnInfoEnum.LATENCY": 2
-        },
-        "FIELD_SWITCH.1 -> BB_SWITCH.2": {
-            "GnInfoEnum.SRC_LINK_TYPE": "LinkType.WAN",
-            "GnInfoEnum.DST_LINK_TYPE": "LinkType.ANY",
             "GnInfoEnum.LATENCY": 2
         },
         "BB_SWITCH.1 -> FIELD_SWITCH.1": {
@@ -170,7 +170,7 @@
             "GnInfoEnum.DST_LINK_TYPE": "LinkType.ANY",
             "GnInfoEnum.LATENCY": 2
         },
-        "BB_SWITCH.2 -> FIELD_SWITCH.1": {
+        "BB_SWITCH.2 -> FIELD_SWITCH.0": {
             "GnInfoEnum.SRC_LINK_TYPE": "LinkType.ANY",
             "GnInfoEnum.DST_LINK_TYPE": "LinkType.WAN",
             "GnInfoEnum.LATENCY": 2

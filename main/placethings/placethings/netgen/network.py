@@ -3,12 +3,11 @@ from __future__ import division
 from __future__ import print_function
 from __future__ import unicode_literals
 
-from future.utils import iteritems
 import logging
 
 from placethings.netgen.netmanager import NetManager
 from placethings.definition import (
-    GInfo, GnInfo, GdInfo, GtInfo, NwLink, NodeType, Device, DeviceCategory)
+    GInfo, GnInfo, GdInfo, GtInfo, NwLink, NodeType, DeviceCategory)
 
 
 log = logging.getLogger()
@@ -36,101 +35,6 @@ class AddressManager(object):
             port = self.net.get_device_free_port(device_name)
             self.address_book[task_name] = (device_name, ip, port)
         return ip, port
-
-
-class ControlPlane(object):
-
-    _cmd_agent_template = (
-        'cd {progdir} && python main_entity.py run_agent '
-        '-n {name} -a {ip}:{port}')
-    _cmd_stop_template = (
-        'cd {progdir} && python main_entity.py stop_server -n stopper -a {ip}:{port}')
-    _PROG_DIR = '/home/kumokay/github/placethings'
-    _AGENT_PORT = 18800
-    _MANAGER_NAME = 'Manager'
-
-    def __init__(self, Gn):
-        self.agent_dict = {}
-        self.net = NetManager.create()
-        for node in Gn.nodes():
-            node_type = Gn.node[node][GInfo.NODE_TYPE]
-            if node_type == NodeType.DEVICE:
-                self.net.addHost(node)
-            elif node_type == NodeType.NW_DEVICE:
-                self.net.addSwitch(node)
-            else:
-                assert False, 'unkown node_type: {}'.format(node_type)
-        for d1, d2 in Gn.edges():
-            edge_info = Gn[d1][d2]
-            self.net.addLink(
-                d1, d2,
-                bw_bps=edge_info[GnInfo.BANDWIDTH],
-                delay_ms=edge_info[GnInfo.LATENCY],
-                pkt_loss_rate=_PKT_LOSS[edge_info[GnInfo.PROTOCOL]])
-
-    def get_agent_address(self, name):
-        return self.net.get_device_ip(name), self._AGENT_PORT
-
-    @staticmethod
-    def get_agent_name(device_name):
-        return 'A-{}'.format(device_name)
-
-    def gen_agent_run_cmd(self, device_name, agent_name):
-        ip, port = self.get_agent_address(device_name)
-        cmd = self._cmd_agent_template.format(
-            progdir=self._PROG_DIR,
-            name=agent_name,
-            ip=ip,
-            port=port)
-        return cmd
-
-    def add_agent_to_host(self, host_name):
-        agent_name = self.get_agent_name(host_name)
-        log.info('add agent {} to host {}'.format(agent_name, host_name))
-        self.agent_dict[agent_name] = self.gen_agent_run_cmd(
-            host_name, agent_name)
-
-    def deploy_agent(self):
-        for host_name in self.net.get_host_list():
-            self.add_agent_to_host(host_name)
-
-    def add_manager(self, device_name):
-        """
-        add manager and link it to a nw device
-        """
-        self.net.addHost(self._MANAGER_NAME)
-        self.net.addLink(
-            self._MANAGER_NAME, device_name,
-            bw_bps=None,
-            delay_ms=0,
-            pkt_loss_rate=0)
-
-    def run_manager_cmd(self, command):
-        return self.net.run_cmd(self._MANAGER_NAME, command, async=False)
-
-    def run_agent(self, name):
-        log.info('run agent: {}'.format(name))
-        run_worker_cmd = self.worker_dict[name]
-        self.net.run_cmd(name, run_worker_cmd, async=True)
-
-    def stop_agent(self, name):
-        log.info('stop worker: {}'.format(name))
-        ip, port = self.get_agent_address(name)
-        command = self._cmd_stop_template.format(
-            progdir=self._PROG_DIR,
-            ip=ip,
-            port=port)
-        self.run_manager_cmd(command, async=True)
-
-    def start(self):
-        log.info('start control plane. run all agents')
-        for name in self.agent_dict:
-            self.run_agent(name)
-
-    def stop(self):
-        log.info('stop control plane. stop all agents')
-        for name in self.agent_dict:
-            self.stop_agent(name)
 
 
 class DataPlane(object):
@@ -184,8 +88,8 @@ class DataPlane(object):
             delay_ms=0,
             pkt_loss_rate=0)
 
-    def run_manager_cmd(self, command, async=False):
-        return self.net.run_cmd(self._MANAGER_NAME, command, async=async)
+    def run_manager_cmd(self, command, is_async=False):
+        return self.net.run_cmd(self._MANAGER_NAME, command, is_async=is_async)
 
     def get_worker_address(self, device_name):
         return self.net.get_device_ip(device_name), self._TASK_PORT
@@ -239,7 +143,7 @@ class DataPlane(object):
     def run_worker(self, device_name):
         log.info('run worker on {}'.format(device_name))
         run_worker_cmd = self.worker_dict[device_name]
-        self.net.run_cmd(device_name, run_worker_cmd, async=False)
+        self.net.run_cmd(device_name, run_worker_cmd, is_async=False)
 
     def stop_worker(self, device_name, is_force=False):
         if not is_force:
@@ -258,7 +162,7 @@ class DataPlane(object):
                 return
         log.debug('kill task on {}'.format(device_name))
         # TODO: this is workaround
-        self.net.run_cmd(device_name, 'kill %python', async=False)
+        self.net.run_cmd(device_name, 'kill %python', is_async=False)
 
     def start(self, is_validate=False):
         log.info('start mininet.')

@@ -17,7 +17,7 @@ class TestBasic(BaseTestCase):
     @staticmethod
     def test(config_name=None, is_export=False):
         if not config_name:
-            config_name = 'config_sample'
+            config_name = 'config_ddflow_demo'
         cfg = Config(folderpath=config_name)
         # graph_gen.create_topo_graph(cfg, is_export)
         Gd = graph_gen.create_device_graph(cfg, is_export)

@@ -1,0 +1,54 @@
+{
+    "node_info": {
+        "task_notify": {
+            "GtInfoEnum.RESRC_RQMT": {},
+            "GtInfoEnum.EXEC_CMD": {},
+            "GtInfoEnum.LATENCY_INFO": {},
+            "GtInfoEnum.DEVICE": "CONTROLLER.0"
+        },
+        "task_takePic": {
+            "GtInfoEnum.RESRC_RQMT": {},
+            "GtInfoEnum.EXEC_CMD": {},
+            "GtInfoEnum.LATENCY_INFO": {},
+            "GtInfoEnum.DEVICE": "CAMERA.0"
+        },
+        "task_findObj": {
+            "GtInfoEnum.RESRC_RQMT": {
+                "Flavor.CPU": {
+                    "Hardware.CPU": 60,
+                    "Hardware.HD": 251658240,
+                    "Hardware.RAM": 8589934592,
+                    "Hardware.GPU": 0
+                },
+                "Flavor.GPU": {
+                    "Hardware.CPU": 5,
+                    "Hardware.HD": 251658240,
+                    "Hardware.RAM": 34359738368,
+                    "Hardware.GPU": 60
+                }
+            },
+            "GtInfoEnum.EXEC_CMD": {},
+            "GtInfoEnum.LATENCY_INFO": {
+                "Device.P3_2XLARGE": {
+                    "Flavor.CPU": 600,
+                    "Flavor.GPU": 20
+                },
+                "Device.T3_LARGE": {
+                    "Flavor.CPU": 2000
+                },
+                "Device.T2_MICRO": {
+                    "Flavor.CPU": 6000
+                }
+            },
+            "GtInfoEnum.DEVICE": null
+        }
+    },
+    "edge_info": {
+        "task_takePic -> task_findObj": {
+            "GtInfoEnum.TRAFFIC": 100663296
+        },
+        "task_findObj -> task_notify": {
+            "GtInfoEnum.TRAFFIC": 80
+        }
+    }
+}

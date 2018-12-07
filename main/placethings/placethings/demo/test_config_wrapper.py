@@ -82,7 +82,7 @@ class TestDefineConfig(BaseTestCase):
             'FIELD_SWITCH.1', 'BB_SWITCH.1',
             LinkType.WAN, LinkType.ANY, Unit.ms(2))
         cfg.add_nw_dev_link(
-            'FIELD_SWITCH.1', 'BB_SWITCH.2',
+            'FIELD_SWITCH.0', 'BB_SWITCH.2',
             LinkType.WAN, LinkType.ANY, Unit.ms(2))
         cfg.add_nw_dev_link(
             'BB_AP.0', 'BB_SWITCH.0',
@@ -102,8 +102,8 @@ class TestDefineConfig(BaseTestCase):
 
         cfg.add_device(DeviceCategory.SENSOR, Device.CAMERA, 1)
         cfg.add_device(DeviceCategory.PROCESSOR, Device.P3_2XLARGE, 1)
-        cfg.add_device(DeviceCategory.PROCESSOR, Device.T3_LARGE, 2)
-        cfg.add_device(DeviceCategory.PROCESSOR, Device.T2_MICRO, 4)
+        cfg.add_device(DeviceCategory.PROCESSOR, Device.T3_LARGE, 1)
+        cfg.add_device(DeviceCategory.PROCESSOR, Device.T2_MICRO, 1)
         cfg.add_device(DeviceCategory.ACTUATOR, Device.CONTROLLER, 1)
 
         cfg.add_dev_link('CAMERA.0', 'BB_AP.0', Unit.ms(30))
@@ -139,6 +139,7 @@ class TestDefineConfig(BaseTestCase):
         cfg.add_task_mapping('task_takePic', 'CAMERA.0')
         cfg.add_task_mapping('task_notify', 'CONTROLLER.0')
 
+        cfg.export_data('config_sample')
         cfg2 = Config(folderpath='config_sample')
         compare_cfg(cfg, cfg2)
 

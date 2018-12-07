@@ -44,6 +44,7 @@ $ python main.py -tc test_ddflow_demo.Test -c config_ddflow_demo
 ## Example
 
 Al examples are in placethings/demo.
+See https://github.com/nesl/Heliot/blob/dev/main/placethings/placethings/demo/README.md
 
 ```
 $ python main.py -tc TESTCASE_FILE.TESTCASE -c CONFIGFILE

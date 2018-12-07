@@ -1,5 +1,7 @@
 # placethings
 
+# Add Credits
+
 ## Overview
 <b>placethings</b> allows developers to construct an experimental testbed to evaluate and verify their internet of things (IoT) applications during the development phase. <b>placethings</b>leverages the famous Mininet/Containernet emulation environment to span the emulation across virtual machines, containers, and bare metal devices. Developers can configure the emulated network and add virtual or real <b>THINGs</b>. Based on the network and devices configuration, <b>placethings</b> also suggests good solutions for deploying IoT applications.
 

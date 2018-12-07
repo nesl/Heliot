@@ -41,6 +41,8 @@ $ sudo apt-get install glpk-utils
 $ python main.py -tc test_ddflow_demo.Test -c config_ddflow_demo
 ```
 
+run with -v option to print the output graphs
+
 ## Example
 
 Al examples are in placethings/demo.

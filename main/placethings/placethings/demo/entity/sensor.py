@@ -60,8 +60,8 @@ class SensorGen(object):
     def _get_delay_start_time(cls):
         now = int(time.time())
         return (
-            now - (now % cls._DELAY_START_TIME_TICK)
-            + (2 * cls._DELAY_START_TIME_TICK))
+            now - (now % cls._DELAY_START_TIME_TICK) + (
+                2 * cls._DELAY_START_TIME_TICK))
 
     @staticmethod
     def _gen_random_byte_str(n):

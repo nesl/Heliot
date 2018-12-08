@@ -21,9 +21,11 @@ class TestPhase1(BaseTestCase):
 
     @classmethod
     def test(
-            cls, config_name, is_export=False,
+            cls, config_name=None, is_export=False,
             is_update_map=True, is_simulate=False):
-        assert config_name == 'config_ddflow_phase1'
+        if not config_name:
+            config_name = 'sample_configs/config_ddflow_phase1'
+        assert config_name == 'sample_configs/config_ddflow_phase1'
         cfg = Config(config_name)
         cfgHelper = ConfigDataHelper(cfg, is_export)
         cfgHelper.init_task_graph()
@@ -81,9 +83,11 @@ class TestPhase2(BaseTestCase):
 
     @classmethod
     def test(
-            cls, config_name, is_export=False,
+            cls, config_name=None, is_export=False,
             is_update_map=False, is_simulate=False):
-        assert config_name == 'config_ddflow_phase2'
+        if not config_name:
+            config_name = 'sample_configs/config_ddflow_phase2'
+        assert config_name == 'sample_configs/config_ddflow_phase2'
         # TODO: clean this shit
         cfg1 = Config('{}.1'.format(config_name))
         cfg2 = Config('{}.2'.format(config_name))

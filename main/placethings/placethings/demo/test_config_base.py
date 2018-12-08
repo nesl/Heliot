@@ -65,7 +65,8 @@ def create_default_nw_inventory():
 class TestDefineNwConfig(BaseTestCase):
     @staticmethod
     def test(config_name=None, is_export=False):
-        assert config_name is None
+        if not config_name:
+            config_name = 'sample_configs/config_base'
 
         nw_device_inventory = create_default_nw_inventory()
 
@@ -81,13 +82,15 @@ class TestDefineNwConfig(BaseTestCase):
         nw_device_data.add_nw_link('bb_sw2', 'home_sw2', network_link)
         nw_device_data.add_nw_link('bb_sw3', 'home_sw3', network_link)
 
-        nw_device_data.export_to_file('config_base/nw_device_data.json')
+        nw_device_data.export_to_file(
+            '{}/nw_device_data.json'.format(config_name))
 
 
 class TestDefineDeviceConfig(BaseTestCase):
     @staticmethod
     def test(config_name=None, is_export=False):
-        assert config_name is None
+        if not config_name:
+            config_name = 'sample_configs/config_base'
 
         device_spec = device_cfg.DeviceSpec()
 
@@ -155,4 +158,4 @@ class TestDefineDeviceConfig(BaseTestCase):
         device_data.add_device_link('samsung_phone', 'bb_ap1', network_link)
         device_data.add_device_link('drone_camera', 'bb_ap3', network_link)
 
-        device_data.export_to_file('config_base/device_data.json')
+        device_data.export_to_file('{}/device_data.json'.format(config_name))

@@ -25,6 +25,7 @@ class NetManager(object):
     _HOST_PREFIX = 'h'
     _SWITCH_PREFIX = 's'
     _PORT_START = 18800
+    _DEFAULT_IMG = "kumokay/heliot_host:v1"
 
     def __init__(self, net, docker_subnet_ip='172.18.0.1'):
         self._net = net
@@ -89,8 +90,7 @@ class NetManager(object):
         name = self._new_host_name()
         # TODO: use cmd to get correct docker ip
         ip, docker_ip = self._new_ip()
-        host = self._net.addDocker(
-            name, ip=ip, dimage="kumokay/ubuntu_wifi:v6")
+        host = self._net.addDocker(name, ip=ip, dimage=self._DEFAULT_IMG)
         self._host_dict[device_name] = host
         self._host_ip_dict[device_name] = ip
         self._host_docker_ip_dict[device_name] = docker_ip

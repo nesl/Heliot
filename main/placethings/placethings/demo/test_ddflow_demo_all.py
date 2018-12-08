@@ -45,7 +45,7 @@ Scenrios:
 
 def _check_support_config(config_name):
     _SUPPORTED_CONFIG = {
-        "config_ddflow_demo",
+        "sample_configs/config_ddflow_demo",
     }
     assert config_name in _SUPPORTED_CONFIG
 
@@ -66,8 +66,10 @@ def _init_netsim(topo_device_graph, Gd, G_map):
 class TestBasic(BaseTestCase):
     @staticmethod
     def test(config_name=None, is_export=True, is_simulate=False):
+        if not config_name:
+            config_name = 'sample_configs/config_ddflow_demo'
         _check_support_config(config_name)
-        cfgHelper = ConfigDataHelper(config_name, is_export)
+        cfgHelper = ConfigDataHelper(Config(config_name), is_export)
         cfgHelper.init_task_graph()
         cfgHelper.update_topo_device_graph()
         cfgHelper.update_task_map()
@@ -115,6 +117,8 @@ class TestDynamic(BaseTestCase):
     def test(
             cls, config_name=None, is_export=True,
             is_update_map=True, is_simulate=True):
+        if not config_name:
+            config_name = 'sample_configs/config_ddflow_demo'
         _check_support_config(config_name)
         cfgHelper = ConfigDataHelper(Config(config_name), is_export)
         cfgHelper.init_task_graph()
@@ -139,39 +143,38 @@ class TestDynamic(BaseTestCase):
         log.info('=== running scenario 1: initial deployment ===')
         data_plane.start_workers()
 
-        while(1):
-            data_plane.print_net_info()
-            raw_input('press any key to start scenario 2')
-            log.info('=== running scenario 2: P3_2XLARGE.0 poor connection ===')
-            nw_dev1 = 'BB_SWITCH.0'
-            nw_dev2 = 'CENTER_SWITCH.1'
-            new_latency = Unit.ms(1000)
-            cls.update_nw_latency(
-                cfgHelper, data_plane, nw_dev1, nw_dev2, new_latency, is_simulate)
-            if is_update_map:
-                cls.update_placement(cfgHelper, data_plane, is_simulate)
+        data_plane.print_net_info()
+        raw_input('press any key to start scenario 2')
+        log.info('=== running scenario 2: P3_2XLARGE.0 poor connection ===')
+        nw_dev1 = 'BB_SWITCH.0'
+        nw_dev2 = 'CENTER_SWITCH.1'
+        new_latency = Unit.ms(1000)
+        cls.update_nw_latency(
+            cfgHelper, data_plane, nw_dev1, nw_dev2, new_latency, is_simulate)
+        if is_update_map:
+            cls.update_placement(cfgHelper, data_plane, is_simulate)
 
-            data_plane.print_net_info()
-            raw_input('press any key to start scenario 3')
-            log.info('=== running scenario 3: T3_LARGE.0 poor connection ===')
-            nw_dev1 = 'BB_SWITCH.1'
-            nw_dev2 = 'FIELD_SWITCH.1'
-            new_latency = Unit.ms(2000)
-            cls.update_nw_latency(
-                cfgHelper, data_plane, nw_dev1, nw_dev2, new_latency, is_simulate)
-            if is_update_map:
-                cls.update_placement(cfgHelper, data_plane, is_simulate)
+        data_plane.print_net_info()
+        raw_input('press any key to start scenario 3')
+        log.info('=== running scenario 3: T3_LARGE.0 poor connection ===')
+        nw_dev1 = 'BB_SWITCH.1'
+        nw_dev2 = 'FIELD_SWITCH.1'
+        new_latency = Unit.ms(2000)
+        cls.update_nw_latency(
+            cfgHelper, data_plane, nw_dev1, nw_dev2, new_latency, is_simulate)
+        if is_update_map:
+            cls.update_placement(cfgHelper, data_plane, is_simulate)
 
-            data_plane.print_net_info()
-            raw_input('press any key to start scenario 4')
-            log.info('=== running scenario 4: P3_2XLARGE.0 back online ===')
-            nw_dev1 = 'BB_SWITCH.0'
-            nw_dev2 = 'CENTER_SWITCH.1'
-            new_latency = Unit.ms(2)
-            cls.update_nw_latency(
-                cfgHelper, data_plane, nw_dev1, nw_dev2, new_latency, is_simulate)
-            if is_update_map:
-                cls.update_placement(cfgHelper, data_plane, is_simulate)
+        data_plane.print_net_info()
+        raw_input('press any key to start scenario 4')
+        log.info('=== running scenario 4: P3_2XLARGE.0 back online ===')
+        nw_dev1 = 'BB_SWITCH.0'
+        nw_dev2 = 'CENTER_SWITCH.1'
+        new_latency = Unit.ms(2)
+        cls.update_nw_latency(
+            cfgHelper, data_plane, nw_dev1, nw_dev2, new_latency, is_simulate)
+        if is_update_map:
+            cls.update_placement(cfgHelper, data_plane, is_simulate)
 
         raw_input('press any key to end test')
         if is_simulate:

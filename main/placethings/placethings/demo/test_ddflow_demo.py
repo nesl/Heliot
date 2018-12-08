@@ -41,7 +41,7 @@ Scenrios:
 
 def _check_support_config(config_name):
     _SUPPORTED_CONFIG = {
-        "config_ddflow_demo",
+        "sample_configs/config_ddflow_demo",
     }
     assert config_name in _SUPPORTED_CONFIG
 
@@ -94,6 +94,8 @@ class Test(BaseTestCase):
     def test(
             cls, config_name=None, is_export=True,
             is_update_map=True, is_simulate=True):
+        if not config_name:
+            config_name = 'sample_configs/config_ddflow_demo'
         _check_support_config(config_name)
 
         #Config(config_name): This reads the file and all the json data in devices, nw_devices and tasks

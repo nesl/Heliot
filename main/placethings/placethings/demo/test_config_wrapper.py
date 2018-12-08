@@ -64,7 +64,8 @@ def compare_cfg(cfg, cfg2):
 class TestDefineConfig(BaseTestCase):
     @staticmethod
     def test(config_name=None, is_export=False):
-        assert config_name is None
+        if not config_name:
+            config_name = 'sample_configs/config_sample'
         cfg = Config()
 
         cfg.add_nw_device(NwDeviceCategory.FIELD, NwDevice.FIELD_SWITCH, 2)
@@ -139,16 +140,6 @@ class TestDefineConfig(BaseTestCase):
         cfg.add_task_mapping('task_takePic', 'CAMERA.0')
         cfg.add_task_mapping('task_notify', 'CONTROLLER.0')
 
-        cfg.export_data('config_sample')
-        cfg2 = Config(folderpath='config_sample')
-        compare_cfg(cfg, cfg2)
-
-
-class TestExportConfig(BaseTestCase):
-    @staticmethod
-    def test(config_name=None, is_export=False):
-        assert config_name is None
-        cfg = Config(folderpath='config_sample')
-        cfg.export_data('config_test_wrapper')
-        cfg2 = Config(folderpath='config_test_wrapper')
+        cfg.export_data(config_name)
+        cfg2 = Config(folderpath=config_name)
         compare_cfg(cfg, cfg2)

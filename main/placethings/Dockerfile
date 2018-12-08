@@ -10,6 +10,15 @@
 # To run this image
 #     sudo docker run -it yourhubusername/imagename:version /bin/bash
 #
+# To test if placethings.main_entity works
+# (1) in the docker command line:
+#   root@docker:/opt/github/placethings# ifconfig eth0
+#   eth0      Link encap:Ethernet  HWaddr 02:42:ac:12:00:08
+#             inet addr:172.18.0.8  Bcast:172.18.255.255  Mask:255.255.0.0
+#   root@docker:/opt/github/placethings# python main_entity.py run_task -n task_camera -en task_forward -a 172.18.0.8:18800
+# (2) outside of docker, do
+#   $ python main_entity.py run_client -n client -a 172.18.0.8:18800 -m push -al "this is a test msg"
+# (3) check if the task inside the docker receives the message
 ############################################################
 
 # start from an official ubuntu image
@@ -17,7 +26,7 @@ FROM ubuntu:16.04
 
 # install some tools
 RUN apt-get update
-RUN apt-get -y install git wget vim iputils-ping
+RUN apt-get -y install git wget vim iputils-ping net-tools
 
 # install python packages for main_entity.py only
 RUN apt-get -y install python-pip

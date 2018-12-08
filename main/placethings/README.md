@@ -38,6 +38,10 @@ $ sudo apt-get install glpk-utils
 
 3. Run demo case
 ```
+# first get the docker image for creating mininet hosts
+$  sudo docker pull kumokay/heliot_host:v1
+
+# try it out!
 $ python main.py -tc test_ddflow_demo.Test -c config_ddflow_demo
 ```
 

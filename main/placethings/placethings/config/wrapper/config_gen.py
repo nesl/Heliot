@@ -8,7 +8,7 @@ from placethings.config.wrapper.device_gen import AllDeviceData
 from placethings.config.wrapper.nw_device_gen import AllNwDeviceData
 from placethings.config.wrapper.task_gen import AllTaskData
 
-sandeep_debug = True
+sandeep_debug = False
 
 
 class Config(object):

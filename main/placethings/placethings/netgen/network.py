@@ -36,7 +36,7 @@ class AddressManager(object):
             self.address_book[task_name] = (device_name, ip, port)
         return ip, port
 
-
+# Dataplane is used for creating the network
 class DataPlane(object):
     _cmd_get_ip = (
         "ip -4 -o addr show dev eth0| awk '{split($4,a,\"/\");print a[1]}'")
@@ -50,6 +50,8 @@ class DataPlane(object):
     def __init__(self, topo_device_graph, docker0_ip='172.18.0.1'):
         self.worker_dict = {}  # worker_name: start_cmd
         self.task_cmd = {}
+
+        #This is the controller which we are creating
         self.net = NetManager.create(docker0_ip)
         # add nw devices
         for node in topo_device_graph.nodes():

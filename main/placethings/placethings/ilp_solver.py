@@ -258,7 +258,7 @@ def _solver(Gt, Gd, target_latency=None):
         for d in Gd.nodes():
             X[t][d] = 0
         d_known = Gt.node[t][GtInfo.DEVICE]
-        X[t][d_known] = 1
+        X[t][d_known] = 1 #Mapping which are added by user
     for t in tasks:
         for d in devices:
             if X[t][d] is None:
@@ -268,11 +268,15 @@ def _solver(Gt, Gd, target_latency=None):
                     upBound=1,
                     cat='Integer')
                 all_unknown_X.append(X[t][d])
-        # 1-1 map
+        # 1-1 map # One task can only map map to device
         prob += pulp.lpSum(listvalues(X[t])) == 1
     # number of X == 1 must equal to number of tasks
     log.info('there are {} unknowns'.format(len(all_unknown_X)))
+
     assert len(all_unknown_X) == len(tasks) * len(devices)
+    # tasks are the tasks not yet assigned.
+    # devices are the devices not yet mapped
+
     prob += pulp.lpSum(all_unknown_X) == len(tasks)
     # auxiliary variable: use XX to replace X[ti][di] * X[tj][dj]
     XX = defaultdict(dict)

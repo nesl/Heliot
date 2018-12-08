@@ -24,8 +24,15 @@ class ConfigDataHelper(object):
         self.update_id = -1
         # graphs
         self.Gt = None  # Graph for the task
+        # We don't use Gn for now. Gn and Gnd looks same in the out
+
         self.Gn = None  # Graph for the network devices (switch, AP)
+
+        #Gnd is used for mininet creating hosts, switches, and links between.
+
         self.Gnd = None # Graph for the network devices + devices ( how host is connected to the swtich)
+
+        #Gd is used by ILP solver. This has the device connectivity, their resources and their latency
         self.Gd = None # Graph for the devices  (it is fake, virtual graph. To check connectivity between two devices )
         self.G_map = None # Initial Task mapping provided by the user.
         self.result_mapping = None # Task mapping for unassigned tasks from the ILP
@@ -38,6 +45,9 @@ class ConfigDataHelper(object):
         log.info('init task graph')
         self.Gt = graph_gen.create_task_graph(self.cfg, self.is_export)
 
+   # Creates a new topology:
+   # Creating Gn, Gnd and Gd.
+   # self.cfg is the input config file, which has data fron device_data.json, nw_device_data.json and task_data.json
     def update_topo_device_graph(self):
         self.update_id += 1
         log.info('round {}: update topo device graph'.format(self.update_id))
@@ -45,6 +55,8 @@ class ConfigDataHelper(object):
             self.cfg, self.is_export, export_suffix=self.update_id)
 
     def update_task_map(self):
+        # result_mapping returns the task to the devices
+        # G_map is the updated task graph. Tasks, connectivity of tasks and their attributes (resources, how to invoke)
         G_map, result_mapping = ilp_solver.place_things(
             self.Gt, self.Gd,
             is_export=self.is_export, export_suffix=self.update_id)

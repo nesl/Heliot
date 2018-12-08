@@ -48,6 +48,7 @@ def _check_support_config(config_name):
 
 def _init_netsim(topo_device_graph, Gd, G_map):
     # get containernet (docker) subnet ip
+    # This will be there is containernet is installed, which install the docker
     cmd = (
         "ifconfig | grep -A 1 'docker'"
         " | tail -1 | cut -d ':' -f 2 | cut -d ' ' -f 1")
@@ -101,11 +102,16 @@ class Test(BaseTestCase):
 
         #Task graph is generated, let us print it
         cfgHelper.init_task_graph()
+        # Task Name with the node names.
+        # Task links is the connectivity, used for data flow
+        # Task attributes are the attributes from task file about how to invoke the task.
+        #  Task attributed also have the resources required
 
         #Device graph along with links
         cfgHelper.update_topo_device_graph()
+        #
 
-
+        #
         # raw_input('Sandeep Task Graph: Press enter to continue: ')
         #
         # print('*'*100)
@@ -119,11 +125,11 @@ class Test(BaseTestCase):
         # print(list(cfgHelper.Gt.edges))
         #
         #
-        # raw_input('Sandeep Device Graph: Press enter to continue: ')
+        # raw_input('Sandeep Device Graphs: Press enter to continue: ')
         #
         # print('*'*100)
         # print('*'*100)
-        # print('Nodes in the graphs')
+        # #print('Nodes in the graphs')
         #
         # print(list(cfgHelper.Gn.nodes))
         # print('*'*100)
@@ -141,60 +147,76 @@ class Test(BaseTestCase):
         # print(list(cfgHelper.Gd.nodes))
         # print('*'*100)
         # print(list(cfgHelper.Gd.edges))
+        #
+        #
+        #
+        # exit(0)
 
-
-
-        #exit(0)
         # This is the ILP ilp_solver
         # Katie is solving for all but updating only for the unique_id=0
+        #ILP solver is using Gt and Gd.  Gd is devices connectivity and has nothing about network. network
+        # is included in the terms of devices connectivity
         cfgHelper.update_task_map()
 
         # This is again some ILP functionality
+        # Getting the maximum latency for the current mapping
+        # Max latency canbe obtained only once the solution is fully mapped
         cfgHelper.update_max_latency_log()
 
         log.info("=== start mininet ===")
 
 
+         # Gd is the devices graphs (All has the network devices (switches,AP) and links)
+         # G_map is the ILP solved mapping of the tasks to devices
+         # _topo: this is not used. Is the network graph, only network devices
+         # topo_device_graph: network devices + devices (We use this for the creation of mininet)
         _topo, topo_device_graph, Gd, G_map = cfgHelper.get_graphs()
 
         #Printing the graphs which we are using in the AirSim
 
-        raw_input('Sandeep Task Graph: Press enter to continue: ')
+        # raw_input('Sandeep Task Graph: Press enter to continue: ')
+        #
+        # print('*'*100)
+        # print('*'*100)
+        # print('Nodes in the topo_device_graph graph')
+        # print(list(topo_device_graph.nodes))
+        #
+        # print('*'*100)
+        # print('*'*100)
+        # print('Edges in the topo_device_graph graph')
+        # print(list(topo_device_graph.edges))
 
-        print('*'*100)
-        print('*'*100)
-        print('Nodes in the topo_device_graph graph')
-        print(list(topo_device_graph.nodes))
+        # print('*'*100)
+        # print('*'*100)
+        # print('Nodes in the Gd graph')
+        # print(list(Gd.nodes))
+        #
+        # print('*'*100)
+        # print('*'*100)
+        # print('Edges in the Gd graph')
+        # print(list(Gd.edges))
+        #
+        #
+        # print('*'*100)
+        # print('*'*100)
+        # print('Nodes in the G_map graph')
+        # print(list(G_map.nodes))
+        #
+        # print('*'*100)
+        # print('*'*100)
+        # print('Edges in the G_map graph')
+        # print(list(G_map.edges))
 
-        print('*'*100)
-        print('*'*100)
-        print('Edges in the topo_device_graph graph')
-        print(list(topo_device_graph.edges))
-
-        print('*'*100)
-        print('*'*100)
-        print('Nodes in the Gd graph')
-        print(list(Gd.nodes))
-
-        print('*'*100)
-        print('*'*100)
-        print('Edges in the Gd graph')
-        print(list(Gd.edges))
-
-
-        print('*'*100)
-        print('*'*100)
-        print('Nodes in the G_map graph')
-        print(list(G_map.nodes))
-
-        print('*'*100)
-        print('*'*100)
-        print('Edges in the G_map graph')
-        print(list(G_map.edges))
-
+        #exit(0)
 
 
         #We are getting some graphs and then calling the _init_netsim
+        # To every device container/host container in the Mininet, we
+        # have two IPS: Mininer_ip = ip, and docker_ip. ip is used
+        # to talk containers with each other (so that they follow the Mininet network characteristics)
+        # docker_ip is used by the external process in the same machine to forward data to the mininet hosts(docker container)
+        # Docker containers by default have access to outside network (external machines, internet)
+
         data_plane = _init_netsim(topo_device_graph, Gd, G_map)
         # raw_input('press any key to start the network')
         data_plane.start(is_validate=True)

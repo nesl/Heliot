@@ -1,5 +1,10 @@
 This folder contains examples and test cases.
 
+To run all test cases:
+```
+sudo python main.py demo -tc run_all.Test
+```
+
 - base_test.py: the abstract class for a test case. All test cases mus follow the data structure.
 - test_config_wrapper.py: definie configuration, export/import configuration to `config_simple`
 - test_ddflow.py: read configuration from `config_ddflow_*` folder, compute good placements, output estimated latency

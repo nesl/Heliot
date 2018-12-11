@@ -1,0 +1,55 @@
+{
+    "task_info": {
+        "task_camera": {
+            "GtInfoEnum.EXEC_CMD": {},
+            "GtInfoEnum.LATENCY_INFO": {},
+            "GtInfoEnum.RESRC_RQMT": {}
+        },
+        "task_alert": {
+            "GtInfoEnum.EXEC_CMD": {},
+            "GtInfoEnum.LATENCY_INFO": {},
+            "GtInfoEnum.RESRC_RQMT": {}
+        },
+        "task_findObject": {
+            "GtInfoEnum.EXEC_CMD": {},
+            "GtInfoEnum.LATENCY_INFO": {
+                "Device.P3_2XLARGE": {
+                    "Flavor.GPU": 100
+                },
+                "Device.T3_LARGE": {
+                    "Flavor.CPU": 884
+                },
+                "Device.T2_MICRO": {
+                    "Flavor.CPU": 3200
+                }
+            },
+            "GtInfoEnum.RESRC_RQMT": {
+                "Flavor.CPU": {
+                    "Hardware.CPU": 60,
+                    "Hardware.HD": 251658240,
+                    "Hardware.RAM": 8589934592,
+                    "Hardware.GPU": 0
+                },
+                "Flavor.GPU": {
+                    "Hardware.CPU": 5,
+                    "Hardware.HD": 251658240,
+                    "Hardware.RAM": 34359738368,
+                    "Hardware.GPU": 60
+                }
+            }
+        }
+    },
+    "task_mapping": {
+        "task_alert": "CONTROLLER.0",
+        "task_camera": "CAMERA.0",
+        "task_findObject": null
+    },
+    "task_links": {
+        "task_camera -> task_findObject": {
+            "GtInfoEnum.TRAFFIC": 83886080
+        },
+        "task_findObject -> task_alert": {
+            "GtInfoEnum.TRAFFIC": 20
+        }
+    }
+}

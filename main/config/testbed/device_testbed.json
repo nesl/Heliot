@@ -1,0 +1,204 @@
+{
+    "Devices": {
+        "googlevisionkit_0": {
+            "compute": {
+                "VPU": [
+                    "VisionBonnet"
+                ],
+                "CPU": "2"
+            },
+            "sensor": {
+                "sensor1": {
+                    "type": "RGBcamera",
+                    "attributes": {
+                        "res": "1080p",
+                        "frame_rate": "30"
+                    }
+                }
+            },
+            "deviceType": "googlevisionkit",
+            "connection": {
+                "username": "root",
+                "ip": "172.17.49.60",
+                "password": "pwd"
+            },
+            "description": "Google Vision Kit"
+        },
+        "tx2_0": {
+            "compute": {
+                "CPU": "4",
+                "GPU": "1"
+            },
+            "deviceType": "tx2",
+            "connection": {
+                "username": "root",
+                "ip": "172.17.49.60",
+                "password": "pwd"
+            },
+            "description": "Nvidia Jetson TX2"
+        },
+        "pi3_cam_vpu_1": {
+            "compute": {
+                "VPU": [
+                    "Movidius_1"
+                ],
+                "CPU": "2"
+            },
+            "sensor": {
+                "sensor1": {
+                    "type": "RGBcamera",
+                    "attributes": {
+                        "res": "1080p",
+                        "frame_rate": "30"
+                    }
+                }
+            },
+            "deviceType": "pi3",
+            "connection": {
+                "username": "root",
+                "ip": "172.17.49.60",
+                "password": "pwd"
+            },
+            "description": "Raspberry pi with camera and Movidius 1"
+        },
+        "gap8_cam": {
+            "compute": {
+                "CPU": "8"
+            },
+            "sensor": {
+                "sensor1": {
+                    "type": "RGBcamera",
+                    "attributes": {
+                        "res": "1080p",
+                        "frame_rate": "30"
+                    }
+                }
+            },
+            "deviceType": "gap8",
+            "connection": {
+                "username": "root",
+                "ip": "172.17.49.60",
+                "password": "pwd"
+            },
+            "description": "Gap 8 board"
+        },
+        "pi3_audio": {
+            "compute": {
+                "CPU": "2"
+            },
+            "sensor": {
+                "sensor1": {
+                    "type": "acoustic",
+                    "attributes": {
+                        "sample_rate": "44100"
+                    }
+                }
+            },
+            "deviceType": "pi3",
+            "connection": {
+                "username": "root",
+                "ip": "172.17.49.60",
+                "password": "pwd"
+            },
+            "description": "Raspberry pi with camera"
+        },
+        "airsimServer": {
+            "compute": {
+                "CPU": "8",
+                "GPU": "1"
+            },
+            "deviceType": "generalServer",
+            "connection": {
+                "username": "root",
+                "ip": "172.17.49.60",
+                "password": "pwd"
+            },
+            "description": "AirSim Server"
+        },
+        "pi3_vpu_2": {
+            "compute": {
+                "VPU": [
+                    "Movidius_2"
+                ],
+                "CPU": "2"
+            },
+            "sensor": {
+                "sensor1": {
+                    "type": "RGBcamera",
+                    "attributes": {
+                        "res": "1080p",
+                        "frame_rate": "30"
+                    }
+                }
+            },
+            "deviceType": "pi3",
+            "connection": {
+                "username": "root",
+                "ip": "172.17.49.60",
+                "password": "pwd"
+            },
+            "description": "Raspberry pi Movidius 2"
+        },
+        "genServer2": {
+            "compute": {
+                "CPU": "8",
+                "GPU": "1"
+            },
+            "deviceType": "generalServer",
+            "connection": {
+                "username": "root",
+                "ip": "172.17.49.60",
+                "password": "pwd"
+            },
+            "description": "General Server"
+        },
+        "samsung_phone": {
+            "compute": {
+                "CPU": "8",
+                "GPU": "1"
+            },
+            "sensor": {
+                "sensor1": {
+                    "type": "RGBcamera",
+                    "attributes": {
+                        "res": "1080p",
+                        "frame_rate": "30"
+                    }
+                }
+            },
+            "deviceType": "smartphone",
+            "connection": {
+                "username": "root",
+                "ip": "172.17.49.60",
+                "password": "pwd"
+            },
+            "description": "Samsung Galaxy S7"
+        },
+        "genServer1": {
+            "compute": {
+                "CPU": "8",
+                "GPU": "1"
+            },
+            "deviceType": "generalServer",
+            "connection": {
+                "username": "root",
+                "ip": "172.17.49.60",
+                "password": "pwd"
+            },
+            "description": "General Server"
+        },
+        "mininetServer": {
+            "compute": {
+                "CPU": "12",
+                "GPU": "1"
+            },
+            "deviceType": "generalServer",
+            "connection": {
+                "username": "root",
+                "ip": "172.17.49.60",
+                "password": "pwd"
+            },
+            "description": "Mininet Server"
+        }
+    }
+}

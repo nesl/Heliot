@@ -1,0 +1,131 @@
+{
+    "externalResource": [
+        "genServer1",
+        "genServer2"
+    ],
+    "nodes": {
+        "realNodes": [
+            "googlevisionkit_0",
+            "tx2_0",
+            "pi3_cam_vpu",
+            "gap8_cam",
+            "genServer2"
+        ],
+        "virtualInfranodes": {
+            "vswitch_0": {
+                "Interfaces": {
+                    "input": {
+                        "n_port": 8,
+                        "protocol": "ethernet"
+                    },
+                    "output": {
+                        "n_port": 1,
+                        "protocol": "ethernet"
+                    }
+                },
+                "deviceType": "switch",
+                "name": "ethernet swtich"
+            }
+        },
+        "virtualNodes": {
+            "virtual_server_1": {
+                "compute": {
+                    "CPU": "2"
+                },
+                "description": "virtual server running on mininetServer"
+            },
+            "virtual_server_CPU": {
+                "compute": {
+                    "CPU": "2"
+                },
+                "description": "virtual server with GPU running on genServer",
+                "realDeviceMapping": "genServer1"
+            },
+            "virtual_server_GPU": {
+                "compute": {
+                    "CPU": "2",
+                    "GPU": "1"
+                },
+                "description": "virtual server with GPU running on genServer",
+                "realDeviceMapping": "genServer1"
+            }
+        },
+        "virtualSensorNodes": {
+            "virtual_car_1": {
+                "attributes": {
+                    "environment": "AirSim",
+                    "sensor_type": "RGBCamera",
+                    "vehicle": "car"
+                },
+                "description": "virtual car running on airsimServer",
+                "realDeviceMapping": "airsimServer"
+            },
+            "virtual_drone_1": {
+                "attributes": {
+                    "environment": "AirSim",
+                    "sensor_type": "RGBCamera",
+                    "vehicle": "drone"
+                },
+                "description": "virtual drone running on airsimServer",
+                "realDeviceMapping": "airsimServer"
+            }
+        }
+    },
+"links": {
+        "gap8_cam": {
+            "vswitch_0": {
+                "latency": 2
+            }
+        },
+        "genServer2": {
+            "vswitch_0": {
+                "latency": 2
+            }
+        },
+        "googlevisionkit_0": {
+            "vswitch_0": {
+                "latency": 2
+            }
+        },
+        "pi3_cam_vpu": {
+            "vswitch_0": {
+                "latency": 2
+            }
+        },
+        "samsung_phone": {
+            "vswitch_0": {
+                "latency": 2
+            }
+        },
+        "tx2_0": {
+            "vswitch_0": {
+                "latency": 2
+            }
+        },
+        "virtual_car_1": {
+            "vswitch_0": {
+                "latency": 2
+            }
+        },
+        "virtual_drone_1": {
+            "vswitch_0": {
+                "latency": 2
+            }
+        },
+        "virtual_server_1:": {
+            "vswitch_0": {
+                "latency": 2
+            }
+        },
+        "virtual_server_CPU": {
+            "vswitch_0": {
+                "latency": 2
+            }
+        },
+        "virtual_server_GPU": {
+            "vswitch_0": {
+                "latency": 2
+            }
+        }
+    }
+}

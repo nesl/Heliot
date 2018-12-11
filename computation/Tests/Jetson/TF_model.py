@@ -9,14 +9,13 @@ import zipfile
 from distutils.version import StrictVersion
 from collections import defaultdict
 from io import StringIO
-from matplotlib import pyplot as plt
 from PIL import Image
 import json
 import time
 
 
 import cv2
-PATH_TO_FROZEN_GRAPH = '../data/mobilenet_v2_1.4_224/mobilenet_v2_1.4_224_frozen.pb'
+PATH_TO_FROZEN_GRAPH = '../data/mobilenet_v1_1.0_224/mobilenet_v1_1.0_224_frozen.pb'
 
 info='Time taken to load Model into memory:'
 start_time=time.time()
@@ -114,9 +113,15 @@ def run_inference_b1(key_name,image, graph,no_of_run):
 image_filename = '../data/' + 'Tiger.jpg'
 
 img = Load_and_process_img(image_filename)
+key_name='MobilenetV1/Predictions/Reshape_1'
 
-key_name='MobilenetV2/Predictions/Reshape_1'
-result,time_taken=run_inference_b1(key_name,img,detection_graph,1000)
+total_time_=0
+for i in range(10):
+    result,time_taken=run_inference_b1(key_name,img,detection_graph,1000)
+    print('Time Taken to run Inference is:',time_taken)
 
-print('Time Taken to run Inference is:',time_taken)
+    total_time_=total_time_+time_taken
+
+
+print('Total time to run: 10 times:',total_time_)
 print(result)

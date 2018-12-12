@@ -4,72 +4,37 @@ from __future__ import print_function
 from __future__ import unicode_literals
 
 from builtins import range
-from copy import deepcopy
 from collections import defaultdict
 from future.utils import listvalues
 import logging
 from itertools import izip as zip
 import pulp
-import networkx as nx
 
 # NOTE: to use glpk solver, sudo apt-get install glpk-utils
 
 from placethings.definition import Const, GdInfo, GtInfo, Hardware
-from placethings.graph_gen import task_graph
+from placethings.ilp import utils as ilp_utils
 
 
 log = logging.getLogger()
 
 
-def _find_src_nodes(Gt):
-    src_list = []
-    for node in Gt.nodes():
-        predecessors = list(Gt.predecessors(node))
-        if not predecessors:
-            src_list.append(node)
-    return src_list
-
-
-def _find_dst_nodes(Gt):
-    dst_list = []
-    for node in Gt.nodes():
-        successors = list(Gt.successors(node))
-        if not successors:
-            dst_list.append(node)
-    return dst_list
-
-
-def _find_all_simple_path(Gt):
-    """
-    Generate all simple paths in the graph G from source to target.
-    Args:
-        Gt (nx.DiGraph)
-    Returns:
-        src_list (list of str): source nodes
-        dst_list (list of str): dstination nodes
-        all_paths (list of list(str)): all simple paths of nodes' names
-    """
-    src_list = _find_src_nodes(Gt)
-    dst_list = _find_dst_nodes(Gt)
-    log.info('find all path from {} to {}'.format(src_list, dst_list))
-    all_paths = []
-    for src in src_list:
-        for dst in dst_list:
-            paths = list(nx.all_simple_paths(Gt, src, dst))
-            log.info('found path: {}'.format(paths))
-            all_paths += paths
-    return src_list, dst_list, all_paths
-
-
-def _solver(Gt, Gd, target_latency=None):
+def solve(Gt, Gd, target_latency=None):
     """
     Args:
         target_latency (int): latency constrain for this task graph
-        source_list (list): source nodes in the task graph
-        dst_list (list): destination nodes in the task graph
+        Gt (networkx.DiGraph): task graph
+        Gd (networkx.DiGraph): device graph
+    Returns:
+        status (pulp.constants.LpStatus): status from solver
+            if an optimal solution is found, return LpStatusOptimal
+            see https://www.coin-or.org/PuLP/constants.html for more details
+        result_mapping (dict): task-to-device mapping
+
+    Args and ILP algorithm description in details:
         Gt (networkx.DiGraph): task graph in a multi-source, single
-        destination, no-loop directed graph, where src_k are data sources,
-        dst is the actuator, and other nodes in between are tasks
+            destination, no-loop directed graph, where src_k are data sources,
+            dst is the actuator, and other nodes in between are tasks
 
            src1 -----> t11 -----> t12 ... ----->  dst
            src2 -----> t21 -----> t22 ... ----->
@@ -258,7 +223,7 @@ def _solver(Gt, Gd, target_latency=None):
         for d in Gd.nodes():
             X[t][d] = 0
         d_known = Gt.node[t][GtInfo.DEVICE]
-        X[t][d_known] = 1 #Mapping which are added by user
+        X[t][d_known] = 1  # Mapping which are added by user
     for t in tasks:
         for d in devices:
             if X[t][d] is None:
@@ -310,7 +275,7 @@ def _solver(Gt, Gd, target_latency=None):
     prob += pulp.lpSum(all_XX) == len(Gt.edges())
 
     # Generate all simple paths in the graph G from source to target.
-    src_list, dst_list, all_paths = _find_all_simple_path(Gt)
+    src_list, dst_list, all_paths = ilp_utils.find_all_simple_path(Gt)
     log.info('find all path from {} to {}'.format(src_list, dst_list))
     # Generate all possible mappings
     all_mappings = list(pulp.permutation(devices, len(tasks)))
@@ -395,65 +360,3 @@ def _solver(Gt, Gd, target_latency=None):
                     t, d, pulp.value(X[t][d])))
                 result_mapping[t] = d
     return status, result_mapping
-
-
-def _get_path_length(path, Gt, Gd, result_mapping):
-    log.info('path: {}'.format(path))
-    path_vars = []
-    # first node: src
-    ti = path[0]
-    di = Gt.node[ti][GtInfo.DEVICE]
-    # device_mapping start from path[1] to path[N-1]
-    for j in range(1, len(path)-1):
-        tj = path[j]
-        dj = result_mapping[tj]
-        # get transmission latency from di -> dj
-        Ld_di_dj = Gd[di][dj][GdInfo.LATENCY]
-        path_vars.append(Ld_di_dj)
-        log.debug('Ld_di_dj (move {} -> {}) = {}'.format(di, dj, Ld_di_dj))
-        # get computation latency for task tj at dj
-        dj_type = Gd.node[dj][GdInfo.DEVICE_TYPE]
-        # get latency of the default build flavor
-        Lt_tj_dj = listvalues(Gt.node[tj][GtInfo.LATENCY_INFO][dj_type])[0]
-        path_vars.append(Lt_tj_dj)
-        log.debug('Lt_tj_dj (do {} at {}) = {}'.format(tj, dj, Lt_tj_dj))
-        ti = tj
-        di = dj
-    # last node: dst
-    tj = path[len(path)-1]
-    dj = Gt.node[tj][GtInfo.DEVICE]
-    Ld_di_dj = Gd[di][dj][GdInfo.LATENCY]
-    path_vars.append(Ld_di_dj)
-    log.debug('Ld_di_dj (move {} -> {}) = {}'.format(di, dj, Ld_di_dj))
-    path_length = sum(path_vars)
-    log.info('\tlength: {}, {}'.format(path_length, path_vars))
-    return path_length
-
-
-def find_mapping(Gt, Gd):
-    status, result_mapping = _solver(Gt, Gd)
-    assert status == pulp.constants.LpStatusOptimal
-    return status, result_mapping
-
-
-def get_max_latency(Gt, Gd, result_mapping):
-    src_list, dst_list, all_paths = _find_all_simple_path(Gt)
-    max_latency = 0
-    for path in all_paths:
-        path_length = _get_path_length(path, Gt, Gd, result_mapping)
-        max_latency = max(path_length, max_latency)
-    return max_latency
-
-
-def place_things(Gt_ro, Gd_ro, is_export, export_suffix=''):
-    Gt = deepcopy(Gt_ro)
-    Gd = deepcopy(Gd_ro)
-    status, result_mapping = find_mapping(Gt, Gd)
-    log.info('solver status: {}'.format(pulp.LpStatus[status]))
-    log.info('check solution for all simple path from src to dst')
-    max_latency = get_max_latency(Gt, Gd, result_mapping)
-    log.info('max_latency={}'.format(max_latency))
-    # update mapping and gen node labels
-    Gt = task_graph.update_graph(
-        result_mapping, Gt, Gd, is_export, export_suffix)
-    return Gt, result_mapping

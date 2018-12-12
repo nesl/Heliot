@@ -8,7 +8,7 @@ import logging
 from placethings.config.wrapper.config_gen import Config
 from placethings.demo.base_test import BaseTestCase
 from placethings.graph_gen.wrapper import graph_gen
-from placethings import ilp_solver
+from placethings.ilp import method
 
 log = logging.getLogger()
 
@@ -22,4 +22,4 @@ class TestBasic(BaseTestCase):
         # graph_gen.create_topo_graph(cfg, is_export)
         Gd = graph_gen.create_device_graph(cfg, is_export)
         Gt = graph_gen.create_task_graph(cfg, is_export)
-        ilp_solver.place_things(Gt, Gd, is_export)
+        method.place_things(Gt, Gd, is_export)

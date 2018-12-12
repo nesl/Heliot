@@ -7,9 +7,8 @@ import logging
 
 from placethings.config.wrapper.config_gen import Config
 from placethings.definition import Unit
-from placethings.demo.utils import ConfigDataHelper
+from placethings.demo.utils import ConfigDataHelper, init_netsim
 from placethings.demo.base_test import BaseTestCase
-from placethings.netgen.network import DataPlane
 
 log = logging.getLogger()
 
@@ -43,42 +42,24 @@ Scenrios:
 """
 
 
-def _check_support_config(config_name):
+class TestBasic(BaseTestCase):
     _SUPPORTED_CONFIG = {
         "sample_configs/config_ddflow_demo",
     }
-    assert config_name in _SUPPORTED_CONFIG
 
-
-def _init_netsim(topo_device_graph, Gd, G_map):
-    # simulate network
-    control_plane = None
-    # control_plane = ControlPlane(topo_device_graph)
-    # control_plane.add_manager('BB_SWITCH.2')
-    # control_plane.deploy_agent()
-    # control_plane.runAgent()
-    data_plane = DataPlane(topo_device_graph)
-    data_plane.add_manager('BB_SWITCH.2')
-    data_plane.deploy_task(G_map, Gd)
-    return control_plane, data_plane
-
-
-class TestBasic(BaseTestCase):
-    @staticmethod
-    def test(config_name=None, is_export=True, is_simulate=False):
+    @classmethod
+    def test(cls, config_name=None, is_export=True, is_simulate=True):
         if not config_name:
             config_name = 'sample_configs/config_ddflow_demo'
-        _check_support_config(config_name)
+        assert config_name in cls._SUPPORTED_CONFIG
         cfgHelper = ConfigDataHelper(Config(config_name), is_export)
         cfgHelper.init_task_graph()
         cfgHelper.update_topo_device_graph()
         cfgHelper.update_task_map()
         _topo, topo_device_graph, Gd, G_map = cfgHelper.get_graphs()
-        # simulate
         if is_simulate:
-            control_plane, data_plane = _init_netsim(
-                topo_device_graph, Gd, G_map)
-            # cleanup
+            data_plane = init_netsim(
+                topo_device_graph, Gd, G_map, 'BB_SWITCH.2')
             data_plane.start(is_validate=True)
             data_plane.start_workers()
             data_plane.stop_workers()
@@ -86,6 +67,9 @@ class TestBasic(BaseTestCase):
 
 
 class TestDynamic(BaseTestCase):
+    _SUPPORTED_CONFIG = {
+        "sample_configs/config_ddflow_demo",
+    }
 
     @classmethod
     def update_nw_latency(
@@ -119,7 +103,7 @@ class TestDynamic(BaseTestCase):
             is_update_map=True, is_simulate=True):
         if not config_name:
             config_name = 'sample_configs/config_ddflow_demo'
-        _check_support_config(config_name)
+        assert config_name in cls._SUPPORTED_CONFIG
         cfgHelper = ConfigDataHelper(Config(config_name), is_export)
         cfgHelper.init_task_graph()
         cfgHelper.update_topo_device_graph()
@@ -133,8 +117,8 @@ class TestDynamic(BaseTestCase):
         if is_simulate:
             log.info("=== start mininet ===")
             _topo, topo_device_graph, Gd, G_map = cfgHelper.get_graphs()
-            _control_plane, data_plane = _init_netsim(
-                topo_device_graph, Gd, G_map)
+            data_plane = init_netsim(
+                topo_device_graph, Gd, G_map, 'BB_SWITCH.2')
             raw_input('press any key to start the network')
             data_plane.start(is_validate=True)
 

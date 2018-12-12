@@ -22,6 +22,8 @@ out_blob = next(iter(net.outputs))
 
 # Only one image as input
 net.batch_size =1
+n, c, h, w = net.inputs[input_blob].shape
+
 
 def preprocess_input(x):
     x /= 255.0
@@ -29,37 +31,31 @@ def preprocess_input(x):
     x *= 2.0
     return x
 
-# Read and pre-process input images
-n, c, h, w = net.inputs[input_blob].shape
-images = np.ndarray(shape=(n, c, h, w))
+def get_input_image(file_name):
+    # Read and pre-process input images
+    images = np.ndarray(shape=(n, c, h, w))
+    #image = cv2.imread('data/Tiger.jpg')
+    image = cv2.imread(file_name)
 
-image = cv2.imread('data/Tiger.jpg')
-#image = cv2.imread('data/image1.jpg')
+    #image = cv2.imread('data/image1.jpg')
+    if image.shape[:-1] != (h, w):
+        #print("Image is resized from {} to {}".format(image.shape[:-1], (h, w)))
+        image = cv2.resize(image, (w, h))
+    image=cv2.cvtColor(image,cv2.COLOR_BGR2RGB)
+    image = image.astype(float)
+    image = preprocess_input(image)
+    image = image.transpose((2, 0, 1))  # Change data layout from HWC to CHW
+    images[0] = image
 
-
-
-if image.shape[:-1] != (h, w):
-    print("Image is resized from {} to {}".format(image.shape[:-1], (h, w)))
-    image = cv2.resize(image, (w, h))
-
-image=cv2.cvtColor(image,cv2.COLOR_BGR2RGB)
-
-image = image.astype(float)
-
-image = preprocess_input(image)
-
-image = image.transpose((2, 0, 1))  # Change data layout from HWC to CHW
-images[0] = image
-print("Batch size is {}".format(n))
+    return images
 
 
+images= get_input_image('data/Tiger.jpg')
 
 t0 = time()
-
 # Loading model to the plugin
 print("Loading model to the plugin")
 exec_net = plugin.load(network=net)
-
 res = exec_net.infer(inputs={input_blob: images})
 t1 = time()
 
@@ -92,7 +88,7 @@ def run_inference_b1(num_of_time=1):
     res=[]
 
     total_time_=0
-    for j in range(10):
+    for j in range(1):
         start_time=time()
         for i in range(num_of_time):
             res = exec_net.infer()#We don't give input image now, running inference on previous input image
@@ -117,9 +113,51 @@ def run_inference_b1(num_of_time=1):
             print("{:.7f} label {}".format(probs[id], det_label))
         print("\n")
 
-    print('Total time on inference is:',total_time_)
+    print('run_inference_b1: Total time on inference is:',total_time_)
+
+# A different image is loaded and moved to the compute stick
+def run_inference_b2(num_of_time=1):
+    res=[]
+
+    total_time_=0
+    for j in range(1):
+        per_i_time=0
+        for i in range(num_of_time):
+            if i % 2==0:
+                images= get_input_image('data/Tiger.jpg')
+            else:
+                images= get_input_image('data/image1.jpg')
+            start_time=time()
+            res= exec_net.infer(inputs={input_blob: images})
+            end_time=time()
+            per_i_time=per_i_time+end_time-start_time
+        print('Time to do inference: Times:',num_of_time,' : ',per_i_time)
+        total_time_=total_time_+per_i_time
+
+
+    #Verifying the inference results using last output
+    # Processing output blob
+    print("Processing output blob")
+    res2 = res[out_blob]
+    top_number = 5
+
+    for i, probs in enumerate(res2):
+        probs = np.squeeze(probs)
+
+        top_ind = np.argsort(probs)[-top_number:][::-1]
+
+        for id in top_ind:
+            det_label = categories[id]  if categories else "#{}".format(id)
+            print("{:.7f} label {}".format(probs[id], det_label))
+        print("\n")
+
+    print('run_inference_b2: Total time on inference is:',total_time_)
+
 
 run_inference_b1(1000)
+
+run_inference_b2(1000)
+
 
 del exec_net
 del plugin

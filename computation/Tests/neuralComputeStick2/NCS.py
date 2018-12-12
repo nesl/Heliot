@@ -50,6 +50,23 @@ def get_input_image(file_name):
     return images
 
 
+def get_input_image(input_type):
+    # Read and pre-process input images
+    images = np.ndarray(shape=(n, c, h, w))
+
+    image = np.ones((224, 224,3))
+    if input_type=='ZERO':
+        image=image*(0.0)
+
+    if input_type=='ONE':
+        image=image*(1.0)
+
+    image = image.transpose((2, 0, 1))  # Change data layout from HWC to CHW
+    images[0] = image
+
+    return images
+
+
 images= get_input_image('data/Tiger.jpg')
 
 t0 = time()
@@ -154,9 +171,61 @@ def run_inference_b2(num_of_time=1):
     print('run_inference_b2: Total time on inference is:',total_time_)
 
 
-run_inference_b1(1000)
+## Running inference on ZERO or ONE image
+def run_inference_b3(type, images,  num_of_time=1):
+    res=[]
+    res = exec_net.infer(inputs={input_blob: images})
 
-run_inference_b2(1000)
+    total_time_=0
+    for j in range(1):
+        start_time=time()
+        for i in range(num_of_time):
+            res = exec_net.infer()#We don't give input image now, running inference on previous input image
+        end_time=time()
+        print(type, ': Time to do inference: Times:',num_of_time,' : ',end_time-start_time)
+        total_time_=total_time_+(end_time-start_time)
+
+
+    #Verifying the inference results using last output
+    # Processing output blob
+    print("Processing output blob")
+    res2 = res[out_blob]
+    top_number = 5
+
+    for i, probs in enumerate(res2):
+        probs = np.squeeze(probs)
+
+        top_ind = np.argsort(probs)[-top_number:][::-1]
+
+        for id in top_ind:
+            det_label = categories[id]  if categories else "#{}".format(id)
+            print("{:.7f} label {}".format(probs[id], det_label))
+        print("\n")
+
+    print('run_inference_b1: Total time on inference is:',total_time_)
+
+
+## Running on tiger
+#run_inference_b1(1000)
+
+#run_inference_b2(1000)
+
+
+
+## Running on all ZERO
+Type='ZERO'
+images2= get_input_image(Type)
+run_inference_b3(Type, images2,  num_of_time=1000)
+
+
+
+## Running on all ZERO
+Type='ONE'
+images3= get_input_image(Type)
+run_inference_b3(Type, images3,  num_of_time=1000)
+
+
+
 
 
 del exec_net

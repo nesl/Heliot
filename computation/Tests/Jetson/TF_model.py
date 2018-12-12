@@ -118,10 +118,47 @@ key_name='MobilenetV1/Predictions/Reshape_1'
 total_time_=0
 for i in range(10):
     result,time_taken=run_inference_b1(key_name,img,detection_graph,1000)
-    print('Time Taken to run Inference is:',time_taken)
+    print('Time Taken to run Inference on Tiger Image is:',time_taken)
 
     total_time_=total_time_+time_taken
 
 
-print('Total time to run: 10 times:',total_time_)
+print('Total time to run: 10 times on Tiger Image:',total_time_)
+print(result)
+
+
+####################### Running on different images types ###########
+
+img2 = np.ones((224, 224,3))
+
+img2 = img2*(0)
+
+key_name='MobilenetV1/Predictions/Reshape_1'
+
+total_time_=0
+for i in range(10):
+    result,time_taken=run_inference_b1(key_name,img2,detection_graph,1000)
+    print('Time Taken to run Inference on Zero Image is:',time_taken)
+
+    total_time_=total_time_+time_taken
+
+
+print('Total time to run: 10 times on Zero Image:',total_time_)
+print(result)
+
+
+
+img3 = np.ones((224, 224,3))
+
+key_name='MobilenetV1/Predictions/Reshape_1'
+
+total_time_=0
+for i in range(10):
+    result,time_taken=run_inference_b1(key_name,img3,detection_graph,1000)
+    print('Time Taken to run Inference on Ones Image is:',time_taken)
+
+    total_time_=total_time_+time_taken
+
+
+print('Total time to run: 10 times on Ones Image:',total_time_)
 print(result)

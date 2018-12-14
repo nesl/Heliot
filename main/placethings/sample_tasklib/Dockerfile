@@ -46,7 +46,9 @@ RUN wget https://pjreddie.com/media/files/yolov3-tiny.weights
 
 # get tasklib
 WORKDIR /opt/github
-RUN wget 
+RUN wget https://github.com/nesl/Heliot/raw/dev/main/placethings/sample_tasklib/sample_tasklib.tar.gz
+RUN mkdir unzip_tasklib && tar -xzvf sample_tasklib.tar.gz -C unzip_tasklib
+RUN rm sample_tasklib.tar.gz
 
 # assign entrypoint workdir
-WORKDIR /opt/github/placethings
+WORKDIR /opt/github/unzip_tasklib

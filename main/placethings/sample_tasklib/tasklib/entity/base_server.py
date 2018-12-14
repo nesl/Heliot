@@ -9,8 +9,6 @@ import msgpackrpc
 import time
 
 from tasklib.entity.base_client import BaseClient
-from tasklib.entity.fileserver import RPCServer as FileRPCServer
-from tasklib.entity.agent import RPCServer as AgentRPCServer
 from tasklib.entity.task import RPCServer as TaskRPCServer
 
 
@@ -56,8 +54,6 @@ class BaseServer(msgpackrpc.Server):
 class ServerGen(object):
 
     _RPC_CLS = {
-        "fileserver": FileRPCServer,
-        "agent": AgentRPCServer,
         "task": TaskRPCServer,
     }
 

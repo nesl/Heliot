@@ -9,7 +9,7 @@
         },
         "task_alert": {
             "GtInfoEnum.EXEC_CMD": {
-                "default": "cd {progdir} && python main_entity.py run_task -n task_alert -en task_forward -a {self_addr} -ra 172.17.20.12:19000 &> /dev/null &"
+                "default": "cd {progdir} && python webserver.py {docker_addr} {self_addr} &> /dev/null &"
             },
             "GtInfoEnum.LATENCY_INFO": {},
             "GtInfoEnum.RESRC_RQMT": {}

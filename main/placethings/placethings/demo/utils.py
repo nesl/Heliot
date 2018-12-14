@@ -16,7 +16,9 @@ from placethings.netgen.network import DataPlane
 log = logging.getLogger()
 
 
-def init_netsim(topo_device_graph, Gd, G_map, manager_attached_nw_device):
+def init_netsim(
+        topo_device_graph, Gd, G_map, manager_attached_nw_device,
+        docker_img=None, prog_dir=None):
     # get containernet (docker) subnet ip
     # This will be there is containernet is installed, which install the docker
     cmd = (
@@ -24,9 +26,11 @@ def init_netsim(topo_device_graph, Gd, G_map, manager_attached_nw_device):
         " | tail -1 | cut -d ':' -f 2 | cut -d ' ' -f 1")
     proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
     docker0_ip = proc.communicate()[0].replace('\n', '')
-    log.info("docker0 ip={}".format(docker0_ip))
+    log.info("docker0 ip={}, docker_img={}".format(docker0_ip, docker_img))
     # simulate network
-    data_plane = DataPlane(topo_device_graph, docker0_ip=docker0_ip)
+    data_plane = DataPlane(
+        topo_device_graph, docker0_ip=docker0_ip, docker_img=docker_img,
+        prog_dir=prog_dir)
     # attach manager to a nw device, e.g. 'BB_SWITCH.2'
     data_plane.add_manager(manager_attached_nw_device)
     data_plane.deploy_task(G_map, Gd)

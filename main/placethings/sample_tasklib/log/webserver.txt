@@ -24,3 +24,4 @@
 2018-12-13 18:23:13,649 webserver|[INFO] _log: 172.17.20.12 - - [13/Dec/2018 18:23:13] "GET / HTTP/1.1" 200 -
 2018-12-13 18:23:13,668 webserver|[INFO] _log: 172.17.20.12 - - [13/Dec/2018 18:23:13] "GET /favicon.ico HTTP/1.1" 404 -
 2018-12-13 18:29:33,083 webserver|[INFO] _log:  * Running on http://172.17.20.12:7788/ (Press CTRL+C to quit)
+2018-12-13 19:26:03,639 webserver|[INFO] _log:  * Running on http://172.17.20.12:7788/ (Press CTRL+C to quit)

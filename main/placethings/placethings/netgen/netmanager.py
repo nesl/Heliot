@@ -24,15 +24,17 @@ class NetManager(object):
     _NEXT_HOST_ID = 0
     _NEXT_SWITCH_ID = 0
     _HOST_PREFIX = 'h'
-    _HOST_PUBLIC_PORT = 18800
+    _HOST_PUBLIC_PORT = 19000
     _SWITCH_PREFIX = 's'
-    _DEFAULT_IMG = "kumokay/heliot_host:v1"
 
-    def __init__(self, net, docker_subnet_ip='172.18.0.1'):
+    def __init__(self, net, docker_subnet_ip, docker_img):
+        if not docker_img:
+            docker_img = self._DEFAULT_IMG
         self._net = net
         self._host_dict = {}
         self._host_ip_dict = {}  # assigned host ip
         self._docker_subnet_prefix = '.'.join(docker_subnet_ip.split('.')[:3])
+        self._docker_img = docker_img
         self._mininet_subnet_prefix = '10.0.0'
         self._host_docker_ip_dict = {}
         self._host_next_free_port = {}
@@ -57,11 +59,11 @@ class NetManager(object):
         return list(self._host_dict)
 
     @classmethod
-    def create(cls, docker0_ip='172.18.0.1'):
+    def create(cls, docker0_ip, docker_img):
         raw_net = Containernet(controller=Controller, link=TCLink)
         log.info('create mininet wtih default controller')
         raw_net.addController('c0')
-        return cls(raw_net, docker0_ip)
+        return cls(raw_net, docker0_ip, docker_img)
 
     def _new_address(self):
         ip = '{}.{}'.format(
@@ -94,7 +96,7 @@ class NetManager(object):
         # TODO: use cmd to get correct docker ip
         ip, docker_ip, docker_port = self._new_address()
         host = self._net.addDocker(
-            name, ip=ip, dimage=self._DEFAULT_IMG,
+            name, ip=ip, dimage=self._docker_img,
             ports=[self._HOST_PUBLIC_PORT],
             port_bindings={self._HOST_PUBLIC_PORT: docker_port})
         self._host_dict[device_name] = host

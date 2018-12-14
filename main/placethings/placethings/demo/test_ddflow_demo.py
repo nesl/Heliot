@@ -41,6 +41,7 @@ Scenrios:
 class Test(BaseTestCase):
     _SUPPORTED_CONFIG = {
         "sample_configs/config_ddflow_demo",
+        "sample_configs/config_ddflow_demo_local"
     }
 
     @classmethod

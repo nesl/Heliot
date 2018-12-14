@@ -20,11 +20,12 @@ log = logging.getLogger()
 class NetManager(object):
     _NEXT_IP_NUM = 100
     _NEXT_DOCKER_IP_NUM = 2
+    _NEXT_DOCKER_PORT = 20000
     _NEXT_HOST_ID = 0
     _NEXT_SWITCH_ID = 0
     _HOST_PREFIX = 'h'
+    _HOST_PUBLIC_PORT = 18800
     _SWITCH_PREFIX = 's'
-    _PORT_START = 18800
     _DEFAULT_IMG = "kumokay/heliot_host:v1"
 
     def __init__(self, net, docker_subnet_ip='172.18.0.1'):
@@ -62,16 +63,18 @@ class NetManager(object):
         raw_net.addController('c0')
         return cls(raw_net, docker0_ip)
 
-    def _new_ip(self):
+    def _new_address(self):
         ip = '{}.{}'.format(
             self._mininet_subnet_prefix, self._NEXT_IP_NUM)
         docker_ip = '{}.{}'.format(
             self._docker_subnet_prefix, self._NEXT_DOCKER_IP_NUM)
+        docker_port = self._NEXT_DOCKER_PORT
         self._NEXT_IP_NUM += 1
         self._NEXT_DOCKER_IP_NUM += 1
+        self._NEXT_DOCKER_PORT += 1
         assert self._NEXT_IP_NUM < 256
         assert self._NEXT_DOCKER_IP_NUM < 256
-        return ip, docker_ip
+        return ip, docker_ip, docker_port
 
     @classmethod
     def _new_host_name(cls):
@@ -89,12 +92,15 @@ class NetManager(object):
         # auto generate name bc name cannot be too long =.=
         name = self._new_host_name()
         # TODO: use cmd to get correct docker ip
-        ip, docker_ip = self._new_ip()
-        host = self._net.addDocker(name, ip=ip, dimage=self._DEFAULT_IMG)
+        ip, docker_ip, docker_port = self._new_address()
+        host = self._net.addDocker(
+            name, ip=ip, dimage=self._DEFAULT_IMG,
+            ports=[self._HOST_PUBLIC_PORT],
+            port_bindings={self._HOST_PUBLIC_PORT: docker_port})
         self._host_dict[device_name] = host
         self._host_ip_dict[device_name] = ip
         self._host_docker_ip_dict[device_name] = docker_ip
-        self._host_next_free_port[device_name] = self._PORT_START
+        self._host_next_free_port[device_name] = self._HOST_PUBLIC_PORT
         self._devNameToNodeName[device_name] = name
         log.debug('add host {}'.format(device_name))
 

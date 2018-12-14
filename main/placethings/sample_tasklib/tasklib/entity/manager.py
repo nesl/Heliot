@@ -6,7 +6,7 @@ from __future__ import unicode_literals
 from future.utils import iteritems
 import logging
 
-from placethings.demo.entity.base_client import ClientGen
+from tasklib.entity.base_client import ClientGen
 
 
 log = logging.getLogger()

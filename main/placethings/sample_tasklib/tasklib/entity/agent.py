@@ -6,7 +6,7 @@ from __future__ import unicode_literals
 import logging
 import subprocess
 
-from placethings.demo.entity.base_client import ClientGen
+from tasklib.entity.base_client import ClientGen
 
 
 log = logging.getLogger()

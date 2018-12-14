@@ -31,7 +31,7 @@ RUN apt-get -y install git wget vim iputils-ping net-tools
 # install python packages for main_entity.py only
 RUN apt-get -y install python-pip
 RUN pip install --upgrade pip==9.0.1
-RUN pip install msgpack-rpc-python numpy Pillow future six aenum
+RUN pip install msgpack-rpc-python Pillow future Flask
 
 # create a working directory
 RUN mkdir -p /opt/github
@@ -44,9 +44,9 @@ RUN make
 RUN wget https://pjreddie.com/media/files/yolov3.weights
 RUN wget https://pjreddie.com/media/files/yolov3-tiny.weights
 
-# get placethings (for main_entity.py only)
+# get tasklib
 WORKDIR /opt/github
-RUN git clone https://github.com/kumokay/placethings.git
+RUN wget 
 
 # assign entrypoint workdir
 WORKDIR /opt/github/placethings

@@ -7,12 +7,10 @@ import argparse
 import base64
 import logging
 
-from placethings.demo.entity import test_entity
-from placethings.demo.entity.base_server import ServerGen
-from placethings.demo.entity.sensor import SensorGen
-from placethings.demo.entity.base_client import ClientGen
-from placethings.utils.common_utils import update_rootlogger
-from placethings.definition import EnumHelper
+from tasklib.entity import test_entity
+from tasklib.entity.base_server import ServerGen
+from tasklib.entity.base_client import ClientGen
+from tasklib.utils.common_utils import update_rootlogger
 
 update_rootlogger()
 log = logging.getLogger()
@@ -54,17 +52,6 @@ class SubArgsManager(object):
             default=[],
             required=required,
             help=('receiver address (ip:port). e.g. 10.11.12.13:1234')
-        )
-
-    def sensor_type(self, required=False):
-        self.subparser.add_argument(
-            '-st',
-            '--sensor_type',
-            type=str,
-            dest='sensor_type',
-            default=None,
-            required=required,
-            help=('sensor_type (int)')
         )
 
     def exectime(self, required=False):
@@ -192,17 +179,6 @@ class FuncManager(object):
             name, 'task', ip, port, 0, None)
 
     @classmethod
-    def run_sensor(cls, args):
-        name = args.name
-        sensor_type = EnumHelper.str_to_enum(args.sensor_type)
-        next_ip, next_port = cls._split_addr(args.recv_address)
-        next_port = int(next_port)
-        update_rootlogger(name, is_log_to_file=True)
-        # def create(cls, name, sensor_type, receiver_dict):
-        SensorGen.start_sensor(
-            name, sensor_type, [(next_ip, next_port)])
-
-    @classmethod
     def run_client(cls, args):
         name = args.name
         ip, port = cls._split_addr(args.address)
@@ -288,16 +264,6 @@ def main():
         help='run_actuator')
     subargs_manager.name(required=True)
     subargs_manager.address(required=True)
-
-    name = 'run_sensor'
-    subargs_manager = args_manager.add_subparser(
-        name,
-        func=getattr(FuncManager, name),
-        help='run_sensor')
-    subargs_manager.name(required=True)
-    subargs_manager.address(required=True)
-    subargs_manager.sensor_type(required=True)
-    subargs_manager.next_address(required=True)
 
     name = 'run_client'
     subargs_manager = args_manager.add_subparser(

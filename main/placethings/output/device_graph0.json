@@ -1,0 +1,186 @@
+{
+    "node_info": {
+        "P3_2XLARGE.0": {
+            "GdInfoEnum.HARDWARE": {
+                "Hardware.CPU": 8,
+                "Hardware.HD": 140737488355328,
+                "Hardware.RAM": 137438953472,
+                "Hardware.GPU": 1
+            },
+            "GdInfoEnum.NIC": {
+                "LinkInfo.ULINK_BW": 10737418240,
+                "LinkInfo.PROTOCOL": "NwLink.ETHERNET",
+                "LinkInfo.N_LINKS": 1,
+                "LinkInfo.DLINK_BW": 10737418240
+            },
+            "GdInfoEnum.DEVICE_TYPE": "Device.P3_2XLARGE",
+            "GdInfoEnum.DEVICE_CAT": "DeviceCategory.PROCESSOR",
+            "GInfoEnum.NODE_TYPE": "NodeType.DEVICE",
+            "GdInfoEnum.RESRC": {
+                "Hardware.CPU": 100,
+                "Hardware.HD": 140737488355328,
+                "Hardware.RAM": 137438953472,
+                "Hardware.GPU": 100
+            },
+            "GdInfoEnum.COST": 3.06
+        },
+        "CAMERA.0": {
+            "GdInfoEnum.HARDWARE": {},
+            "GdInfoEnum.NIC": {
+                "LinkInfo.ULINK_BW": 104857600,
+                "LinkInfo.PROTOCOL": "NwLink.WIFI",
+                "LinkInfo.N_LINKS": 1,
+                "LinkInfo.DLINK_BW": 104857600
+            },
+            "GdInfoEnum.DEVICE_TYPE": "Device.CAMERA",
+            "GdInfoEnum.DEVICE_CAT": "DeviceCategory.SENSOR",
+            "GInfoEnum.NODE_TYPE": "NodeType.DEVICE",
+            "GdInfoEnum.RESRC": {},
+            "GdInfoEnum.COST": 0
+        },
+        "T2_MICRO.0": {
+            "GdInfoEnum.HARDWARE": {
+                "Hardware.CPU": 1,
+                "Hardware.HD": 257698037760,
+                "Hardware.RAM": 8589934592,
+                "Hardware.GPU": 0
+            },
+            "GdInfoEnum.NIC": {
+                "LinkInfo.ULINK_BW": 104857600,
+                "LinkInfo.PROTOCOL": "NwLink.ETHERNET",
+                "LinkInfo.N_LINKS": 1,
+                "LinkInfo.DLINK_BW": 104857600
+            },
+            "GdInfoEnum.DEVICE_TYPE": "Device.T2_MICRO",
+            "GdInfoEnum.DEVICE_CAT": "DeviceCategory.PROCESSOR",
+            "GInfoEnum.NODE_TYPE": "NodeType.DEVICE",
+            "GdInfoEnum.RESRC": {
+                "Hardware.CPU": 100,
+                "Hardware.HD": 257698037760,
+                "Hardware.RAM": 8589934592,
+                "Hardware.GPU": 100
+            },
+            "GdInfoEnum.COST": 0.0116
+        },
+        "CONTROLLER.0": {
+            "GdInfoEnum.HARDWARE": {},
+            "GdInfoEnum.NIC": {
+                "LinkInfo.ULINK_BW": 104857600,
+                "LinkInfo.PROTOCOL": "NwLink.ETHERNET",
+                "LinkInfo.N_LINKS": 1,
+                "LinkInfo.DLINK_BW": 104857600
+            },
+            "GdInfoEnum.DEVICE_TYPE": "Device.CONTROLLER",
+            "GdInfoEnum.DEVICE_CAT": "DeviceCategory.ACTUATOR",
+            "GInfoEnum.NODE_TYPE": "NodeType.DEVICE",
+            "GdInfoEnum.RESRC": {},
+            "GdInfoEnum.COST": 0
+        },
+        "T3_LARGE.0": {
+            "GdInfoEnum.HARDWARE": {
+                "Hardware.CPU": 2,
+                "Hardware.HD": 140737488355328,
+                "Hardware.RAM": 68719476736,
+                "Hardware.GPU": 0
+            },
+            "GdInfoEnum.NIC": {
+                "LinkInfo.ULINK_BW": 107374182400,
+                "LinkInfo.PROTOCOL": "NwLink.ETHERNET",
+                "LinkInfo.N_LINKS": 1,
+                "LinkInfo.DLINK_BW": 107374182400
+            },
+            "GdInfoEnum.DEVICE_TYPE": "Device.T3_LARGE",
+            "GdInfoEnum.DEVICE_CAT": "DeviceCategory.PROCESSOR",
+            "GInfoEnum.NODE_TYPE": "NodeType.DEVICE",
+            "GdInfoEnum.RESRC": {
+                "Hardware.CPU": 100,
+                "Hardware.HD": 140737488355328,
+                "Hardware.RAM": 68719476736,
+                "Hardware.GPU": 100
+            },
+            "GdInfoEnum.COST": 0.0928
+        }
+    },
+    "edge_info": {
+        "T2_MICRO.0 -> P3_2XLARGE.0": {
+            "GdInfoEnum.LATENCY": 12,
+            "GdInfoEnum.BANDWIDTH": 104857600
+        },
+        "CONTROLLER.0 -> CAMERA.0": {
+            "GdInfoEnum.LATENCY": 64,
+            "GdInfoEnum.BANDWIDTH": 104857600
+        },
+        "CONTROLLER.0 -> T3_LARGE.0": {
+            "GdInfoEnum.LATENCY": 10,
+            "GdInfoEnum.BANDWIDTH": 104857600
+        },
+        "T2_MICRO.0 -> CONTROLLER.0": {
+            "GdInfoEnum.LATENCY": 12,
+            "GdInfoEnum.BANDWIDTH": 104857600
+        },
+        "T3_LARGE.0 -> CAMERA.0": {
+            "GdInfoEnum.LATENCY": 66,
+            "GdInfoEnum.BANDWIDTH": 104857600
+        },
+        "T2_MICRO.0 -> T3_LARGE.0": {
+            "GdInfoEnum.LATENCY": 10,
+            "GdInfoEnum.BANDWIDTH": 104857600
+        },
+        "CAMERA.0 -> T2_MICRO.0": {
+            "GdInfoEnum.LATENCY": 68,
+            "GdInfoEnum.BANDWIDTH": 52428800
+        },
+        "T2_MICRO.0 -> CAMERA.0": {
+            "GdInfoEnum.LATENCY": 68,
+            "GdInfoEnum.BANDWIDTH": 104857600
+        },
+        "T3_LARGE.0 -> CONTROLLER.0": {
+            "GdInfoEnum.LATENCY": 10,
+            "GdInfoEnum.BANDWIDTH": 104857600
+        },
+        "CAMERA.0 -> CONTROLLER.0": {
+            "GdInfoEnum.LATENCY": 64,
+            "GdInfoEnum.BANDWIDTH": 52428800
+        },
+        "CAMERA.0 -> P3_2XLARGE.0": {
+            "GdInfoEnum.LATENCY": 64,
+            "GdInfoEnum.BANDWIDTH": 52428800
+        },
+        "T3_LARGE.0 -> P3_2XLARGE.0": {
+            "GdInfoEnum.LATENCY": 10,
+            "GdInfoEnum.BANDWIDTH": 104857600
+        },
+        "P3_2XLARGE.0 -> CONTROLLER.0": {
+            "GdInfoEnum.LATENCY": 8,
+            "GdInfoEnum.BANDWIDTH": 104857600
+        },
+        "P3_2XLARGE.0 -> T3_LARGE.0": {
+            "GdInfoEnum.LATENCY": 10,
+            "GdInfoEnum.BANDWIDTH": 104857600
+        },
+        "CONTROLLER.0 -> T2_MICRO.0": {
+            "GdInfoEnum.LATENCY": 12,
+            "GdInfoEnum.BANDWIDTH": 104857600
+        },
+        "CAMERA.0 -> T3_LARGE.0": {
+            "GdInfoEnum.LATENCY": 66,
+            "GdInfoEnum.BANDWIDTH": 52428800
+        },
+        "P3_2XLARGE.0 -> CAMERA.0": {
+            "GdInfoEnum.LATENCY": 64,
+            "GdInfoEnum.BANDWIDTH": 104857600
+        },
+        "CONTROLLER.0 -> P3_2XLARGE.0": {
+            "GdInfoEnum.LATENCY": 8,
+            "GdInfoEnum.BANDWIDTH": 104857600
+        },
+        "T3_LARGE.0 -> T2_MICRO.0": {
+            "GdInfoEnum.LATENCY": 10,
+            "GdInfoEnum.BANDWIDTH": 104857600
+        },
+        "P3_2XLARGE.0 -> T2_MICRO.0": {
+            "GdInfoEnum.LATENCY": 12,
+            "GdInfoEnum.BANDWIDTH": 104857600
+        }
+    }
+}

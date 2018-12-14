@@ -1,0 +1,27 @@
+2018-12-13 18:20:00,713 webserver|[INFO] _log:  * Running on http://172.17.20.12:7788/ (Press CTRL+C to quit)
+2018-12-13 18:20:59,332 webserver|[INFO] _log:  * Running on http://172.17.20.12:7788/ (Press CTRL+C to quit)
+2018-12-13 18:21:20,930 webserver|[INFO] _log: 172.17.20.12 - - [13/Dec/2018 18:21:20] "GET / HTTP/1.1" 200 -
+2018-12-13 18:21:20,974 webserver|[INFO] _log: 172.17.20.12 - - [13/Dec/2018 18:21:20] "GET /favicon.ico HTTP/1.1" 404 -
+2018-12-13 18:21:24,967 webserver|[INFO] _log: 172.17.20.12 - - [13/Dec/2018 18:21:24] "GET / HTTP/1.1" 200 -
+2018-12-13 18:21:24,986 webserver|[INFO] _log: 172.17.20.12 - - [13/Dec/2018 18:21:24] "GET /favicon.ico HTTP/1.1" 404 -
+2018-12-13 18:21:26,525 webserver|[INFO] _log: 172.17.20.12 - - [13/Dec/2018 18:21:26] "GET / HTTP/1.1" 200 -
+2018-12-13 18:21:26,543 webserver|[INFO] _log: 172.17.20.12 - - [13/Dec/2018 18:21:26] "GET /favicon.ico HTTP/1.1" 404 -
+2018-12-13 18:22:27,843 webserver|[INFO] _log:  * Running on http://172.17.20.12:7788/ (Press CTRL+C to quit)
+2018-12-13 18:22:38,992 webserver|[INFO] push: got data, size=76
+2018-12-13 18:22:38,992 webserver|[INFO] push: receive data, cnt=1
+2018-12-13 18:22:47,039 webserver|[INFO] push: got data, size=94
+2018-12-13 18:22:47,039 webserver|[INFO] push: receive data, cnt=2
+2018-12-13 18:22:51,675 webserver|[INFO] _log: 172.17.20.12 - - [13/Dec/2018 18:22:51] "GET / HTTP/1.1" 200 -
+2018-12-13 18:22:51,719 webserver|[INFO] _log: 172.17.20.12 - - [13/Dec/2018 18:22:51] "GET /favicon.ico HTTP/1.1" 404 -
+2018-12-13 18:22:53,118 webserver|[INFO] _log: 172.17.20.12 - - [13/Dec/2018 18:22:53] "GET / HTTP/1.1" 200 -
+2018-12-13 18:22:53,150 webserver|[INFO] _log: 172.17.20.12 - - [13/Dec/2018 18:22:53] "GET /favicon.ico HTTP/1.1" 404 -
+2018-12-13 18:22:58,539 webserver|[INFO] _log: 172.17.20.12 - - [13/Dec/2018 18:22:58] "GET / HTTP/1.1" 200 -
+2018-12-13 18:22:58,559 webserver|[INFO] _log: 172.17.20.12 - - [13/Dec/2018 18:22:58] "GET /favicon.ico HTTP/1.1" 404 -
+2018-12-13 18:23:11,741 webserver|[INFO] push: got data, size=76
+2018-12-13 18:23:11,742 webserver|[INFO] push: receive data, cnt=3
+2018-12-13 18:23:12,431 webserver|[INFO] _log: 172.17.20.12 - - [13/Dec/2018 18:23:12] "GET / HTTP/1.1" 200 -
+2018-12-13 18:23:12,459 webserver|[INFO] _log: 172.17.20.12 - - [13/Dec/2018 18:23:12] "GET /favicon.ico HTTP/1.1" 404 -
+2018-12-13 18:23:13,649 webserver|[INFO] _log: 172.17.20.12 - - [13/Dec/2018 18:23:13] "GET / HTTP/1.1" 200 -
+2018-12-13 18:23:13,668 webserver|[INFO] _log: 172.17.20.12 - - [13/Dec/2018 18:23:13] "GET /favicon.ico HTTP/1.1" 404 -
+2018-12-13 18:29:33,083 webserver|[INFO] _log:  * Running on http://172.17.20.12:7788/ (Press CTRL+C to quit)
+2018-12-13 19:26:03,639 webserver|[INFO] _log:  * Running on http://172.17.20.12:7788/ (Press CTRL+C to quit)

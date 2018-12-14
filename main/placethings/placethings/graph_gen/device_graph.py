@@ -75,7 +75,9 @@ def _derive_edge_info(
     for edge_str, edge_data in iteritems(links):
         n1, n2 = LinkHelper.get_nodes(edge_str)
         link_type = LinkType.LAN
-        latency = edge_data[GnInfo.LATENCY]
+        est_latency = edge_data.get(GnInfo.LATENCY, 2)  # default latency 2ms
+        est_bandwidth = edge_data.get(GnInfo.BANDWIDTH, 2147483647)
+        est_distance = edge_data.get(GnInfo.DISTANCE, 10)  # default dst 10 m
         ul1, dl1, prot1 = _get_link_info(
             dev_inventory, nw_inventory, n1, link_type)
         ul2, dl2, prot2 = _get_link_info(
@@ -84,8 +86,9 @@ def _derive_edge_info(
         edge_info[edge_str] = {
             GnInfo.SRC_LINK_TYPE: link_type,
             GnInfo.DST_LINK_TYPE: link_type,
-            GnInfo.BANDWIDTH: min(ul1, dl2),
-            GnInfo.LATENCY: latency,
+            GnInfo.BANDWIDTH: min(ul1, dl2, est_bandwidth),
+            GnInfo.LATENCY: est_latency,
+            GnInfo.DISTANCE: est_distance,
             GnInfo.PROTOCOL: prot1,
         }
     return edge_info
@@ -126,8 +129,7 @@ def _derive_graph_info(spec, inventory, links, nw_spec, nw_inventory):
 
 
 def create_topo_device_graph(
-        spec, inventory, links,
-        nw_spec, nw_inventory, nw_links,
+        spec, inventory, links, nw_spec, nw_inventory, nw_links,
         is_export=False, export_suffix=''):
     """
     Returns:
@@ -164,14 +166,6 @@ def create_graph(
         spec, inventory, links, nw_spec, nw_inventory, nw_links,
         is_export, export_suffix)
     return dev_graph
-
-
-def create_default_graph(is_export=False):
-    spec, inventory, links = device_data.create_default_device_data()
-    nw_spec, nw_inventory, nw_links = (
-        nw_device_data.create_default_device_data())
-    return create_graph(
-        spec, inventory, links, nw_spec, nw_inventory, nw_links, is_export)
 
 
 def create_graph_from_file(device_data_path, nw_data_path, is_export=False):

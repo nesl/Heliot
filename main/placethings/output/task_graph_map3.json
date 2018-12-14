@@ -1,0 +1,35 @@
+{
+    "node_info": {
+        "task_camera": {
+            "GtInfoEnum.CUR_DEVICE": "CAMERA.0",
+            "GtInfoEnum.CUR_LATENCY": 0,
+            "GtInfoEnum.EXEC_CMD": {
+                "default": "cd {progdir} && python main_entity.py run_task -n task_camera -en task_forward -a {docker_addr} -ra {next_addr} &> /dev/null &"
+            }
+        },
+        "task_findObject": {
+            "GtInfoEnum.CUR_DEVICE": "P3_2XLARGE.0",
+            "GtInfoEnum.CUR_LATENCY": 100,
+            "GtInfoEnum.EXEC_CMD": {
+                "default": "cd {progdir} && python main_entity.py run_task -n task_findObj -en task_findObj -a {self_addr} -ra {next_addr} -al local &> /dev/null &",
+                "P3_2XLARGE.0": "cd {progdir} && python main_entity.py run_task -n task_findObj -en task_findObj -a {self_addr} -ra {next_addr} -al offload 172.17.49.60:18800 &> /dev/null &",
+                "T3_LARGE.0": "cd {progdir} && python main_entity.py run_task -n task_findObj -en task_findObj -a {self_addr} -ra {next_addr} -al local &> /dev/null &"
+            }
+        },
+        "task_alert": {
+            "GtInfoEnum.CUR_DEVICE": "CONTROLLER.0",
+            "GtInfoEnum.CUR_LATENCY": 0,
+            "GtInfoEnum.EXEC_CMD": {
+                "default": "cd {progdir} && python main_entity.py run_task -n task_alert -en task_forward -a {self_addr} -ra 172.17.51.1:18900 &> /dev/null &"
+            }
+        }
+    },
+    "edge_info": {
+        "task_camera -> task_findObject": {
+            "GtInfoEnum.CUR_LATENCY": 64
+        },
+        "task_findObject -> task_alert": {
+            "GtInfoEnum.CUR_LATENCY": 8
+        }
+    }
+}

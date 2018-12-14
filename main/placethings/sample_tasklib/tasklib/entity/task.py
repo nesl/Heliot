@@ -6,7 +6,7 @@ from __future__ import unicode_literals
 import logging
 import time
 
-from placethings.demo.entity.base_client import ClientGen
+from tasklib.entity.base_client import ClientGen
 
 
 log = logging.getLogger()
@@ -35,7 +35,7 @@ class RPCServer(object):
             time.sleep(self.exec_delay_time_sec)
         t2 = time.time()
         log.info('(TIME) stop computation: {}'.format(t2))
-        return 'spent {} to compute result'.format(t2-t1)
+        return 'spent {} to compute result'.format(t2 - t1)
 
     def push(self, data):
         if not self.receiver_list:

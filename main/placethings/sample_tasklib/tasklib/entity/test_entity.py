@@ -7,7 +7,7 @@ import logging
 import msgpackrpc
 import time
 
-from placethings.demo.entity.manager import Manager
+from tasklib.entity.manager import Manager
 
 log = logging.getLogger()
 

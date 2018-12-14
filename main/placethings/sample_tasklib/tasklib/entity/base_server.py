@@ -8,10 +8,8 @@ import logging
 import msgpackrpc
 import time
 
-from placethings.demo.entity.base_client import BaseClient
-from placethings.demo.entity.fileserver import RPCServer as FileRPCServer
-from placethings.demo.entity.agent import RPCServer as AgentRPCServer
-from placethings.demo.entity.task import RPCServer as TaskRPCServer
+from tasklib.entity.base_client import BaseClient
+from tasklib.entity.task import RPCServer as TaskRPCServer
 
 
 log = logging.getLogger()
@@ -36,7 +34,7 @@ class BaseServer(msgpackrpc.Server):
         log.info('====== receive pkt ======')
         log.info('(TIME) pkt sent time: {}'.format(t1))
         log.info('(TIME) pkt rcev time: {}'.format(t2))
-        log.info('(TIME) transmit time: {}'.format(t2-t1))
+        log.info('(TIME) transmit time: {}'.format(t2 - t1))
         log.info('(RECV) {}: {}'.format(method, self._obj_to_str(param)))
         # dispatch
         method = msgpackrpc.compat.force_str(method)
@@ -56,8 +54,6 @@ class BaseServer(msgpackrpc.Server):
 class ServerGen(object):
 
     _RPC_CLS = {
-        "fileserver": FileRPCServer,
-        "agent": AgentRPCServer,
         "task": TaskRPCServer,
     }
 
@@ -71,7 +67,7 @@ class ServerGen(object):
             entity_class = cls._RPC_CLS[entity_name]
             log.info('try to start base entity {}'.format(entity_name))
         else:
-            module_name = 'placethings.demo.entity.{}'.format(entity_name)
+            module_name = 'tasklib.entity.{}'.format(entity_name)
             log.info('run rpc_server from {}'.format(module_name))
             entity_module = importlib.import_module(module_name)
             entity_class = getattr(entity_module, 'RPCServer')

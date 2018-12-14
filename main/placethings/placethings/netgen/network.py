@@ -36,23 +36,36 @@ class AddressManager(object):
             self.address_book[task_name] = (device_name, ip, port)
         return ip, port
 
-# Dataplane is used for creating the network
+
 class DataPlane(object):
+    # Dataplane is used for creating the network
     _cmd_get_ip = (
         "ip -4 -o addr show dev eth0| awk '{split($4,a,\"/\");print a[1]}'")
+    _DOCKER_IMG = 'kumokay/heliot_host:v1'
+    _DOCKER_IP = '172.18.0.1'
     _PROG_DIR = '/opt/github/placethings'
     _TASK_PORT = 18800
+    _PUBLIC_PORT = 19000
     _MANAGER_NAME = 'Manager'
     _cmd_stop_template = (
         'cd {progdir} && python main_entity.py stop_server '
         '-n stopper -a {ip}:{port}')
 
-    def __init__(self, topo_device_graph, docker0_ip='172.18.0.1'):
+    def __init__(
+            self, topo_device_graph, docker0_ip=None, docker_img=None,
+            prog_dir=None):
+        if not docker0_ip:
+            docker0_ip = self._DOCKER_IP
+        if not docker_img:
+            docker_img = self._DOCKER_IMG
+        if not prog_dir:
+            prog_dir = self._PROG_DIR
         self.worker_dict = {}  # worker_name: start_cmd
         self.task_cmd = {}
+        self.prog_dir = prog_dir
 
-        #This is the controller which we are creating
-        self.net = NetManager.create(docker0_ip)
+        # This is the controller which we are creating
+        self.net = NetManager.create(docker0_ip, docker_img)
         # add nw devices
         for node in topo_device_graph.nodes():
             node_info = topo_device_graph.node[node]
@@ -97,7 +110,7 @@ class DataPlane(object):
         return self.net.get_device_ip(device_name), self._TASK_PORT
 
     def get_worker_public_addr(self, device_name):
-        return self.net.get_device_docker_ip(device_name), self._TASK_PORT
+        return self.net.get_device_docker_ip(device_name), self._PUBLIC_PORT
 
     @staticmethod
     def _get_next_task(G_map, task_name):
@@ -110,7 +123,7 @@ class DataPlane(object):
 
     def deploy_task(self, G_map, Gd):
         # gen info
-        progdir = self._PROG_DIR
+        progdir = self.prog_dir
         for task_name in G_map.nodes():
             device_name = G_map.node[task_name][GtInfo.CUR_DEVICE]
             log.info('deploy {} to {}'.format(task_name, device_name))
@@ -152,7 +165,7 @@ class DataPlane(object):
             log.info('stop {}'.format(device_name))
             ip, port = self.get_worker_address(device_name)
             command = self._cmd_stop_template.format(
-                progdir=self._PROG_DIR,
+                progdir=self.prog_dir,
                 name=self._MANAGER_NAME,
                 ip=ip,
                 port=port)

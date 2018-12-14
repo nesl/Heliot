@@ -21,15 +21,34 @@
 # (3) check if the task inside the docker receives the message
 ############################################################
 
-FROM kumokay/heliot_host:v2
+# start from an official ubuntu image
+FROM ubuntu:16.04
+
+# install some tools
+RUN apt-get update
+RUN apt-get -y install git wget vim iputils-ping net-tools
+
+# install python packages for main_entity.py only
+RUN apt-get -y install python-pip
+RUN pip install --upgrade pip==9.0.1
+RUN pip install msgpack-rpc-python Pillow future Flask
+
+# create a working directory
+RUN mkdir -p /opt/github
+
+# install yolov3
+WORKDIR /opt/github
+RUN git clone https://github.com/pjreddie/darknet
+WORKDIR /opt/github/darknet
+RUN make
+RUN wget https://pjreddie.com/media/files/yolov3.weights
+RUN wget https://pjreddie.com/media/files/yolov3-tiny.weights
 
 # get tasklib
 WORKDIR /opt/github
-RUN rm -rf unzip_tasklib
 RUN wget https://github.com/nesl/Heliot/raw/dev/main/placethings/sample_tasklib/sample_tasklib.tar.gz
 RUN mkdir unzip_tasklib && tar -xzvf sample_tasklib.tar.gz -C unzip_tasklib
 RUN rm sample_tasklib.tar.gz
 
 # assign entrypoint workdir
 WORKDIR /opt/github/unzip_tasklib
-

@@ -63,7 +63,7 @@ class Test(BaseTestCase):
 
         data_plane = init_netsim(
             topo_device_graph, Gd, G_map, 'BB_SWITCH.2',
-            docker_img='kumokay/heliot_host:v2',
+            docker_img='kumokay/heliot_host:v3',
             prog_dir='/opt/github/unzip_tasklib')
         # raw_input('press any key to start the network')
         data_plane.start(is_validate=True)

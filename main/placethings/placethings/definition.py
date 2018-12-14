@@ -171,6 +171,7 @@ class GnInfo(object):
         BANDWIDTH = auto()
         LATENCY = auto()
         PROTOCOL = auto()
+        DISTANCE = auto()
 
     class helper(type):
         # used as keys for **kwargs for networkx.Digraph.add_node

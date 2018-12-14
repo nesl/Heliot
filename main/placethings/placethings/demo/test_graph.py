@@ -14,10 +14,17 @@ log = logging.getLogger()
 
 
 class TestBasic(BaseTestCase):
-    @staticmethod
-    def test(config_name=None, is_export=False):
+    _SUPPORTED_CONFIG = {
+        "sample_configs/config_ddflow_bw",
+        "sample_configs/config_ddflow_demo",
+        "sample_configs/config_ddflow_demo_local",
+    }
+
+    @classmethod
+    def test(cls, config_name=None, is_export=False):
         if not config_name:
             config_name = 'sample_configs/config_ddflow_demo'
+        assert config_name in cls._SUPPORTED_CONFIG
         cfg = Config(folderpath=config_name)
         # graph_gen.create_topo_graph(cfg, is_export)
         Gd = graph_gen.create_device_graph(cfg, is_export)

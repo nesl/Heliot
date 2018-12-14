@@ -21,7 +21,7 @@
 # (3) check if the task inside the docker receives the message
 ############################################################
 
-FROM kumokay/heliot_host:v2
+FROM kumokay/heliot_host:v3
 
 # get tasklib
 WORKDIR /opt/github
@@ -32,4 +32,3 @@ RUN rm sample_tasklib.tar.gz
 
 # assign entrypoint workdir
 WORKDIR /opt/github/unzip_tasklib
-

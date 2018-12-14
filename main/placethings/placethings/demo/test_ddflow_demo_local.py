@@ -13,7 +13,18 @@ from placethings.demo.base_test import BaseTestCase
 log = logging.getLogger()
 
 """
-network settings
+Usage:
+
+1. send sample image from your local terminal to the fake camera in mininet:
+$ cd placethings/sample_tasklib
+$ python main_entity.py client_send_file -n client1 -a 172.17.20.12:20000 \
+  -m push -al sample_img/2-0.png
+
+2. use browser open http://172.17.20.12:20001/ to see the result
+
+
+
+Network settings
 
 CONTROLLER.0   P3_2XLARGE.0  T3_LARGE.0
        |         |              |

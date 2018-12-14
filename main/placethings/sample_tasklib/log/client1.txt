@@ -1,0 +1,9 @@
+2018-12-13 19:41:43,174 client1|[INFO] call: ====== send pkt ======
+2018-12-13 19:41:43,174 client1|[INFO] call: (TIME) pkt sent time: 1544758903.17
+2018-12-13 19:41:43,175 client1|[INFO] call: (SEND) push: ('iVBORw0KGgoAAAANSUhEUgAAAQAAAACQCAYAAADnY7WRAAAgAElEQVR4Acy9CZ
+2018-12-13 19:41:43,175 client1|[WARNING] _handle_connect: Connect error on fd 7: ECONNREFUSED
+2018-12-13 19:41:43,176 client1|[WARNING] _handle_connect: Connect error on fd 7: ECONNREFUSED
+2018-12-13 19:41:43,176 client1|[WARNING] _handle_connect: Connect error on fd 7: ECONNREFUSED
+2018-12-13 19:41:43,176 client1|[WARNING] _handle_connect: Connect error on fd 7: ECONNREFUSED
+2018-12-13 19:41:43,177 client1|[WARNING] _handle_connect: Connect error on fd 7: ECONNREFUSED
+2018-12-13 19:41:43,177 client1|[INFO] client_send_file: file sent: size=41

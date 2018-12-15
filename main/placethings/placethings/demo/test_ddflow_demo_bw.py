@@ -52,14 +52,16 @@ class TestBasic(BaseTestCase):
         if not config_name:
             config_name = 'sample_configs/config_ddflow_bw'
         assert config_name in cls._SUPPORTED_CONFIG
-        cfgHelper = ConfigDataHelper(Config(config_name), is_export)
+        cfgHelper = ConfigDataHelper(
+            Config(config_name), is_export, use_assigned_latency=False)
         cfgHelper.init_task_graph()
         cfgHelper.update_topo_device_graph()
         cfgHelper.update_task_map()
         _topo, topo_device_graph, G_map = cfgHelper.get_graphs()
         if is_simulate:
             data_plane = init_netsim(
-                topo_device_graph, G_map, 'BB_SWITCH.2')
+                topo_device_graph, G_map, 'BB_SWITCH.2',
+                use_assigned_latency=False)
             data_plane.start(is_validate=True)
             data_plane.start_workers()
             data_plane.stop_workers()
@@ -78,8 +80,7 @@ class TestDynamic(BaseTestCase):
         cfgHelper.update_nw_link_bandwidth(nw_dev1, nw_dev2, new_bandwidth)
         cfgHelper.update_topo_device_graph()
         if is_simulate:
-            ############ TODO
-            data_plane.modify_link(nw_dev1, nw_dev2, new_delay)
+            data_plane.modify_link(nw_dev1, nw_dev2, bw_bps=new_bandwidth)
             data_plane.print_net_info()
 
     @classmethod
@@ -100,9 +101,10 @@ class TestDynamic(BaseTestCase):
             cls, config_name=None, is_export=True,
             is_update_map=True, is_simulate=True):
         if not config_name:
-            config_name = 'sample_configs/config_ddflow_demo_local'
+            config_name = 'sample_configs/config_ddflow_bw'
         assert config_name in cls._SUPPORTED_CONFIG
-        cfgHelper = ConfigDataHelper(Config(config_name), is_export)
+        cfgHelper = ConfigDataHelper(
+            Config(config_name), is_export, use_assigned_latency=False)
         cfgHelper.init_task_graph()
         cfgHelper.update_topo_device_graph()
         cfgHelper.update_task_map()
@@ -119,7 +121,8 @@ class TestDynamic(BaseTestCase):
             data_plane = init_netsim(
                 topo_device_graph, G_map, 'BB_SWITCH.2',
                 docker_img='kumokay/heliot_host:v3',
-                prog_dir='/opt/github/unzip_tasklib')
+                prog_dir='/opt/github/unzip_tasklib',
+                use_assigned_latency=False)
             raw_input('press any key to start the network')
             data_plane.start(is_validate=True)
             data_plane.print_net_info()
@@ -133,9 +136,9 @@ class TestDynamic(BaseTestCase):
         log.info('=== running scenario 2: P3_2XLARGE.0 poor connection ===')
         nw_dev1 = 'BB_SWITCH.0'
         nw_dev2 = 'CENTER_SWITCH.1'
-        new_latency = Unit.ms(3000)
-        cls.update_nw_latency(
-            cfgHelper, data_plane, nw_dev1, nw_dev2, new_latency, is_simulate)
+        new_bw = Unit.kbps(10)
+        cls.update_nw_bandwidth(
+            cfgHelper, data_plane, nw_dev1, nw_dev2, new_bw, is_simulate)
         if is_update_map:
             cls.update_placement(cfgHelper, data_plane, is_simulate)
 
@@ -143,9 +146,9 @@ class TestDynamic(BaseTestCase):
         log.info('=== running scenario 3: T3_LARGE.0 poor connection ===')
         nw_dev1 = 'BB_SWITCH.1'
         nw_dev2 = 'FIELD_SWITCH.1'
-        new_latency = Unit.ms(2000)
-        cls.update_nw_latency(
-            cfgHelper, data_plane, nw_dev1, nw_dev2, new_latency, is_simulate)
+        new_bw = Unit.kbps(10)
+        cls.update_nw_bandwidth(
+            cfgHelper, data_plane, nw_dev1, nw_dev2, new_bw, is_simulate)
         if is_update_map:
             cls.update_placement(cfgHelper, data_plane, is_simulate)
 
@@ -153,9 +156,9 @@ class TestDynamic(BaseTestCase):
         log.info('=== running scenario 4: P3_2XLARGE.0 back online ===')
         nw_dev1 = 'BB_SWITCH.0'
         nw_dev2 = 'CENTER_SWITCH.1'
-        new_latency = Unit.ms(2)
-        cls.update_nw_latency(
-            cfgHelper, data_plane, nw_dev1, nw_dev2, new_latency, is_simulate)
+        new_bw = Unit.mbps(100)
+        cls.update_nw_bandwidth(
+            cfgHelper, data_plane, nw_dev1, nw_dev2, new_bw, is_simulate)
         if is_update_map:
             cls.update_placement(cfgHelper, data_plane, is_simulate)
 

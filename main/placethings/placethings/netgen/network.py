@@ -13,12 +13,6 @@ from placethings.definition import (
 log = logging.getLogger()
 
 
-_PKT_LOSS = {
-    NwLink.WIFI: 0.0,
-    NwLink.ETHERNET: 0.0,
-}
-
-
 class AddressManager(object):
     def __init__(self, net):
         self.net = net
@@ -53,7 +47,7 @@ class DataPlane(object):
 
     def __init__(
             self, topo_device_graph, docker0_ip=None, docker_img=None,
-            prog_dir=None):
+            prog_dir=None, use_assigned_latency=True):
         if not docker0_ip:
             docker0_ip = self._DOCKER_IP
         if not docker_img:
@@ -63,6 +57,7 @@ class DataPlane(object):
         self.worker_dict = {}  # worker_name: start_cmd
         self.task_cmd = {}
         self.prog_dir = prog_dir
+        self.use_assigned_latency = use_assigned_latency
 
         # This is the controller which we are creating
         self.net = NetManager.create(docker0_ip, docker_img)
@@ -79,11 +74,13 @@ class DataPlane(object):
         for d1, d2 in topo_device_graph.edges():
             print('edge: {},{}'.format(d1, d2))
             edge_info = topo_device_graph[d1][d2]
+            if self.use_assigned_latency:
+                delay_ms = edge_info[GnInfo.LATENCY]
+            else:
+                speed_of_light = 299792458
+                delay_ms = int(edge_info[GnInfo.DISTANCE] / speed_of_light)
             self.net.addLink(
-                d1, d2,
-                bw_bps=edge_info[GnInfo.BANDWIDTH],
-                delay_ms=edge_info[GnInfo.LATENCY],
-                pkt_loss_rate=_PKT_LOSS[edge_info[GnInfo.PROTOCOL]])
+                d1, d2, bw_bps=edge_info[GnInfo.BANDWIDTH], delay_ms=delay_ms)
         self.net.print_net_info()
 
     def print_net_info(self):
@@ -92,8 +89,9 @@ class DataPlane(object):
     def run_mininet_cli(self):
         self.net.run_cli()
 
-    def modify_link(self, src, dst, delay_ms):
-        self.net.modifyLinkDelay(src, dst, delay_ms)
+    def modify_link(self, src, dst, delay_ms=None, bw_bps=None):
+        self.net.modifyLinkAttribute(
+            src, dst, delay_ms=delay_ms, bw_bps=bw_bps)
 
     def add_manager(self, device_name):
         self.net.addHost(self._MANAGER_NAME)
@@ -198,76 +196,3 @@ class DataPlane(object):
     def stop(self):
         log.info('stop mininet.')
         self.net.stop()
-
-
-class NetGen(object):
-
-    _PKT_LOSS = {
-        NwLink.WIFI: 0.0,
-        NwLink.ETHERNET: 0.0,
-    }
-
-    @classmethod
-    def create_control_plane(cls, Gn):
-        """
-        Create an empty network and add nodes to it.
-
-        Args:
-            Gn (nx.DiGraph): topo_device_graph
-        Returns:
-            net (NetManager): a network of switches and devices
-        """
-        return cls.create(Gn)
-
-    def create_data_plane(cls, Gn):
-        """
-        Args:
-            Gn (nx.DiGraph): topo_device_graph
-        Returns:
-            net (NetManager): a network of all switches
-        """
-        net = NetManager.create()
-        for node in Gn.nodes():
-            node_type = Gn.node[node][GInfo.NODE_TYPE]
-            if node_type == NodeType.DEVICE:
-                net.addSwitch(node)
-            elif node_type == NodeType.NW_DEVICE:
-                net.addSwitch(node)
-            else:
-                assert False, 'unkown node_type: {}'.format(node_type)
-        for d1, d2 in Gn.edges():
-            edge_info = Gn[d1][d2]
-            net.addLink(
-                d1, d2,
-                bw_bps=edge_info[GnInfo.BANDWIDTH],
-                delay_ms=edge_info[GnInfo.LATENCY],
-                pkt_loss_rate=cls._PKT_LOSS[edge_info[GnInfo.PROTOCOL]])
-        return net
-
-    @classmethod
-    def create(cls, Gn):
-        """
-        Create an empty network and add nodes to it.
-
-        Args:
-            Gn (nx.DiGraph): topo_device_graph
-        Returns:
-            net (NetManager)
-        """
-        net = NetManager.create()
-        for node in Gn.nodes():
-            node_type = Gn.node[node][GInfo.NODE_TYPE]
-            if node_type == NodeType.DEVICE:
-                net.addHost(node)
-            elif node_type == NodeType.NW_DEVICE:
-                net.addSwitch(node)
-            else:
-                assert False, 'unkown node_type: {}'.format(node_type)
-        for d1, d2 in Gn.edges():
-            edge_info = Gn[d1][d2]
-            net.addLink(
-                d1, d2,
-                bw_bps=edge_info[GnInfo.BANDWIDTH],
-                delay_ms=edge_info[GnInfo.LATENCY],
-                pkt_loss_rate=cls._PKT_LOSS[edge_info[GnInfo.PROTOCOL]])
-        return net

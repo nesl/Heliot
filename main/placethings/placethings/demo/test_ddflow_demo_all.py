@@ -78,7 +78,7 @@ class TestDynamic(BaseTestCase):
         cfgHelper.update_nw_link_latency(nw_dev1, nw_dev2, new_latency)
         cfgHelper.update_topo_device_graph()
         if is_simulate:
-            data_plane.modify_link(nw_dev1, nw_dev2, new_latency)
+            data_plane.modify_link(nw_dev1, nw_dev2, delay_ms=new_latency)
             data_plane.print_net_info()
 
     @classmethod

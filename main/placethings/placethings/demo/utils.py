@@ -18,7 +18,7 @@ log = logging.getLogger()
 
 def init_netsim(
         Gnd, G_map, manager_attached_nw_device, docker_img=None,
-        prog_dir=None):
+        prog_dir=None, use_assigned_latency=True):
     # get containernet (docker) subnet ip
     # This will be there is containernet is installed, which install the docker
     cmd = (
@@ -30,7 +30,7 @@ def init_netsim(
     # simulate network
     data_plane = DataPlane(
         Gnd, docker0_ip=docker0_ip, docker_img=docker_img,
-        prog_dir=prog_dir)
+        prog_dir=prog_dir, use_assigned_latency=use_assigned_latency)
     # attach manager to a nw device, e.g. 'BB_SWITCH.2'
     data_plane.add_manager(manager_attached_nw_device)
     data_plane.deploy_task(G_map, Gnd)

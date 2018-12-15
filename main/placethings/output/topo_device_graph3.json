@@ -103,84 +103,74 @@
     },
     "edge_info": {
         "CENTER_SWITCH.0 -> CONTROLLER.0": {
-            "GnInfoEnum.PROTOCOL": "NwLink.ETHERNET",
-            "GnInfoEnum.SRC_LINK_TYPE": "LinkType.LAN",
-            "GnInfoEnum.LATENCY": 2,
             "GnInfoEnum.BANDWIDTH": 104857600,
-            "GnInfoEnum.DISTANCE": 10,
-            "GnInfoEnum.DST_LINK_TYPE": "LinkType.LAN"
+            "GnInfoEnum.SRC_LINK_TYPE": "LinkType.LAN",
+            "GnInfoEnum.DST_LINK_TYPE": "LinkType.LAN",
+            "GnInfoEnum.LATENCY": 2,
+            "GnInfoEnum.PROTOCOL": "NwLink.ETHERNET"
         },
         "T2_MICRO.0 -> FIELD_SWITCH.0": {
-            "GnInfoEnum.PROTOCOL": "NwLink.ETHERNET",
-            "GnInfoEnum.SRC_LINK_TYPE": "LinkType.LAN",
-            "GnInfoEnum.LATENCY": 2,
             "GnInfoEnum.BANDWIDTH": 104857600,
-            "GnInfoEnum.DISTANCE": 10,
-            "GnInfoEnum.DST_LINK_TYPE": "LinkType.LAN"
+            "GnInfoEnum.SRC_LINK_TYPE": "LinkType.LAN",
+            "GnInfoEnum.DST_LINK_TYPE": "LinkType.LAN",
+            "GnInfoEnum.LATENCY": 2,
+            "GnInfoEnum.PROTOCOL": "NwLink.ETHERNET"
         },
         "T3_LARGE.0 -> FIELD_SWITCH.1": {
-            "GnInfoEnum.PROTOCOL": "NwLink.ETHERNET",
-            "GnInfoEnum.SRC_LINK_TYPE": "LinkType.LAN",
-            "GnInfoEnum.LATENCY": 2,
             "GnInfoEnum.BANDWIDTH": 419430400,
-            "GnInfoEnum.DISTANCE": 10,
-            "GnInfoEnum.DST_LINK_TYPE": "LinkType.LAN"
+            "GnInfoEnum.SRC_LINK_TYPE": "LinkType.LAN",
+            "GnInfoEnum.DST_LINK_TYPE": "LinkType.LAN",
+            "GnInfoEnum.LATENCY": 2,
+            "GnInfoEnum.PROTOCOL": "NwLink.ETHERNET"
         },
         "CONTROLLER.0 -> CENTER_SWITCH.0": {
-            "GnInfoEnum.PROTOCOL": "NwLink.ETHERNET",
-            "GnInfoEnum.SRC_LINK_TYPE": "LinkType.LAN",
-            "GnInfoEnum.LATENCY": 2,
             "GnInfoEnum.BANDWIDTH": 104857600,
-            "GnInfoEnum.DISTANCE": 10,
-            "GnInfoEnum.DST_LINK_TYPE": "LinkType.LAN"
+            "GnInfoEnum.SRC_LINK_TYPE": "LinkType.LAN",
+            "GnInfoEnum.DST_LINK_TYPE": "LinkType.LAN",
+            "GnInfoEnum.LATENCY": 2,
+            "GnInfoEnum.PROTOCOL": "NwLink.ETHERNET"
         },
         "CENTER_SWITCH.1 -> P3_2XLARGE.0": {
-            "GnInfoEnum.PROTOCOL": "NwLink.ETHERNET",
-            "GnInfoEnum.SRC_LINK_TYPE": "LinkType.LAN",
-            "GnInfoEnum.LATENCY": 2,
             "GnInfoEnum.BANDWIDTH": 104857600,
-            "GnInfoEnum.DISTANCE": 10,
-            "GnInfoEnum.DST_LINK_TYPE": "LinkType.LAN"
+            "GnInfoEnum.SRC_LINK_TYPE": "LinkType.LAN",
+            "GnInfoEnum.DST_LINK_TYPE": "LinkType.LAN",
+            "GnInfoEnum.LATENCY": 2,
+            "GnInfoEnum.PROTOCOL": "NwLink.ETHERNET"
         },
         "CAMERA.0 -> BB_AP.0": {
-            "GnInfoEnum.PROTOCOL": "NwLink.WIFI",
-            "GnInfoEnum.SRC_LINK_TYPE": "LinkType.LAN",
-            "GnInfoEnum.LATENCY": 30,
             "GnInfoEnum.BANDWIDTH": 52428800,
-            "GnInfoEnum.DISTANCE": 10,
-            "GnInfoEnum.DST_LINK_TYPE": "LinkType.LAN"
+            "GnInfoEnum.SRC_LINK_TYPE": "LinkType.LAN",
+            "GnInfoEnum.DST_LINK_TYPE": "LinkType.LAN",
+            "GnInfoEnum.LATENCY": 30,
+            "GnInfoEnum.PROTOCOL": "NwLink.WIFI"
         },
         "BB_AP.0 -> CAMERA.0": {
-            "GnInfoEnum.PROTOCOL": "NwLink.WIFI",
-            "GnInfoEnum.SRC_LINK_TYPE": "LinkType.LAN",
-            "GnInfoEnum.LATENCY": 30,
             "GnInfoEnum.BANDWIDTH": 104857600,
-            "GnInfoEnum.DISTANCE": 10,
-            "GnInfoEnum.DST_LINK_TYPE": "LinkType.LAN"
+            "GnInfoEnum.SRC_LINK_TYPE": "LinkType.LAN",
+            "GnInfoEnum.DST_LINK_TYPE": "LinkType.LAN",
+            "GnInfoEnum.LATENCY": 30,
+            "GnInfoEnum.PROTOCOL": "NwLink.WIFI"
         },
         "FIELD_SWITCH.1 -> T3_LARGE.0": {
-            "GnInfoEnum.PROTOCOL": "NwLink.ETHERNET",
-            "GnInfoEnum.SRC_LINK_TYPE": "LinkType.LAN",
-            "GnInfoEnum.LATENCY": 2,
             "GnInfoEnum.BANDWIDTH": 419430400,
-            "GnInfoEnum.DISTANCE": 10,
-            "GnInfoEnum.DST_LINK_TYPE": "LinkType.LAN"
+            "GnInfoEnum.SRC_LINK_TYPE": "LinkType.LAN",
+            "GnInfoEnum.DST_LINK_TYPE": "LinkType.LAN",
+            "GnInfoEnum.LATENCY": 2,
+            "GnInfoEnum.PROTOCOL": "NwLink.ETHERNET"
         },
         "FIELD_SWITCH.0 -> T2_MICRO.0": {
-            "GnInfoEnum.PROTOCOL": "NwLink.ETHERNET",
-            "GnInfoEnum.SRC_LINK_TYPE": "LinkType.LAN",
-            "GnInfoEnum.LATENCY": 2,
             "GnInfoEnum.BANDWIDTH": 104857600,
-            "GnInfoEnum.DISTANCE": 10,
-            "GnInfoEnum.DST_LINK_TYPE": "LinkType.LAN"
+            "GnInfoEnum.SRC_LINK_TYPE": "LinkType.LAN",
+            "GnInfoEnum.DST_LINK_TYPE": "LinkType.LAN",
+            "GnInfoEnum.LATENCY": 2,
+            "GnInfoEnum.PROTOCOL": "NwLink.ETHERNET"
         },
         "P3_2XLARGE.0 -> CENTER_SWITCH.1": {
-            "GnInfoEnum.PROTOCOL": "NwLink.ETHERNET",
-            "GnInfoEnum.SRC_LINK_TYPE": "LinkType.LAN",
-            "GnInfoEnum.LATENCY": 2,
             "GnInfoEnum.BANDWIDTH": 104857600,
-            "GnInfoEnum.DISTANCE": 10,
-            "GnInfoEnum.DST_LINK_TYPE": "LinkType.LAN"
+            "GnInfoEnum.SRC_LINK_TYPE": "LinkType.LAN",
+            "GnInfoEnum.DST_LINK_TYPE": "LinkType.LAN",
+            "GnInfoEnum.LATENCY": 2,
+            "GnInfoEnum.PROTOCOL": "NwLink.ETHERNET"
         }
     }
 }

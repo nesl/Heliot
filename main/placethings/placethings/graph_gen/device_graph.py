@@ -73,22 +73,24 @@ def _derive_edge_info(
     for edge_str, edge_data in iteritems(links):
         n1, n2 = LinkHelper.get_nodes(edge_str)
         link_type = LinkType.LAN
-        est_latency = edge_data.get(GnInfo.LATENCY, 2)  # default latency 2ms
-        est_bandwidth = edge_data.get(GnInfo.BANDWIDTH, 2147483647)
-        est_distance = edge_data.get(GnInfo.DISTANCE, 10)  # default dst 10 m
         ul1, dl1, prot1 = _get_link_info(
             dev_inventory, nw_inventory, n1, link_type)
         ul2, dl2, prot2 = _get_link_info(
             dev_inventory, nw_inventory, n2, link_type)
         assert prot1 == prot2
+        est_bandwidth = edge_data.get(GnInfo.BANDWIDTH, 2147483647)
         edge_info[edge_str] = {
             GnInfo.SRC_LINK_TYPE: link_type,
             GnInfo.DST_LINK_TYPE: link_type,
             GnInfo.BANDWIDTH: min(ul1, dl2, est_bandwidth),
-            GnInfo.LATENCY: est_latency,
-            GnInfo.DISTANCE: est_distance,
             GnInfo.PROTOCOL: prot1,
         }
+        if GnInfo.LATENCY in edge_data:
+            assert GnInfo.DISTANCE not in edge_data
+            edge_info[edge_str][GnInfo.LATENCY] = edge_data[GnInfo.LATENCY]
+        if GnInfo.DISTANCE in edge_data:
+            assert GnInfo.LATENCY not in edge_data
+            edge_info[edge_str][GnInfo.DISTANCE] = edge_data[GnInfo.DISTANCE]
     return edge_info
 
 
@@ -115,7 +117,12 @@ def create_topo_device_graph(
     topo_device_graph = GraphGen.create(node_info, edge_info, base_graph=topo)
     if is_export:
         export_name = 'topo_device_graph{}'.format(export_suffix)
+        (n1, n2) = list(topo_device_graph.edges())[0]
+        if GnInfo.LATENCY in topo_device_graph[n1][n2]:
+            which_edge_label = GnInfo.LATENCY
+        else:
+            which_edge_label = GnInfo.BANDWIDTH
         FileHelper.export_graph(
-            topo_device_graph, export_name, which_edge_label=GnInfo.LATENCY)
+            topo_device_graph, export_name, which_edge_label=which_edge_label)
         FileHelper.export_data(node_info, edge_info, export_name)
     return topo, topo_device_graph

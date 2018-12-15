@@ -135,9 +135,10 @@ class NetManager(object):
             bw=bw_mbps, delay=delay, jitter=jitter,
             max_queue_size=max_queue_size, loss=loss)
         self._edge_dict[(src, dst)] = link
-        self._edge_info_dict[(src, dst)] = 'delay {}, jitter {}'.format(
-            delay_ms, jitter_ms)
-        log.debug('link {} <-> {}: delay={}'.format(src, dst, delay))
+        self._edge_info_dict[(src, dst)] = dict(
+            delay_ms=delay_ms, bw_bps=bw_bps)
+        log.debug('link {} <-> {}: {}'.format(
+            src, dst, self._edge_info_dict[(src, dst)]))
 
     def delLink(self, src, dst):
         if (src, dst) in self._edge_dict:
@@ -155,16 +156,22 @@ class NetManager(object):
             del self._edge_info_dict[(src, dst)]
         log.debug('delete link {} <-> {}'.format(src, dst))
 
-    def modifyLinkDelay(self, src, dst, delay_ms):
+    def modifyLinkAttribute(self, src, dst, delay_ms=None, bw_bps=None):
         edge = (src, dst)
         if edge not in self._edge_dict:
             edge = (dst, src)
             assert edge in self._edge_dict
         link = self._edge_dict[edge]
+        if delay_ms is None:
+            delay_ms = self._edge_info_dict[edge]['delay_ms']
+        if bw_bps is None:
+            bw_bps = self._edge_info_dict[edge]['bw_bps']
         delay = '{}ms'.format(delay_ms // 2)
-        link.intf1.config(delay=delay)
-        link.intf2.config(delay=delay)
-        self._edge_info_dict[edge] = delay_ms
+        link.intf1.config(delay=delay, bw_bps=bw_bps)
+        link.intf2.config(delay=delay, bw_bps=bw_bps)
+        self._edge_info_dict[edge] = dict(delay_ms=delay_ms, bw_bps=bw_bps)
+        log.debug('link {} <-> {}: {}'.format(
+            edge[0], edge[1], self._edge_info_dict[edge]))
 
     def modifyLink(
             self, src, dst, new_dst=None, bw_bps=None, delay_ms=1,

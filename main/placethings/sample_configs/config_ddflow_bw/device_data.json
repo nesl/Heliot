@@ -87,52 +87,42 @@
     },
     "links": {
         "CONTROLLER.0 -> CENTER_SWITCH.0": {
-            "GnInfoEnum.LATENCY": 2,
             "GnInfoEnum.BANDWIDTH": 104857600,
             "GnInfoEnum.DISTANCE": 100
         },
         "CENTER_SWITCH.0 -> CONTROLLER.0": {
-            "GnInfoEnum.LATENCY": 2,
             "GnInfoEnum.BANDWIDTH": 104857600,
             "GnInfoEnum.DISTANCE": 100
         },
         "CAMERA.0 -> BB_AP.0": {
-            "GnInfoEnum.LATENCY": 30,
             "GnInfoEnum.BANDWIDTH": 10485760,
             "GnInfoEnum.DISTANCE": 100
         },
         "BB_AP.0 -> CAMERA.0": {
-            "GnInfoEnum.LATENCY": 30,
             "GnInfoEnum.BANDWIDTH": 10485760,
             "GnInfoEnum.DISTANCE": 100
         },
         "T2_MICRO.0 -> FIELD_SWITCH.0": {
-            "GnInfoEnum.LATENCY": 2,
             "GnInfoEnum.BANDWIDTH": 104857600,
             "GnInfoEnum.DISTANCE": 100
         },
         "FIELD_SWITCH.0 -> T2_MICRO.0": {
-            "GnInfoEnum.LATENCY": 2,
             "GnInfoEnum.BANDWIDTH": 104857600,
             "GnInfoEnum.DISTANCE": 100
         },
         "P3_2XLARGE.0 -> CENTER_SWITCH.1": {
-            "GnInfoEnum.LATENCY": 2,
             "GnInfoEnum.BANDWIDTH": 104857600,
             "GnInfoEnum.DISTANCE": 100
         },
         "CENTER_SWITCH.1 -> P3_2XLARGE.0": {
-            "GnInfoEnum.LATENCY": 2,
             "GnInfoEnum.BANDWIDTH": 104857600,
             "GnInfoEnum.DISTANCE": 100
         },
         "T3_LARGE.0 -> FIELD_SWITCH.1": {
-            "GnInfoEnum.LATENCY": 2,
             "GnInfoEnum.BANDWIDTH": 104857600,
             "GnInfoEnum.DISTANCE": 100
         },
         "FIELD_SWITCH.1 -> T3_LARGE.0": {
-            "GnInfoEnum.LATENCY": 2,
             "GnInfoEnum.BANDWIDTH": 104857600,
             "GnInfoEnum.DISTANCE": 100
         }

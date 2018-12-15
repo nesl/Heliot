@@ -6,7 +6,8 @@ from __future__ import unicode_literals
 import logging
 
 from placethings.config.wrapper.config_gen import Config
-from placethings.demo.utils import ConfigDataHelper, init_netsim
+from placethings.config.helper import ConfigDataHelper
+from placethings.netgen.network import init_netsim
 from placethings.demo.base_test import BaseTestCase, wait_key
 
 

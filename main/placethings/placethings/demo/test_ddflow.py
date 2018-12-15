@@ -6,10 +6,10 @@ from __future__ import unicode_literals
 import logging
 import random
 
-from placethings.demo.utils import ConfigDataHelper
-from placethings.demo.base_test import BaseTestCase
 from placethings.config.definition.common_def import Unit
+from placethings.config.helper import ConfigDataHelper
 from placethings.config.wrapper.config_gen import Config
+from placethings.demo.base_test import BaseTestCase
 
 log = logging.getLogger()
 

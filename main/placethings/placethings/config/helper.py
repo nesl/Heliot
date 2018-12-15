@@ -4,37 +4,15 @@ from __future__ import print_function
 from __future__ import unicode_literals
 
 import logging
-import subprocess
 
 from placethings.config.common import LinkHelper
 from placethings.config.definition.common_def import GnInfo
 from placethings.graph_gen.wrapper import graph_gen
 from placethings.config.wrapper.config_gen import Config
 from placethings.ilp import method
-from placethings.netgen.network import DataPlane
+
 
 log = logging.getLogger()
-
-
-def init_netsim(
-        Gnd, G_map, manager_attached_nw_device, docker_img=None,
-        prog_dir=None, use_assigned_latency=True):
-    # get containernet (docker) subnet ip
-    # This will be there is containernet is installed, which install the docker
-    cmd = (
-        "ifconfig | grep -A 1 'docker'"
-        " | tail -1 | cut -d ':' -f 2 | cut -d ' ' -f 1")
-    proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
-    docker0_ip = proc.communicate()[0].replace('\n', '')
-    log.info("docker0 ip={}, docker_img={}".format(docker0_ip, docker_img))
-    # simulate network
-    data_plane = DataPlane(
-        Gnd, docker0_ip=docker0_ip, docker_img=docker_img,
-        prog_dir=prog_dir, use_assigned_latency=use_assigned_latency)
-    # attach manager to a nw device, e.g. 'BB_SWITCH.2'
-    data_plane.add_manager(manager_attached_nw_device)
-    data_plane.deploy_task(G_map, Gnd)
-    return data_plane
 
 
 class ConfigDataHelper(object):

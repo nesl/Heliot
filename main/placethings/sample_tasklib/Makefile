@@ -7,6 +7,12 @@ zip_tasklib:
 unzip_tasklib:
 	mkdir unzip_tasklib && tar -xzvf sample_tasklib.tar.gz -C unzip_tasklib
 
+docker_build:
+	sudo docker build --no-cache -t kumokay/heliot_host:$(TAG) .
+
+docker_push:
+	sudo docker push kumokay/heliot_host:$(TAG)
+
 clean:
 	rm -rf unzip_tasklib
 	rm sample_tasklib.tar.gz

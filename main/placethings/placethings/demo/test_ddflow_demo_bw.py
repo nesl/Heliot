@@ -120,7 +120,7 @@ class TestDynamic(BaseTestCase):
             _topo, topo_device_graph, G_map = cfgHelper.get_graphs()
             data_plane = init_netsim(
                 topo_device_graph, G_map, 'BB_SWITCH.2',
-                docker_img='kumokay/heliot_host:v3',
+                docker_img='kumokay/heliot_host:v4',
                 prog_dir='/opt/github/unzip_tasklib',
                 use_assigned_latency=False)
             raw_input('press any key to start the network')

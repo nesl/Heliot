@@ -42,3 +42,16 @@
 2018-12-14 16:14:23,383 client1|[INFO] call: (TIME) pkt sent time: 1544832863.38
 2018-12-14 16:14:23,383 client1|[INFO] call: (SEND) push: ('iVBORw0KGgoAAAANSUhEUgAAAQAAAACQCAYAAADnY7WRAAAgAElEQVR4AcydB5
 2018-12-14 16:14:27,082 client1|[INFO] client_send_file: file sent: size=37
+2018-12-15 01:26:28,585 client1|[INFO] call: ====== send pkt ======
+2018-12-15 01:26:28,586 client1|[INFO] call: (TIME) pkt sent time: 1544865988.59
+2018-12-15 01:26:28,586 client1|[INFO] call: (SEND) push: ('iVBORw0KGgoAAAANSUhEUgAAAQAAAACQCAYAAADnY7WRAAAgAElEQVR4Acy9CZ
+2018-12-15 01:26:28,586 client1|[WARNING] _handle_connect: Connect error on fd 7: ECONNREFUSED
+2018-12-15 01:26:28,587 client1|[WARNING] _handle_connect: Connect error on fd 7: ECONNREFUSED
+2018-12-15 01:26:28,587 client1|[WARNING] _handle_connect: Connect error on fd 7: ECONNREFUSED
+2018-12-15 01:26:28,587 client1|[WARNING] _handle_connect: Connect error on fd 7: ECONNREFUSED
+2018-12-15 01:26:28,588 client1|[WARNING] _handle_connect: Connect error on fd 7: ECONNREFUSED
+2018-12-15 01:26:28,588 client1|[INFO] client_send_file: file sent: size=41
+2018-12-15 01:26:51,096 client1|[INFO] call: ====== send pkt ======
+2018-12-15 01:26:51,096 client1|[INFO] call: (TIME) pkt sent time: 1544866011.1
+2018-12-15 01:26:51,096 client1|[INFO] call: (SEND) push: ('iVBORw0KGgoAAAANSUhEUgAAAQAAAACQCAYAAADnY7WRAAAgAElEQVR4Acy9CZ
+2018-12-15 01:26:54,801 client1|[INFO] client_send_file: file sent: size=37

@@ -10,7 +10,9 @@ import thread
 from flask import Flask
 import msgpackrpc
 
+from tasklib.entity.base_server import BaseServer
 from tasklib.utils.common_utils import update_rootlogger
+
 
 update_rootlogger('webserver', is_log_to_file=True)
 log = logging.getLogger()
@@ -20,7 +22,7 @@ g_CURRENT_CNT = 0
 
 
 class RPCServer(object):
-    def push(self, data, ts):
+    def push(self, data):
         log.info('got data, size={}'.format(len(data)))
         global g_CURRENT_RESULT, g_CURRENT_CNT
         g_CURRENT_RESULT = data
@@ -58,6 +60,6 @@ if __name__ == "__main__":
     thread.start_new_thread(flaskThread, (web_ip, web_port,))
 
     # rpc server
-    server = msgpackrpc.Server(RPCServer())
+    server = BaseServer('webserver', RPCServer())
     server.listen(msgpackrpc.Address(rpc_ip, int(rpc_port)))
     server.start()

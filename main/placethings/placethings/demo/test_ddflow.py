@@ -8,7 +8,7 @@ import random
 
 from placethings.demo.utils import ConfigDataHelper
 from placethings.demo.base_test import BaseTestCase
-from placethings.definition import Unit
+from placethings.config.definition.common_def import Unit
 from placethings.config.wrapper.config_gen import Config
 
 log = logging.getLogger()
@@ -17,7 +17,7 @@ log = logging.getLogger()
 class TestPhase1(BaseTestCase):
     @classmethod
     def test(
-            cls, config_name=None, is_export=False,
+            cls, config_name=None, is_export=False, is_interactive=True,
             is_update_map=True, is_simulate=False):
         if not config_name:
             config_name = 'sample_configs/config_ddflow_phase1'
@@ -73,7 +73,7 @@ class TestPhase1(BaseTestCase):
 class TestPhase2(BaseTestCase):
     @classmethod
     def test(
-            cls, config_name=None, is_export=False,
+            cls, config_name=None, is_export=False, is_interactive=True,
             is_update_map=False, is_simulate=False):
         if not config_name:
             config_name = 'sample_configs/config_ddflow_phase2'

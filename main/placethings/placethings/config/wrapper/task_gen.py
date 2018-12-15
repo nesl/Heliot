@@ -7,7 +7,7 @@ import copy
 
 from future.utils import iteritems
 
-from placethings.definition import Device, Flavor, Hardware, GtInfo
+from placethings.config.definition.common_def import Device, Flavor, Hardware, GtInfo
 from placethings.utils import json_utils
 
 

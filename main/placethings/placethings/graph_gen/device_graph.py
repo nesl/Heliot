@@ -8,7 +8,7 @@ from future.utils import iteritems
 import logging
 
 from placethings.config.common import LinkHelper, InventoryManager
-from placethings.definition import (
+from placethings.config.definition.common_def import (
     GInfo, GdInfo, GnInfo, Hardware, LinkType, LinkInfo, NodeType, Unit)
 from placethings.graph_gen import topo_graph
 from placethings.graph_gen.graph_utils import GraphGen, FileHelper

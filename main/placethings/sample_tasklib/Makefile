@@ -13,6 +13,9 @@ docker_build:
 docker_push:
 	sudo docker push kumokay/heliot_host:$(TAG)
 
+docker_pull:
+	sudo docker pull kumokay/heliot_host:$(TAG)
+
 clean:
 	rm -rf unzip_tasklib
 	rm sample_tasklib.tar.gz

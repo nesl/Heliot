@@ -9,7 +9,7 @@ import logging
 
 from placethings.config import nw_device_data
 from placethings.config.common import LinkHelper, InventoryManager
-from placethings.definition import GInfo, GnInfo, LinkInfo, NodeType
+from placethings.config.definition.common_def import GInfo, GnInfo, LinkInfo, NodeType
 from placethings.graph_gen.graph_utils import GraphGen, FileHelper
 
 

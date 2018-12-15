@@ -6,8 +6,8 @@ from __future__ import unicode_literals
 
 from future.utils import iteritems
 
-from placethings.definition import Device, DeviceCategory, GnInfo
-from placethings.config import spec_def
+from placethings.config.definition.common_def import Device, DeviceCategory, GnInfo
+from placethings.config.definition import spec_def
 from placethings.utils import json_utils
 
 

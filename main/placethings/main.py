@@ -7,8 +7,6 @@ import argparse
 import logging
 import importlib
 
-from placethings.config import config_factory
-from placethings.graph_gen import graph_factory
 from placethings.utils.common_utils import update_rootlogger
 
 

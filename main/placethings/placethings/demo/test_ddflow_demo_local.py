@@ -7,7 +7,7 @@ import logging
 
 from placethings.config.wrapper.config_gen import Config
 from placethings.demo.utils import ConfigDataHelper, init_netsim
-from placethings.demo.base_test import BaseTestCase
+from placethings.demo.base_test import BaseTestCase, wait_key
 
 
 log = logging.getLogger()
@@ -56,7 +56,7 @@ class Test(BaseTestCase):
 
     @classmethod
     def test(
-            cls, config_name=None, is_export=True,
+            cls, config_name=None, is_export=True, is_interactive=True,
             is_update_map=True, is_simulate=True):
         if not config_name:
             config_name = 'sample_configs/config_ddflow_demo_local'
@@ -76,15 +76,15 @@ class Test(BaseTestCase):
             topo_device_graph, G_map, 'BB_SWITCH.2',
             docker_img='kumokay/heliot_host:v3',
             prog_dir='/opt/github/unzip_tasklib')
-        # raw_input('press any key to start the network')
+        # wait_key(is_interactive, 'press any key to start the network')
         data_plane.start(is_validate=True)
 
         data_plane.print_net_info()
-        # raw_input('press any key to start scenario')
+        # wait_key(is_interactive, 'press any key to start scenario')
         log.info('=== running scenario: initial deployment ===')
         data_plane.start_workers()
 
-        raw_input('press any key to end test')
+        wait_key(is_interactive, 'press any key to end test')
         if is_simulate:
             data_plane.stop_workers()
             data_plane.stop()

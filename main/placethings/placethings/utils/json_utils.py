@@ -9,7 +9,7 @@ import json
 import os
 
 from placethings.utils import common_utils
-from placethings.definition import EnumHelper
+from placethings.config.definition.common_def import EnumHelper
 
 
 log = logging.getLogger()

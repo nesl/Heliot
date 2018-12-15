@@ -14,7 +14,7 @@ import networkx as nx
 
 # NOTE: to use glpk solver, sudo apt-get install glpk-utils
 
-from placethings.definition import (
+from placethings.config.definition.common_def import (
     Const, GdInfo, GtInfo, GInfo, GnInfo, Hardware, NodeType)
 from placethings.ilp import utils as ilp_utils
 

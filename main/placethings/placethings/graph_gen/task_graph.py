@@ -9,7 +9,7 @@ import logging
 
 from placethings.config import task_data
 from placethings.config.common import LinkHelper
-from placethings.definition import GtInfo, GdInfo, GnInfo
+from placethings.config.definition.common_def import GtInfo, GdInfo
 from placethings.graph_gen.graph_utils import GraphGen, FileHelper
 
 
@@ -39,10 +39,12 @@ def _derive_graph_info(task_mapping, task_links, task_info):
     edge_info = _derive_edge_info(task_links)
     return node_info, edge_info
 
-# Creates the Task Graph
-# Each node is the task. (name) and along with the propertie (build flavours and how to invoke them)
+
 def create_graph(
         mapping, task_links, task_info, is_export=False, export_suffix=''):
+    # Creates the Task Graph
+    # Each node is the task. (name) and along with the propertie
+    # (build flavours and how to invoke them)
     node_info, edge_info = _derive_graph_info(mapping, task_links, task_info)
     graph = GraphGen.create(node_info, edge_info)
     if is_export:

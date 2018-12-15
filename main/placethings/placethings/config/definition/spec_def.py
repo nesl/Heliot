@@ -3,7 +3,7 @@ from __future__ import division
 from __future__ import print_function
 from __future__ import unicode_literals
 
-from placethings.definition import (
+from placethings.config.definition.common_def import (
     Const, Device, DeviceCategory, GdInfo, Hardware, LinkInfo, LinkType,
     NwDevice, NwDeviceCategory, NwLink, Unit)
 

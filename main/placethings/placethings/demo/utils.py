@@ -7,7 +7,7 @@ import logging
 import subprocess
 
 from placethings.config.common import LinkHelper
-from placethings.definition import GnInfo
+from placethings.config.definition.common_def import GnInfo
 from placethings.graph_gen.wrapper import graph_gen
 from placethings.config.wrapper.config_gen import Config
 from placethings.ilp import method

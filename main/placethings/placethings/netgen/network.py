@@ -6,8 +6,8 @@ from __future__ import unicode_literals
 import logging
 
 from placethings.netgen.netmanager import NetManager
-from placethings.definition import (
-    GInfo, GnInfo, GdInfo, GtInfo, NwLink, NodeType, DeviceCategory)
+from placethings.config.definition.common_def import (
+    GInfo, GnInfo, GdInfo, GtInfo, NodeType, DeviceCategory)
 
 
 log = logging.getLogger()

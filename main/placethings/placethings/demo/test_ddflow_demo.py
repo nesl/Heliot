@@ -128,7 +128,7 @@ class Test(BaseTestCase):
         # _topo: this is not used. Is the network graph, only network devices
         # topo_device_graph: network devices + devices (We use this for the
         #   creation of mininet)
-        _topo, topo_device_graph, Gd, G_map = cfgHelper.get_graphs()
+        _topo, topo_device_graph, G_map = cfgHelper.get_graphs()
 
         # Printing the graphs which we are using in the AirSim
 
@@ -177,7 +177,7 @@ class Test(BaseTestCase):
         # Docker containers by default have access to outside network (external
         #   machines, internet)
 
-        data_plane = init_netsim(topo_device_graph, Gd, G_map, 'BB_SWITCH.2')
+        data_plane = init_netsim(topo_device_graph, G_map, 'BB_SWITCH.2')
         # raw_input('press any key to start the network')
         data_plane.start(is_validate=True)
 

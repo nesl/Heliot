@@ -44,13 +44,13 @@ Scenrios:
 
 class TestBasic(BaseTestCase):
     _SUPPORTED_CONFIG = {
-        "sample_configs/config_ddflow_demo",
+        "sample_configs/config_ddflow_bw",
     }
 
     @classmethod
     def test(cls, config_name=None, is_export=True, is_simulate=True):
         if not config_name:
-            config_name = 'sample_configs/config_ddflow_demo'
+            config_name = 'sample_configs/config_ddflow_bw'
         assert config_name in cls._SUPPORTED_CONFIG
         cfgHelper = ConfigDataHelper(Config(config_name), is_export)
         cfgHelper.init_task_graph()
@@ -68,17 +68,18 @@ class TestBasic(BaseTestCase):
 
 class TestDynamic(BaseTestCase):
     _SUPPORTED_CONFIG = {
-        "sample_configs/config_ddflow_demo_local",
+        "sample_configs/config_ddflow_bw",
     }
 
     @classmethod
-    def update_nw_latency(
-            cls, cfgHelper, data_plane, nw_dev1, nw_dev2, new_latency,
+    def update_nw_bandwidth(
+            cls, cfgHelper, data_plane, nw_dev1, nw_dev2, new_bandwidth,
             is_simulate):
-        cfgHelper.update_nw_link_latency(nw_dev1, nw_dev2, new_latency)
+        cfgHelper.update_nw_link_bandwidth(nw_dev1, nw_dev2, new_bandwidth)
         cfgHelper.update_topo_device_graph()
         if is_simulate:
-            data_plane.modify_link(nw_dev1, nw_dev2, new_latency)
+            ############ TODO
+            data_plane.modify_link(nw_dev1, nw_dev2, new_delay)
             data_plane.print_net_info()
 
     @classmethod

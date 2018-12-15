@@ -15,10 +15,6 @@ log = logging.getLogger()
 
 
 class TestPhase1(BaseTestCase):
-    @staticmethod
-    def _simulate(topo_device_graph, Gd, G_map):
-        pass
-
     @classmethod
     def test(
             cls, config_name=None, is_export=False,
@@ -32,9 +28,7 @@ class TestPhase1(BaseTestCase):
         cfgHelper.update_topo_device_graph()
         cfgHelper.update_task_map()
         cfgHelper.update_max_latency_log()
-        topo, topo_device_graph, Gd, G_map = cfgHelper.get_graphs()
-        if is_simulate:
-            cls._simulate(topo_device_graph, Gd, G_map)
+        topo, topo_device_graph, G_map = cfgHelper.get_graphs()
         # all_devices = [
         #     'P3_2XLARGE.0',
         #     'T3_LARGE.0',
@@ -67,9 +61,9 @@ class TestPhase1(BaseTestCase):
             if is_update_map:
                 cfgHelper.update_task_map()
             cfgHelper.update_max_latency_log()
-            topo, topo_device_graph, Gd, G_map = cfgHelper.get_graphs()
+            topo, topo_device_graph, G_map = cfgHelper.get_graphs()
             if is_simulate:
-                cls._simulate(topo_device_graph, Gd, G_map)
+                cls._simulate(topo_device_graph, G_map)
         latency_dynamic, latency_static = cfgHelper.get_max_latency_log()
         print('static\tdynamic\tdiff')
         for t1, t2 in zip(latency_static, latency_dynamic):
@@ -77,10 +71,6 @@ class TestPhase1(BaseTestCase):
 
 
 class TestPhase2(BaseTestCase):
-    @staticmethod
-    def _simulate(topo_device_graph, Gd, G_map):
-        pass
-
     @classmethod
     def test(
             cls, config_name=None, is_export=False,
@@ -112,7 +102,7 @@ class TestPhase2(BaseTestCase):
             update_id += 1
             log.info('=== update {}: mobile-ap link ==='.format(update_id))
             dev = random.sample(all_mobiles, 1)[0]
-            _, topo_device_graph, _, _ = cfgHelper.get_graphs()
+            _Gn, topo_device_graph, _Gmap = cfgHelper.get_graphs()
             edges = list(topo_device_graph.edges(dev))
             assert len(edges) == 1
             nw_dev = edges[0][1]

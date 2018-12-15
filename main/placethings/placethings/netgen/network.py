@@ -121,7 +121,7 @@ class DataPlane(object):
         next_task = next_task_list[0]
         return next_task
 
-    def deploy_task(self, G_map, Gd):
+    def deploy_task(self, G_map, Gnd):
         # gen info
         progdir = self.prog_dir
         for task_name in G_map.nodes():
@@ -129,7 +129,7 @@ class DataPlane(object):
             log.info('deploy {} to {}'.format(task_name, device_name))
             ip, port = self.get_worker_address(device_name)
             docker_ip, docker_port = self.get_worker_public_addr(device_name)
-            device_cat = Gd.node[device_name][GdInfo.DEVICE_CAT]
+            device_cat = Gnd.node[device_name][GdInfo.DEVICE_CAT]
             # device_type = Gd.node[device_name][GdInfo.DEVICE_TYPE]
             # exectime = G_map.node[task_name][GtInfo.CUR_LATENCY]
             next_task = self._get_next_task(G_map, task_name)

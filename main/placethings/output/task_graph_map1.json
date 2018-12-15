@@ -12,7 +12,7 @@
             "GtInfoEnum.CUR_LATENCY": 884,
             "GtInfoEnum.EXEC_CMD": {
                 "default": "cd {progdir} && python main_entity.py run_task -n task_findObj -en task_findObj -a {self_addr} -ra {next_addr} -al local &> /dev/null &",
-                "P3_2XLARGE.0": "cd {progdir} && python main_entity.py run_task -n task_findObj -en task_findObj -a {self_addr} -ra {next_addr} -al offload 172.17.49.60:18800 &> /dev/null &",
+                "P3_2XLARGE.0": "cd {progdir} && python main_entity.py run_task -n task_findObj -en task_findObj -a {self_addr} -ra {next_addr} -al local &> /dev/null &",
                 "T3_LARGE.0": "cd {progdir} && python main_entity.py run_task -n task_findObj -en task_findObj -a {self_addr} -ra {next_addr} -al local &> /dev/null &"
             }
         },
@@ -20,7 +20,7 @@
             "GtInfoEnum.CUR_DEVICE": "CONTROLLER.0",
             "GtInfoEnum.CUR_LATENCY": 0,
             "GtInfoEnum.EXEC_CMD": {
-                "default": "cd {progdir} && python main_entity.py run_task -n task_alert -en task_forward -a {self_addr} -ra 172.17.51.1:18900 &> /dev/null &"
+                "default": "cd {progdir} && python webserver.py {docker_addr} {self_addr} &> /dev/null &"
             }
         }
     },

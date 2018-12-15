@@ -16,20 +16,8 @@ def create_topo_graph(cfg, is_export, export_suffix=''):
         is_export=is_export, export_suffix=export_suffix)
 
 
-def create_device_graph(cfg, is_export, export_suffix=''):
-    assert type(cfg) is Config
-    return device_graph.create_graph(
-        cfg.all_device_data.device_spec.data,
-        cfg.all_device_data.device_inventory.data,
-        cfg.all_device_data.device_links.data,
-        cfg.all_nw_device_data.nw_device_spec.data,
-        cfg.all_nw_device_data.nw_device_inventory.data,
-        cfg.all_nw_device_data.nw_device_links.data,
-        is_export=is_export, export_suffix=export_suffix)
-
-
 def create_topo_device_graph(cfg, is_export, export_suffix=''):
-    Gn, Gnd, Gd = device_graph.create_topo_device_graph(
+    Gn, Gnd = device_graph.create_topo_device_graph(
         cfg.all_device_data.device_spec.data,
         cfg.all_device_data.device_inventory.data,
         cfg.all_device_data.device_links.data,
@@ -37,7 +25,7 @@ def create_topo_device_graph(cfg, is_export, export_suffix=''):
         cfg.all_nw_device_data.nw_device_inventory.data,
         cfg.all_nw_device_data.nw_device_links.data,
         is_export=is_export, export_suffix=export_suffix)
-    return Gn, Gnd, Gd
+    return Gn, Gnd
 
 
 def create_task_graph(cfg, is_export, export_suffix=''):

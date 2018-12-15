@@ -70,10 +70,10 @@ class Test(BaseTestCase):
 
         log.info("=== start mininet ===")
 
-        _topo, topo_device_graph, Gd, G_map = cfgHelper.get_graphs()
+        _topo, topo_device_graph, G_map = cfgHelper.get_graphs()
 
         data_plane = init_netsim(
-            topo_device_graph, Gd, G_map, 'BB_SWITCH.2',
+            topo_device_graph, G_map, 'BB_SWITCH.2',
             docker_img='kumokay/heliot_host:v3',
             prog_dir='/opt/github/unzip_tasklib')
         # raw_input('press any key to start the network')

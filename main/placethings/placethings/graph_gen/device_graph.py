@@ -6,12 +6,10 @@ from __future__ import unicode_literals
 from copy import deepcopy
 from future.utils import iteritems
 import logging
-import networkx as nx
 
-from placethings.config import device_data, nw_device_data
 from placethings.config.common import LinkHelper, InventoryManager
 from placethings.definition import (
-    Const, GInfo, GdInfo, GnInfo, Hardware, LinkType, LinkInfo, NodeType, Unit)
+    GInfo, GdInfo, GnInfo, Hardware, LinkType, LinkInfo, NodeType, Unit)
 from placethings.graph_gen import topo_graph
 from placethings.graph_gen.graph_utils import GraphGen, FileHelper
 
@@ -94,33 +92,6 @@ def _derive_edge_info(
     return edge_info
 
 
-def _derive_device_graph_edge_info(Gn, device_nodes):
-    edge_info = {}
-    for src in device_nodes:
-        for dst in device_nodes:
-            if src == dst:
-                continue
-            try:
-                path = nx.shortest_path(
-                    Gn, source=src, target=dst, weight=GnInfo.LATENCY)
-                min_bw = Const.INT_MAX
-                total_latency = 0
-                n1 = path[0]
-                for i in range(1, len(path)):
-                    n2 = path[i]
-                    total_latency += Gn[n1][n2][GnInfo.LATENCY]
-                    min_bw = min(min_bw, Gn[n1][n2][GnInfo.BANDWIDTH])
-                    n1 = n2
-                edge_str = LinkHelper.get_edge(src, dst)
-                edge_info[edge_str] = {
-                    GdInfo.LATENCY: total_latency,
-                    GdInfo.BANDWIDTH: min_bw,
-                }
-            except nx.NetworkXNoPath:
-                continue
-    return edge_info
-
-
 def _derive_graph_info(spec, inventory, links, nw_spec, nw_inventory):
     node_info = _derive_node_info(spec, inventory)
     edge_info = _derive_edge_info(
@@ -142,34 +113,9 @@ def create_topo_device_graph(
     node_info, edge_info = _derive_graph_info(
         spec, inventory, links, nw_spec, nw_inventory)
     topo_device_graph = GraphGen.create(node_info, edge_info, base_graph=topo)
-    # derive device_graph
-    dev_edge_info = _derive_device_graph_edge_info(
-        topo_device_graph, list(node_info))
-    dev_graph = GraphGen.create(node_info, dev_edge_info)
     if is_export:
         export_name = 'topo_device_graph{}'.format(export_suffix)
         FileHelper.export_graph(
             topo_device_graph, export_name, which_edge_label=GnInfo.LATENCY)
         FileHelper.export_data(node_info, edge_info, export_name)
-        export_name = 'device_graph{}'.format(export_suffix)
-        FileHelper.export_graph(
-            dev_graph, export_name, which_edge_label=GdInfo.LATENCY)
-        FileHelper.export_data(node_info, dev_edge_info, export_name)
-    return topo, topo_device_graph, dev_graph
-
-
-def create_graph(
-        spec, inventory, links,
-        nw_spec, nw_inventory, nw_links,
-        is_export=False, export_suffix=''):
-    _, _, dev_graph = create_topo_device_graph(
-        spec, inventory, links, nw_spec, nw_inventory, nw_links,
-        is_export, export_suffix)
-    return dev_graph
-
-
-def create_graph_from_file(device_data_path, nw_data_path, is_export=False):
-    spec, inventory, links = device_data.import_data(device_data_path)
-    nw_spec, nw_inventory, nw_links = nw_device_data.import_data(nw_data_path)
-    return create_graph(
-        spec, inventory, links, nw_spec, nw_inventory, nw_links, is_export)
+    return topo, topo_device_graph

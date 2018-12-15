@@ -63,6 +63,8 @@ class TestBasic(BaseTestCase):
         if is_simulate:
             data_plane = init_netsim(
                 topo_device_graph, G_map, 'BB_SWITCH.2',
+                docker_img='kumokay/heliot_host:v4',
+                prog_dir='/opt/github/unzip_tasklib',
                 use_assigned_latency=False)
             data_plane.start(is_validate=True)
             data_plane.start_workers()

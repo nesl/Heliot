@@ -11,14 +11,14 @@ To run one test case:
 ```
 $ python main.py -tc TESTCASE_MODULE.TESTCASE -c CONFIGFILE
 ```
+For example:
+```
+$ python main.py -tc test_ddflow_demo_local.Test -c sample_configs/test_ddflow_demo_local
+```
 - <b>TESTCASE_MODULE</b> is the file name of your test case in placethings/demo
 - <b>TESTCASE</b> is the name of the class that contains your test function.
 
 To add one test case, please inherit <b>placethings.demo.BaseTestCase</b> and implement your own test logic in <b>test()</b> method.
-
-e.g.
-$ python main.py -tc test_ddflow_demo_local.Test -c sample_configs/test_ddflow_demo_local
-```
 
 Some of the demo cases runs tasks that depends on code from the sample library.
 

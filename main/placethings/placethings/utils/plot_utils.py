@@ -4,9 +4,11 @@ from __future__ import print_function
 from __future__ import unicode_literals
 
 import logging
+import math
 
-import networkx as nx
+from future.utils import iteritems
 from matplotlib import pyplot as plt
+import networkx as nx
 
 from placethings.utils import common_utils
 
@@ -27,6 +29,9 @@ def plot(
         node_label_dict=None, filepath=None):
     if not pos:
         pos = nx.spring_layout(graph)
+    n_nodes = nx.number_of_nodes(graph)
+    figure_len = max(2, int(math.sqrt(n_nodes)))
+    plt.figure(figsize=(figure_len * 3.2, figure_len * 2.4))
     nx.draw_networkx_nodes(
         graph,
         pos=pos,
@@ -35,9 +40,15 @@ def plot(
         node_color='r',
         node_shape='o',
     )
+    node_label_pos = {}
+    margin = min(0.1, 1 / (math.sqrt(n_nodes)))
+    for node_name, (x, y) in iteritems(pos):
+        node_label_pos[node_name] = (x, y - margin)  # put label under the node
+        x = min(max(x, margin), 1 - margin)
+        y = min(max(y, margin), 1 - margin)
     nx.draw_networkx_labels(
         graph,
-        pos=pos,
+        pos=node_label_pos,
         labels=node_label_dict,
         font_size=10,
         font_color='k',

@@ -43,22 +43,9 @@ $  sudo docker pull kumokay/heliot_host:v4
 
 # try it out! and run with -v option to print the output graphs
 $ python main.py -tc test_ddflow_demo_local.Test -v
-
 ```
-
-
+For more details, see this [docs/demo.md#demo-case-explain](docs/demo.md#demo-case-explain)
 
 ## Example
 
-All examples are in placethings/demo.
-See https://github.com/nesl/Heliot/blob/dev/main/placethings/docs/demo.md
-
-```
-$ python main.py -tc TESTCASE_FILE.TESTCASE -c CONFIGFILE
-
-all TESTCASE_FILEs are in placethings/demo
-TESTCASE is the name of each lcass
-
-e.g.
-$ python main.py -tc test_ddflow_demo_local.Test -c sample_configs/test_ddflow_demo_local
-```
+All examples are in placethings/demo. See [docs/demo.md](docs/demo.md) for more details

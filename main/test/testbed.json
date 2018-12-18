@@ -19,7 +19,6 @@
                     "compute": [
                          {
                               "attributes": {
-                                   "manufacturer": "intel",
                                    "no_of_cores": 8
                               },
                               "type": "cpu"
@@ -52,7 +51,6 @@
                     "compute": [
                          {
                               "attributes": {
-                                   "manufacturer": "intel",
                                    "no_of_cores": 8
                               },
                               "type": "cpu"
@@ -82,7 +80,6 @@
                     "compute": [
                          {
                               "attributes": {
-                                   "manufacturer": "arm",
                                    "no_of_cores": 4
                               },
                               "type": "cpu"
@@ -117,7 +114,6 @@
                     "compute": [
                          {
                               "attributes": {
-                                   "manufacturer": "arm",
                                    "no_of_cores": 1
                               },
                               "type": "cpu"
@@ -155,7 +151,6 @@
                     "compute": [
                          {
                               "attributes": {
-                                   "manufacturer": "arm",
                                    "no_of_cores": 2
                               },
                               "type": "cpu"
@@ -168,6 +163,43 @@
                     "description": "Raspberry pi with camera and VPU"
                },
                "type": "raspberry_pi_3"
+          },
+          {
+               "attributes": {
+                    "sensor": [
+                         {
+                              "attributes": {},
+                              "type": "camera"
+                         }
+                    ],
+                    "os": {
+                         "attributes": {},
+                         "type": "android"
+                    },
+                    "connection": [
+                         {
+                              "attributes": {
+                                   "token": "api-token",
+                                   "ip": "172.17.49.60"
+                              },
+                              "type": "rest_api"
+                         }
+                    ],
+                    "compute": [
+                         {
+                              "attributes": {
+                                   "no_of_cores": 8
+                              },
+                              "type": "cpu"
+                         },
+                         {
+                              "attributes": {},
+                              "type": "gpu"
+                         }
+                    ],
+                    "description": "Samsung Galaxy S-7 device"
+               },
+               "type": "smartphone"
           }
      ]
 }

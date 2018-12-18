@@ -1,0 +1,173 @@
+{
+     "Devices": [
+          {
+               "attributes": {
+                    "os": {
+                         "attributes": {},
+                         "type": "ubuntu"
+                    },
+                    "connection": [
+                         {
+                              "attributes": {
+                                   "password": "pwd",
+                                   "username": "root",
+                                   "ip": "172.17.49.60"
+                              },
+                              "type": "ssh"
+                         }
+                    ],
+                    "compute": [
+                         {
+                              "attributes": {
+                                   "manufacturer": "intel",
+                                   "no_of_cores": 8
+                              },
+                              "type": "cpu"
+                         },
+                         {
+                              "attributes": {},
+                              "type": "gpu"
+                         }
+                    ],
+                    "description": "General Linux Server used for mininet"
+               },
+               "type": "server"
+          },
+          {
+               "attributes": {
+                    "os": {
+                         "attributes": {},
+                         "type": "windows"
+                    },
+                    "connection": [
+                         {
+                              "attributes": {
+                                   "password": "pwd",
+                                   "username": "root",
+                                   "ip": "172.17.49.60"
+                              },
+                              "type": "ssh"
+                         }
+                    ],
+                    "compute": [
+                         {
+                              "attributes": {
+                                   "manufacturer": "intel",
+                                   "no_of_cores": 8
+                              },
+                              "type": "cpu"
+                         },
+                         {
+                              "attributes": {},
+                              "type": "gpu"
+                         }
+                    ],
+                    "description": "General Windows Server used for Airsim"
+               },
+               "type": "server"
+          },
+          {
+               "attributes": {
+                    "description": "Nvidia Jetson Tx2",
+                    "connection": [
+                         {
+                              "attributes": {
+                                   "password": "pwd",
+                                   "username": "root",
+                                   "ip": "172.17.49.60"
+                              },
+                              "type": "ssh"
+                         }
+                    ],
+                    "compute": [
+                         {
+                              "attributes": {
+                                   "manufacturer": "arm",
+                                   "no_of_cores": 4
+                              },
+                              "type": "cpu"
+                         },
+                         {
+                              "attributes": {},
+                              "type": "gpu"
+                         }
+                    ]
+               },
+               "type": "nvidia_jetson_tx2"
+          },
+          {
+               "attributes": {
+                    "sensor": [
+                         {
+                              "attributes": {},
+                              "type": "camera"
+                         }
+                    ],
+                    "description": "Google vision kit",
+                    "connection": [
+                         {
+                              "attributes": {
+                                   "password": "pwd",
+                                   "username": "root",
+                                   "ip": "172.17.49.60"
+                              },
+                              "type": "ssh"
+                         }
+                    ],
+                    "compute": [
+                         {
+                              "attributes": {
+                                   "manufacturer": "arm",
+                                   "no_of_cores": 1
+                              },
+                              "type": "cpu"
+                         },
+                         {
+                              "attributes": {},
+                              "type": "vpu"
+                         }
+                    ]
+               },
+               "type": "google_vision_kit"
+          },
+          {
+               "attributes": {
+                    "sensor": [
+                         {
+                              "attributes": {},
+                              "type": "camera"
+                         }
+                    ],
+                    "os": {
+                         "attributes": {},
+                         "type": "raspbian"
+                    },
+                    "connection": [
+                         {
+                              "attributes": {
+                                   "password": "pwd",
+                                   "username": "root",
+                                   "ip": "172.17.49.60"
+                              },
+                              "type": "ssh"
+                         }
+                    ],
+                    "compute": [
+                         {
+                              "attributes": {
+                                   "manufacturer": "arm",
+                                   "no_of_cores": 2
+                              },
+                              "type": "cpu"
+                         },
+                         {
+                              "attributes": {},
+                              "type": "vpu"
+                         }
+                    ],
+                    "description": "Raspberry pi with camera and VPU"
+               },
+               "type": "raspberry_pi_3"
+          }
+     ]
+}

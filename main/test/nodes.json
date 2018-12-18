@@ -1,0 +1,156 @@
+{
+     "virtual_sensor": [
+          {
+               "attributes": {
+                    "id": "virtual_drone_0",
+                    "description": "Adding virtual drone",
+                    "sensor": [
+                         {
+                              "attributes": {
+                                   "vehicle": {
+                                        "attributes": {},
+                                        "type": "drone"
+                                   }
+                              },
+                              "type": "camera"
+                         }
+                    ]
+               },
+               "type": "airsim"
+          }
+     ],
+     "nodes": [
+          {
+               "attributes": {
+                    "memory": {
+                         "attributes": {
+                              "size": 512000000.0
+                         },
+                         "type": "ram"
+                    },
+                    "compute": [
+                         {
+                              "attributes": {
+                                   "no_of_cores": 1
+                              },
+                              "type": "cpu"
+                         },
+                         {
+                              "attributes": {},
+                              "type": "vpu"
+                         }
+                    ],
+                    "id": "google_vision_kit_0",
+                    "description": "Adding node for Google vision kit to part of scenario",
+                    "sensor": [
+                         {
+                              "attributes": {},
+                              "type": "camera"
+                         }
+                    ]
+               },
+               "type": "google_vision_kit"
+          },
+          {
+               "attributes": {
+                    "memory": {
+                         "attributes": {
+                              "size": 8000000000.0
+                         },
+                         "type": "ram"
+                    },
+                    "compute": [
+                         {
+                              "attributes": {
+                                   "no_of_cores": 4
+                              },
+                              "type": "cpu"
+                         },
+                         {
+                              "attributes": {},
+                              "type": "gpu"
+                         }
+                    ],
+                    "id": "jetson_tx2_0",
+                    "description": "Adding Nvidia Jetson Tx2 node to the scenario"
+               },
+               "type": "nvidia_jetson_tx2"
+          },
+          {
+               "attributes": {
+                    "memory": {
+                         "attributes": {
+                              "size": 4000000000.0
+                         },
+                         "type": "ram"
+                    },
+                    "compute": [
+                         {
+                              "attributes": {
+                                   "no_of_cores": 8
+                              },
+                              "type": "cpu"
+                         },
+                         {
+                              "attributes": {},
+                              "type": "gpu"
+                         }
+                    ],
+                    "os": {
+                         "attributes": {},
+                         "type": "android"
+                    },
+                    "description": "Adding Samsung Galaxy S-7 device to scenario",
+                    "id": "samsung_galaxy_s7_0"
+               },
+               "type": "container"
+          }
+     ],
+     "links": [
+          {
+               "attributes": {
+                    "point_1": "virtual_drone_0",
+                    "latency": 2,
+                    "description": "link between drone and virtual switch",
+                    "point_2": "virtual_switch_0"
+               },
+               "type": "mininet_link"
+          },
+          {
+               "attributes": {
+                    "point_1": "google_vision_kit_0",
+                    "latency": 2,
+                    "description": "link between google vision kit  and virtual switch",
+                    "point_2": "virtual_switch_0"
+               },
+               "type": "mininet_link"
+          },
+          {
+               "attributes": {
+                    "point_1": "jetson_tx2_0",
+                    "latency": 2,
+                    "description": "link between jetson tx2  and virtual switch",
+                    "point_2": "virtual_switch_0"
+               },
+               "type": "mininet_link"
+          },
+          {
+               "attributes": {
+                    "point_1": "samsung_galaxy_s7_0",
+                    "latency": 2,
+                    "description": "link between samsung galaxy s7  and virtual switch",
+                    "point_2": "virtual_switch_0"
+               },
+               "type": "mininet_link"
+          }
+     ],
+     "virtual_infrastructure_nodes": [
+          {
+               "attributes": {
+                    "id": "virtual_switch_0",
+                    "description": "Adding virtual switch"
+               },
+               "type": "switch"
+          }
+     ]
+}

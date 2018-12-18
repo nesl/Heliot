@@ -1,7 +1,7 @@
 {
      "Devices": [
           {
-               "type": "server",
+               "type": "mininet_server",
                "attributes": {
                     "description": "General Linux Server used for mininet",
                     "compute": [
@@ -39,7 +39,7 @@
                }
           },
           {
-               "type": "server",
+               "type": "airsim_server",
                "attributes": {
                     "description": "General Windows Server used for Airsim",
                     "compute": [

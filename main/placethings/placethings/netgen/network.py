@@ -4,37 +4,35 @@ from __future__ import print_function
 from __future__ import unicode_literals
 
 import logging
+import subprocess
 
 from placethings.netgen.netmanager import NetManager
-from placethings.definition import (
-    GInfo, GnInfo, GdInfo, GtInfo, NwLink, NodeType, DeviceCategory)
+from placethings.config.definition.common_def import (
+    GInfo, GnInfo, GdInfo, GtInfo, NodeType, DeviceCategory)
 
 
 log = logging.getLogger()
 
 
-_PKT_LOSS = {
-    NwLink.WIFI: 0.0,
-    NwLink.ETHERNET: 0.0,
-}
-
-
-class AddressManager(object):
-    def __init__(self, net):
-        self.net = net
-        self.address_book = {}
-
-    def get_address_book(self):
-        return self.address_book
-
-    def get_task_address(self, task_name, device_name):
-        if task_name in self.address_book:
-            _, ip, port = self.address_book[task_name]
-        else:
-            ip = self.net.get_device_ip(device_name)
-            port = self.net.get_device_free_port(device_name)
-            self.address_book[task_name] = (device_name, ip, port)
-        return ip, port
+def init_netsim(
+        Gnd, G_map, manager_attached_nw_device, docker_img=None,
+        prog_dir=None, use_assigned_latency=True):
+    # get containernet (docker) subnet ip
+    # This will be there is containernet is installed, which install the docker
+    cmd = (
+        "ifconfig | grep -A 1 'docker'"
+        " | tail -1 | cut -d ':' -f 2 | cut -d ' ' -f 1")
+    proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
+    docker0_ip = proc.communicate()[0].replace('\n', '')
+    log.info("docker0 ip={}, docker_img={}".format(docker0_ip, docker_img))
+    # simulate network
+    data_plane = DataPlane(
+        Gnd, docker0_ip=docker0_ip, docker_img=docker_img,
+        prog_dir=prog_dir, use_assigned_latency=use_assigned_latency)
+    # attach manager to a nw device, e.g. 'BB_SWITCH.2'
+    data_plane.add_manager(manager_attached_nw_device)
+    data_plane.deploy_task(G_map, Gnd)
+    return data_plane
 
 
 class DataPlane(object):
@@ -53,7 +51,7 @@ class DataPlane(object):
 
     def __init__(
             self, topo_device_graph, docker0_ip=None, docker_img=None,
-            prog_dir=None):
+            prog_dir=None, use_assigned_latency=True):
         if not docker0_ip:
             docker0_ip = self._DOCKER_IP
         if not docker_img:
@@ -63,6 +61,7 @@ class DataPlane(object):
         self.worker_dict = {}  # worker_name: start_cmd
         self.task_cmd = {}
         self.prog_dir = prog_dir
+        self.use_assigned_latency = use_assigned_latency
 
         # This is the controller which we are creating
         self.net = NetManager.create(docker0_ip, docker_img)
@@ -79,11 +78,13 @@ class DataPlane(object):
         for d1, d2 in topo_device_graph.edges():
             print('edge: {},{}'.format(d1, d2))
             edge_info = topo_device_graph[d1][d2]
+            if self.use_assigned_latency:
+                delay_ms = edge_info[GnInfo.LATENCY]
+            else:
+                speed_of_light = 299792458
+                delay_ms = int(edge_info[GnInfo.DISTANCE] / speed_of_light)
             self.net.addLink(
-                d1, d2,
-                bw_bps=edge_info[GnInfo.BANDWIDTH],
-                delay_ms=edge_info[GnInfo.LATENCY],
-                pkt_loss_rate=_PKT_LOSS[edge_info[GnInfo.PROTOCOL]])
+                d1, d2, bw_bps=edge_info[GnInfo.BANDWIDTH], delay_ms=delay_ms)
         self.net.print_net_info()
 
     def print_net_info(self):
@@ -92,8 +93,9 @@ class DataPlane(object):
     def run_mininet_cli(self):
         self.net.run_cli()
 
-    def modify_link(self, src, dst, delay_ms):
-        self.net.modifyLinkDelay(src, dst, delay_ms)
+    def modify_link(self, src, dst, delay_ms=None, bw_bps=None):
+        self.net.modifyLinkAttribute(
+            src, dst, delay_ms=delay_ms, bw_bps=bw_bps)
 
     def add_manager(self, device_name):
         self.net.addHost(self._MANAGER_NAME)
@@ -121,7 +123,7 @@ class DataPlane(object):
         next_task = next_task_list[0]
         return next_task
 
-    def deploy_task(self, G_map, Gd):
+    def deploy_task(self, G_map, Gnd):
         # gen info
         progdir = self.prog_dir
         for task_name in G_map.nodes():
@@ -129,7 +131,7 @@ class DataPlane(object):
             log.info('deploy {} to {}'.format(task_name, device_name))
             ip, port = self.get_worker_address(device_name)
             docker_ip, docker_port = self.get_worker_public_addr(device_name)
-            device_cat = Gd.node[device_name][GdInfo.DEVICE_CAT]
+            device_cat = Gnd.node[device_name][GdInfo.DEVICE_CAT]
             # device_type = Gd.node[device_name][GdInfo.DEVICE_TYPE]
             # exectime = G_map.node[task_name][GtInfo.CUR_LATENCY]
             next_task = self._get_next_task(G_map, task_name)
@@ -198,76 +200,3 @@ class DataPlane(object):
     def stop(self):
         log.info('stop mininet.')
         self.net.stop()
-
-
-class NetGen(object):
-
-    _PKT_LOSS = {
-        NwLink.WIFI: 0.0,
-        NwLink.ETHERNET: 0.0,
-    }
-
-    @classmethod
-    def create_control_plane(cls, Gn):
-        """
-        Create an empty network and add nodes to it.
-
-        Args:
-            Gn (nx.DiGraph): topo_device_graph
-        Returns:
-            net (NetManager): a network of switches and devices
-        """
-        return cls.create(Gn)
-
-    def create_data_plane(cls, Gn):
-        """
-        Args:
-            Gn (nx.DiGraph): topo_device_graph
-        Returns:
-            net (NetManager): a network of all switches
-        """
-        net = NetManager.create()
-        for node in Gn.nodes():
-            node_type = Gn.node[node][GInfo.NODE_TYPE]
-            if node_type == NodeType.DEVICE:
-                net.addSwitch(node)
-            elif node_type == NodeType.NW_DEVICE:
-                net.addSwitch(node)
-            else:
-                assert False, 'unkown node_type: {}'.format(node_type)
-        for d1, d2 in Gn.edges():
-            edge_info = Gn[d1][d2]
-            net.addLink(
-                d1, d2,
-                bw_bps=edge_info[GnInfo.BANDWIDTH],
-                delay_ms=edge_info[GnInfo.LATENCY],
-                pkt_loss_rate=cls._PKT_LOSS[edge_info[GnInfo.PROTOCOL]])
-        return net
-
-    @classmethod
-    def create(cls, Gn):
-        """
-        Create an empty network and add nodes to it.
-
-        Args:
-            Gn (nx.DiGraph): topo_device_graph
-        Returns:
-            net (NetManager)
-        """
-        net = NetManager.create()
-        for node in Gn.nodes():
-            node_type = Gn.node[node][GInfo.NODE_TYPE]
-            if node_type == NodeType.DEVICE:
-                net.addHost(node)
-            elif node_type == NodeType.NW_DEVICE:
-                net.addSwitch(node)
-            else:
-                assert False, 'unkown node_type: {}'.format(node_type)
-        for d1, d2 in Gn.edges():
-            edge_info = Gn[d1][d2]
-            net.addLink(
-                d1, d2,
-                bw_bps=edge_info[GnInfo.BANDWIDTH],
-                delay_ms=edge_info[GnInfo.LATENCY],
-                pkt_loss_rate=cls._PKT_LOSS[edge_info[GnInfo.PROTOCOL]])
-        return net

@@ -64,7 +64,7 @@ def create_default_nw_inventory():
 
 class TestDefineNwConfig(BaseTestCase):
     @staticmethod
-    def test(config_name=None, is_export=False):
+    def test(config_name=None, is_export=False, is_interactive=True):
         if not config_name:
             config_name = 'sample_configs/config_base'
 
@@ -88,7 +88,7 @@ class TestDefineNwConfig(BaseTestCase):
 
 class TestDefineDeviceConfig(BaseTestCase):
     @staticmethod
-    def test(config_name=None, is_export=False):
+    def test(config_name=None, is_export=False, is_interactive=True):
         if not config_name:
             config_name = 'sample_configs/config_base'
 

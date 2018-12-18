@@ -9,7 +9,7 @@ import logging
 
 from placethings.config import task_data
 from placethings.config.common import LinkHelper
-from placethings.definition import GtInfo, GdInfo
+from placethings.config.definition.common_def import GtInfo, GdInfo
 from placethings.graph_gen.graph_utils import GraphGen, FileHelper
 
 
@@ -39,10 +39,12 @@ def _derive_graph_info(task_mapping, task_links, task_info):
     edge_info = _derive_edge_info(task_links)
     return node_info, edge_info
 
-# Creates the Task Graph
-# Each node is the task. (name) and along with the propertie (build flavours and how to invoke them)
+
 def create_graph(
         mapping, task_links, task_info, is_export=False, export_suffix=''):
+    # Creates the Task Graph
+    # Each node is the task. (name) and along with the propertie
+    # (build flavours and how to invoke them)
     node_info, edge_info = _derive_graph_info(mapping, task_links, task_info)
     graph = GraphGen.create(node_info, edge_info)
     if is_export:
@@ -62,12 +64,12 @@ def create_graph_from_file(filepath, is_export=False):
     return create_graph(task_mapping, task_links, task_info, is_export)
 
 
-def _gen_update_info(result_mapping, Gt, Gd):
+def _gen_update_info(result_mapping, result_latency, Gt, Gnd):
     node_info = {}
     for task, device in iteritems(result_mapping):
         if Gt.node[task][GtInfo.DEVICE]:
             assert device == Gt.node[task][GtInfo.DEVICE]
-        device_type = Gd.node[device][GdInfo.DEVICE_TYPE]
+        device_type = Gnd.node[device][GdInfo.DEVICE_TYPE]
         latency_info = Gt.node[task][GtInfo.LATENCY_INFO]
         exec_cmd = deepcopy(Gt.node[task][GtInfo.EXEC_CMD])
         compute_latency = 0 if not latency_info else (
@@ -78,11 +80,8 @@ def _gen_update_info(result_mapping, Gt, Gd):
             GtInfo.EXEC_CMD: exec_cmd
         }
     edge_info = {}
-    for edge in Gt.edges():
-        t1, t2 = edge
-        d1 = node_info[t1][GtInfo.CUR_DEVICE]
-        d2 = node_info[t2][GtInfo.CUR_DEVICE]
-        transmission_latency = Gd[d1][d2][GdInfo.LATENCY]
+    for (t1, t2) in Gt.edges():
+        transmission_latency = result_latency[(t1, t2)]
         edge_info[LinkHelper.get_edge(t1, t2)] = {
             GtInfo.CUR_LATENCY: transmission_latency,
         }
@@ -104,8 +103,10 @@ def _gen_graph_labels(Gt):
     return node_labels, edge_labels
 
 
-def update_graph(result_mapping, Gt, Gd, is_export, export_suffix=''):
-    node_info, edge_info = _gen_update_info(result_mapping, Gt, Gd)
+def update_graph(
+        result_mapping, result_latency, Gt, Gnd, is_export, export_suffix=''):
+    node_info, edge_info = _gen_update_info(
+        result_mapping, result_latency, Gt, Gnd)
     Gt = GraphGen.create(node_info, edge_info, base_graph=Gt)
     if is_export:
         export_data_name = 'task_graph_map{}'.format(export_suffix)

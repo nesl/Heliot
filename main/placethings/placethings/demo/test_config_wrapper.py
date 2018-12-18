@@ -8,7 +8,7 @@ import logging
 from placethings.config.wrapper.config_gen import Config
 from placethings.config.wrapper.task_gen import TaskFlavor
 from placethings.demo.base_test import BaseTestCase
-from placethings.definition import (
+from placethings.config.definition.common_def import (
     Device, DeviceCategory, Flavor, Hardware, NwDevice, NwDeviceCategory,
     LinkType, Unit)
 
@@ -63,7 +63,7 @@ def compare_cfg(cfg, cfg2):
 
 class TestDefineConfig(BaseTestCase):
     @staticmethod
-    def test(config_name=None, is_export=False):
+    def test(config_name=None, is_export=False, is_interactive=True):
         if not config_name:
             config_name = 'sample_configs/config_sample'
         cfg = Config()

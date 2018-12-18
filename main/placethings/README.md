@@ -39,26 +39,13 @@ $ sudo apt-get install glpk-utils
 3. Run demo case
 ```
 # first get the docker image for creating mininet hosts
-$  sudo docker pull kumokay/heliot_host:v1
+$  sudo docker pull kumokay/heliot_host:v4
 
-# try it out!
-$ python main.py -tc test_ddflow_demo.Test -c config_ddflow_demo
+# try it out! and run with -v option to print the output graphs
+$ python main.py -tc test_ddflow_demo_local.Test -v
 ```
-
-run with -v option to print the output graphs
+For more details, see this [docs/demo.md#demo-case-explain](docs/demo.md#demo-case-explain)
 
 ## Example
 
-Al examples are in placethings/demo.
-See https://github.com/nesl/Heliot/blob/dev/main/placethings/placethings/demo/README.md
-
-```
-$ python main.py -tc TESTCASE_FILE.TESTCASE -c CONFIGFILE
-
-all TESTCASE_FILEs are in placethings/demo
-TESTCASE is the name of each lcass
-
-e.g.
-$ python main.py -tc test_ddflow_demo.Test -c config_ddflow_demo
-```
-
+All examples are in placethings/demo. See [docs/demo.md](docs/demo.md) for more details

@@ -8,23 +8,87 @@ from collections import defaultdict
 from future.utils import listvalues
 import logging
 from itertools import izip as zip
+
 import pulp
+import networkx as nx
 
 # NOTE: to use glpk solver, sudo apt-get install glpk-utils
 
-from placethings.definition import Const, GdInfo, GtInfo, Hardware
+from placethings.config.definition.common_def import (
+    Const, GdInfo, GtInfo, GInfo, GnInfo, Hardware, NodeType)
 from placethings.ilp import utils as ilp_utils
 
 
 log = logging.getLogger()
 
 
-def solve(Gt, Gd, target_latency=None):
+def _get_transmission_latency(ti, tj, di, dj, Gt, Gnd, use_assigned_latency):
+    all_paths = list(nx.all_simple_paths(Gnd, di, dj))
+    data_sz = Gt[ti][tj][GtInfo.TRAFFIC]
+    speed_of_light = 299792458
+    min_latency = 2147483647
+    for path in all_paths:
+        total_latency = 0
+        d1 = path[0]
+        for i in range(1, len(path)):
+            d2 = path[i]
+            if use_assigned_latency:  # use assigned latency directly
+                latency = Gnd[d1][d2][GnInfo.LATENCY]
+            else:
+                distance = Gnd[d1][d2][GnInfo.DISTANCE]
+                bandwidth = Gnd[d1][d2][GnInfo.BANDWIDTH]
+                propagation_delay = distance / speed_of_light
+                transmission_delay = data_sz / bandwidth
+                queuing_delay = 0  # ignore for now
+                latency = (
+                    propagation_delay + transmission_delay + queuing_delay)
+            total_latency += latency
+            d1 = d2
+        min_latency = min(min_latency, total_latency)
+    return min_latency
+
+
+def get_path_length(path, Gt, Gnd, result_mapping, use_assigned_latency):
+    log.info('path: {}'.format(path))
+    path_vars = []
+    # first node: src
+    ti = path[0]
+    di = Gt.node[ti][GtInfo.DEVICE]
+    # device_mapping start from path[1] to path[N-1]
+    for j in range(1, len(path)-1):
+        tj = path[j]
+        dj = result_mapping[tj]
+        # get transmission latency from di -> dj
+        Ld_di_dj = _get_transmission_latency(
+            ti, tj, di, dj, Gt, Gnd, use_assigned_latency)
+        path_vars.append(Ld_di_dj)
+        log.debug('Ld_di_dj (move {} -> {}) = {}'.format(di, dj, Ld_di_dj))
+        # get computation latency for task tj at dj
+        dj_type = Gnd.node[dj][GdInfo.DEVICE_TYPE]
+        # get latency of the default build flavor
+        Lt_tj_dj = listvalues(Gt.node[tj][GtInfo.LATENCY_INFO][dj_type])[0]
+        path_vars.append(Lt_tj_dj)
+        log.debug('Lt_tj_dj (do {} at {}) = {}'.format(tj, dj, Lt_tj_dj))
+        ti = tj
+        di = dj
+    # last node: dst
+    tj = path[len(path)-1]
+    dj = Gt.node[tj][GtInfo.DEVICE]
+    Ld_di_dj = _get_transmission_latency(
+        ti, tj, di, dj, Gt, Gnd, use_assigned_latency)
+    path_vars.append(Ld_di_dj)
+    log.debug('Ld_di_dj (move {} -> {}) = {}'.format(di, dj, Ld_di_dj))
+    path_length = sum(path_vars)
+    log.info('\tlength: {}, {}'.format(path_length, path_vars))
+    return path_length
+
+
+def solve(Gt, Gnd, use_assigned_latency, target_latency=None):
     """
     Args:
         target_latency (int): latency constrain for this task graph
         Gt (networkx.DiGraph): task graph
-        Gd (networkx.DiGraph): device graph
+        Gnd (networkx.DiGraph): network device and device graph
     Returns:
         status (pulp.constants.LpStatus): status from solver
             if an optimal solution is found, return LpStatusOptimal
@@ -193,7 +257,9 @@ def solve(Gt, Gd, target_latency=None):
     mapped_tasks = list(known_mapping)
     mapped_devices = listvalues(known_mapping)
     tasks = [t for t in Gt.nodes() if t not in mapped_tasks]
-    devices = [d for d in Gd.nodes() if d not in mapped_devices]
+    all_devices = [d for d in Gnd.nodes() if(
+        Gnd.node[d][GInfo.NODE_TYPE] == NodeType.DEVICE)]
+    devices = [d for d in all_devices if d not in mapped_devices]
     log.info('find possible mappings for {} tasks in {} devices'.format(
         len(tasks), len(devices)))
 
@@ -220,7 +286,7 @@ def solve(Gt, Gd, target_latency=None):
         for t in Gt.nodes():
             X[t][d] = 0
     for t in mapped_tasks:
-        for d in Gd.nodes():
+        for d in all_devices:
             X[t][d] = 0
         d_known = Gt.node[t][GtInfo.DEVICE]
         X[t][d_known] = 1  # Mapping which are added by user
@@ -247,13 +313,12 @@ def solve(Gt, Gd, target_latency=None):
     XX = defaultdict(dict)
     all_XX = []
     for ti in Gt.nodes():
-        for di in Gd.nodes():
+        for di in all_devices:
             for tj in Gt.nodes():
-                for dj in Gd.nodes():
+                for dj in all_devices:
                     if (ti, tj) not in Gt.edges():
                         XX[(ti, di)][(tj, dj)] = 0
-                    elif (di, dj) not in Gd.edges() or (
-                            Gd[di][dj][GdInfo.LATENCY] > invalid_latency):
+                    elif not ilp_utils.has_simple_path(Gnd, di, dj):
                         # constrians 1: neighbors in the task graph must also
                         # be accessible from each other in the network graph
                         XX[(ti, di)][(tj, dj)] = 0
@@ -277,6 +342,7 @@ def solve(Gt, Gd, target_latency=None):
     # Generate all simple paths in the graph G from source to target.
     src_list, dst_list, all_paths = ilp_utils.find_all_simple_path(Gt)
     log.info('find all path from {} to {}'.format(src_list, dst_list))
+
     # Generate all possible mappings
     all_mappings = list(pulp.permutation(devices, len(tasks)))
     log.info('{} possible mappings for {} devices and {} tasks'.format(
@@ -296,15 +362,16 @@ def solve(Gt, Gd, target_latency=None):
                 tj = path[j]
                 dj = device_mapping[task_to_idx[tj]]
                 assert Gt.node[tj][GtInfo.DEVICE] is None
-                assert dj in Gd.nodes()
+                assert dj in all_devices
                 # get transmission latency from di -> dj
-                Ld_di_dj = Gd[di][dj][GdInfo.LATENCY]
+                Ld_di_dj = _get_transmission_latency(
+                    ti, tj, di, dj, Gt, Gnd, use_assigned_latency)
                 # path_vars.append((X[ti][di] * X[tj][dj]) * Ld_di_dj)
                 path_vars.append(XX[(ti, di)][(tj, dj)] * Ld_di_dj)
                 log.debug('Ld_di_dj (move from {} to {}) = {}'.format(
                     di, dj, Ld_di_dj))
                 # get computation latency for task tj at dj
-                dj_type = Gd.node[dj][GdInfo.DEVICE_TYPE]
+                dj_type = Gnd.node[dj][GdInfo.DEVICE_TYPE]
                 # get latency of the default build flavor
                 Lt_tj_dj = listvalues(
                     Gt.node[tj][GtInfo.LATENCY_INFO][dj_type])[0]
@@ -316,7 +383,9 @@ def solve(Gt, Gd, target_latency=None):
             # last node: dst
             tj = path[len(path)-1]
             dj = Gt.node[tj][GtInfo.DEVICE]
-            Ld_di_dj = Gd[di][dj][GdInfo.LATENCY]
+            # get transmission latency from di -> dj
+            Ld_di_dj = _get_transmission_latency(
+                ti, tj, di, dj, Gt, Gnd, use_assigned_latency)
             # path_vars.append(X[ti][di] * X[tj][dj] * Ld_di_dj)
             path_vars.append(XX[(ti, di)][(tj, dj)] * Ld_di_dj)
             log.debug('Ld_di_dj (move from {} to {}) = {}'.format(
@@ -334,10 +403,10 @@ def solve(Gt, Gd, target_latency=None):
     for di in devices:
         for resrc in Hardware:
             # get available RESRC or set to 0
-            Rd_d_r = Gd.node[di][GdInfo.RESRC].get(resrc, 0)
+            Rd_d_r = Gnd.node[di][GdInfo.RESRC].get(resrc, 0)
             var_list = []
             for ti in tasks:
-                di_type = Gd.node[di][GdInfo.DEVICE_TYPE]
+                di_type = Gnd.node[di][GdInfo.DEVICE_TYPE]
                 # get the default flavor
                 ti_flavor = list(Gt.node[ti][GtInfo.LATENCY_INFO][di_type])[0]
                 Rt_t_r_d = (
@@ -354,9 +423,15 @@ def solve(Gt, Gd, target_latency=None):
     log.info('status={}'.format(pulp.LpStatus[status]))
     result_mapping = {}
     for t in Gt.nodes():
-        for d in Gd.nodes():
+        for d in all_devices:
             if pulp.value(X[t][d]):
                 log.info('map: {} <-> {}, X_t_d={}'.format(
                     t, d, pulp.value(X[t][d])))
                 result_mapping[t] = d
-    return status, result_mapping
+    result_latency = {}
+    for (t1, t2) in Gt.edges():
+        d1 = result_mapping[t1]
+        d2 = result_mapping[t2]
+        result_latency[(t1, t2)] = _get_transmission_latency(
+            t1, t2, d1, d2, Gt, Gnd, use_assigned_latency)
+    return status, result_mapping, result_latency

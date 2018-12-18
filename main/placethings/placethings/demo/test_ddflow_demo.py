@@ -6,8 +6,9 @@ from __future__ import unicode_literals
 import logging
 
 from placethings.config.wrapper.config_gen import Config
-from placethings.demo.utils import ConfigDataHelper, init_netsim
-from placethings.demo.base_test import BaseTestCase
+from placethings.config.helper import ConfigDataHelper
+from placethings.netgen.network import init_netsim
+from placethings.demo.base_test import BaseTestCase, wait_key
 
 
 log = logging.getLogger()
@@ -45,7 +46,7 @@ class Test(BaseTestCase):
 
     @classmethod
     def test(
-            cls, config_name=None, is_export=True,
+            cls, config_name=None, is_export=True, is_interactive=True,
             is_update_map=True, is_simulate=True):
         if not config_name:
             config_name = 'sample_configs/config_ddflow_demo'
@@ -68,7 +69,7 @@ class Test(BaseTestCase):
         #
 
         #
-        # raw_input('Sandeep Task Graph: Press enter to continue: ')
+        # wait_key(is_interactive, 'Sandeep Task Graph: Press enter to continue: ')
         #
         # print('*'*100)
         # print('*'*100)
@@ -81,7 +82,7 @@ class Test(BaseTestCase):
         # print(list(cfgHelper.Gt.edges))
         #
         #
-        # raw_input('Sandeep Device Graphs: Press enter to continue: ')
+        # wait_key(is_interactive, 'Sandeep Device Graphs: Press enter to continue: ')
         #
         # print('*'*100)
         # print('*'*100)
@@ -128,11 +129,11 @@ class Test(BaseTestCase):
         # _topo: this is not used. Is the network graph, only network devices
         # topo_device_graph: network devices + devices (We use this for the
         #   creation of mininet)
-        _topo, topo_device_graph, Gd, G_map = cfgHelper.get_graphs()
+        _topo, topo_device_graph, G_map = cfgHelper.get_graphs()
 
         # Printing the graphs which we are using in the AirSim
 
-        # raw_input('Sandeep Task Graph: Press enter to continue: ')
+        # wait_key(is_interactive, 'Sandeep Task Graph: Press enter to continue: ')
         #
         # print('*'*100)
         # print('*'*100)
@@ -177,16 +178,16 @@ class Test(BaseTestCase):
         # Docker containers by default have access to outside network (external
         #   machines, internet)
 
-        data_plane = init_netsim(topo_device_graph, Gd, G_map, 'BB_SWITCH.2')
-        # raw_input('press any key to start the network')
+        data_plane = init_netsim(topo_device_graph, G_map, 'BB_SWITCH.2')
+        # wait_key(is_interactive, 'press any key to start the network')
         data_plane.start(is_validate=True)
 
         data_plane.print_net_info()
-        # raw_input('press any key to start scenario')
+        # wait_key(is_interactive, 'press any key to start scenario')
         log.info('=== running scenario: initial deployment ===')
         data_plane.start_workers()
 
-        raw_input('press any key to end test')
+        wait_key(is_interactive, 'press any key to end test')
         if is_simulate:
             data_plane.stop_workers()
             data_plane.stop()

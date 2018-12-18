@@ -15,18 +15,34 @@ log = logging.getLogger()
 
 class TestBasic(BaseTestCase):
     _SUPPORTED_CONFIG = {
-        "sample_configs/config_ddflow_bw",
         "sample_configs/config_ddflow_demo",
         "sample_configs/config_ddflow_demo_local",
     }
 
     @classmethod
-    def test(cls, config_name=None, is_export=False):
+    def test(cls, config_name=None, is_export=False, is_interactive=True):
         if not config_name:
             config_name = 'sample_configs/config_ddflow_demo'
         assert config_name in cls._SUPPORTED_CONFIG
         cfg = Config(folderpath=config_name)
         # graph_gen.create_topo_graph(cfg, is_export)
-        Gd = graph_gen.create_device_graph(cfg, is_export)
+        _Gn, Gnd = graph_gen.create_topo_device_graph(cfg, is_export)
         Gt = graph_gen.create_task_graph(cfg, is_export)
-        method.place_things(Gt, Gd, is_export)
+        method.place_things(Gt, Gnd, is_export)
+
+
+class TestDerivedLatency(BaseTestCase):
+    _SUPPORTED_CONFIG = {
+        "sample_configs/config_ddflow_bw",
+    }
+
+    @classmethod
+    def test(cls, config_name=None, is_export=False, is_interactive=True):
+        if not config_name:
+            config_name = 'sample_configs/config_ddflow_bw'
+        assert config_name in cls._SUPPORTED_CONFIG
+        cfg = Config(folderpath=config_name)
+        # graph_gen.create_topo_graph(cfg, is_export)
+        _Gn, Gnd = graph_gen.create_topo_device_graph(cfg, is_export)
+        Gt = graph_gen.create_task_graph(cfg, is_export)
+        method.place_things(Gt, Gnd, is_export, use_assigned_latency=False)

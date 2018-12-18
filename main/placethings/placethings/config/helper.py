@@ -4,45 +4,24 @@ from __future__ import print_function
 from __future__ import unicode_literals
 
 import logging
-import subprocess
 
 from placethings.config.common import LinkHelper
-from placethings.definition import GnInfo
+from placethings.config.definition.common_def import GnInfo
 from placethings.graph_gen.wrapper import graph_gen
 from placethings.config.wrapper.config_gen import Config
 from placethings.ilp import method
-from placethings.netgen.network import DataPlane
+
 
 log = logging.getLogger()
 
 
-def init_netsim(
-        topo_device_graph, Gd, G_map, manager_attached_nw_device,
-        docker_img=None, prog_dir=None):
-    # get containernet (docker) subnet ip
-    # This will be there is containernet is installed, which install the docker
-    cmd = (
-        "ifconfig | grep -A 1 'docker'"
-        " | tail -1 | cut -d ':' -f 2 | cut -d ' ' -f 1")
-    proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
-    docker0_ip = proc.communicate()[0].replace('\n', '')
-    log.info("docker0 ip={}, docker_img={}".format(docker0_ip, docker_img))
-    # simulate network
-    data_plane = DataPlane(
-        topo_device_graph, docker0_ip=docker0_ip, docker_img=docker_img,
-        prog_dir=prog_dir)
-    # attach manager to a nw device, e.g. 'BB_SWITCH.2'
-    data_plane.add_manager(manager_attached_nw_device)
-    data_plane.deploy_task(G_map, Gd)
-    return data_plane
-
-
 class ConfigDataHelper(object):
 
-    def __init__(self, cfg, is_export=False):
+    def __init__(self, cfg, is_export=False, use_assigned_latency=True):
         assert type(cfg) is Config
         self.cfg = cfg
         self.is_export = is_export
+        self.use_assigned_latency = use_assigned_latency
         self.update_id = -1
         # graphs
         self.Gt = None  # Graph for the task
@@ -59,7 +38,7 @@ class ConfigDataHelper(object):
         #   resources and their latency.
         # Graph for the devices (it is fake, virtual graph. To check
         #   connectivity between two devices)
-        self.Gd = None
+        # self.Gd = None
 
         # Initial Task mapping provided by the user.
         self.G_map = None
@@ -86,7 +65,7 @@ class ConfigDataHelper(object):
         #   device_data.json, nw_device_data.json and task_data.json
         self.update_id += 1
         log.info('round {}: update topo device graph'.format(self.update_id))
-        self.Gn, self.Gnd, self.Gd = graph_gen.create_topo_device_graph(
+        self.Gn, self.Gnd = graph_gen.create_topo_device_graph(
             self.cfg, self.is_export, export_suffix=self.update_id)
 
     def update_task_map(self):
@@ -94,8 +73,8 @@ class ConfigDataHelper(object):
         # G_map is the updated task graph. Tasks, connectivity of tasks and
         #   their attributes (resources, how to invoke)
         G_map, result_mapping = method.place_things(
-            self.Gt, self.Gd,
-            is_export=self.is_export, export_suffix=self.update_id)
+            self.Gt, self.Gnd, self.is_export, export_suffix=self.update_id,
+            use_assigned_latency=self.use_assigned_latency)
         self.G_map = G_map
         self.result_mapping = result_mapping
         if self.update_id == 0:
@@ -105,17 +84,18 @@ class ConfigDataHelper(object):
 
     def update_max_latency_log(self):
         max_latency = method.get_max_latency(
-            self.Gt, self.Gd, self.result_mapping)
+            self.Gt, self.Gnd, self.result_mapping, self.use_assigned_latency)
         self.max_latency_log.append(max_latency)
         max_latency_static = method.get_max_latency(
-            self.Gt, self.Gd, self.init_result_mapping)
+            self.Gt, self.Gnd, self.init_result_mapping,
+            self.use_assigned_latency)
         self.max_latency_static_log.append(max_latency_static)
 
     def get_max_latency_log(self):
         return self.max_latency_log, self.max_latency_static_log
 
     def get_graphs(self):
-        return self.Gn, self.Gnd, self.Gd, self.G_map
+        return self.Gn, self.Gnd, self.G_map
 
     def _gen_link(src, dst):
         return '{} -> {}'.format
@@ -131,6 +111,18 @@ class ConfigDataHelper(object):
         links_dict[edge_str][GnInfo.LATENCY] = latency
         edge_str = LinkHelper.get_edge(n2, n1)
         links_dict[edge_str][GnInfo.LATENCY] = latency
+
+    @staticmethod
+    def _update_link_bandwidth(links_dict, n1, n2, bandwidth):
+        edge_str = LinkHelper.get_edge(n1, n2)
+        bandwidth_before = links_dict[edge_str][GnInfo.BANDWIDTH]
+        log.info('update link bandwidth {}: {} => {}'.format(
+            edge_str, bandwidth_before, bandwidth))
+        # update link latency
+        edge_str = LinkHelper.get_edge(n1, n2)
+        links_dict[edge_str][GnInfo.BANDWIDTH] = bandwidth
+        edge_str = LinkHelper.get_edge(n2, n1)
+        links_dict[edge_str][GnInfo.BANDWIDTH] = bandwidth
 
     @staticmethod
     def _update_link_dst(links_dict, n1, n2, new_n2, new_latency):
@@ -164,6 +156,14 @@ class ConfigDataHelper(object):
         """
         nw_links = self.cfg.all_nw_device_data.nw_device_links.data
         self._update_link_latency(nw_links, nw_dev1, nw_dev2, latency)
+
+    def update_nw_link_bandwidth(self, nw_dev1, nw_dev2, bandwidth):
+        """
+        update network_dev <-> network_dev link bandwidth.
+            e.g. change bw of 'BB_SWITCH.0 -> BB_AP.0' from 100mbps to 30 mbps
+        """
+        nw_links = self.cfg.all_nw_device_data.nw_device_links.data
+        self._update_link_bandwidth(nw_links, nw_dev1, nw_dev2, bandwidth)
 
     def update_dev_link(self, dev, nw_dev, new_nw_dev, new_latency):
         """

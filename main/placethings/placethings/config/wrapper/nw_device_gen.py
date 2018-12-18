@@ -5,8 +5,8 @@ from __future__ import unicode_literals
 
 from future.utils import iteritems
 
-from placethings.definition import NwDevice, NwDeviceCategory, GnInfo, LinkType
-from placethings.config import spec_def
+from placethings.config.definition.common_def import NwDevice, NwDeviceCategory, GnInfo, LinkType
+from placethings.config.definition import spec_def
 from placethings.utils import json_utils
 
 

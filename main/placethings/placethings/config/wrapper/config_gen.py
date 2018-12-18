@@ -40,7 +40,7 @@ class Config(object):
             print('*'*100)
             print('*'*100)
 
-            ## Network Devices
+            # Network Devices
             print('NW Device Specs')
             print(self.all_nw_device_data.nw_device_spec.data)
             print('*'*100)
@@ -66,8 +66,6 @@ class Config(object):
             print(self.all_task_data.task_info.data)
             print('*'*100)
             print('*'*100)
-
-            #exit(0)
 
     @staticmethod
     def _gen_file_path(folder_path, filename):

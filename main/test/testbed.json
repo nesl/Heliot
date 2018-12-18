@@ -1,205 +1,241 @@
 {
      "Devices": [
           {
+               "type": "server",
                "attributes": {
-                    "os": {
-                         "attributes": {},
-                         "type": "ubuntu"
+                    "description": "General Linux Server used for mininet",
+                    "compute": [
+                         {
+                              "type": "cpu",
+                              "attributes": {
+                                   "no_of_cores": 8
+                              }
+                         },
+                         {
+                              "type": "gpu",
+                              "attributes": {}
+                         }
+                    ],
+                    "memory": {
+                         "type": "ram",
+                         "attributes": {
+                              "size": 32000000000.0
+                         }
                     },
                     "connection": [
                          {
+                              "type": "ssh",
                               "attributes": {
                                    "password": "pwd",
                                    "username": "root",
                                    "ip": "172.17.49.60"
-                              },
-                              "type": "ssh"
+                              }
                          }
                     ],
-                    "compute": [
-                         {
-                              "attributes": {
-                                   "no_of_cores": 8
-                              },
-                              "type": "cpu"
-                         },
-                         {
-                              "attributes": {},
-                              "type": "gpu"
-                         }
-                    ],
-                    "description": "General Linux Server used for mininet"
-               },
-               "type": "server"
+                    "os": {
+                         "type": "ubuntu",
+                         "attributes": {}
+                    }
+               }
           },
           {
+               "type": "server",
                "attributes": {
-                    "os": {
-                         "attributes": {},
-                         "type": "windows"
+                    "description": "General Windows Server used for Airsim",
+                    "compute": [
+                         {
+                              "type": "cpu",
+                              "attributes": {
+                                   "no_of_cores": 8
+                              }
+                         },
+                         {
+                              "type": "gpu",
+                              "attributes": {}
+                         }
+                    ],
+                    "memory": {
+                         "type": "ram",
+                         "attributes": {
+                              "size": 32000000000.0
+                         }
                     },
                     "connection": [
                          {
+                              "type": "ssh",
                               "attributes": {
                                    "password": "pwd",
                                    "username": "root",
                                    "ip": "172.17.49.60"
-                              },
-                              "type": "ssh"
+                              }
                          }
                     ],
-                    "compute": [
-                         {
-                              "attributes": {
-                                   "no_of_cores": 8
-                              },
-                              "type": "cpu"
-                         },
-                         {
-                              "attributes": {},
-                              "type": "gpu"
-                         }
-                    ],
-                    "description": "General Windows Server used for Airsim"
-               },
-               "type": "server"
+                    "os": {
+                         "type": "windows",
+                         "attributes": {}
+                    }
+               }
           },
           {
+               "type": "nvidia_jetson_tx2",
                "attributes": {
-                    "description": "Nvidia Jetson Tx2",
-                    "connection": [
-                         {
-                              "attributes": {
-                                   "password": "pwd",
-                                   "username": "root",
-                                   "ip": "172.17.49.60"
-                              },
-                              "type": "ssh"
-                         }
-                    ],
                     "compute": [
                          {
+                              "type": "cpu",
                               "attributes": {
                                    "no_of_cores": 4
-                              },
-                              "type": "cpu"
+                              }
                          },
                          {
-                              "attributes": {},
-                              "type": "gpu"
-                         }
-                    ]
-               },
-               "type": "nvidia_jetson_tx2"
-          },
-          {
-               "attributes": {
-                    "sensor": [
-                         {
-                              "attributes": {},
-                              "type": "camera"
+                              "type": "gpu",
+                              "attributes": {}
                          }
                     ],
-                    "description": "Google vision kit",
+                    "memory": {
+                         "type": "ram",
+                         "attributes": {
+                              "size": 8000000000.0
+                         }
+                    },
                     "connection": [
                          {
+                              "type": "ssh",
                               "attributes": {
                                    "password": "pwd",
                                    "username": "root",
                                    "ip": "172.17.49.60"
-                              },
-                              "type": "ssh"
+                              }
                          }
                     ],
+                    "description": "Nvidia Jetson Tx2"
+               }
+          },
+          {
+               "type": "google_vision_kit",
+               "attributes": {
                     "compute": [
                          {
+                              "type": "cpu",
                               "attributes": {
                                    "no_of_cores": 1
-                              },
-                              "type": "cpu"
+                              }
                          },
                          {
-                              "attributes": {},
-                              "type": "vpu"
-                         }
-                    ]
-               },
-               "type": "google_vision_kit"
-          },
-          {
-               "attributes": {
-                    "sensor": [
-                         {
-                              "attributes": {},
-                              "type": "camera"
+                              "type": "vpu",
+                              "attributes": {}
                          }
                     ],
-                    "os": {
-                         "attributes": {},
-                         "type": "raspbian"
+                    "sensor": [
+                         {
+                              "type": "camera",
+                              "attributes": {}
+                         }
+                    ],
+                    "memory": {
+                         "type": "ram",
+                         "attributes": {
+                              "size": 512000000.0
+                         }
                     },
                     "connection": [
                          {
+                              "type": "ssh",
                               "attributes": {
                                    "password": "pwd",
                                    "username": "root",
                                    "ip": "172.17.49.60"
-                              },
-                              "type": "ssh"
+                              }
                          }
                     ],
-                    "compute": [
-                         {
-                              "attributes": {
-                                   "no_of_cores": 2
-                              },
-                              "type": "cpu"
-                         },
-                         {
-                              "attributes": {},
-                              "type": "vpu"
-                         }
-                    ],
-                    "description": "Raspberry pi with camera and VPU"
-               },
-               "type": "raspberry_pi_3"
+                    "description": "Google vision kit"
+               }
           },
           {
+               "type": "raspberry_pi_3",
                "attributes": {
                     "sensor": [
                          {
-                              "attributes": {},
-                              "type": "camera"
+                              "type": "camera",
+                              "attributes": {}
+                         }
+                    ],
+                    "memory": {
+                         "type": "ram",
+                         "attributes": {
+                              "size": 1000000000.0
+                         }
+                    },
+                    "description": "Raspberry pi with camera and VPU",
+                    "compute": [
+                         {
+                              "type": "cpu",
+                              "attributes": {
+                                   "no_of_cores": 2
+                              }
+                         },
+                         {
+                              "type": "vpu",
+                              "attributes": {}
+                         }
+                    ],
+                    "connection": [
+                         {
+                              "type": "ssh",
+                              "attributes": {
+                                   "password": "pwd",
+                                   "username": "root",
+                                   "ip": "172.17.49.60"
+                              }
                          }
                     ],
                     "os": {
-                         "attributes": {},
-                         "type": "android"
+                         "type": "raspbian",
+                         "attributes": {}
+                    }
+               }
+          },
+          {
+               "type": "smartphone",
+               "attributes": {
+                    "sensor": [
+                         {
+                              "type": "camera",
+                              "attributes": {}
+                         }
+                    ],
+                    "memory": {
+                         "type": "ram",
+                         "attributes": {
+                              "size": 4000000000.0
+                         }
                     },
+                    "description": "Samsung Galaxy S-7 device",
+                    "compute": [
+                         {
+                              "type": "cpu",
+                              "attributes": {
+                                   "no_of_cores": 8
+                              }
+                         },
+                         {
+                              "type": "gpu",
+                              "attributes": {}
+                         }
+                    ],
                     "connection": [
                          {
+                              "type": "rest_api",
                               "attributes": {
                                    "token": "api-token",
                                    "ip": "172.17.49.60"
-                              },
-                              "type": "rest_api"
+                              }
                          }
                     ],
-                    "compute": [
-                         {
-                              "attributes": {
-                                   "no_of_cores": 8
-                              },
-                              "type": "cpu"
-                         },
-                         {
-                              "attributes": {},
-                              "type": "gpu"
-                         }
-                    ],
-                    "description": "Samsung Galaxy S-7 device"
-               },
-               "type": "smartphone"
+                    "os": {
+                         "type": "android",
+                         "attributes": {}
+                    }
+               }
           }
      ]
 }

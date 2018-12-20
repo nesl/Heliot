@@ -35,23 +35,23 @@ class device:
 
 # device attributes are: list of compute, memory, list of connection, list of sensors, os and description
 
-#compute is list of compute objects
-    _compute=[]
-
-#_memory store the memory objects
-    _memory =memory()
-
-# _connection store the list of connection object
-    _connection = []
-
-# _sensor store the list of sensors
-    _sensor = []
-
-# _os store the os object
-    _os = os()
 
     def __init__(self,type=''):
         self._type = type
+        #compute is list of compute objects
+        self._compute=[]
+
+        #_memory store the memory objects
+        self._memory =None
+
+        # _connection store the list of connection object
+        self._connection = []
+
+        # _sensor store the list of sensors
+        self._sensor = []
+
+        # _os store the os object
+        self._os = None
 
     def add_compute(self, c):
         #verify c is compute object
@@ -97,11 +97,11 @@ class device:
     def get_info(self):
 
         attributes = {
-        'compute':self._compute,
-        'memory' : self._memory,
-        'connection' : self._connection,
-        'sensor': self._sensor,
-        'os': self._os
+        '_compute':self._compute,
+        '_memory' : self._memory,
+        '_connection' : self._connection,
+        '_sensor': self._sensor,
+        '_os': self._os
         }
 
 

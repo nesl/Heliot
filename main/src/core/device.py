@@ -5,31 +5,33 @@ Devices are part of Testbed and Nodes are part of the scenario which are mapped 
 device.py define the device abstrction which refers to testbed physical devices.
 """
 
+#Heliot imports
 from .compute import *
 from .memory import *
+from .connection import *
+from .sensor import *
+from .os import *
+
+#other imports
 import sys
 import logging
 
-logger = logging.getLogger('In device.py')
-# create console handler and set level to debug
+logger = logging.getLogger(__name__)
 ch = logging.StreamHandler()
-
-# create formatter
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-
-# add formatter to ch
 ch.setFormatter(formatter)
+ch.setLevel(logging.DEBUG)
 
-# add ch to logger
 logger.addHandler(ch)
 
+logger.setLevel(logging.DEBUG)
 
 
 
 class device:
 
-# type is one of [mininet_server, airsim_server, server, nvidia_jetson_tx2, google_vision_kit, smartphone , ..]
-# attributes is a dictionary which defines the device in more details
+# device type is one of [mininet_server, airsim_server, server, nvidia_jetson_tx2, google_vision_kit, smartphone , ..]
+# device attributes  defines the device in more details
 
 # device attributes are: list of compute, memory, list of connection, list of sensors, os and description
 
@@ -39,6 +41,15 @@ class device:
 #_memory store the memory objects
     _memory =memory()
 
+# _connection store the list of connection object
+    _connection = []
+
+# _sensor store the list of sensors
+    _sensor = []
+
+# _os store the os object
+    _os = os()
+
     def __init__(self,type=''):
         self._type = type
 
@@ -47,7 +58,7 @@ class device:
         if type(c) is compute:
             self._compute.append(c)
         else:
-            logger.error('add_compute called with wrong input')  # will not print anything
+            logger.error('add_compute called with wrong input')
             sys.exit()
 
     def add_memory(self, m):
@@ -55,14 +66,42 @@ class device:
         if type(m) is memory:
             self._memory = m
         else:
-            logger.error('add_memory called with wrong input')  # will not print anything
+            logger.error('add_memory called with wrong input')
             sys.exit()
+
+    def add_connection(self, con):
+        #verify c is compute object
+        if type(con) is connection:
+            self._connection.append(con)
+        else:
+            logger.error('add_connection called with wrong input')
+            sys.exit()
+
+    def add_sensor(self, s):
+        #verify c is compute object
+        if type(s) is sensor:
+            self._sensor.append(s)
+        else:
+            logger.error('add_sensor called with wrong input')
+            sys.exit()
+
+    def add_os(self, o):
+        #verify m is memory object
+        if type(o) is os:
+            self._os = o
+        else:
+            logger_device.error('add_os called with wrong input')
+            sys.exit()
+
 
     def get_info(self):
 
         attributes = {
         'compute':self._compute,
-        'memory' : self._memory
+        'memory' : self._memory,
+        'connection' : self._connection,
+        'sensor': self._sensor,
+        'os': self._os
         }
 
 

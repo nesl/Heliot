@@ -19,8 +19,8 @@ class os:
         return info
 
 
-    def __repr__(self):
-        return self.get_info()
-
-    def __str__(self):
-        return self.get_info()
+    # def __repr__(self):
+    #     return self.get_info()
+    #
+    # def __str__(self):
+    #     return self.get_info()

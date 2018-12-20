@@ -2,18 +2,14 @@
 Heliot Framework abstractions are Devices, Nodes and Tasks
 Devices are part of Testbed and Nodes are part of the scenario which are mapped to Devices
 
-compute.py define the compute which can be part of devices and nodes.
+os.py define the operating system types and definitions (ubuntu, windows , ..) which are part of devices and nodes
 """
 
-class compute:
+class os:
 
-# type is one of [cpu, gpu, vpu, ...]
-# attributes is a dictionary which defines the compute in more details
+# type is one of [camera, audio, imu , ..]
+# attributes is a dictionary which defines the sensors in more details
     def __init__(self,type='',attributes={}):
-
-        #type should be a string
-        
-
         self.type = type
         self.attributes = attributes
 
@@ -22,8 +18,9 @@ class compute:
         info = info + '\n attributes:'+str(self.attributes)
         return info
 
-    # def __repr__(self):
-    #     return self.get_info()
-    #
-    # def __str__(self):
-    #     return self.get_info()
+
+    def __repr__(self):
+        return self.get_info()
+
+    def __str__(self):
+        return self.get_info()

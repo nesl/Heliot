@@ -2,16 +2,22 @@
 Heliot Framework abstractions are Devices, Nodes and Tasks
 Devices are part of Testbed and Nodes are part of the scenario which are mapped to Devices
 
-sensor.py define the sensors definition (camera, audio, imu , ..) which are part of devices and nodes
+Scenario is defined by three types of nodes in the Heliot:
+1) node: which refer to the compute node (real/virtual containers) which may have sensors.
+2) virtual infrastructure node: which refer to the virtual mininet nodes such as switches used to connect the nodes
+3) virtual sensor nodes: This refers to the virtual sensors nodes defined in Airsim. At present we only consider airsim virtual sensors
 
-This sensor definition is included for the sensors on real devices.
+airsimSensor.py define the  virtual sensors of Airsim abstrction for the scenario.
+
+To Do: Extend this abstrction to other types of virtual sensors.
 """
 
 
-class sensor:
+class airsimSensor:
 
-# type is one of [camera, audio, imu , ..]
-# attributes is a dictionary which defines the sensors in more details
+# type is one of [drone, car, cv , ..]
+# attributes is a dictionary which defines the airsimSensors in more details
+
     def __init__(self,type=''):
 
         #type should be a string

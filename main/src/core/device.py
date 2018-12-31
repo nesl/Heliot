@@ -108,6 +108,12 @@ class device:
         return self._type, attributes
 
 
+    def validate(self):
+        #validate the devices in the testbed
+
+        return True
+
+
     # def __repr__(self):
     #     return self.get_info()
     #

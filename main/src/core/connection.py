@@ -34,9 +34,8 @@ class connection:
         self._attributes = {}
 
     def get_info(self):
-        info ='\n type:'+str(self._type)+','
-        info = info + '\n attributes:'+str(self._attributes)
-        return info
+        return self._type, self._attributes
+
 
     # def __repr__(self):
     #     return self.get_info()

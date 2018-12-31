@@ -5,6 +5,14 @@ Devices are part of Testbed and Nodes are part of the scenario which are mapped 
 device.py define the device abstrction which refers to testbed physical devices.
 """
 
+"""
+Predefined: Device keywords
+1) _types:  _airsim_server, _mininet_server, _server, _nvidia_jetson_tx2, _google_vision_kit, _smartphone
+
+
+"""
+
+
 #Heliot imports
 from .compute import *
 from .memory import *
@@ -36,7 +44,10 @@ class device:
 # device attributes are: list of compute, memory, list of connection, list of sensors, os and description
 
 
-    def __init__(self,type=''):
+    def __init__(self,id='',type=''):
+
+        self._id=id
+
         self._type = type
         #compute is list of compute objects
         self._compute=[]
@@ -94,6 +105,9 @@ class device:
             sys.exit()
 
 
+    def get_connection(self):
+        return self._connection
+
     def get_info(self):
 
         attributes = {
@@ -106,12 +120,6 @@ class device:
 
 
         return self._type, attributes
-
-
-    def validate(self):
-        #validate the devices in the testbed
-
-        return True
 
 
     # def __repr__(self):

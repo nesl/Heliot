@@ -5,9 +5,21 @@ Devices are part of Testbed and Nodes are part of the scenario which are mapped 
 connection.py define the connection definition (ssh, REST) which are part of devices.
 """
 
+"""
+Predefined connection keywords:
+type: _ssh, _rest
+
+1) for _ssh:
+_ip, _username, _password: to connect to the linux, windows machines
+
+2) for _rest:
+TODO: need to add
+"""
+
+
 class connection:
 
-# type is one of [ram, ...]
+# type is one of [_ssh, _rest]
 # attributes is a dictionary which defines the connection in more details
     def __init__(self,type=''):
 

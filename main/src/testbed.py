@@ -19,10 +19,16 @@ Keywords: _ssh (_ip)
 #Heliot imports
 from core.device import *
 from utils.ping import *
+from utils.ssh import *
 
 #other imports
 import sys
 import logging
+import os as sys_os
+
+####################initialization file path
+supported_os=['_ubuntu','_windows']
+
 
 logger = logging.getLogger(__name__)
 ch = logging.StreamHandler()
@@ -108,7 +114,9 @@ class testbed:
 
             if con._type =='_ssh':
                 ip = con._attributes['_ip']
-                val = check_ping(address=ip)
+
+                # Checking the reachability of devices using ping
+                val = check_ping(ip=ip)
                 if not val:
                     logger.error(str(dev._id) +'  cannot be reached')
                     logger.error('Testbed validation failed')
@@ -116,8 +124,30 @@ class testbed:
 
                 logger.info(str(dev._id)+' is connected')
 
-                # After ping, now doing ssh connection and downloading heliot github repo on devices
-                
+                # After ping, now doing initialize
+                username = con._attributes['_username']
+                password = con._attributes['_password']
+
+
+                val = False
+                # Based on type of OS (linux/windows/android) different initialization is done
+                dev_os = dev.get_os()._type
+
+                if str(dev_os) not in supported_os:
+                    logger.error(str(dev_os) +'  is not supported in heliot')
+                    logger.error('Testbed validation failed')
+                    sys.exit()
+
+                if str(dev_os)=='_ubuntu':
+                    val = do_intializaton_linux(ip=ip,username=username, password=password, logger = logger)
+                    if not val:
+                        logger.error(str(dev._id) +'  cannot be initialized')
+                        logger.error('Testbed validation failed')
+                        sys.exit()
+
+                logger.info('heliot initalization done for '+ str(dev._id))
+
+
 
 
 

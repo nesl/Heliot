@@ -59,16 +59,22 @@ def do_intializaton_linux(ip, username, password, logger):
             sys.exit()
 
         logger.info('Heliot repo downloaded from Github')
+        client.close()
 
+
+        # A new client to start a non-blocking call
+        client = paramiko.SSHClient()
+        client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+        client.connect(ip, timeout=5, look_for_keys=False, username=username, password=password)
 
         cmd = 'cd heliot_runtime/Heliot/main/src; python3 init.py &'
         stdin, stdout, stderr = client.exec_command(cmd)
-        
-        output = stdout.readlines()
-        print('stdout output is:',output)
 
-        output = stderr.readlines()
-        print('stderr output is:',output)
+        # output = stdout.readlines()
+        # print('stdout output is:',output)
+        #
+        # output = stderr.readlines()
+        # print('stderr output is:',output)
 
         client.close()
         return True

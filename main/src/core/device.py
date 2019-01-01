@@ -108,6 +108,10 @@ class device:
     def get_connection(self):
         return self._connection
 
+
+    def get_os(self):
+        return self._os
+
     def get_info(self):
 
         attributes = {

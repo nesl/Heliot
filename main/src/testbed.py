@@ -12,6 +12,7 @@ Logic and predefined heliot keywords used in the testbed file:
 1) device should have unique id. A list of id is maintained and it is ensured each device has unique id
 2) Predefined keywords for connection object in device is used to validate the existence of testbed
 Keywords: _ssh (_ip)
+3) Predefined keywords for operating system is used in order to contact respective devices and do initialization
 
 """
 
@@ -62,7 +63,7 @@ class testbed:
 
     # Add device to the list of devices in the testbed
     def add_device(self, d):
-        #verify c is compute object
+        #verify d is device object
         if type(d) is device:
             id = d._id
             print('Adding device ',id, ' to testbed')
@@ -146,8 +147,6 @@ class testbed:
                         sys.exit()
 
                 logger.info('heliot initalization done for '+ str(dev._id))
-
-
 
 
 

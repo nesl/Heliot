@@ -18,11 +18,12 @@ class airsimSensor:
 # type is one of [drone, car, cv , ..]
 # attributes is a dictionary which defines the airsimSensors in more details
 
-    def __init__(self,type=''):
+    def __init__(self,id='', type=''):
 
         #type should be a string
-        if isinstance(type, str):
+        if isinstance(type, str) and isinstance(id, str):
             self._type = type
+            self._id=id
             self._attributes={}
 
         else:

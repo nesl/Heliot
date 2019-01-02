@@ -49,8 +49,8 @@ def transfer_heliot_repo_from_master(ip, username, password, logger):
 
         # Upload
 
-        target_path = '/home/nvidia/heliot_runtime/'
-        source_path = '/home/nesl/Heliot/github/Heliot/'
+        target_path = '/home/nvidia/heliot_runtime/Heliot/main/src/'
+        source_path = '/home/nesl/Heliot/github/Heliot/main/src/'
 
         sftp.mkdir(target_path, ignore_existing=True)
         sftp.put_dir(source_path, target_path)

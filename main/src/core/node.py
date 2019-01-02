@@ -35,13 +35,17 @@ logger.setLevel(logging.DEBUG)
 
 class node:
 
-# node type is one of [container, mininet_server, airsim_server, server, nvidia_jetson_tx2, google_vision_kit, smartphone , ..]
+# node type is one of [_container, _mininet_server, _airsim_server, _server, _nvidia_jetson_tx2, _google_vision_kit, _edge, _smartphone , ..]
 # node attributes  defines the node in more details
 
 # node attributes are: list of compute, memory, list of sensors, os and description
 
 
-    def __init__(self,type=''):
+    def __init__(self,id='', type=''):
+
+        self._id=id
+
+
         self._type = type
         #compute is list of compute objects
         self._compute=[]

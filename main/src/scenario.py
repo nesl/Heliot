@@ -19,6 +19,7 @@ Logic and predefined heliot keywords used in the Scenario file:
 from core.node import *
 from core.airsimSensor import *
 from core.infranode import *
+from core.mininetLink import *
 
 #other imports
 import logging
@@ -50,6 +51,11 @@ class scenario:
         # infrastructure Nodes
         self._infranode = []
 
+
+        # mininet links between nodes/virtual sensor and virtual infranode
+        self._mininetLink=[]
+
+
         # Stores the ids of all the nodes in the scenario
         # all node should have unique ids
         self._nodeid = []
@@ -70,13 +76,14 @@ class scenario:
         #verify n is node object
         if type(n) is node:
             id = n._id
-            print('Adding node ',id, ' to scenario')
+
             # check if device of this id is already present in scenario
             if str(id) in self._nodeid:
                 logger.error(str(id)+' is already present in scenario')
                 logger.error('id of each node should be unique')
                 sys.exit()
 
+            print('Adding node ',id, ' to scenario')
             self._node.append(n)
             self._nodeid.append(str(id))
 
@@ -88,13 +95,14 @@ class scenario:
         #verify v is airsimSensor object
         if type(v) is airsimSensor:
             id = v._id
-            print('Adding airsimSensor ',id, ' to scenario')
+
             # check if airsimSensor of this id is already present in scenario
             if str(id) in self._airsimSensorid:
                 logger.error(str(id)+' is already present in scenario')
                 logger.error('id of each airsimSensor should be unique')
                 sys.exit()
 
+            print('Adding airsimSensor ',id, ' to scenario')
             self._airsimSensor.append(v)
             self._airsimSensorid.append(str(id))
 
@@ -108,16 +116,45 @@ class scenario:
         #verify in is infranode object
         if type(inode) is infranode:
             id = inode._id
-            print('Adding infranode ',id, ' to scenario')
+
             # check if infranode of this id is already present in scenario
             if str(id) in self._infranodeid:
                 logger.error(str(id)+' is already present in scenario')
                 logger.error('id of each infranode should be unique')
                 sys.exit()
 
+            print('Adding infranode ',id, ' to scenario')
             self._infranode.append(inode)
             self._infranodeid.append(str(id))
 
         else:
             logger.error('add_infranode called with wrong input')
+            sys.exit()
+
+
+    def add_mininetLink(self, l):
+        #verify l is mininetLink object
+        if type(l) is mininetLink:
+            id_1 = l._id_1
+            id_2 = l._id_2
+
+            #Checks:
+            #  id_1 can be node or  virtual airsim sensor or infranode
+            #  id_2 has to be virtual infranode
+
+            if id_1 in self._nodeid or id_1 in self._infranodeid or id_1 in self._airsimSensorid:
+                if id_2 in self._infranodeid:
+
+                    print('Adding mininetLink ',l._name, ' to scenario')
+                    self._mininetLink.append(l)
+                else:
+                    logger.error('id_2 in add_mininetLink is not an infranode id')
+                    sys.exit()
+
+            else:
+                logger.error('id_1 in add_mininetLink has to be a node id or infranode id or airsimSensor id')
+                sys.exit()
+
+        else:
+            logger.error('add_mininetLink called with wrong input')
             sys.exit()

@@ -15,7 +15,7 @@ node.py define the first type of node abstrction for the scenario.
 from .compute import *
 from .memory import *
 from .sensor import *
-from .os import *
+from .osHeliot import *
 
 
 #other imports
@@ -57,7 +57,7 @@ class node:
         self._sensor = []
 
         # _os store the os object
-        self._os = None
+        self._osHeliot = None
 
     def add_compute(self, c):
         #verify c is compute object
@@ -85,8 +85,8 @@ class node:
 
     def add_os(self, o):
         #verify m is memory object
-        if type(o) is os:
-            self._os = o
+        if type(o) is osHeliot:
+            self._osHeliot = o
         else:
             logger_device.error('add_os called with wrong input')
             sys.exit()
@@ -97,6 +97,6 @@ class node:
         '_compute':self._compute,
         '_memory' : self._memory,
         '_sensor': self._sensor,
-        '_os': self._os
+        '_osHeliot': self._osHeliot
         }
         return self._type, attributes

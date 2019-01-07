@@ -18,7 +18,7 @@ from .compute import *
 from .memory import *
 from .connection import *
 from .sensor import *
-from .os import *
+from .osHeliot import *
 
 #other imports
 import sys
@@ -62,7 +62,7 @@ class device:
         self._sensor = []
 
         # _os store the os object
-        self._os = None
+        self._osHeliot = None
 
     def add_compute(self, c):
         #verify c is compute object
@@ -98,8 +98,8 @@ class device:
 
     def add_os(self, o):
         #verify m is memory object
-        if type(o) is os:
-            self._os = o
+        if type(o) is osHeliot:
+            self._osHeliot = o
         else:
             logger_device.error('add_os called with wrong input')
             sys.exit()
@@ -110,7 +110,7 @@ class device:
 
 
     def get_os(self):
-        return self._os
+        return self._osHeliot
 
     def get_info(self):
 
@@ -119,7 +119,7 @@ class device:
         '_memory' : self._memory,
         '_connection' : self._connection,
         '_sensor': self._sensor,
-        '_os': self._os
+        '_os': self._osHeliot
         }
 
 

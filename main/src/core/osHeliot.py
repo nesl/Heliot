@@ -5,7 +5,7 @@ Devices are part of Testbed and Nodes are part of the scenario which are mapped 
 os.py define the operating system types and definitions (ubuntu, windows , ..) which are part of devices and nodes
 """
 
-class os:
+class osHeliot:
 
 # type is one of [camera, audio, imu , ..]
 # attributes is a dictionary which defines the sensors in more details
@@ -37,7 +37,7 @@ class os:
         info ='\n type:'+str(self._type)+','
         info = info + '\n attributes:'+str(self._attributes)
         return info
-        
+
     # def __repr__(self):
     #     return self.get_info()
     #

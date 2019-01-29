@@ -1,8 +1,10 @@
 """
 Heliot Framework abstractions are Devices, Nodes and Tasks
-Devices are part of Testbed and Nodes are part of the scenario which are mapped to Devices
+Devices are part of Testbed and Nodes are part of the scenario
+which are mapped to Devices
 
-sensor.py define the sensors definition (camera, audio, imu , ..) which are part of devices and nodes
+sensor.py define the sensors definition (camera, audio, imu , ..)
+which are part of devices and nodes
 
 This sensor definition is included for the sensors on real devices.
 """

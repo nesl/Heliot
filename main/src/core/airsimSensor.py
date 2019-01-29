@@ -9,7 +9,7 @@ Scenario is defined by three types of nodes in the Heliot:
 
 airsimSensor.py define the  virtual sensors of Airsim abstrction for the scenario.
 
-To Do: Extend this abstrction to other types of virtual sensors.
+To Do: Extend this abstraction to other types of virtual sensors.
 """
 
 

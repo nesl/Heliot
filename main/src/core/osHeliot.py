@@ -2,7 +2,8 @@
 Heliot Framework abstractions are Devices, Nodes and Tasks
 Devices are part of Testbed and Nodes are part of the scenario which are mapped to Devices
 
-os.py define the operating system types and definitions (ubuntu, windows , ..) which are part of devices and nodes
+os.py define the operating system types and definitions (ubuntu, windows , ..)
+which are part of devices and nodes
 """
 
 class osHeliot:

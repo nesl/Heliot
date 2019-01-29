@@ -4,10 +4,11 @@ Devices are part of Testbed and Nodes are part of the scenario which are mapped 
 
 Scenario is defined by three types of nodes in the Heliot:
 1) node: which refer to the compute node (real/virtual containers) which may have sensors.
-2) virtual infrastructure node: which refer to the virtual mininet nodes such as switches used to connect the nodes
+2) virtual infrastructure node: which refer to the virtual mininet nodes such as
+switches used to connect the nodes
 3) virtual sensors: This refers to the virtual sensors defined in Airsim.
 
-node.py define the first type of node abstrction for the scenario.
+node.py define the first type of node abstraction for the scenario.
 
 """
 
@@ -35,7 +36,8 @@ logger.setLevel(logging.DEBUG)
 
 class node:
 
-# node type is one of [_container, _mininet_server, _airsim_server, _server, _nvidia_jetson_tx2, _google_vision_kit, _edge, _smartphone , ..]
+# node type is one of [_container, _mininet_server, _airsim_server, _server,
+#_nvidia_jetson_tx2, _google_vision_kit, _edge, _smartphone , ..]
 # node attributes  defines the node in more details
 
 # node attributes are: list of compute, memory, list of sensors, os and description

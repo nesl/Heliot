@@ -25,15 +25,10 @@ class dataflow(object):
 
             ## check for all the expected data ids
             if self.ids.sort() == self.ids2.sort():
-
-
-            ## Execute the task
-            print('Executing the task')
-            ## Push the output of the task to other devices
-
-
-
-            return True
+                ## Execute the task
+                print('Executing the task')
+                ## Push the output of the task to other devices
+                return True
 
 
         return False

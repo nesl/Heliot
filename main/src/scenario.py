@@ -1,7 +1,8 @@
 """
 The definition of workload in Heliot consists of Testbed and Scenario
 
-Scenario defines the (nodes, airsimSensor) (tasks or computations) and mapping etc. The definition of objects are defined in core folder.
+Scenario defines the (nodes, airsimSensor) (tasks or computations) and mapping etc.
+The definition of objects are defined in core folder.
 Scenario represents a current usecase which is run by Heliot
 
 """
@@ -9,9 +10,12 @@ Scenario represents a current usecase which is run by Heliot
 """
 Logic and predefined heliot keywords used in the Scenario file:
 
-1) nodes should have unique id. A list of id is maintained and it is ensured each node has unique id
-2) mininet node is special type of node and neednot to be defines in the scenario. By default a mininet node is assumed part of scenario.
-3) airsimSensor should have a unique id. A list of id is maintained and it is ensured each airsimSensor has unique id
+1) nodes should have unique id. A list of id is maintained and it is ensured each node has
+unique id
+2) mininet node is special type of node and neednot to be defines in the scenario.
+By default a mininet node is assumed part of scenario.
+3) airsimSensor should have a unique id. A list of id is maintained and it is ensured each
+airsimSensor has unique id
 
 """
 
@@ -20,6 +24,7 @@ from core.node import *
 from core.airsimSensor import *
 from core.infranode import *
 from core.mininetLink import *
+from core.taskHeliot import *
 
 #other imports
 import logging

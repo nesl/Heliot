@@ -4,12 +4,14 @@ Devices are part of Testbed and Nodes are part of the scenario which are mapped 
 
 Devices are connected to the physical network. Nodes are connected via virtual network controlled by mininet
 
-The nodes are connected to each other using virtual infranodes. The connection can have different properties as desired.
+The nodes are connected to each other using virtual infranodes.
+The connection can have different properties as desired.
 
 """
 
 """
-id_1, id_2  (connectivity is between 2 types of nodes (node and virtual infranode ), identified by id_1 and id_2)
+id_1, id_2  (connectivity is between 2 types of nodes (node and virtual infranode ),
+identified by id_1 and id_2)
 
 _latency, is added as attribute
 

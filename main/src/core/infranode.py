@@ -4,7 +4,8 @@ Devices are part of Testbed and Nodes are part of the scenario which are mapped 
 
 Scenario is defined by three types of nodes in the Heliot:
 1) node: which refer to the compute node (real/virtual containers) which may have sensors.
-2) virtual infrastructure node: which refer to the virtual mininet nodes such as switches used to connect the nodes
+2) virtual infrastructure node: which refer to the virtual mininet nodes such as
+switches used to connect the nodes
 3) virtual sensors: This refers to the virtual sensors defined in Airsim.
 
 

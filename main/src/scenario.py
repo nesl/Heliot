@@ -25,9 +25,10 @@ from core.airsimSensor import *
 from core.infranode import *
 from core.mininetLink import *
 from core.taskHeliot import *
-
 #Network imports for mininet
 from network.netHeliot import *
+#Task import
+from core.taskHeliot import *
 
 #other imports
 import os
@@ -77,6 +78,14 @@ class scenario:
         # all infranodes should have unique ids
         self._infranodeid=[]
 
+        # This is initialized and connectivity is assigned by start_network() function
+        self._net=None
+
+        # list of tasks in the scenario to run
+        self._tasks=[]
+        #stores the ids of all the tasks in the Scenario
+        #used to verify one task is added only once
+        self._taskid=[]
 
 
 
@@ -168,36 +177,63 @@ class scenario:
             logger.error('add_mininetLink called with wrong input')
             sys.exit()
 
+    def add_task(self, task):
+        if type(task) is taskHeliot:
+            if id in self._taskid:
+                print('Task:',self._taskid,'  is already part of scenario')
+            else:
+                self._tasks.append(task)
+                print('Adding task:',task._taskid)
+                self._taskid.append(task._taskid)
+        else:
+            logger.error('add_task called with wrong input')
+            sys.exit()
+
+
+
+    def stop_network(self):
+        print('Stopping the network');11
+        self._net._network.stop()
+
     def start_network(self):
+
+        # a digit has to be added as part of the id, else
+        # mininet is not able to initialize the switches and hosts
+
         mininet_id="0"
+
         if os.getuid()!=0:
             logger.error('Heliot cannot start network without sudo privileges')
             logger.error('if using jupyter, use: "sudo jupyter notebook --allow-root"')
             sys.exit()
         else:
-            self.net = netHeliot()
+
+            # Note this has to be started on the mininet machine
+            # At present, I am assuming my work machine is mininet machine
+
+            self._net = netHeliot()
 
             #adding the virtual infrastructure nodes
             # virtual switches
             print('Adding infranodes to the network')
             for inode in self._infranode:
                 #print('Adding:',inode._id+mininet_id)
-                self.net.add_switch(inode._id+mininet_id)
+                self._net.add_switch(inode._id+mininet_id)
 
             print('Adding nodes to the network')
             #Adding other nodes as hosts
             for node in self._node:
-                self.net.add_host(node._id+mininet_id)
+                self._net.add_host(node._id+mininet_id)
 
             print('Adding airSim sensors to the network')
             for sensor in self._airsimSensor:
-                self.net.add_host(sensor._id+mininet_id)
+                self._net.add_host(sensor._id+mininet_id)
 
             #Add the links
             for link in self._mininetLink:
-                self.net.add_link(link._id_1+mininet_id, link._id_2+mininet_id)
+                self._net.add_link(link._id_1+mininet_id, link._id_2+mininet_id)
 
             print('Starting the network using Mininet')
-            self.net._network.start()
-            self.net._network.pingAll()
-            self.net._network.stop()
+            self._net._network.start()
+            self._net._network.pingAll()
+            #self.net._network.stop()

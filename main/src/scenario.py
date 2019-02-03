@@ -26,7 +26,11 @@ from core.infranode import *
 from core.mininetLink import *
 from core.taskHeliot import *
 
+#Network imports for mininet
+from network.netHeliot import *
+
 #other imports
+import os
 import logging
 logger = logging.getLogger(__name__)
 ch = logging.StreamHandler()
@@ -163,3 +167,37 @@ class scenario:
         else:
             logger.error('add_mininetLink called with wrong input')
             sys.exit()
+
+    def start_network(self):
+        mininet_id="0"
+        if os.getuid()!=0:
+            logger.error('Heliot cannot start network without sudo privileges')
+            logger.error('if using jupyter, use: "sudo jupyter notebook --allow-root"')
+            sys.exit()
+        else:
+            self.net = netHeliot()
+
+            #adding the virtual infrastructure nodes
+            # virtual switches
+            print('Adding infranodes to the network')
+            for inode in self._infranode:
+                #print('Adding:',inode._id+mininet_id)
+                self.net.add_switch(inode._id+mininet_id)
+
+            print('Adding nodes to the network')
+            #Adding other nodes as hosts
+            for node in self._node:
+                self.net.add_host(node._id+mininet_id)
+
+            print('Adding airSim sensors to the network')
+            for sensor in self._airsimSensor:
+                self.net.add_host(sensor._id+mininet_id)
+
+            #Add the links
+            for link in self._mininetLink:
+                self.net.add_link(link._id_1+mininet_id, link._id_2+mininet_id)
+
+            print('Starting the network using Mininet')
+            self.net._network.start()
+            self.net._network.pingAll()
+            self.net._network.stop()

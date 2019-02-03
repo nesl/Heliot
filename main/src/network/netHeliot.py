@@ -13,7 +13,6 @@ in the scenario.py file.
 #Mininet imports
 # We are using the containernet to do the job, so as to run each mininet container within
 # a separate docker container
-from mininet.net import Containernet
 from mininet.net import Mininet
 from mininet.node import Controller
 from mininet.cli import CLI
@@ -27,7 +26,7 @@ from mininet.log import info, setLogLevel
 class netHeliot:
 
     def __init__(self):
-        self._network=Containernet(controller=Controller)
+        self._network=Mininet(controller=Controller)
         self._network.addController('c0')
         self._switches={}
         self._hosts={}
@@ -90,11 +89,11 @@ class netHeliot:
 #
 # net1._network.start()
 #
-# print "h1.IP():",h1.IP()
-# print "h2.IP():",h2.IP()
-# print "s1.IP():",s1.IP()
+# print("h1.IP():",h1.IP())
+# print("h2.IP():",h2.IP())
+# print("s1.IP():",s1.IP())
 #
 #
-# print h1.cmd('ping -c1 %s' % h2.IP())
+# print(h1.cmd('ping -c1 %s' % h2.IP()))
 #
 # net1._network.stop()

@@ -19,8 +19,8 @@ Keywords: _ssh (_ip)
 
 #Heliot imports
 from core.device import *
-from utils.ping import *
-from utils.ssh import *
+from utilss.ping import *
+from utilss.ssh import *
 
 #other imports
 import sys
@@ -28,7 +28,7 @@ import logging
 import os as sys_os
 
 ####################initialization file path
-supported_os=['_ubuntu','_windows']
+supported_os=['_ubuntu','_windows','_linux','_android']
 
 
 logger = logging.getLogger(__name__)
@@ -104,7 +104,7 @@ class testbed:
 ######################################Checking connectivity of all devices first #######################################################
             #In case no connection object is present
             if len(dev.get_connection())==0:
-                logger.error(str(con._type) +' is not known to heliot')
+                logger.error('connection object is not known to heliot')
                 logger.error(str(dev._id) +'  cannot be reached')
                 logger.error('Testbed validation failed')
                 sys.exit()
@@ -139,7 +139,7 @@ class testbed:
                     logger.error('Testbed validation failed')
                     sys.exit()
 
-                if str(dev_os)=='_ubuntu':
+                if str(dev_os)=='_ubuntu' or str(dev_os)=='_linux':
                     val = do_intializaton_linux(ip=ip,username=username, password=password, logger = logger)
                     if not val:
                         logger.error(str(dev._id) +'  cannot be initialized')
@@ -160,5 +160,4 @@ class testbed:
         logger.info('Testbed validated')
 
 #t1 = testbed('mytestbed')
-
 #print(t1.get_info())

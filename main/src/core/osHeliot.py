@@ -8,8 +8,7 @@ which are part of devices and nodes
 
 class osHeliot:
 
-# type is one of [camera, audio, imu , ..]
-# attributes is a dictionary which defines the sensors in more details
+
     def __init__(self,type=''):
 
         #type should be a string

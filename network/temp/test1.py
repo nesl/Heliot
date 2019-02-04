@@ -14,6 +14,10 @@ info('*** Adding docker containers\n')
 leftHost = net.addHost('leftHost', ip='10.0.0.21')#docker_ip=172.18.0.2
 rightHost = net.addHost('rightHost', ip='10.0.0.22')#docker_ip=172.18.0.3
 
+print 'leftHost: ',type(leftHost)
+
+print 'rightHost: ',rightHost
+
 info('*** Adding switches\n')
 s1 = net.addSwitch('s1')
 

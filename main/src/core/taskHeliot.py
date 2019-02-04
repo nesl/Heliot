@@ -20,9 +20,17 @@ logger.setLevel(logging.DEBUG)
 
 class taskHeliot(object):
 
-    def __init__(self,_taskid='',_filename='', _nodeid=''):
-        self._filename = _filename
+    # 3 _type of tasks: _compute, _virtualSensing, _alertAndroid
+    #  _taskid is used to uniquely identify the tasks
+    # _filename, the file used to run the task
+    # _nodeid, this may be given or left empty. This tell where to schedule the task
+    ## if this is empty, it triggers Heliot computation to do automatic placement
+    
+    def __init__(self,_type='',_taskid='',_filename='', _nodeid=''):
+        self._type = _type
+
         self._taskid = _taskid
+        self._filename = _filename
         self._nodeid = _nodeid
         self._outputids =[]
         self._inputids=[]

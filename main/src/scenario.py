@@ -30,6 +30,9 @@ from network.netHeliot import *
 #Task import
 from core.taskHeliot import *
 
+#Testbed import
+from testbed import *
+
 #other imports
 import os
 import logging
@@ -237,3 +240,11 @@ class scenario:
             self._net._network.start()
             self._net._network.pingAll()
             #self.net._network.stop()
+
+    # Function to run the tasks on the nodes
+    # Testbed object tbed is passed as the input
+    def start_tasks(self,tbed):
+
+        for task in self._tasks:
+            print('Starting Task:',task._taskid, 'on node:',task._nodeid)
+            

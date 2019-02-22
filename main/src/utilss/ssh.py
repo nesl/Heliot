@@ -135,8 +135,9 @@ def do_intializaton_linux(ip, username, password, logger):
 
         logger.info('Heliot repo downloaded from Github')
 
-        cmd = 'cd heliot_runtime/Heliot/main/src; python3 init.py &'
-        stdin, stdout, stderr = client.exec_command(cmd)
+        #Below lines can be used to start any process on the client
+        #cmd = 'cd heliot_runtime/Heliot/main/src; python3 init.py &'
+        #stdin, stdout, stderr = client.exec_command(cmd)
 
         #Note should not try to read the output, as this starts a continuous process, and this call will not return
         # output = stdout.readlines()

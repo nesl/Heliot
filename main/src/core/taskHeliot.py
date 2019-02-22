@@ -1,4 +1,6 @@
 '''
+# This is a skeleton of the task
+
 Provides task functionality to the heliot scenario
 
 The functionality of the class is explained as below:
@@ -25,12 +27,12 @@ class taskHeliot(object):
     # _filename, the file used to run the task
     # _nodeid, this may be given or left empty. This tell where to schedule the task
     ## if this is empty, it triggers Heliot computation to do automatic placement
-    
-    def __init__(self,_type='',_taskid='',_filename='', _nodeid=''):
+
+    def __init__(self,_type='',_taskid='',_file='', _nodeid=''):
         self._type = _type
 
         self._taskid = _taskid
-        self._filename = _filename
+        self._file = _file
         self._nodeid = _nodeid
         self._outputids =[]
         self._inputids=[]

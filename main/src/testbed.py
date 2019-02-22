@@ -22,10 +22,14 @@ from core.device import *
 from utilss.ping import *
 from utilss.ssh import *
 
+#Network imports for mininet
+from network.netHeliot import *
+
+
 #other imports
 import sys
 import logging
-import os as sys_os
+import os
 
 ####################initialization file path
 supported_os=['_ubuntu','_windows','_linux','_android']
@@ -158,6 +162,66 @@ class testbed:
                 sys.exit()
 
         logger.info('Testbed validated')
+
+
+    def stop_network(self):
+        print('Stopping the network');
+        self._net._network.stop()
+
+    def set_scenario(self,_scenario=None):
+        self._scenario=_scenario
+        print('Adding scenario to the testbed')
+
+    def start_network(self):
+
+        # a digit has to be added as part of the id, else
+        # mininet is not able to initialize the switches and hosts
+
+        mininet_id="0"
+
+        if os.getuid()!=0:
+            logger.error('Heliot cannot start network without sudo privileges')
+            logger.error('if using jupyter, use: "sudo jupyter notebook --allow-root"')
+            sys.exit()
+        else:
+
+            # Note this has to be started on the mininet machine
+            # At present, I am assuming my work machine is mininet machine
+
+            self._net = netHeliot()
+
+            #adding the virtual infrastructure nodes
+            # virtual switches
+            print('Adding infranodes to the network')
+            for inode in self._scenario._infranode:
+                #print('Adding:',inode._id+mininet_id)
+                self._net.add_switch(inode._id+mininet_id)
+
+            print('Adding nodes to the network')
+            #Adding other nodes as hosts
+            for node in self._scenario._node:
+                self._net.add_host(node._id+mininet_id)
+
+            print('Adding airSim sensors to the network')
+            for sensor in self._scenario._airsimSensor:
+                self._net.add_host(sensor._id+mininet_id)
+
+            #Add the links
+            for link in self._scenario._mininetLink:
+                self._net.add_link(link._id_1+mininet_id, link._id_2+mininet_id)
+
+            print('Starting the network using Mininet')
+            self._net._network.start()
+            self._net._network.pingAll()
+            #self.net._network.stop()
+
+
+        # Function to run the tasks on the nodes
+        # Testbed object tbed is passed as the input
+    def start_tasks(self):
+
+        for task in self._scenario._tasks:
+            print('Attempting to start Task:',task._taskid, 'on node:',task._nodeid)
 
 #t1 = testbed('mytestbed')
 #print(t1.get_info())

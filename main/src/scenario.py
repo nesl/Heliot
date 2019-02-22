@@ -25,8 +25,8 @@ from core.airsimSensor import *
 from core.infranode import *
 from core.mininetLink import *
 from core.taskHeliot import *
-#Network imports for mininet
-from network.netHeliot import *
+
+
 #Task import
 from core.taskHeliot import *
 
@@ -191,60 +191,3 @@ class scenario:
         else:
             logger.error('add_task called with wrong input')
             sys.exit()
-
-
-
-    def stop_network(self):
-        print('Stopping the network');11
-        self._net._network.stop()
-
-    def start_network(self):
-
-        # a digit has to be added as part of the id, else
-        # mininet is not able to initialize the switches and hosts
-
-        mininet_id="0"
-
-        if os.getuid()!=0:
-            logger.error('Heliot cannot start network without sudo privileges')
-            logger.error('if using jupyter, use: "sudo jupyter notebook --allow-root"')
-            sys.exit()
-        else:
-
-            # Note this has to be started on the mininet machine
-            # At present, I am assuming my work machine is mininet machine
-
-            self._net = netHeliot()
-
-            #adding the virtual infrastructure nodes
-            # virtual switches
-            print('Adding infranodes to the network')
-            for inode in self._infranode:
-                #print('Adding:',inode._id+mininet_id)
-                self._net.add_switch(inode._id+mininet_id)
-
-            print('Adding nodes to the network')
-            #Adding other nodes as hosts
-            for node in self._node:
-                self._net.add_host(node._id+mininet_id)
-
-            print('Adding airSim sensors to the network')
-            for sensor in self._airsimSensor:
-                self._net.add_host(sensor._id+mininet_id)
-
-            #Add the links
-            for link in self._mininetLink:
-                self._net.add_link(link._id_1+mininet_id, link._id_2+mininet_id)
-
-            print('Starting the network using Mininet')
-            self._net._network.start()
-            self._net._network.pingAll()
-            #self.net._network.stop()
-
-    # Function to run the tasks on the nodes
-    # Testbed object tbed is passed as the input
-    def start_tasks(self,tbed):
-
-        for task in self._tasks:
-            print('Starting Task:',task._taskid, 'on node:',task._nodeid)
-            

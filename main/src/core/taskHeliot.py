@@ -10,6 +10,8 @@ The functionality of the class is explained as below:
 import sys
 import logging
 
+
+
 logger = logging.getLogger(__name__)
 ch = logging.StreamHandler()
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
@@ -63,9 +65,3 @@ class taskHeliot(object):
             else:
                 self._inputids.append(id)
                 print(id, ": is set as input for task:",self._taskid)
-
-    def run_task(self):
-        pass
-        #Add logic to run_task
-            #Import the taskfile
-            #Call the run function

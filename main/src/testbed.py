@@ -30,6 +30,7 @@ from network.netHeliot import *
 import sys
 import logging
 import os
+import importlib
 
 ####################initialization file path
 supported_os=['_ubuntu','_windows','_linux','_android']
@@ -222,6 +223,32 @@ class testbed:
 
         for task in self._scenario._tasks:
             print('Attempting to start Task:',task._taskid, 'on node:',task._nodeid)
+
+
+    #Starting a task: We find the node on which task has to be mapped
+    # From node we find the physical device on which this node is mapped.
+    # Then we call start_task_on_device, with task and device as input
+
+    def start_task(self,task):
+
+        #Finding node to run this task on
+        for node in self._scenario._node:
+            if node._id==task._nodeid:
+
+                # Finding to which device is this node mapped to
+                for device in self._device:
+                    if device._type ==node._type:
+                        print('Attempting to start Task:',task._taskid, ', on node:',node._id,', mapped to device:',device._id)
+                        self.start_task_on_device(task,device)
+
+    def start_task_on_device(self,task,device):
+        print('Attempting to start Task:',task._taskid,', mapped to device:',device._id)
+
+        #import the task file
+        print('importing:',task._file)
+        mod_task=importlib.import_module('tasks.'+task._file)
+        mod_task.run_task()
+
 
 #t1 = testbed('mytestbed')
 #print(t1.get_info())

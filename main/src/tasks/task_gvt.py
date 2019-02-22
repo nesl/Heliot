@@ -7,7 +7,7 @@ import time
 import sys
 import pickle
 
-
+#run task will be called with a dataflow object
 def run_task():
     print('Running Task Now')
     filepath = '/home/nesl/Downloads/img.jpg'

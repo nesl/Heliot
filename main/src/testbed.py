@@ -21,6 +21,8 @@ Keywords: _ssh (_ip)
 from core.device import *
 from utilss.ping import *
 from utilss.ssh import *
+from utilss.runTask import *
+
 
 #Network imports for mininet
 from network.netHeliot import *
@@ -241,14 +243,36 @@ class testbed:
                         print('Attempting to start Task:',task._taskid, ', on node:',node._id,', mapped to device:',device._id)
                         self.start_task_on_device(task,device)
 
-    def start_task_on_device(self,task,device):
-        print('Attempting to start Task:',task._taskid,', mapped to device:',device._id)
+    def start_task_on_device(self,task,dev):
+        print('Attempting to start Task:',task._taskid,', mapped to device:',dev._id)
 
-        #import the task file
-        print('importing:',task._file)
-        mod_task=importlib.import_module('tasks.'+task._file)
-        mod_task.run_task()
 
+        #Do the remote ssh login to the device
+        con = dev.get_connection()[0] #At present, there is only one type of connection obect which is ssh/restAPI
+        if con._type =='_ssh':
+            ip = con._attributes['_ip']
+
+            # Checking the reachability of devices using ping
+            val = check_ping(ip=ip)
+            if not val:
+                logger.error(str(dev._id) +'  cannot be reached')
+                logger.error('Testbed validation failed')
+                sys.exit()
+
+            logger.info(str(dev._id)+' is connected')
+
+            # After ping, now doing initialize
+            username = con._attributes['_username']
+            password = con._attributes['_password']
+
+
+        try:
+            port = 22
+            runTask(ip=ip,username=username, password=password)
+
+        except Exception as e:
+            print(e)
+            
 
 #t1 = testbed('mytestbed')
 #print(t1.get_info())

@@ -46,21 +46,27 @@ class dataflow:
     # We need to send data with id
     @staticmethod
     def sendData(id,data):
-        if dataflow.map_id_op==None:
-            dataflow.set_data_input_mapping()
+        try:
+            if dataflow.map_id_op==None:
+                dataflow.set_data_input_mapping()
 
-        ip = dataflow.map_id_op[id]
-        print('Sending data to:',ip)
+            ip = dataflow.map_id_op[id]
+            print('Sending data to:',ip)
 
-        dataflow.soc_hel.sendData(ip,data)
+            dataflow.soc_hel.sendData(ip,data)
+        except Exception as e:
+            print(e)
 
     @staticmethod
     def getData():
-        if dataflow.map_id_op==None:
-            dataflow.set_data_input_mapping()
+        try:
+            if dataflow.map_id_op==None:
+                dataflow.set_data_input_mapping()
 
-        data=dataflow.soc_hel.getData()
-        return data
-
+            data=dataflow.soc_hel.getData()
+            return data
+            
+        except Exception as e:
+            print(e)
 
 # Send the data

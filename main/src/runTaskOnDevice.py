@@ -3,14 +3,25 @@
 
 import sys
 import importlib
+import os
 
-# modify to read in the command line arguments
+file = open("runTaskOnDevice.log", "w")
 
-if len(sys.argv)==2:
+try:
+    if len(sys.argv)==2:
+        mod = sys.argv[1]
+        #import the task file
+        print('importing task file')
+        mod_task=importlib.import_module('tasks.'+str(mod))
+        mod_task.run_task()
 
-    mod = sys.argv[1]
-    
-    #import the task file
-    print('importing task file')
-    mod_task=importlib.import_module('tasks.'+str(mod))
-    mod_task.run_task()
+        file.write('Attempted to start the task')
+        file.write('\n')
+        file.flush()
+
+except Exception as e:
+
+    file.write('Error:')
+    file.write('\n')
+    file.write(str(e))
+    file.flush()

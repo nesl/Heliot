@@ -15,7 +15,7 @@ sendData: requires the ip, port of the machine to which to send data.
 This required information is send by the master to the each node in the testbed.
 """
 #Heliot imports
-from socketHeliot import *
+from .socketHeliot import *
 
 
 class dataflow:
@@ -65,7 +65,7 @@ class dataflow:
 
             data=dataflow.soc_hel.getData()
             return data
-            
+
         except Exception as e:
             print(e)
 

@@ -8,11 +8,11 @@ import sys
 import pickle
 import os
 
-from dataflow import *
+from .dataflow import *
 
 #run task will be called with a dataflow object
 def run_task():
-    i = 100
+
     file = open("taskgvt.txt", "w")
 
     for i in range(100):
@@ -31,4 +31,4 @@ def run_task():
     #data_string = pickle.dumps(data)
     #print(data_string)
 
-run_task()
+#run_task()

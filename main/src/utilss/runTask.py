@@ -2,7 +2,6 @@ import paramiko
 import sys
 import os as sys_os
 
-
 # Given the device connection parameters and the task
 # We start the task using the task file name
 def runTask(ip, username, password, taskFile):
@@ -23,7 +22,7 @@ def runTask(ip, username, password, taskFile):
         #print('outputerr is:',outputerr,":" ,type(outputerr))
         print('started task:', taskFile)
 
-        client.close()
+        #client.close()
 
     except Exception as e:
         print(e)

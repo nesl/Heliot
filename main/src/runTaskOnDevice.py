@@ -11,13 +11,17 @@ try:
     if len(sys.argv)==2:
         mod = sys.argv[1]
         #import the task file
+        file.write('Attempted to start the task')
+        file.write('\n')
+        file.write('importing task file')
+        file.write('\n')
+        file.flush()
+
         print('importing task file')
         mod_task=importlib.import_module('tasks.'+str(mod))
         mod_task.run_task()
 
-        file.write('Attempted to start the task')
-        file.write('\n')
-        file.flush()
+
 
 except Exception as e:
 

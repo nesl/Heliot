@@ -17,34 +17,40 @@ class socketHeliot:
 
     #Opens a socket and listens for data
     def getData(self):
-
-        server_socket=socket.socket()
-        server_socket.bind(('',self.port))
-        server_socket.listen(1)
-        print('waiting for a connection...')
-
-        client_connection,client_address=server_socket.accept()
-        print('connected to ',client_address[0])
-
         ultimate_buffer=None
 
-        while True:
-            data = client_connection.recv(1024)
-            if not data:
-                break
-            if ultimate_buffer==None:
-                ultimate_buffer=data
-            else:
-                ultimate_buffer= ultimate_buffer+data
+        try:
 
-        #print(ultimate_buffer)
-        client_connection.close()
-        server_socket.close()
+            server_socket=socket.socket()
+            server_socket.bind(('',self.port))
+            server_socket.listen(1)
+            print('waiting for a connection...')
 
-        if ultimate_buffer!=None:
-            ultimate_buffer = pickle.loads(ultimate_buffer)
-        #print(ultimate_buffer)
-        #print('\n Data received')
+            client_connection,client_address=server_socket.accept()
+            print('connected to ',client_address[0])
+
+
+
+            while True:
+                data = client_connection.recv(1024)
+                if not data:
+                    break
+                if ultimate_buffer==None:
+                    ultimate_buffer=data
+                else:
+                    ultimate_buffer= ultimate_buffer+data
+
+            #print(ultimate_buffer)
+            client_connection.close()
+            server_socket.close()
+
+            if ultimate_buffer!=None:
+                ultimate_buffer = pickle.loads(ultimate_buffer)
+            #print(ultimate_buffer)
+            #print('\n Data received')
+        except Exception as e:
+            print('Exception:',e)
+
         return ultimate_buffer
 
     # uses socket to send the data

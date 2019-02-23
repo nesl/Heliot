@@ -17,4 +17,4 @@ def run_task():
     print('Data is:')
     print(data)
 
-run_task()
+#run_task()

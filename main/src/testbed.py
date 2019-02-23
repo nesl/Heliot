@@ -261,18 +261,19 @@ class testbed:
 
             logger.info(str(dev._id)+' is connected')
 
-            # After ping, now doing initialize
+            # After ping, now we start the task
             username = con._attributes['_username']
             password = con._attributes['_password']
+            taskFile= task._file
 
 
         try:
             port = 22
-            runTask(ip=ip,username=username, password=password)
+            runTask(ip=ip,username=username, password=password, taskFile=taskFile)
 
         except Exception as e:
             print(e)
-            
+
 
 #t1 = testbed('mytestbed')
 #print(t1.get_info())

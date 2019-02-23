@@ -17,11 +17,10 @@ def run_task():
     binary_file=open(filepath, 'rb')
     data = binary_file.read()
     #print(data)
-
     dataflow.sendData(id='gvt_image_data',data=data)
 
     #print("*"*100)
     #data_string = pickle.dumps(data)
     #print(data_string)
 
-run_task()
+#run_task()

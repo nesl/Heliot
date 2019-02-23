@@ -10,13 +10,13 @@ import socket
 import numpy as np
 import pickle
 
-class socketHelot:
+class socketHeliot:
     def __init__(self):
         self.port=7555
         pass
 
     #Opens a socket and listens for data
-    def receiveData(self):
+    def getData(self):
 
         server_socket=socket.socket()
         server_socket.bind(('',self.port))
@@ -40,7 +40,9 @@ class socketHelot:
         #print(ultimate_buffer)
         client_connection.close()
         server_socket.close()
-        ultimate_buffer = pickle.loads(ultimate_buffer)
+
+        if ultimate_buffer!=None:
+            ultimate_buffer = pickle.loads(ultimate_buffer)
         #print(ultimate_buffer)
         #print('\n Data received')
         return ultimate_buffer
@@ -50,8 +52,9 @@ class socketHelot:
         client_socket=socket.socket()
 
         try:
+            print('Trying to connect to:',server_address, ': on port:',self.port)
             client_socket.connect((server_address, self.port))
-            print ('Connected to %s on port %s' % (server_address, port))
+            print ('Connected to %s on port %s' % (server_address, self.port))
         except Exception as e:
             print('Exception:',e)
             return False

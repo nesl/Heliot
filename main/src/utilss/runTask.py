@@ -3,6 +3,8 @@ import sys
 import os as sys_os
 
 
+# Given the device connection parameters and the task
+# We start the task using the task file name
 def runTask(ip, username, password):
     try:
         #print(ip, ' ', username, ' ',password)
@@ -19,7 +21,7 @@ def runTask(ip, username, password):
         print('output is:',output,":" ,type(output))
         outputerr = stderr.readlines()
         print('outputerr is:',outputerr,":" ,type(outputerr))
-
+        
 
     except Exception as e:
         print(e)

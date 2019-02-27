@@ -42,8 +42,8 @@ class dataflow:
 
         #harcoding this, we need to get this from master
         dataflow.map_id_op={}
-        dataflow.map_id_op['gvt_image_data']='172.17.15.21'  #ip of tx2
-        dataflow.map_id_op['drone_image_data']='172.17.15.21'  #ip of tx2
+        dataflow.map_id_op['gvt_image_data']='172.17.49.71'  #ip of tx2
+        dataflow.map_id_op['drone_image_data']='172.17.49.71'  #ip of tx2
 
     # We need to send data with id
     @staticmethod

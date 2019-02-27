@@ -15,7 +15,7 @@ sendData: requires the ip, port of the machine to which to send data.
 This required information is send by the master to the each node in the testbed.
 """
 #Heliot imports
-from socketHeliot import *
+from .socketHeliot import *
 import time
 
 class dataflow:
@@ -48,7 +48,7 @@ class dataflow:
     # We need to send data with id
     @staticmethod
     def sendData(id,data):
-        retry=10
+        retry=1000
         while retry>0:
             try:
                 if dataflow.map_id_op==None:
@@ -69,7 +69,9 @@ class dataflow:
             except Exception as e:
                 dataflow.logs_file.write('error on ip:'+str(ip)+': at time:'+str(time.time()))
                 dataflow.logs_file.write('\n')
-                dataflow.logs_file.write(str(e))
+                dataflow.logs_file.write('Exception: '+str(e))
+                dataflow.logs_file.write('\n')
+                dataflow.logs_file.write('Retry: '+str(retry))
                 dataflow.logs_file.write('\n')
                 dataflow.logs_file.flush()
 

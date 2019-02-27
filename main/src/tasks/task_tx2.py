@@ -8,7 +8,7 @@ import sys
 import pickle
 import os
 
-from dataflow import *
+from .dataflow import *
 
 #run task will be called with a dataflow object
 def run_task():

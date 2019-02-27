@@ -17,10 +17,10 @@ try:
         file.write('\n')
         file.flush()
 
-        print('importing task file')
+        #print('importing task file')
         mod_task=importlib.import_module('tasks.'+str(mod))
         mod_task.run_task()
-
+        file.close()
 
 
 except Exception as e:
@@ -29,3 +29,4 @@ except Exception as e:
     file.write('\n')
     file.write(str(e))
     file.flush()
+    file.close()

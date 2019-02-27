@@ -8,7 +8,7 @@ import sys
 import pickle
 import os
 
-from dataflow import *
+from .dataflow import *
 
 #run task will be called with a dataflow object
 def run_task():
@@ -38,6 +38,8 @@ def run_task():
             file.flush()
 
         time.sleep(1)
+
+    file.close()
     #print("*"*100)
     #data_string = pickle.dumps(data)
     #print(data_string)

@@ -15,7 +15,7 @@ sendData: requires the ip, port of the machine to which to send data.
 This required information is send by the master to the each node in the testbed.
 """
 #Heliot imports
-from .socketHeliot import *
+from socketHeliot import *
 import time
 
 class dataflow:
@@ -42,13 +42,13 @@ class dataflow:
 
         #harcoding this, we need to get this from master
         dataflow.map_id_op={}
-        dataflow.map_id_op['gvt_image_data']='172.17.49.71'  #ip of tx2
-        dataflow.map_id_op['drone_image_data']='172.17.49.71'  #ip of tx2
+        dataflow.map_id_op['gvt_image_data']='172.17.15.21'  #ip of tx2
+        dataflow.map_id_op['drone_image_data']='172.17.15.21'  #ip of tx2
 
     # We need to send data with id
     @staticmethod
     def sendData(id,data):
-        retry=1000
+        retry=1
         while retry>0:
             try:
                 if dataflow.map_id_op==None:

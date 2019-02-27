@@ -12,7 +12,11 @@ def runTask(ip, username, password, taskFile):
         client.connect(ip, timeout=5, look_for_keys=False, username=username, password=password)
 
         cmd = 'cd heliot_runtime/Heliot/main/src; python3 runTaskOnDevice.py '+str(taskFile)+' &'
+
         stdin, stdout, stderr = client.exec_command(cmd)
+
+        pid=0
+        #pid = int(stdout.readline())
 
         #exit_status = stdout.channel.recv_exit_status()          # Blocking call
 
@@ -20,8 +24,7 @@ def runTask(ip, username, password, taskFile):
         #print('output is:',output,":" ,type(output))
         #outputerr = stderr.readlines()
         #print('outputerr is:',outputerr,":" ,type(outputerr))
-        print('started task:', taskFile)
-
+        print('started task:', taskFile,' :pid is:',pid)
         #client.close()
 
     except Exception as e:

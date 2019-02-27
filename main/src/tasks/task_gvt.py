@@ -8,15 +8,15 @@ import sys
 import pickle
 import os
 
-from .dataflow import *
+from dataflow import *
 
 #run task will be called with a dataflow object
 def run_task():
-
+    print('gvk pid is:',os.getpid())
     file = open("taskgvt.txt", "w")
     print('Attempting to run Task GVT')
 
-    for i in range(10):
+    for i in range(100):
         file.write(str(i)+': GVK task is running')
         file.write('\n')
         file.flush()
@@ -29,6 +29,8 @@ def run_task():
         file.write('Sending data:'+data)
         file.write('\n')
         file.flush()
+
+        result = True
 
         result = dataflow.sendData(id='gvt_image_data',data=data)
         print(i,':result is:',result)

@@ -272,7 +272,10 @@ class testbed:
             runTask(ip=ip,username=username, password=password, taskFile=taskFile)
 
         except Exception as e:
-            print(e)
+            logger.error('start_task_on_device failed')
+            logger.error(str(e))
+            sys.exit()
+
 
 
 #t1 = testbed('mytestbed')

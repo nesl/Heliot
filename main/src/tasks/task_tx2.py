@@ -8,27 +8,25 @@ import sys
 import pickle
 import os
 
-from .dataflow import *
+from dataflow import *
 
 #run task will be called with a dataflow object
 def run_task():
     file = open("tasktx2.txt", "w")
-    for i in range(100):
-        try:
-            file.write(str(i)+': Task is running')
-            file.write('\n')
-            file.flush()
+    print('Attempting to start task Tx2')
 
+    for i in range(10):
+        print(i, ': Task tx2 is running')
+        data = dataflow.getData()
 
-            print('Running Task Now')
-            data = dataflow.getData()
-            #print('Data is:')
+        file.write('Received data:'+str(data))
+        file.write('\n')
+        file.flush()
+
+        print('Data is:',data)
             #print(data)
 
-        except Exception as e:
-            print('Exception:',e)
-
-        time.sleep(1)
+        #time.sleep(1)
     file.close()
 
-#run_task()
+run_task()

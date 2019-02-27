@@ -15,13 +15,14 @@ sendData: requires the ip, port of the machine to which to send data.
 This required information is send by the master to the each node in the testbed.
 """
 #Heliot imports
-from .socketHeliot import *
-
+from socketHeliot import *
+import time
 
 class dataflow:
 
     map_id_op=None
     soc_hel=None
+    logs_file = None
 
     def __init__(self):
         pass
@@ -37,6 +38,7 @@ class dataflow:
 
         # We need to decide an appropriate place to put it
         dataflow.soc_hel = socketHeliot()
+        dataflow.logs_file = open('dataflow'+str(time.time())+'.log', "w")
 
         #harcoding this, we need to get this from master
         dataflow.map_id_op={}
@@ -46,16 +48,36 @@ class dataflow:
     # We need to send data with id
     @staticmethod
     def sendData(id,data):
-        try:
-            if dataflow.map_id_op==None:
-                dataflow.set_data_input_mapping()
+        retry=10
+        while retry>0:
+            try:
+                if dataflow.map_id_op==None:
+                    dataflow.set_data_input_mapping()
 
-            ip = dataflow.map_id_op[id]
-            print('Sending data to:',ip)
+                ip = dataflow.map_id_op[id]
 
-            dataflow.soc_hel.sendData(ip,data)
-        except Exception as e:
-            print(e)
+                #maintaing logs on storage
+                dataflow.logs_file.write('Sending data to:'+str(ip)+': at time:'+str(time.time()))
+                dataflow.logs_file.write('\n')
+                dataflow.logs_file.flush()
+                dataflow.soc_hel.sendData(ip,data)
+
+                #we don't need to retry now
+                retry = 0
+                return True
+
+            except Exception as e:
+                dataflow.logs_file.write('error on ip:'+str(ip)+': at time:'+str(time.time()))
+                dataflow.logs_file.write('\n')
+                dataflow.logs_file.write(str(e))
+                dataflow.logs_file.write('\n')
+                dataflow.logs_file.flush()
+
+                #we will retry again
+                retry=retry-1
+
+        return False
+
 
     @staticmethod
     def getData():
@@ -63,10 +85,20 @@ class dataflow:
             if dataflow.map_id_op==None:
                 dataflow.set_data_input_mapping()
 
+            #maintaing logs on storage
+            dataflow.logs_file.write('getData: at time:'+str(time.time()))
+            dataflow.logs_file.write('\n')
+            dataflow.logs_file.flush()
+
             data=dataflow.soc_hel.getData()
             return data
 
         except Exception as e:
-            print(e)
+            dataflow.logs_file.write('Error on: getData: at time:'+str(time.time()))
+            dataflow.logs_file.write('\n')
+            dataflow.logs_file.write(str(e))
+            dataflow.logs_file.write('\n')
+            dataflow.logs_file.flush()
+            return None
 
 # Send the data

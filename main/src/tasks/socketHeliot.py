@@ -19,55 +19,47 @@ class socketHeliot:
     def getData(self):
         ultimate_buffer=None
 
-        try:
+        server_socket=socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        server_socket.bind(('',self.port))
+        server_socket.listen(1)
+        print('waiting for a connection...')
 
-            server_socket=socket.socket()
-            server_socket.bind(('',self.port))
-            server_socket.listen(1)
-            print('waiting for a connection...')
-
-            client_connection,client_address=server_socket.accept()
-            print('connected to ',client_address[0])
+        client_connection,client_address=server_socket.accept()
+        print('connected to ',client_address[0])
 
 
 
-            while True:
-                data = client_connection.recv(1024)
-                if not data:
-                    break
-                if ultimate_buffer==None:
-                    ultimate_buffer=data
-                else:
-                    ultimate_buffer= ultimate_buffer+data
+        while True:
+            data = client_connection.recv(1024)
+            if not data:
+                break
+            if ultimate_buffer==None:
+                ultimate_buffer=data
+            else:
+                ultimate_buffer= ultimate_buffer+data
 
-            #print(ultimate_buffer)
-            client_connection.close()
-            server_socket.close()
+        #print('ultimate_buffer is:',ultimate_buffer)
+        client_connection.close()
+        server_socket.close()
 
-            if ultimate_buffer!=None:
-                ultimate_buffer = pickle.loads(ultimate_buffer)
+        if ultimate_buffer!=None:
+            ultimate_buffer = pickle.loads(ultimate_buffer)
             #print(ultimate_buffer)
             #print('\n Data received')
-        except Exception as e:
-            print('Exception:',e)
 
         return ultimate_buffer
 
     # uses socket to send the data
     def sendData(self, server_address,Data):
-        client_socket=socket.socket()
+        client_socket=socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-        try:
-            print('Trying to connect to:',server_address, ': on port:',self.port)
-            client_socket.connect((server_address, self.port))
-            print ('Connected to %s on port %s' % (server_address, self.port))
-        except Exception as e:
-            print('Exception:',e)
-            return False
+        #print('Trying to connect to:',server_address, ': on port:',self.port)
+        client_socket.connect((server_address, self.port))
+        #print ('Connected to %s on port %s' % (server_address, self.port))
 
-        data_string = pickle.dumps(Data)
+        data_string = pickle.dumps(Data, protocol=3)
         #print(data_string)
         client_socket.sendall(data_string)
         client_socket.close()
-        #print('numpy data sent')
+
         return True

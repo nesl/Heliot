@@ -166,8 +166,8 @@ if __name__ == "__main__":
 	https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/detection_model_zoo.md
 	"""
 	# The model used for the inference
-	MODEL_NAME = 'ssdlite_mobilenet_v2_coco_2018_05_09'#'ssd_mobilenet_v2_coco_2018_03_29'
-
+	#MODEL_NAME = 'ssdlite_mobilenet_v2_coco_2018_05_09'#'ssd_mobilenet_v2_coco_2018_03_29'
+	MODEL_NAME = 'ssd_mobilenet_v1_0.75_depth_300x300_coco14_sync_2018_07_03'
 
 	MODEL_FILE = MODEL_NAME + '.tar.gz'
 	DOWNLOAD_BASE = 'http://download.tensorflow.org/models/object_detection/'
@@ -227,7 +227,7 @@ if __name__ == "__main__":
 	print('Available for Inference now')
 
 	for i in range(1000):
-	    data = dataflow.getData()
+	    data = dataflow.getData(inport=20001)
 	    #print('Data is:',data)
 	    InferenceServer.push(data)
 

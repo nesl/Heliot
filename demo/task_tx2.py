@@ -229,7 +229,9 @@ if __name__ == "__main__":
 	for i in range(1000):
 	    data = dataflow.getData(inport=20001)
 	    #print('Data is:',data)
-	    InferenceServer.push(data)
+	    labels = InferenceServer.push(data)
+	    res_send = dataflow.sendData('tx2_inference',labels)
+	    print('res send is:',res_send)
 
 	#print(res)
 	#print(res)

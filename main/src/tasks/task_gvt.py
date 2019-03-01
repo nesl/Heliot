@@ -8,42 +8,29 @@ import sys
 import pickle
 import os
 
-from dataflow import *
+from utils.dataflow import *
+filepath = 'local.jpg'
 
-#run task will be called with a dataflow object
-def run_task():
-    print('gvk pid is:',os.getpid())
-    file = open("taskgvt.txt", "w")
-    print('Attempting to run Task GVT')
+if __name__ == "__main__":
+# #There is input port argument
+#  if len(sys.argv)!=3:
+#   print('usage: python main.py MININET_SERVER_IP MININET_SERVER_PORT')
+#   print('Example: python main.py 172.17.20.12 18800')
+#   exit(0)
+#
+#  mininet_ip=str(sys.argv[1])
+#  port = int(sys.argv[2])
 
-    for i in range(100):
-        file.write(str(i)+': GVK task is running')
-        file.write('\n')
-        file.flush()
+ camera= picamera.PiCamera()
+ camera.resolution = (300, 300)
+ #camera.start_preview()
 
-        # filepath = '/home/nesl/Downloads/img.jpg'
-        # binary_file=open(filepath, 'rb')
-        # data = binary_file.read()
-        #print(data)
-        data = str(i)+': gvk'
-        file.write('Sending data:'+data)
-        file.write('\n')
-        file.flush()
+ while True:
+  time.sleep(1)
+  camera.capture(filepath)
+  binary_file=open(filepath, 'rb')
+  data = binary_file.read()
+  data = base64.b64encode(data)
 
-        result = True
-
-        result = dataflow.sendData(id='gvt_image_data',data=data)
-        print(i,':result is:',result)
-        if not result:
-            file.write(str(i)+': GVK task data transfer failed')
-            file.write('\n')
-            file.flush()
-
-        time.sleep(1)
-
-    file.close()
-    #print("*"*100)
-    #data_string = pickle.dumps(data)
-    #print(data_string)
-
-run_task()
+  result = dataflow.sendData(id='gvt_image_data',data=data)
+  print(result)

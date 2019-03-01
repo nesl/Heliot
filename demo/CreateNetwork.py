@@ -51,6 +51,7 @@ info('*** Running CLI\n')
 
 print cam.cmd('cd /opt/github/placethings/Heliot/demo && python3 mininetDemo.py \'cam\' &')
 print tx2.cmd('cd /opt/github/placethings/Heliot/demo && python3 mininetDemo.py \'tx2\' &')
+print act.cmd('cd /opt/github/placethings/Heliot/demo && python3 mininetDemo.py \'act\' &')
 
 CLI(net)
 

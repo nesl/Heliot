@@ -10,8 +10,14 @@ DISPLAY_PORT = None
 
 @app.route("/")
 def hello():
-    
-    result = 'car'
+    labels = dataflow.getData(inport=20003) #get the labels
+    print('lables are:',labels)
+    result = None
+    if labels!=None:
+        if len(labels)>0:
+            result = labels[0]
+            if result !='car' or result !='person':
+                result =None
     return '{}'.format(result)
 
 

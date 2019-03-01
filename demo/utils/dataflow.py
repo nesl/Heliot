@@ -63,7 +63,7 @@ class dataflow:
         dataflow.map_ports['tx2_inference'] = 20001 #tx2 container is lisening on 20001 for labels
         dataflow.map_ports['act_container'] = 10002
         dataflow.map_ports['act_task'] = 20003
-        
+
 
     # We need to send data with id
     @staticmethod

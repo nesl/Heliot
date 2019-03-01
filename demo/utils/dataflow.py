@@ -36,8 +36,8 @@ class dataflow:
 
     @staticmethod
     def set_data_input_mapping():
-        ip_mininet_machine = '172.17.15.21'
-        ip_tx2_machine = '172.17.49.71'
+        ip_mininet_machine = '192.168.1.6'
+        ip_tx2_machine = '192.168.1.8'
         # We need to decide an appropriate place to put it
         dataflow.soc_hel = socketHeliot()
         #dataflow.logs_file = open('dataflow'+str(time.time())+'.log', "w")

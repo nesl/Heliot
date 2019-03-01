@@ -152,6 +152,8 @@ class InferenceServer():
         #except Exception as inst:
 
 if __name__ == "__main__":
+	config = tf.ConfigProto()
+	config.gpu_options.allow_growth = True
 
 	# #There is input port argument
 	# if len(sys.argv)!=2:
@@ -226,7 +228,7 @@ if __name__ == "__main__":
 	print('*'*100)
 	print('Available for Inference now')
 
-	for i in range(1000):
+	while True:
 	    data = dataflow.getData(inport=20001)
 	    #print('Data is:',data)
 	    labels = InferenceServer.push(data)

@@ -32,5 +32,5 @@ if __name__ == "__main__":
 		#receive images on port 19000 and forward them to tx2 container
 		if type=='cam':
 			print('Starting cam container')
-			data = dataflow.getData(inport=19000)
+			data = dataflow.getData(inport=20000)
 			print(data)

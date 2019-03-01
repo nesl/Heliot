@@ -51,7 +51,7 @@ class dataflow:
 
 
         dataflow.map_ports={}
-        dataflow.map_ports['drone_image_data']='20000'
+        dataflow.map_ports['gvt_image_data']='20000'
 
 
 
@@ -75,6 +75,8 @@ class dataflow:
                 inport=None
                 if id in dataflow.map_ports:
                     inport = dataflow.map_ports[id]
+
+                print('sending to:',ip,':',inport)
                 dataflow.soc_hel.sendData(ip,data,inport)
 
                 #we don't need to retry now

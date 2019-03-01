@@ -16,11 +16,15 @@ class socketHeliot:
         pass
 
     #Opens a socket and listens for data
-    def getData(self):
+    def getData(self, inport=None):
         ultimate_buffer=None
 
         server_socket=socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        server_socket.bind(('',self.port))
+        if inport==None:
+            server_socket.bind(('',self.port))
+        else:
+            server_socket.bind(('',inport))
+
         server_socket.listen(1)
         print('waiting for a connection...')
 

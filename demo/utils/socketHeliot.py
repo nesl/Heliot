@@ -7,7 +7,6 @@ Pickle is used to send data using Sockets
 '''
 
 import socket
-import numpy as np
 import pickle
 
 class socketHeliot:
@@ -63,7 +62,7 @@ class socketHeliot:
             client_socket.connect((server_address, self.port))
         else:
             client_socket.connect((server_address, inport))
-            
+
         #print ('Connected to %s on port %s' % (server_address, self.port))
 
         data_string = pickle.dumps(Data, protocol=3)

@@ -19,14 +19,16 @@ net.addController('c0') #docker_ip=172.18.0.1
 
 
 info('*** Adding docker containers\n')
-# 19000 is the internal docker ports
-# 20000, 20001, 20002 is the exteral ports exposed
 
-cam = net.addDocker('cam', ip='10.0.0.101', dimage="sandynesl/heliot:1", ports=[19000], port_bindings={19000: 20000})#docker_ip=172.18.0.2
-#ports=[19000], port_bindings={19000: 20001}
-#ports=[19000], port_bindings={19000: 20002}
-tx2 = net.addDocker('tx2', ip='10.0.0.102', dimage="sandynesl/heliot:1")#docker_ip=172.18.0.3
-act = net.addDocker('act', ip='10.0.0.103', dimage="sandynesl/heliot:1")#docker_ip=172.18.0.4
+
+# 20000 is internal, external port of cam container
+# 20001 is for tx2
+# 20002 is for act
+
+cam = net.addDocker('cam', ip='10.0.0.101', dimage="sandynesl/heliot:1", ports=[20000], port_bindings={20000: 20000})#docker_ip=172.18.0.2
+
+tx2 = net.addDocker('tx2', ip='10.0.0.102', dimage="sandynesl/heliot:1", ports=[20001], port_bindings={20001: 20001})#docker_ip=172.18.0.3
+act = net.addDocker('act', ip='10.0.0.103', dimage="sandynesl/heliot:1", ports=[20002], port_bindings={20002: 20002})#docker_ip=172.18.0.4
 
 info('*** Adding switches\n')
 s1 = net.addSwitch('s1')
@@ -46,6 +48,9 @@ net.ping([cam, tx2])
 
 
 info('*** Running CLI\n')
+
+print cam.cmd('cd /opt/github/placethings/Heliot/demo && python3 mininetDemo.py \'cam\' &')
+
 CLI(net)
 
 # Now run the individual container code

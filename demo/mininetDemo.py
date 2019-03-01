@@ -29,8 +29,18 @@ if __name__ == "__main__":
 
 	print(recv,send)
 	while True:
-		#receive images on port 19000 and forward them to tx2 container
+		#receive images on port 20000 and forward them to tx2 container on 10.0.0.102
 		if type=='cam':
 			print('Starting cam container')
 			data = dataflow.getData(inport=20000)
-			print(data)
+			print('cam received data')
+			res = dataflow.sendData('tx2_container_data',data)
+			print('res is:',res)
+			# We need to send data with id
+
+		#Tx2 container receives data from cam container
+		#tx2 container sends data to the tx2 machine
+		if type =='tx2':
+			print('starting tx2 container')
+			data = dataflow.getData(inport=20001)
+			print('data received')

@@ -54,11 +54,16 @@ class socketHeliot:
         return ultimate_buffer
 
     # uses socket to send the data
-    def sendData(self, server_address,Data):
+    def sendData(self, server_address, Data, inport=None):
         client_socket=socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
         #print('Trying to connect to:',server_address, ': on port:',self.port)
-        client_socket.connect((server_address, self.port))
+
+        if inport ==None:
+            client_socket.connect((server_address, self.port))
+        else:
+            client_socket.connect((server_address, inport))
+            
         #print ('Connected to %s on port %s' % (server_address, self.port))
 
         data_string = pickle.dumps(Data, protocol=3)

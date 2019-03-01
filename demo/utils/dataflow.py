@@ -21,6 +21,7 @@ import time
 class dataflow:
 
     map_id_op=None
+    map_ports=None
     soc_hel=None
     logs_file = None
 
@@ -43,12 +44,14 @@ class dataflow:
 
         #harcoding this, we need to get this from master
         dataflow.map_id_op={}
-        dataflow.map_id_op['gvt_image_data']='10.0.0.1'#'172.17.15.21'  #ip of tx2
+        dataflow.map_id_op['gvt_image_data']='172.17.15.21'#'172.17.15.21'  #ip of tx2
         dataflow.map_id_op['drone_image_data']='172.17.15.21'  #ip of tx2
-
         dataflow.map_id_op['master']='172.17.15.21'  #ip of master
-
         #get the pid of the task and send it to the master using socket API
+
+
+        dataflow.map_ports={}
+        dataflow.map_ports['drone_image_data']='20000'
 
 
 
@@ -67,7 +70,12 @@ class dataflow:
                 dataflow.logs_file.write('Sending data to:'+str(ip)+': at time:'+str(time.time()))
                 dataflow.logs_file.write('\n')
                 dataflow.logs_file.flush()
-                dataflow.soc_hel.sendData(ip,data)
+
+
+                inport=None
+                if id in dataflow.map_ports:
+                    inport = dataflow.map_ports[id]
+                dataflow.soc_hel.sendData(ip,data,inport)
 
                 #we don't need to retry now
                 retry = 0

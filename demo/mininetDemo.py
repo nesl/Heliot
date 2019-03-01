@@ -4,16 +4,6 @@ from utils.dataflow import *
 import sys
 from flask import Flask
 
-app = Flask(__name__)
-
-@app.route("/")
-def hello():
-	print('running act container')
-	labels = dataflow.getData(inport=10002) #get the labels
-	print(labels)
-	return '{}'.format(str(labels))
-
-
 #internal port of docker listening on the machine 19000
 
 #receiving ports
@@ -70,7 +60,10 @@ if __name__ == "__main__":
 
 		#act listens for the label from the tx2 container
 		if type =='act':
-			web_ip, web_port = '10.0.0.103','20002'
-			app.run(host='localhost', port=int(web_port))
-			break
-			#print('lables are:',labels)
+			print('starting act container')
+			labels = dataflow.getData(inport=10002) #get the labels
+			print('lables are:',labels)
+
+			#send labels to the act ask on mininet
+			res = dataflow.sendData('act_task',labels)
+			print('sending android res is:',res)

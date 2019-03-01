@@ -20,8 +20,10 @@ class socketHeliot:
 
         server_socket=socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         if inport==None:
+            print('listening on port:',self.port)
             server_socket.bind(('',self.port))
         else:
+            print('listening on port:',inport)
             server_socket.bind(('',inport))
 
         server_socket.listen(1)

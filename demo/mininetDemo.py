@@ -42,8 +42,12 @@ if __name__ == "__main__":
 		#tx2 container sends data to the tx2 machine
 		if type =='tx2':
 			print('starting tx2 container')
-			data = dataflow.getData(inport=20001)
-			print('data received')
+			data = dataflow.getData(inport=10001) #get the image
+			print('image data received')
 			#send data to tx2 machine
 			res = dataflow.sendData('tx2_machine_inference',data)
 			print('sending tx2 machine res is:',res)
+
+			#receive the labels from tx2 machine
+			labels = dataflow.getData(inport=20001) #get the labels
+			print('labels are:',labels)

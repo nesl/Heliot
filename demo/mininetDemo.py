@@ -28,7 +28,7 @@ if __name__ == "__main__":
 	#Parsing the input argument
 	type=str(sys.argv[1])
 
-	print(recv,send)
+	#print(recv,send)
 	while True:
 		#receive images on port 20000 and forward them to tx2 container on 10.0.0.102
 		if type=='cam':

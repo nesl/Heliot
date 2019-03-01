@@ -12,6 +12,8 @@ import base64
 import threading
 from msgpackrpc.error import RPCError
 
+from utils.dataflow import *
+
 #C:\Users\Heliot Nesl\Desktop\Demo\images
 
 image_folder = 'C:\\Users\\Heliot Nesl\\Desktop\\Demo\\images'
@@ -60,7 +62,7 @@ def move_drone(drone_name, dx, dy, dz, yaw, speed):
         yaw_mode=airsim.YawMode(is_rate=False, yaw_or_rate=yaw),
         drivetrain=airsim.DrivetrainType.MaxDegreeOfFreedom,
         vehicle_name=drone_name)
-    time.sleep(17)
+    time.sleep(8)
     thread.join()
     t2 = time.time()
     print('Time it takes:',t2-t1)
@@ -70,22 +72,22 @@ def move_drone(drone_name, dx, dy, dz, yaw, speed):
 
 
 def control_drone1_move(is_stop):
-    i = 1
+    i = 2
 
     while i>0:
         try:
-            move_drone('Drone1', 40, 0, -1.5, 90, 2.5)
+            move_drone('Drone1', 35, 0, -1.5, 90, 2.5)
         except RuntimeError as err:
-                print('wait a sec')
-                time.sleep(3)
+                #print('wait a sec')
+                time.sleep(1)
                 pass
 
         try:
-            move_drone('Drone1', 0, 0, -1.5, 90, 2.5)
+            move_drone('Drone1', 20, 0, -1.5, 90, 2.5)
 
         except RuntimeError as err:
-                print('wait a sec')
-                time.sleep(3)
+                #print('wait a sec')
+                time.sleep(1)
 
                 pass
         i = i-1
@@ -98,15 +100,26 @@ def control_drone1_pic(is_stop):
         print('take_picture')
         responses = None
         try:
-            responses = take_picture('Drone1', is_save=True)
+            responses = take_picture('Drone1', is_save=False)
         except RPCError as err:
-            print('RPCError but it is okay: {}'.format(err))
+            print('RPCError due to two threads: {}'.format(err))
         except Exception as exp:
-            print('Exception but it is okay: {}'.format(exp))
+            print('Exception due to two threads: {}'.format(exp))
         except RuntimeError as err:
-            print('RuntimeError but it is okay: {}'.format(err))
+            print('RuntimeError due to two threads: {}'.format(err))
 
         i = i -1
+
+        if responses!=None:
+            #sending image for inference
+            image_data= responses[0].image_data_uint8
+            data = base64.b64encode(image_data)
+            #print('image is:',data)
+            print('Sensing image for inference')
+            result = dataflow.sendData(id='drone_image_data',data=data)
+            print(i,':result is:',result)
+
+
 
 
 if __name__ == '__main__':

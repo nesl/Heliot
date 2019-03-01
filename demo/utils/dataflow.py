@@ -36,7 +36,8 @@ class dataflow:
 
     @staticmethod
     def set_data_input_mapping():
-
+        ip_mininet_machine = '172.17.15.21'
+        ip_tx2_machine = '172.17.49.71'
         # We need to decide an appropriate place to put it
         dataflow.soc_hel = socketHeliot()
         #dataflow.logs_file = open('dataflow'+str(time.time())+'.log', "w")
@@ -44,15 +45,18 @@ class dataflow:
 
         #harcoding this, we need to get this from master
         dataflow.map_id_op={}
-        dataflow.map_id_op['gvt_image_data']='172.17.15.21'#  #ip of mininet machine
-        dataflow.map_id_op['drone_image_data']='172.17.15.21'  #ip of mininet machine
-        #dataflow.map_id_op['master']='172.17.15.21'  # ip of master
-        dataflow.map_id_op['tx2_container_data']='10.0.0.102' #  minient ip of tx2 container
-        dataflow.map_id_op['tx2_machine_inference']='172.17.49.71'
-        dataflow.map_id_op['tx2_inference']='172.17.15.21'
+        dataflow.map_id_op['gvt_image_data']=ip_mininet_machine  # ip of mininet machine
+        dataflow.map_id_op['drone_image_data']=ip_mininet_machine  # ip of mininet machine
 
-        dataflow.map_id_op['act_container']='10.0.0.103'
-        dataflow.map_id_op['act_task']='172.17.15.21'
+        dataflow.map_id_op['tx2_container_data']='10.0.0.102' #  minient ip of tx2 container
+        dataflow.map_id_op['tx2_machine_inference']=ip_tx2_machine #ip of tx2 machine
+
+        dataflow.map_id_op['tx2_inference']=ip_mininet_machine #ip of mininet machine
+
+        dataflow.map_id_op['act_container']='10.0.0.103' #ip of act container
+
+        dataflow.map_id_op['act_task']=ip_mininet_machine #ip of mininet machine
+
         #get the pid of the task and send it to the master using socket API
 
 

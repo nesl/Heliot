@@ -16,8 +16,8 @@ def hello():
     if labels!=None:
         if len(labels)>0:
             result = labels[0]
-            if result !='car' or result !='person':
-                result =None
+            #if result !='car' or result !='person':
+                #result =None
     return '{}'.format(result)
 
 

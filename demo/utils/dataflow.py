@@ -48,12 +48,15 @@ class dataflow:
         dataflow.map_id_op['drone_image_data']='172.17.15.21'  #ip of tx2 machine
         dataflow.map_id_op['master']='172.17.15.21'  # ip of master
         dataflow.map_id_op['tx2_container_data']='10.0.0.102' #  minient ip of tx2 container
+        dataflow.map_id_op['tx2_machine_inference']='172.17.49.71'
+
         #get the pid of the task and send it to the master using socket API
 
 
         dataflow.map_ports={}
         dataflow.map_ports['gvt_image_data']=20000
         dataflow.map_ports['tx2_container_data']=20001
+        dataflow.map_ports['tx2_machine_inference']=20001
 
 
 

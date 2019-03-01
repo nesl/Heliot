@@ -44,3 +44,6 @@ if __name__ == "__main__":
 			print('starting tx2 container')
 			data = dataflow.getData(inport=20001)
 			print('data received')
+			#send data to tx2 machine
+			res = dataflow.sendData('tx2_machine_inference',data)
+			print('sending tx2 machine res is:',res)

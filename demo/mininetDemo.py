@@ -71,5 +71,6 @@ if __name__ == "__main__":
 		#act listens for the label from the tx2 container
 		if type =='act':
 			web_ip, web_port = '10.0.0.103','20002'
-			app.run(host=web_ip, port=int(web_port))
+			app.run(host='localhost', port=int(web_port))
+			break
 			#print('lables are:',labels)

@@ -54,7 +54,7 @@ if __name__ == "__main__":
 				print('labels are:',labels)
 
 				#send labels to the actuator container
-				res = dataflow.sendData('act_container',data)
+				res = dataflow.sendData('act_container',labels)
 				print('sending act_container res is:',res)
 
 		#act listens for the label from the tx2 container

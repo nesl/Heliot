@@ -49,5 +49,6 @@ if __name__ == "__main__":
 			print('sending tx2 machine res is:',res)
 
 			#receive the labels from tx2 machine
-			labels = dataflow.getData(inport=20001) #get the labels
-			print('labels are:',labels)
+			if res:
+				labels = dataflow.getData(inport=20001) #get the labels
+				print('labels are:',labels)

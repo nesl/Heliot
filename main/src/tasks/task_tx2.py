@@ -106,7 +106,7 @@ class InferenceServer():
 
         image_data = base64.b64decode(data)
         image = Image.open(io.BytesIO(image_data))
-        image.save('Im_rec_3.png')
+        image.save('inf_images/Image_received.png')
 
         #Converting to numpy array
         image_np = load_image_into_numpy_array(image)
@@ -121,6 +121,7 @@ class InferenceServer():
         time_taken=end_time-start_time
         print("Time Taken for Inference is:",time_taken)
 
+        result,labels=get_scores_labels(output_dict,confidence_limit)
 
         if save_image:
             # The results of a detection is visualized
@@ -134,11 +135,15 @@ class InferenceServer():
                 use_normalized_coordinates=True,
                 line_thickness=8)
             im = Image.fromarray(image_np)
-            im.save('Inference.jpg')
+            #im.save('inf_images/Inference.jpg')
+
+            if len(labels)>0:
+                name=labels[0]
+                if name =='car' or name =='person':
+                    im.save('inf_images/'+name+'.jpg')
 
 
 
-        result,labels=get_scores_labels(output_dict,confidence_limit)
 
 
         print("Result is:",result)

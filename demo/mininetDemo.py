@@ -48,7 +48,17 @@ if __name__ == "__main__":
 			res = dataflow.sendData('tx2_machine_inference',data)
 			print('sending tx2 machine res is:',res)
 
-			#receive the labels from tx2 machine
+			#receive the labels from tx2 machine only if we send data
 			if res:
 				labels = dataflow.getData(inport=20001) #get the labels
 				print('labels are:',labels)
+
+				#send labels to the actuator container
+				res = dataflow.sendData('act_container',data)
+				print('sending act_container res is:',res)
+
+		#act listens for the label from the tx2 container
+		if type =='act':
+			print('starting act container')
+			labels = dataflow.getData(inport=10002) #get the labels
+			print('lables are:',labels)

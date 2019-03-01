@@ -49,7 +49,9 @@ class dataflow:
         #dataflow.map_id_op['master']='172.17.15.21'  # ip of master
         dataflow.map_id_op['tx2_container_data']='10.0.0.102' #  minient ip of tx2 container
         dataflow.map_id_op['tx2_machine_inference']='172.17.49.71'
-        dataflow.map_id_op['tx2_inference']='172.17.15.21' 
+        dataflow.map_id_op['tx2_inference']='172.17.15.21'
+
+        dataflow.map_id_op['act_container']='10.0.0.103'
         #get the pid of the task and send it to the master using socket API
 
 
@@ -58,6 +60,7 @@ class dataflow:
         dataflow.map_ports['tx2_container_data']=10001 #tx2 container is lisening on 10001 for image
         dataflow.map_ports['tx2_machine_inference']=20001 #tx2 machine is listening on 20001
         dataflow.map_ports['tx2_inference'] = 20001 #tx2 container is lisening on 20001 for labels
+        dataflow.map_ports['act_container'] = 10002
 
 
     # We need to send data with id

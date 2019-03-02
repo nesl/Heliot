@@ -34,7 +34,7 @@ if __name__ == "__main__":
 		if type=='cam':
 			print('Starting cam container')
 			data = dataflow.getData(inport=20000)
-			#print('data is:',data)
+			print('Image data is:',data)
 			print('cam received data')
 			res = dataflow.sendData('tx2_container_data',data)
 			print('res is:',res)
@@ -46,6 +46,7 @@ if __name__ == "__main__":
 			print('starting tx2 container')
 			data = dataflow.getData(inport=10001) #get the image
 			print('image data received')
+			print('Image data is:',data)
 			#send data to tx2 machine
 			res = dataflow.sendData('tx2_machine_inference',data)
 			print('sending tx2 machine res is:',res)

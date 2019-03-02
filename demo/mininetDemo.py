@@ -34,6 +34,7 @@ if __name__ == "__main__":
 		if type=='cam':
 			print('Starting cam container')
 			data = dataflow.getData(inport=20000)
+			print('data is:',data)
 			print('cam received data')
 			res = dataflow.sendData('tx2_container_data',data)
 			print('res is:',res)

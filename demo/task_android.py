@@ -15,8 +15,8 @@ def get_data():
         if label!=None:
             if len(label)>0:
                 labels.append(label[0])
-        else:
-            labels.append('None')
+        # else:
+        #     labels.append('None')
         print('labels:',labels)
         if len(labels)>5:
             labels = []

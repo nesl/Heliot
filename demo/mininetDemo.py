@@ -36,7 +36,9 @@ if __name__ == "__main__":
 			data = dataflow.getData(inport=20000)
 			print('Image data is:',data)
 			print('cam received data')
-			res = dataflow.sendData('tx2_container_data',data)
+			res = False
+			if data!=None:
+				res = dataflow.sendData('tx2_container_data',data)
 			print('res is:',res)
 			# We need to send data with id
 
@@ -48,8 +50,10 @@ if __name__ == "__main__":
 			print('image data received')
 			print('Image data is:',data)
 			#send data to tx2 machine
-			res = dataflow.sendData('tx2_machine_inference',data)
-			print('sending tx2 machine res is:',res)
+			res=False
+			if data!=None:
+				res = dataflow.sendData('tx2_machine_inference',data)
+				print('sending tx2 machine res is:',res)
 
 			#receive the labels from tx2 machine only if we send data
 			if res:

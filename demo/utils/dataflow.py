@@ -38,6 +38,9 @@ class dataflow:
     def set_data_input_mapping():
         ip_mininet_machine = '192.168.1.6'
         ip_tx2_machine = '192.168.1.8'
+
+        ip_airsim_machine = '192.168.1.175'
+
         # We need to decide an appropriate place to put it
         dataflow.soc_hel = socketHeliot()
         #dataflow.logs_file = open('dataflow'+str(time.time())+'.log', "w")
@@ -47,6 +50,7 @@ class dataflow:
         dataflow.map_id_op={}
         dataflow.map_id_op['gvt_image_data']=ip_mininet_machine  # ip of mininet machine
         dataflow.map_id_op['drone_image_data']=ip_mininet_machine  # ip of mininet machine
+        dataflow.map_id_op['air_sim_scenario']=ip_airsim_machine  # ip of mininet machine
 
         dataflow.map_id_op['tx2_container_data']='10.0.0.102' #  minient ip of tx2 container
         dataflow.map_id_op['tx2_machine_inference']=ip_tx2_machine #ip of tx2 machine
@@ -69,6 +73,7 @@ class dataflow:
         dataflow.map_ports['act_container'] = 10002
         dataflow.map_ports['act_task'] = 20003
 
+        dataflow.map_ports['air_sim_scenario'] = 10009
 
     # We need to send data with id
     @staticmethod

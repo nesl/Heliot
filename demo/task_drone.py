@@ -76,14 +76,14 @@ def control_drone1_move(is_stop):
 
     while i>0:
         try:
-            move_drone('Drone1', 35, 0, -1.5, 90, 2.5)
+            move_drone('Drone1', 35, 10, -1.5, 90, 2.5)
         except RuntimeError as err:
                 #print('wait a sec')
                 time.sleep(1)
                 pass
 
         try:
-            move_drone('Drone1', 20, 0, -1.5, 90, 2.5)
+            move_drone('Drone1', 10, 10, -1.5, 90, 2.5)
 
         except RuntimeError as err:
                 #print('wait a sec')

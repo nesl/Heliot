@@ -33,12 +33,26 @@ Scenario = 1 # no rain no dust on the route: move_drone('Drone1', 35, 10, -1.5, 
 def get_scenario():
     global Scenario
 
-    while Scenario!=0:
-        data = dataflow.getData(inport=10009) #get the scenario from any machine on the network, scenario port is: 10009
+    while True:
 
-        if data!=None:
-            Scenario = data
-            print('scenario is:',data)
+        try:
+            data = dataflow.getData(inport=10009) #get the scenario from any machine on the network, scenario port is: 10009
+            if data!=None:
+                Scenario = data
+
+                if Scenario==0:
+                    break #exit from the loop when scenaio is 0
+
+                print('scenario is:',data)
+                if Scenario == 1 or Scenario ==3:
+                    client.simSetWeatherParameter(airsim.WeatherParameter.Rain, 0.0);
+                    client.simSetWeatherParameter(airsim.WeatherParameter.Dust, 0.0);
+                elif Scenario == 2 or Scenario ==4 :
+                    client.simSetWeatherParameter(airsim.WeatherParameter.Rain, 0.45);
+                    client.simSetWeatherParameter(airsim.WeatherParameter.Dust, 0.25);
+        except Exception as e:
+            pass
+
 
 def take_picture(drone_name, is_save=False):
     responses = client.simGetImages([airsim.ImageRequest("front_center", airsim.ImageType.Scene)], vehicle_name=drone_name)
@@ -92,21 +106,34 @@ def move_drone(drone_name, dx, dy, dz, yaw, speed):
 
 def control_drone1_move(is_stop):
     while Scenario!=0:
-        try:
-            move_drone('Drone1', 35, 10, -1.5, 90, 2.5)
-        except RuntimeError as err:
-                #print('wait a sec')
-                time.sleep(1)
-                pass
 
-        try:
-            move_drone('Drone1', 10, 10, -1.5, 90, 2.5)
+        if Scenario==1:
+            try:
+                move_drone('Drone1', 35, 10, -1.5, 90, 2.5)
+            except RuntimeError as err:
+                    time.sleep(1)
+                    pass
 
-        except RuntimeError as err:
-                #print('wait a sec')
-                time.sleep(1)
+            try:
+                move_drone('Drone1', 10, 10, -1.5, 90, 2.5)
 
-                pass
+            except RuntimeError as err:
+                    time.sleep(1)
+                    pass
+
+        if Scenario==2:
+            try:
+                move_drone('Drone1', 35, 10, -1.5, 90, 2.5)
+            except RuntimeError as err:
+                    time.sleep(1)
+                    pass
+
+            try:
+                move_drone('Drone1', 10, 10, -1.5, 90, 2.5)
+
+            except RuntimeError as err:
+                    time.sleep(1)
+                    pass
 
 def control_drone1_pic(is_stop):
 
@@ -145,6 +172,9 @@ if __name__ == '__main__':
     # connect to the AirSim simulator
     client = airsim.MultirotorClient()
     client.confirmConnection()
+
+    client.simEnableWeather(True)
+
     client.enableApiControl(True, "Drone1")
     client.armDisarm(True, "Drone1")
 

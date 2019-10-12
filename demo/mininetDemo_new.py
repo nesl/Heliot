@@ -19,6 +19,10 @@ from flask import Flask
 # send['tx22']    = '10.0.0.103'  #  sending to act container over port 19005, different port
 # send['act']    = '172.17.15.21' #  sending to android server over port 19000
 
+#starting tasks on individual containers
+# cd /opt/github/placethings/Heliot/demo && python3 mininetDemo_new.py 'cam'
+#cd /opt/github/placethings/Heliot/demo && python3 mininetDemo_new.py 'tx2'
+
 if __name__ == "__main__":
 	if len(sys.argv)!=2:
 		print('usage: python3 mininetDemo.py container')
@@ -72,14 +76,15 @@ if __name__ == "__main__":
 						print('sending act_container res is:',res)
 
 
-	#print(recv,send)
-	while True:
-		#act listens for the label from the tx2 container
-		if type =='act':
-			print('starting act container')
-			labels = dataflow.getData(inport=10002) #get the labels
-			print('lables are:',labels)
+	#This is the actuation container
+	if type =='act':
+		print('starting act container')
 
-			#send labels to the act ask on mininet
-			res = dataflow.sendData('act_task',labels)
-			print('sending android res is:',res)
+		while True:
+			labels = dataflow.getData(inport=10002) #get the labels from the tx2 container
+
+			if labels!=None:
+				data_index = data_index + 1
+				res = dataflow.sendData('act_task',labels)#sending labels to the actuation task which can host it
+				#print('sending android res is:',res)
+				print('act received lables:',data_index,' : send res: ',res)

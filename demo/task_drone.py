@@ -21,6 +21,25 @@ image_id = {
     'Drone1': 1,
 }
 
+#Scenario's are 4 here for the conix demo
+Scenario = 1 # no rain no dust on the route: move_drone('Drone1', 35, 10, -1.5, 90, 2.5),  move_drone('Drone1', 10, 10, -1.5, 90, 2.5)
+#Scenario = 2 # rain and dust enabled on the route: move_drone('Drone1', 35, 10, -1.5, 90, 2.5),  move_drone('Drone1', 10, 10, -1.5, 90, 2.5)
+
+#Scenario = 3 # no rain and no dust enabled on the route: move_drone('Drone1', 100, 0, -2, 90, 2.5),  move_drone('Drone1', 10, 10, -1.5, 90, 2.5)
+#Scenario = 3 # rain and dust enabled on the route: move_drone('Drone1', 10, 0, -2, 90, 2.5),  move_drone('Drone1', 10, 10, -1.5, 90, 2.5)
+
+
+#get which scenario is running
+def get_scenario():
+    global Scenario
+
+    while Scenario!=0:
+        data = dataflow.getData(inport=10009) #get the scenario from any machine on the network, scenario port is: 10009
+
+        if data!=None:
+            Scenario = data
+            print('scenario is:',data)
+
 def take_picture(drone_name, is_save=False):
     responses = client.simGetImages([airsim.ImageRequest("front_center", airsim.ImageType.Scene)], vehicle_name=drone_name)
 
@@ -72,9 +91,7 @@ def move_drone(drone_name, dx, dy, dz, yaw, speed):
 
 
 def control_drone1_move(is_stop):
-    i = 2
-
-    while i>0:
+    while Scenario!=0:
         try:
             move_drone('Drone1', 35, 10, -1.5, 90, 2.5)
         except RuntimeError as err:
@@ -90,11 +107,11 @@ def control_drone1_move(is_stop):
                 time.sleep(1)
 
                 pass
-        i = i-1
 
 def control_drone1_pic(is_stop):
-    i=100
-    while i>0:
+
+    i = 0
+    while Scenario!=0:
         time.sleep(0.3)  # fps = 1
         # prevent RPC error stop the process
         print('take_picture')
@@ -108,7 +125,6 @@ def control_drone1_pic(is_stop):
         except RuntimeError as err:
             print('RuntimeError due to two threads: {}'.format(err))
 
-        i = i -1
 
         if responses!=None:
             #sending image for inference
@@ -118,6 +134,8 @@ def control_drone1_pic(is_stop):
             print('Sensing image for inference')
             result = dataflow.sendData(id='drone_image_data',data=data)
             print(i,':result is:',result)
+
+        i = i+1
 
 
 
@@ -148,13 +166,20 @@ if __name__ == '__main__':
         target=control_drone1_pic, args=(is_stop,), name='control_drone1_pic')
 
 
+    worker3 = threading.Thread(
+        target=get_scenario, args=(), name='get_drone1_scenario')
+
+
+
     print('Start worker threads')
     worker1.start()
     worker2.start()
+    worker3.start()
 
     print('Waiting for worker threads')
     worker2.join()
     worker1.join()
+    worker3.join()
 
     #worker2.join()
 

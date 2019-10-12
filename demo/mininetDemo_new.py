@@ -40,36 +40,40 @@ if __name__ == "__main__":
 			data = dataflow.getData(inport=20000)
 			res = False
 			if data!=None:
-				print('cam received data:', data_index)
+				print('cam received image:', data_index)
 				data_index = data_index + 1
-				res = dataflow.sendData('tx2_container_data',data)
+				res = dataflow.sendData('tx2_container_data',data) #Send image to cam container
 			print('res is:',res)
+
+	#This is the tx2 container
+	if type =='tx2':
+		print('starting tx2 container')
+		#Tx2 container receives data from cam container
+		#tx2 container sends data to the tx2 machine
+
+		while True:
+			data = dataflow.getData(inport=10001) #get the image from cam container
+			res=False
+			if data!=None:
+				data_index = data_index + 1
+				res = dataflow.sendData('tx2_machine_inference',data)#sending the image to the the tx2 physical machine
+				#print('sending tx2 machine res is:',res)
+				print('tx2 conainter received image:', data_index,' : ', res)
+
+				#receive the labels from tx2 machine only if we send data
+				if res:
+					labels = dataflow.getData(inport=20001) #get the labels
+					#print('labels are:',labels)
+
+
+					if labels!=None:
+						#send labels to the actuator container
+						res = dataflow.sendData('act_container',labels)
+						print('sending act_container res is:',res)
 
 
 	#print(recv,send)
 	while True:
-		#Tx2 container receives data from cam container
-		#tx2 container sends data to the tx2 machine
-		if type =='tx2':
-			print('starting tx2 container')
-			data = dataflow.getData(inport=10001) #get the image
-			print('image data received')
-			print('Image data is:',data)
-			#send data to tx2 machine
-			res=False
-			if data!=None:
-				res = dataflow.sendData('tx2_machine_inference',data)
-				print('sending tx2 machine res is:',res)
-
-			#receive the labels from tx2 machine only if we send data
-			if res:
-				labels = dataflow.getData(inport=20001) #get the labels
-				print('labels are:',labels)
-
-				#send labels to the actuator container
-				res = dataflow.sendData('act_container',labels)
-				print('sending act_container res is:',res)
-
 		#act listens for the label from the tx2 container
 		if type =='act':
 			print('starting act container')

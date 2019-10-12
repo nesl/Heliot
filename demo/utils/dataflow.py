@@ -62,6 +62,7 @@ class dataflow:
 
         dataflow.map_ports={}
         dataflow.map_ports['gvt_image_data']=20000
+        dataflow.map_ports['drone_image_data']=20000
         dataflow.map_ports['tx2_container_data']=10001 #tx2 container is lisening on 10001 for image
         dataflow.map_ports['tx2_machine_inference']=20001 #tx2 machine is listening on 20001
         dataflow.map_ports['tx2_inference'] = 20001 #tx2 container is lisening on 20001 for labels

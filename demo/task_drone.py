@@ -44,12 +44,12 @@ def get_scenario():
                     break #exit from the loop when scenaio is 0
 
                 print('scenario is:',data)
-                if Scenario == 1 or Scenario ==3:
-                    client.simSetWeatherParameter(airsim.WeatherParameter.Rain, 0.0);
+                if Scenario == 1 or Scenario==3:
+                    #client.simSetWeatherParameter(airsim.WeatherParameter.Rain, 0.0);
                     client.simSetWeatherParameter(airsim.WeatherParameter.Dust, 0.0);
-                elif Scenario == 2 or Scenario ==4 :
-                    client.simSetWeatherParameter(airsim.WeatherParameter.Rain, 0.45);
-                    client.simSetWeatherParameter(airsim.WeatherParameter.Dust, 0.25);
+                elif Scenario == 2 or Scenario==4:
+                    #client.simSetWeatherParameter(airsim.WeatherParameter.Rain, 0.45);
+                    client.simSetWeatherParameter(airsim.WeatherParameter.Dust, 0.5);
         except Exception as e:
             pass
 
@@ -107,29 +107,31 @@ def move_drone(drone_name, dx, dy, dz, yaw, speed):
 def control_drone1_move(is_stop):
     while Scenario!=0:
 
-        if Scenario==1:
+        if Scenario==1 or Scenario==2:
             try:
-                move_drone('Drone1', 35, 10, -1.5, 90, 2.5)
+                move_drone('Drone1', 40, 10, -1.5, 90, 3)
             except RuntimeError as err:
                     time.sleep(1)
                     pass
 
+        if Scenario==1 or Scenario==2:
             try:
-                move_drone('Drone1', 10, 10, -1.5, 90, 2.5)
+                move_drone('Drone1', 30, 10, -1.5, 90, 3)
 
             except RuntimeError as err:
                     time.sleep(1)
                     pass
 
-        if Scenario==2:
+        if Scenario==3 or Scenario==4:
             try:
-                move_drone('Drone1', 35, 10, -1.5, 90, 2.5)
+                move_drone('Drone1', 40, 0, -2, 90, 3)
             except RuntimeError as err:
                     time.sleep(1)
                     pass
 
+        if Scenario==3 or Scenario==4:
             try:
-                move_drone('Drone1', 10, 10, -1.5, 90, 2.5)
+                move_drone('Drone1', 30, 0, -2, 90, 3)
 
             except RuntimeError as err:
                     time.sleep(1)

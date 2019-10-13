@@ -21,6 +21,39 @@ image_id = {
     'Drone1': 1,
 }
 
+#Scenario's are 4 here for the conix demo
+Scenario = 1 # no rain no dust on the route: move_drone('Drone1', 35, 10, -1.5, 90, 2.5),  move_drone('Drone1', 10, 10, -1.5, 90, 2.5)
+#Scenario = 2 # rain and dust enabled on the route: move_drone('Drone1', 35, 10, -1.5, 90, 2.5),  move_drone('Drone1', 10, 10, -1.5, 90, 2.5)
+
+#Scenario = 3 # no rain and no dust enabled on the route: move_drone('Drone1', 100, 0, -2, 90, 2.5),  move_drone('Drone1', 10, 10, -1.5, 90, 2.5)
+#Scenario = 3 # rain and dust enabled on the route: move_drone('Drone1', 10, 0, -2, 90, 2.5),  move_drone('Drone1', 10, 10, -1.5, 90, 2.5)
+
+
+#get which scenario is running
+def get_scenario():
+    global Scenario
+
+    while True:
+
+        try:
+            data = dataflow.getData(inport=10009) #get the scenario from any machine on the network, scenario port is: 10009
+            if data!=None:
+                Scenario = data
+
+                if Scenario==0:
+                    break #exit from the loop when scenaio is 0
+
+                print('scenario is:',data)
+                if Scenario == 1 or Scenario==3:
+                    #client.simSetWeatherParameter(airsim.WeatherParameter.Rain, 0.0);
+                    client.simSetWeatherParameter(airsim.WeatherParameter.Dust, 0.0);
+                elif Scenario == 2 or Scenario==4:
+                    #client.simSetWeatherParameter(airsim.WeatherParameter.Rain, 0.45);
+                    client.simSetWeatherParameter(airsim.WeatherParameter.Dust, 0.5);
+        except Exception as e:
+            pass
+
+
 def take_picture(drone_name, is_save=False):
     responses = client.simGetImages([airsim.ImageRequest("front_center", airsim.ImageType.Scene)], vehicle_name=drone_name)
 
@@ -72,29 +105,42 @@ def move_drone(drone_name, dx, dy, dz, yaw, speed):
 
 
 def control_drone1_move(is_stop):
-    i = 2
+    while Scenario!=0:
 
-    while i>0:
-        try:
-            move_drone('Drone1', 35, 0, -1.5, 90, 2.5)
-        except RuntimeError as err:
-                #print('wait a sec')
-                time.sleep(1)
-                pass
+        if Scenario==1 or Scenario==2:
+            try:
+                move_drone('Drone1', 40, 10, -1.5, 90, 3)
+            except RuntimeError as err:
+                    time.sleep(1)
+                    pass
 
-        try:
-            move_drone('Drone1', 20, 0, -1.5, 90, 2.5)
+        if Scenario==1 or Scenario==2:
+            try:
+                move_drone('Drone1', 30, 10, -1.5, 90, 3)
 
-        except RuntimeError as err:
-                #print('wait a sec')
-                time.sleep(1)
+            except RuntimeError as err:
+                    time.sleep(1)
+                    pass
 
-                pass
-        i = i-1
+        if Scenario==3 or Scenario==4:
+            try:
+                move_drone('Drone1', 40, 0, -2, 90, 3)
+            except RuntimeError as err:
+                    time.sleep(1)
+                    pass
+
+        if Scenario==3 or Scenario==4:
+            try:
+                move_drone('Drone1', 30, 0, -2, 90, 3)
+
+            except RuntimeError as err:
+                    time.sleep(1)
+                    pass
 
 def control_drone1_pic(is_stop):
-    i=100
-    while i>0:
+
+    i = 0
+    while Scenario!=0:
         time.sleep(0.3)  # fps = 1
         # prevent RPC error stop the process
         print('take_picture')
@@ -108,7 +154,6 @@ def control_drone1_pic(is_stop):
         except RuntimeError as err:
             print('RuntimeError due to two threads: {}'.format(err))
 
-        i = i -1
 
         if responses!=None:
             #sending image for inference
@@ -119,6 +164,8 @@ def control_drone1_pic(is_stop):
             result = dataflow.sendData(id='drone_image_data',data=data)
             print(i,':result is:',result)
 
+        i = i+1
+
 
 
 
@@ -127,6 +174,9 @@ if __name__ == '__main__':
     # connect to the AirSim simulator
     client = airsim.MultirotorClient()
     client.confirmConnection()
+
+    client.simEnableWeather(True)
+
     client.enableApiControl(True, "Drone1")
     client.armDisarm(True, "Drone1")
 
@@ -148,13 +198,20 @@ if __name__ == '__main__':
         target=control_drone1_pic, args=(is_stop,), name='control_drone1_pic')
 
 
+    worker3 = threading.Thread(
+        target=get_scenario, args=(), name='get_drone1_scenario')
+
+
+
     print('Start worker threads')
     worker1.start()
     worker2.start()
+    worker3.start()
 
     print('Waiting for worker threads')
     worker2.join()
     worker1.join()
+    worker3.join()
 
     #worker2.join()
 

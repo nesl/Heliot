@@ -25,10 +25,10 @@ info('*** Adding docker containers\n')
 # 20001 is for tx2
 # 20002 is for act
 
-cam = net.addDocker('cam', ip='10.0.0.101', dimage="sandynesl/heliot:2", ports=[20000], port_bindings={20000: 20000})#docker_ip=172.18.0.2
+cam = net.addDocker('cam', ip='10.0.0.101', dimage="sandynesl/heliot:3", ports=[20000], port_bindings={20000: 20000})#docker_ip=172.18.0.2
 
-tx2 = net.addDocker('tx2', ip='10.0.0.102', dimage="sandynesl/heliot:2", ports=[20001], port_bindings={20001: 20001})#docker_ip=172.18.0.3
-act = net.addDocker('act', ip='10.0.0.103', dimage="sandynesl/heliot:2", ports=[20002], port_bindings={20002: 20002})#docker_ip=172.18.0.4
+tx2 = net.addDocker('tx2', ip='10.0.0.102', dimage="sandynesl/heliot:3", ports=[20001], port_bindings={20001: 20001})#docker_ip=172.18.0.3
+act = net.addDocker('act', ip='10.0.0.103', dimage="sandynesl/heliot:3", ports=[20002], port_bindings={20002: 20002})#docker_ip=172.18.0.4
 
 info('*** Adding switches\n')
 s1 = net.addSwitch('s1')
@@ -49,9 +49,13 @@ net.ping([cam, tx2])
 
 info('*** Running CLI\n')
 
-print cam.cmd('cd /opt/github/placethings/Heliot/demo && python3 mininetDemo.py \'cam\' &')
-#print tx2.cmd('cd /opt/github/placethings/Heliot/demo && python3 mininetDemo.py \'tx2\' &')
-#print act.cmd('cd /opt/github/placethings/Heliot/demo && python3 mininetDemo.py \'act\' &')
+
+# code to start the dataflow tasks on the containers
+
+print cam.cmd('cd /opt/github/placethings/Heliot/demo && python3 mininetDemo_new.py \'cam\' &')
+print tx2.cmd('cd /opt/github/placethings/Heliot/demo && python3 mininetDemo_new.py \'tx2\' &')
+print act.cmd('cd /opt/github/placethings/Heliot/demo && python3 mininetDemo_new.py \'act\' &')
+
 
 #cd /opt/github/placethings/Heliot/demo && python3 mininetDemo.py 'cam'
 

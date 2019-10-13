@@ -133,7 +133,7 @@ class InferenceServer():
                 category_index,
                 instance_masks=output_dict.get('detection_masks'),
                 use_normalized_coordinates=True,
-                line_thickness=8)
+                line_thickness=1)
             im = Image.fromarray(image_np)
             #im.save('inf_images/Inference.jpg')
 
@@ -141,6 +141,8 @@ class InferenceServer():
                 name=labels[0]
                 if name =='car' or name =='person':
                     im.save('inf_images/'+name+'.jpg')
+
+                im.save('inf_images/'+'Inferred_image'+'.jpg')
 
 
 

@@ -621,8 +621,8 @@ def visualize_boxes_and_labels_on_image_array(
         display_str = ''
         if not skip_labels:
           if not agnostic_mode:
-            if classes[i] in category_index.keys():
-              class_name = category_index[classes[i]]['name']
+            if str(classes[i]) in category_index.keys():
+              class_name = category_index[str(classes[i])]
             else:
               class_name = 'N/A'
             display_str = str(class_name)

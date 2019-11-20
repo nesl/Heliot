@@ -13,12 +13,13 @@ try:
         #import the task file
         file.write('Attempted to start the task')
         file.write('\n')
-        file.write('importing task file')
+        file.write('importing task file: ' + str(mod))
         file.write('\n')
         file.flush()
 
         #print('importing task file')
         mod_task=importlib.import_module('tasks.'+str(mod))
+        # mod_task=importlib.import_module('.' + str(mod), package='tasks')
         mod_task.run_task()
         file.close()
 

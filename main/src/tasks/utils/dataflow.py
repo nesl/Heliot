@@ -34,19 +34,26 @@ class dataflow:
     #On the machine which task is running, there is a socket receive function is running
 
     @staticmethod
-    def set_data_input_mapping():
+    def set_data_input_mapping(get=False):
 
         # We need to decide an appropriate place to put it
         dataflow.soc_hel = socketHeliot()
         #dataflow.logs_file = open('dataflow'+str(time.time())+'.log', "w")
-        dataflow.logs_file = open('dataflow'+'.log', "w")
+        if get:
+            dataflow.logs_file = open('dataflow_get'+'.log', "w")
+        else:
+            dataflow.logs_file = open('dataflow_send'+'.log', "w")
 
         #harcoding this, we need to get this from master
         dataflow.map_id_op={}
-        dataflow.map_id_op['gvt_image_data']='10.0.0.1'#'172.17.15.21'  #ip of tx2
-        dataflow.map_id_op['drone_image_data']='172.17.15.21'  #ip of tx2
+        dataflow.map_id_op['gvt_image_data']='10.0.0.1'         #'172.17.15.21'  #ip of tx2
+        dataflow.map_id_op['drone_image_data']='172.17.15.21'   #ip of tx2
 
         dataflow.map_id_op['master']='172.17.15.21'  #ip of master
+
+        dataflow.map_id_op['task1_data']='127.0.0.1'
+        dataflow.map_id_op['task2_data']='127.0.0.1'
+
 
         #get the pid of the task and send it to the master using socket API
 
@@ -92,7 +99,7 @@ class dataflow:
     def getData(inport=None):
         try:
             if dataflow.map_id_op==None:
-                dataflow.set_data_input_mapping()
+                dataflow.set_data_input_mapping(True)
 
             #maintaing logs on storage
             dataflow.logs_file.write('getData: at time:'+str(time.time()))

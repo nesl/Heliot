@@ -17,8 +17,8 @@ def run_task():
 
     try:
         for i in range(20):
-            data1 = dataflow.getData()
-            data2 = dataflow.getData()
+            data1 = dataflow.getData(9000)
+            data2 = dataflow.getData(9000)
 
             file.write('Received data' + str(i+1) + ': ' + str(data1) + ', ' + str(data2))
             file.write('\n')

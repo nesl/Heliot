@@ -12,7 +12,7 @@ def runTask(ip, username, password, taskFile):
         client.connect(ip, timeout=5, look_for_keys=False, username=username, password=password)
 
         print("Running", str(taskFile))
-        cmd = 'cd Desktop/prince/test_2; /home/prince/miniconda3/envs/mininet/bin/python runTaskOnDevice.py '+ str(taskFile) + ' &'
+        cmd = 'cd /home/prince/Desktop/Heliot/main/src; /home/prince/miniconda3/envs/mininet/bin/python runTaskOnDevice.py '+ str(taskFile) + ' &'
 
         stdin, stdout, stderr = client.exec_command(cmd)
 

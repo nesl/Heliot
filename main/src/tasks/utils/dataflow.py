@@ -46,13 +46,9 @@ class dataflow:
 
         #harcoding this, we need to get this from master
         dataflow.map_id_op={}
-        dataflow.map_id_op['gvt_image_data']='10.0.0.1'         #'172.17.15.21'  #ip of tx2
-        dataflow.map_id_op['drone_image_data']='172.17.15.21'   #ip of tx2
-
-        dataflow.map_id_op['master']='172.17.15.21'  #ip of master
-
-        dataflow.map_id_op['task1_data']='127.0.0.1'
-        dataflow.map_id_op['task2_data']='127.0.0.1'
+        dataflow.map_id_op['master']        ='172.17.15.21'
+        dataflow.map_id_op['task1_data']    ='127.0.0.1'
+        dataflow.map_id_op['task2_data']    ='127.0.0.1'
 
 
         #get the pid of the task and send it to the master using socket API
@@ -61,7 +57,7 @@ class dataflow:
 
     # We need to send data with id
     @staticmethod
-    def sendData(id,data):
+    def sendData(id, data, port=None):
         retry=1
         while retry>0:
             try:
@@ -74,7 +70,7 @@ class dataflow:
                 dataflow.logs_file.write('Sending data to:'+str(ip)+': at time:'+str(time.time()))
                 dataflow.logs_file.write('\n')
                 dataflow.logs_file.flush()
-                dataflow.soc_hel.sendData(ip,data)
+                dataflow.soc_hel.sendData(ip,data,port)
 
                 #we don't need to retry now
                 retry = 0
@@ -113,6 +109,8 @@ class dataflow:
             dataflow.logs_file.write('Error on: getData: at time:'+str(time.time()))
             dataflow.logs_file.write('\n')
             dataflow.logs_file.write(str(e))
+            dataflow.logs_file.write('\n')
+            dataflow.logs_file.write(str(inport))
             dataflow.logs_file.write('\n')
             dataflow.logs_file.flush()
             return None

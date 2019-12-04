@@ -28,11 +28,16 @@ from utilss.runTask import *
 from network.netHeliot import *
 
 
+# Port/Ip Mapper
+from mapper import *
+
+
 #other imports
 import sys
 import logging
 import os
 import importlib
+
 
 ####################initialization file path
 supported_os=['_ubuntu','_windows','_linux','_android']
@@ -68,6 +73,9 @@ class testbed:
         # all devices should have unique ids
         self._id = []
 
+        self._mapper = mapper()
+
+
     # Add device to the list of devices in the testbed
     def add_device(self, d):
         #verify d is device object
@@ -82,6 +90,7 @@ class testbed:
 
             self._device.append(d)
             self._id.append(str(id))
+            self._mapper.addDeviceMapping(d)
 
         else:
             logger.error('add_device called with wrong input')
@@ -219,6 +228,21 @@ class testbed:
             #self.net._network.stop()
 
 
+    def map_task(self, task):
+        #Finding node to run this task on
+        for node in self._scenario._node:
+            if node._id==task._nodeid:
+
+                # Finding to which device is this node mapped to
+                for device in self._device:
+                    if device._type ==node._type:
+                        print('Mapping Task:',task._taskid, ', on node:',node._id,', mapped to device:',device._id)
+                        self._mapper.addTaskMapping(task, device)
+
+    def dataflow_mapping(self, dir):
+        self._mapper.mapDataflow(self._scenario._tasks, self._device, self._scenario._node, dir)
+        
+
         # Function to run the tasks on the nodes
         # Testbed object tbed is passed as the input
     def start_tasks(self):
@@ -232,7 +256,6 @@ class testbed:
     # Then we call start_task_on_device, with task and device as input
 
     def start_task(self,task):
-
         #Finding node to run this task on
         for node in self._scenario._node:
             if node._id==task._nodeid:

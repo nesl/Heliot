@@ -5,12 +5,11 @@ import sys
 import importlib
 import os
 
-file = open("runTaskOnDevice.log", "w")
-
 try:
     if len(sys.argv)==2:
         mod = sys.argv[1]
         #import the task file
+        file = open("runTaskOnDevice.log", "w")
         file.write('Attempted to start the task')
         file.write('\n')
         file.write('importing task file: ' + str(mod))

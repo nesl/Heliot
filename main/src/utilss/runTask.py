@@ -13,6 +13,7 @@ def runTask(ip, username, password, taskFile):
 
         print("Running", str(taskFile))
         cmd = 'cd /home/prince/Desktop/Heliot/main/src; /home/prince/miniconda3/envs/mininet/bin/python runTaskOnDevice.py '+ str(taskFile) + ' &'
+        # TODO: Send mapping JSON file
 
         stdin, stdout, stderr = client.exec_command(cmd)
 

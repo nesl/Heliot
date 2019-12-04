@@ -9,7 +9,7 @@ try:
     if len(sys.argv)==2:
         mod = sys.argv[1]
         #import the task file
-        file = open("runTaskOnDevice.log", "w")
+        file = open("runTaskOnDevice_"+str(mod)+".log", "w")
         file.write('Attempted to start the task')
         file.write('\n')
         file.write('importing task file: ' + str(mod))

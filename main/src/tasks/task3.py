@@ -16,9 +16,9 @@ def run_task():
     print('Attempting to start task Task3')
 
     try:
-        for i in range(20):
-            data1 = dataflow.getData(8000)
-            data2 = dataflow.getData(8000)
+        for i in range(10):
+            data1 = dataflow.getData('task3')
+            data2 = dataflow.getData('task3')
 
             file.write('Received data' + str(i+1) + ': ' + str(data1) + ', ' + str(data2))
             file.write('\n')

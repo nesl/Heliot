@@ -20,13 +20,7 @@ def run_task():
         for i in range(10):
             data = random.randint(0, 10)
 
-            result = dataflow.sendData(id='task2_data', data=data, port=8000)
-            print('Task2(' + str(i) + '): Sending', data, ":", result)
-            file.write('Task2(' + str(i) + '): Sending ' + str(data) + " : " + str(result))
-            file.write('\n')
-            file.flush()
-
-            result = dataflow.sendData(id='task2_data', data=data, port=9000)
+            result = dataflow.sendData(id='task2_data', data=data)
             print('Task2(' + str(i) + '): Sending', data, ":", result)
             file.write('Task2(' + str(i) + '): Sending ' + str(data) + " : " + str(result))
             file.write('\n')

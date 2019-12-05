@@ -18,7 +18,7 @@ def run_task():
 
     try: 
         for i in range(10):
-            data = random.randint(0, 10)
+            data = ['task2_data', random.randint(0, 10)]
 
             result = dataflow.sendData(id='task2_data', data=data)
             print('Task2(' + str(i) + '): Sending', data, ":", result)

@@ -5,8 +5,11 @@ Task: Multiplies random numbers received
 import time
 import random
 import os, signal
-
 from tasks.utils.dataflow import *
+
+
+task1_data = []
+task2_data = []
 
 #run task will be called with a dataflow object
 def run_task():
@@ -17,8 +20,12 @@ def run_task():
 
     try:
         for i in range(10):
-            data1 = dataflow.getData('task4')
-            data2 = dataflow.getData('task4')
+            while len(task1_data) == 0 or len(task2_data) == 0: 
+                rawdata = dataflow.getData('task4')
+                assignData(rawdata)
+
+            data1 = task1_data.pop(0)
+            data2 = task2_data.pop(0)
 
             file.write('Received data' + str(i+1) + ': ' + str(data1) + ', ' + str(data2))
             file.write('\n')
@@ -33,3 +40,9 @@ def run_task():
         file.close()
         os.kill(os.getpid(), signal.SIGTERM)
 
+
+def assignData(data):
+    if data[0] == 'task1_data':
+        task1_data.append(data[1])
+    elif data[0] == 'task2_data':
+        task2_data.append(data[1])

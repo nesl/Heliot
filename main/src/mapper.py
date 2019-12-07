@@ -4,17 +4,17 @@ Maps tasks to their devices & nodes, and assigns port numbers to the tasks.
 Basic map Structure:
    map = {
       'task_1': { 
-         'in_port': #,                                            # This task's listening port, if any
-         'out_ports': { 'task1_data': [#, ...], ... },            # Receiving task's listening ports
+         'in_port': '#',                                          # This task's listening port, if any
+         'out_ports': { 'task1_data': [...], ... },               # Receiving task's listening ports
          'device': 'device_x',                                    # This task's device
          'out_devices: { 'task1_data': ['device_x', ...], ... },  # Receiving task's device
          'node': 'node_x'                                         # This task's respective node
       },
       'task_2': ...,
       ...,
-      'master': 'device_x',                       # Not implemented
-      'node_x': { ip: #, device: 'device_x' },    # Not implemented
-      'device_x': { ip: },
+      'master': 'device_x',                        # Not implemented
+      'node_x': { ip: '#', device: 'device_x' },   # Not implemented
+      'device_x': { ip: '#' },
       ...,
    }
 """
@@ -22,6 +22,7 @@ Basic map Structure:
 # Imports
 from core.device import *
 from core.taskHeliot import *
+from core.node import *
 import sys
 import json
 
@@ -64,13 +65,13 @@ class mapper:
 
    
    # Creates the initial map structure for task
-   def addTaskMapping(self, _task, _device):
-      if self.checkTask(_task) and self.checkDevice(_device):
+   def addTaskMapping(self, _task, _device, _node):
+      if self.checkTask(_task) and self.checkDevice(_device) and self.checkNode(_node):
          inPort = None
          outPorts = {}
          dev = _device._id
          out_devices = {}
-         node = ''
+         node = _node._id
 
          for output in _task._outputids:
                outPorts[output] = []
@@ -100,11 +101,27 @@ class mapper:
          self.map[_device._id] = { 'ip': _device.get_connection()[0]._attributes['_ip'] }
 
 
+   # Maps nodes to their devices
+   def addNodeMapping(self, _device, _node):
+      if self.checkDevice(_device) and self.checkNode(_node):
+         if _node._id in self.map:
+            self.map[_node._id].update( { 'device': _device._id } )
+         else:
+            self.map[_node._id] = { 'device': _device._id }
+
+   # Maps IPs to nodes
+   def addNodeIP(self, hostId, IP):
+      if hostId in self.map:
+         self.map[hostId].update( { 'ip': IP } )
+      else:
+         self.map[hostId] = { 'ip': IP }
+
+
    # Maps all tasks' 'out_devices' and 'out_ports' based on their _inputids and _outputids in taskHeliot.py
    # Writes the map to a JSON file
    # Thus, should be called last. After all other mapping is done.
    def mapDataflow(self, tasks, devices, nodes, dir):
-      print(self.map)
+      print("Map before mapping dataflow\n", self.map)
       for task in tasks:
          for input_id in task._inputids:
                for key, value in self.map.items():
@@ -140,122 +157,10 @@ class mapper:
          logger.error("Device mapping must have an argument of type device")
          sys.exit()
 
-
-"""
-BEFORE
-{ 
-   'prince_device':{ 
-      'ip':'127.0.0.1'
-   },
-   'task3':{ 
-      'in_ports':8000,
-      'out_ports':{ 
-
-      },
-      'device':'prince_device',
-      'out_devices':{ 
-
-      }
-   },
-   'task4':{ 
-      'in_ports':8001,
-      'out_ports':{ 
-
-      },
-      'device':'prince_device',
-      'out_devices':{ 
-
-      }
-   },
-   'task1':{ 
-      'in_ports':None,
-      'out_ports':{ 
-         'task1_data':[ 
-
-         ]
-      },
-      'device':'prince_device',
-      'out_devices':{ 
-         'task1_data':[ 
-
-         ]
-      }
-   },
-   'task2':{ 
-      'in_ports':None,
-      'out_ports':{ 
-         'task2_data':[ 
-
-         ]
-      },
-      'device':'prince_device',
-      'out_devices':{ 
-         'task2_data':[ 
-
-         ]
-      }
-   }
-}
-"""
-
-
-"""
-AFTER
-{ 
-   'prince_device':{ 
-      'ip':'127.0.0.1'
-   },
-   'task3':{ 
-      'in_ports':8000,
-      'out_ports':{ 
-
-      },
-      'device':'prince_device',
-      'out_devices':{ 
-
-      }
-   },
-   'task4':{ 
-      'in_ports':8001,
-      'out_ports':{ 
-
-      },
-      'device':'prince_device',
-      'out_devices':{ 
-
-      }
-   },
-   'task1':{ 
-      'in_ports':None,
-      'out_ports':{ 
-         'task1_data':[ 
-            8000,
-            8001
-         ]
-      },
-      'device':'prince_device',
-      'out_devices':{ 
-         'task1_data':[ 
-            'prince_device',
-            'prince_device'
-         ]
-      }
-   },
-   'task2':{ 
-      'in_ports':None,
-      'out_ports':{ 
-         'task2_data':[ 
-            8000,
-            8001
-         ]
-      },
-      'device':'prince_device',
-      'out_devices':{ 
-         'task2_data':[ 
-            'prince_device',
-            'prince_device'
-         ]
-      }
-   }
-}
-"""
+   # Checks if node is of type node
+   def checkNode(self, _node):
+      if type(_node) is node:
+         return True
+      else:
+         logger.error("Node mapping must have an argument of type node")
+         sys.exit()

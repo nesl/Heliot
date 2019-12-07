@@ -54,7 +54,7 @@ class netHeliot:
         self._hosts[id]=h
 
     #adding a mininet link between node1 and node2
-    def add_link(self,node1,node2, delay="0ms"):
+    def add_link(self,node1,node2, delay=0):
         self._network.addLink(node1, node2, delay=str(delay) + 'ms')
 
     def get_host(self, id=''):

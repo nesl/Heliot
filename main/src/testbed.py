@@ -184,12 +184,16 @@ class testbed:
         self._scenario=_scenario
         print('Adding scenario to the testbed')
 
+        for task in self._scenario._tasks:
+            self.map_task(task)
+
+
     def start_network(self):
 
         # a digit has to be added as part of the id, else
         # mininet is not able to initialize the switches and hosts
-
-        mininet_id="0"
+        # Prince: Seems to work fine for me without
+        mininet_id=""
 
         if os.getuid()!=0:
             logger.error('Heliot cannot start network without sudo privileges')
@@ -225,10 +229,15 @@ class testbed:
             print('Starting the network using Mininet')
             self._net._network.start()
             self._net._network.pingAll()
+
+            # Add hosts to dataflow map
+            for id, host in self._net._hosts.items():
+                self._mapper.addNodeIP(id, host.IP())
+
             #self.net._network.stop()
 
 
-    # Creates a initial map structure for a task
+    # Creates a initial map structure for a task - called via set_scenario
     def map_task(self, task):
         #Finding node to run this task on
         for node in self._scenario._node:
@@ -237,12 +246,14 @@ class testbed:
                 # Finding to which device is this node mapped to
                 for device in self._device:
                     if device._type ==node._type:
-                        print('Mapping Task:',task._taskid, ', on node:',node._id,', mapped to device:',device._id)
-                        self._mapper.addTaskMapping(task, device)
+                        print('Mapping Task:',task._taskid, 'on node:',node._id,'to device:',device._id)
+                        self._mapper.addTaskMapping(task, device, node)
+                        self._mapper.addNodeMapping(device, node)
 
     # Creates the dataflow mapping for all tasks and writes the map to a JSON file
     def dataflow_mapping(self, dir):
         self._mapper.mapDataflow(self._scenario._tasks, self._device, self._scenario._node, dir)
+        
         
 
     # Function to run the tasks on the nodes

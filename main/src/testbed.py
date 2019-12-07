@@ -228,6 +228,7 @@ class testbed:
             #self.net._network.stop()
 
 
+    # Creates a initial map structure for a task
     def map_task(self, task):
         #Finding node to run this task on
         for node in self._scenario._node:
@@ -239,12 +240,13 @@ class testbed:
                         print('Mapping Task:',task._taskid, ', on node:',node._id,', mapped to device:',device._id)
                         self._mapper.addTaskMapping(task, device)
 
+    # Creates the dataflow mapping for all tasks and writes the map to a JSON file
     def dataflow_mapping(self, dir):
         self._mapper.mapDataflow(self._scenario._tasks, self._device, self._scenario._node, dir)
         
 
-        # Function to run the tasks on the nodes
-        # Testbed object tbed is passed as the input
+    # Function to run the tasks on the nodes
+    # Testbed object tbed is passed as the input
     def start_tasks(self):
 
         for task in self._scenario._tasks:

@@ -13,8 +13,9 @@ Basic map Structure:
       'task_2': ...,
       ...,
       'master': 'device_x',                        # Not implemented
-      'node_x': { ip: '#', device: 'device_x' },   # Not implemented
-      'device_x': { ip: '#' },
+      'node_x': { ip: '#', device: 'device_x', type: 'x' },
+      'nodes_info: { 'num': #, ... },                             # Information about nodes: Number of nodes in the scenario
+      'device_x': { ip: '#', type: 'x' },
       ...,
    }
 """
@@ -46,7 +47,7 @@ class mapper:
 
 
    def __init__(self):
-      self.map = {}
+      self.map = { 'nodes_info': {'num': 0} }
 
 
    # Returns an outport and increments
@@ -98,16 +99,17 @@ class mapper:
    # Maps devices to thier ip
    def addDeviceMapping(self, _device):
       if self.checkDevice(_device):
-         self.map[_device._id] = { 'ip': _device.get_connection()[0]._attributes['_ip'] }
+         self.map[_device._id] = { 'ip': _device.get_connection()[0]._attributes['_ip'], 'type': _device._type }
 
 
    # Maps nodes to their devices
    def addNodeMapping(self, _device, _node):
       if self.checkDevice(_device) and self.checkNode(_node):
          if _node._id in self.map:
-            self.map[_node._id].update( { 'device': _device._id } )
+            self.map[_node._id].update( { 'device': _device._id, 'type': _node._type } )
          else:
-            self.map[_node._id] = { 'device': _device._id }
+            self.map[_node._id] = { 'device': _device._id, 'type': _node._type }
+         self.map['nodes_info']['num'] += 1
 
    # Maps IPs to nodes
    def addNodeIP(self, hostId, IP):

@@ -227,6 +227,7 @@ class testbed:
                 self._net.add_link(link._id_1+mininet_id, link._id_2+mininet_id)
 
             print('Starting the network using Mininet')
+            self._net._network.addNAT().configDefault()
             self._net._network.start()
             self._net._network.pingAll()
 

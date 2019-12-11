@@ -1,0 +1,43 @@
+{
+    "n1": {
+        "device": "prince_device",
+        "ip": "10.0.0.1",
+        "port": 20000, 
+        "type": "_server"
+    },
+    "n2": {
+        "device": "prince_device",
+        "ip": "10.0.0.2",
+        "port": 21000,
+        "type": "_server"
+    },
+    "nodes_info": {
+        "num": 4
+    },
+    "prince_device": {
+        "ip": "127.0.0.1",
+        "type": "_server"
+    },
+    "t1": {
+        "device": "prince_device",
+        "in_port": null,
+        "node": "n1",
+        "out_devices": {
+            "t1_data": [
+                "prince_device"
+            ]
+        },
+        "out_ports": {
+            "t1_data": [
+                14000
+            ]
+        }
+    },
+    "t2": {
+        "device": "prince_device",
+        "in_port": 14000,
+        "node": "n2",
+        "out_devices": {},
+        "out_ports": {}
+    }
+}

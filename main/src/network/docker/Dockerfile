@@ -1,5 +1,3 @@
--- pushing an updated docker container to the docker hub
-
 #FROM ubuntu:16.04
 #RUN apt-get update && \
 #apt-get install git && \

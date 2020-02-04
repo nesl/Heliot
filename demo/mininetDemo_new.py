@@ -61,7 +61,7 @@ if __name__ == "__main__":
 			if data!=None:
 				data_index = data_index + 1
 				res = dataflow.sendData('tx2_machine_inference',data)#sending the image to the the tx2 physical machine
-				#print('sending tx2 machine res is:',res)
+				print('sending tx2 machine res is:',res)
 				print('tx2 conainter received image:', data_index,' : ', res)
 
 				#receive the labels from tx2 machine only if we send data

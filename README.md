@@ -195,3 +195,8 @@ Another easy way is to use auto refresh Android application. We recommend using 
 
 <br/>
 you should be able to see the result once the whole system starts running.
+
+
+## Scenario-2: Computation Split using Deep RL
+- Details are [here](https://github.com/nesl/Heliot/tree/master/Scenario-2).
+

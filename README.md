@@ -4,6 +4,9 @@
 **Heliot** is a framework to emulate different IoT scenarios. An Iot scenario in Heliot consists of sensors (both real and virtual), compute resources (cloud, cloudlet, edge devices, containers etc) running computation and a dynamic network topology.  Heliot simplifies to study the application performance in presence of heterogeneous compute resources, sensors, dynamic network characteristics,and compute partition and placement algorithms. Heliot is in active development. 
 
 <br />
+<br />
+
+**[Heliot received best demo award at IoTDI 2019](https://conferences.computer.org/iotDI/prev/2019/).**
 
 To better understand the Heliot, let us consider a demo IoT scenario of surveillance as follows.
 

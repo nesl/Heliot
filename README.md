@@ -6,7 +6,7 @@
 <br />
 <br />
 
-**[Heliot received best demo award at IoTDI 2019](https://conferences.computer.org/iotDI/prev/2019/).**
+**[Heliot received the best demo award at IoTDI 2019](https://conferences.computer.org/iotDI/prev/2019/).**
 
 To better understand the Heliot, let us consider a demo IoT scenario of surveillance as follows.
 
